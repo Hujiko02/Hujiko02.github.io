@@ -1,4 +1,3 @@
-
 .MUMUVMM/
 .android/
 .gitconfig
@@ -24,3 +23,35 @@ Searches/
 Videos/
 WPS Cloud Files/
 WPSDrive/
+
+
+*.log
+*.tmp
+*.bak
+
+
+111A*.pdf
+CK Driver.lnk
+Celeste.url
+Counter-Strike 2.url
+Dev-C++.lnk
+FINAL FANTASY VII REBIRTH.lnk
+HMCL.lnk
+WPS Office.lnk
+c source code.lnk
+desktop.ini
+osu!(lazer).lnk
+osu!.lnk
+{4CE8EDC7-46FD-4AE3-B3E2-AD482FA7F8D3}.startpagefile
+{CCF7C232-08FD-406F-925D-07B7E145CD37}.startpagefile
+
+/**/Application Data/
+/**/Cookies/
+/**/Local Settings/
+/**/My Documents/
+/**/NetHood/
+/**/PrintHood/
+/**/Recent/
+/**/SendTo/
+/**/Templates/
+/**/「开始」菜单/
