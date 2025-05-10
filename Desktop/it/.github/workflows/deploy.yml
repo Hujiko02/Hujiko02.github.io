@@ -1,23 +1,26 @@
-name: Auto-Deploy  
+name: Auto-Deploy
+
 on:
   push:
-    branches: [main]  
+    branches: [main]
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2  
+      - uses: actions/checkout@v2
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: "3.13"  
-      - name: Install MkDocs
-        run: pip install mkdocs  
-      - name: Build site
-        run: mkdocs build  
+      - run: pip install mkdocs
+
+      - run: mkdocs build
+
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3 
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  
-          publish_dir: ./site  
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          keep_files: false  
