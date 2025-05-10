@@ -1,57 +1,26 @@
-.MUMUVMM/
-.android/
-.gitconfig
-.harmony/
-.idlerc/
-.lesshst
-.openjfx/
 AppData/
-Contacts/
-Documents/
-Downloads/
-Favorites/
-Links/
-Logs/
-Music/
-NTUSER.DAT
-ntuser.dat.LOG1
-ntuser.dat.LOG2
-ntuser.ini
-Pictures/
-Saved Games/
-Searches/
-Videos/
-WPS Cloud Files/
-WPSDrive/
+Cookies/
+Local Settings/
+My Documents/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Templates/
+「开始」菜单/
+*.lnk
+*.url
+*.pdf
+*.docx
+*.xlsx
+*.zip
+*.pptx
+*.png
 
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
 
-*.log
-*.tmp
-*.bak
-
-
-111A*.pdf
-CK Driver.lnk
-Celeste.url
-Counter-Strike 2.url
-Dev-C++.lnk
-FINAL FANTASY VII REBIRTH.lnk
-HMCL.lnk
-WPS Office.lnk
-c source code.lnk
-desktop.ini
-osu!(lazer).lnk
-osu!.lnk
-{4CE8EDC7-46FD-4AE3-B3E2-AD482FA7F8D3}.startpagefile
-{CCF7C232-08FD-406F-925D-07B7E145CD37}.startpagefile
-
-/**/Application Data/
-/**/Cookies/
-/**/Local Settings/
-/**/My Documents/
-/**/NetHood/
-/**/PrintHood/
-/**/Recent/
-/**/SendTo/
-/**/Templates/
-/**/「开始」菜单/
+site/
