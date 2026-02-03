@@ -1,11 +1,8 @@
-# 网站名称
 site_name: 无忌
-# 网站描述，有利于SEO
-site_description: 这是我全新构建的静态网站
-# 网站作者
-site_author: 你的名字
+site_url: https://Hujiko02.github.io
+site_author: 无忌
+site_description: 无忌的个人网站
 
-# 使用Material主题
 theme:
   name: material
   # 语言设置为中文
@@ -13,18 +10,18 @@ theme:
   # 配色方案（可切换明暗模式）
   palette:
     - scheme: default
-      primary: teal
+      primary: indigo
       accent: amber
       toggle:
         icon: material/weather-sunny
         name: 浅色模式
     - scheme: slate
-      primary: teal
+      primary: indigo
       accent: amber
       toggle:
         icon: material/weather-night
         name: 深色模式
-  # 启用主题的丰富功能
+
   features:
     - navigation.instant # 即时页面加载
     - navigation.tabs # 顶部标签页导航
@@ -33,14 +30,22 @@ theme:
     - search.suggest # 搜索建议
     - search.highlight # 搜索高亮
 
-# 导航菜单（左侧边栏）
 nav:
   - 首页: index.md
-  - 快速开始:
-    - 安装: guides/installation.md
-    - 写作: guides/writing.md
-  - 关于: about.md
+  - 摘录:
+    - 世界尽头与冷酷仙境: extract/End of the World and Hard-Boiled Wonderland.md
+  - 关于我: about.md
 
+extra:
+  social: 
+    - name: 我的GitHub
+      icon: fontawesome/brands/github
+      link: https://github.com/Hujiko02
+    - name: 我的Bilibili
+      icon: fontawesome/brands/bilibili
+      link: https://space.bilibili.com/2058282898
+   
 # 扩展功能
 plugins:
   - search # 启用搜索插件（Material主题自带）
+
