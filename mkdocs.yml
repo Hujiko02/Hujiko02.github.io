@@ -1,0 +1,46 @@
+# 网站名称
+site_name: 无忌
+# 网站描述，有利于SEO
+site_description: 这是我全新构建的静态网站
+# 网站作者
+site_author: 你的名字
+
+# 使用Material主题
+theme:
+  name: material
+  # 语言设置为中文
+  language: zh
+  # 配色方案（可切换明暗模式）
+  palette:
+    - scheme: default
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: 浅色模式
+    - scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: 深色模式
+  # 启用主题的丰富功能
+  features:
+    - navigation.instant # 即时页面加载
+    - navigation.tabs # 顶部标签页导航
+    - navigation.sections # 侧边栏分组显示
+    - toc.integrate # 集成目录
+    - search.suggest # 搜索建议
+    - search.highlight # 搜索高亮
+
+# 导航菜单（左侧边栏）
+nav:
+  - 首页: index.md
+  - 快速开始:
+    - 安装: guides/installation.md
+    - 写作: guides/writing.md
+  - 关于: about.md
+
+# 扩展功能
+plugins:
+  - search # 启用搜索插件（Material主题自带）
