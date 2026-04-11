@@ -1,49 +1,46 @@
 @echo off
 chcp 65001 >nul
 echo ========================================
-echo    MkDocs 一键部署程序
+echo    MkDocs Deploy Script
 echo ========================================
 echo.
 
-REM 检查是否在项目根目录
 if not exist "mkdocs.yml" (
-    echo [错误] 请在包含 mkdocs.yml 的目录中运行此脚本！
+    echo [ERROR] Run this script in the directory containing mkdocs.yml!
     pause
     exit /b 1
 )
 
-REM 1. 提交源码更改
-echo [1/3] 正在提交源码...
+echo [1/3] Staging changes...
 git add .
-set /p commit_msg="请输入本次更新说明（直接回车则使用默认）: "
-if "%commit_msg%"=="" set commit_msg=自动更新 %date% %time%
+set /p commit_msg="Enter commit message (or press Enter for auto): "
+if "%commit_msg%"=="" set commit_msg=Auto update %date% %time%
 git commit -m "%commit_msg%"
 if errorlevel 1 (
-    echo [提示] 没有需要提交的更改，或提交失败。
+    echo [INFO] Nothing to commit or commit failed.
 )
 
-REM 2. 拉取远程更新并推送
-echo [2/3] 正在同步远程仓库...
+echo [2/3] Syncing with remote...
 git pull origin main --rebase --autostash
 git push origin main
 if errorlevel 1 (
-    echo [错误] 推送失败，请检查网络或手动处理冲突。
+    echo [ERROR] Push failed.
     pause
     exit /b 1
 )
 
-REM 3. 部署到 GitHub Pages
-echo [3/3] 正在构建并部署网站...
-python -m mkdocs gh-deploy --force
+echo [3/3] Building and deploying...
+REM Use 'py' instead of 'python' for Windows
+py -m mkdocs gh-deploy --force
 if errorlevel 1 (
-    echo [错误] 部署失败，请检查 MkDocs 配置。
+    echo [ERROR] Deployment failed. Check MkDocs configuration.
     pause
     exit /b 1
 )
 
 echo.
 echo ========================================
-echo 部署成功！网站稍后即可访问：
+echo SUCCESS! Website will be available soon at:
 echo https://Hujiko02.github.io
 echo ========================================
 timeout /t 5
