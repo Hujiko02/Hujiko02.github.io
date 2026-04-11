@@ -30,8 +30,7 @@ if errorlevel 1 (
 )
 
 echo [3/3] Building and deploying...
-REM Use 'py' instead of 'python' for Windows
-py -m mkdocs gh-deploy --force
+C:\Users\wuji\AppData\Local\Python\pythoncore-3.14-64\python.exe -m mkdocs gh-deploy --force
 if errorlevel 1 (
     echo [ERROR] Deployment failed. Check MkDocs configuration.
     pause
