@@ -6,7 +6,6 @@ site_description: 无忌的个人网站
 theme:
   name: material
   # 语言设置为中文
-  custom_dir: overrides
   language: zh
   # 配色方案（可切换明暗模式）
   palette:
