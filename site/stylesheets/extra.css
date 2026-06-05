@@ -1,43 +1,40 @@
-/* 导入霞鹜文楷字体 (LXGW WenKai) */
+/* 自托管 LXGW WenKai Regular (仅 400 字重) */
 @font-face {
     font-family: 'LXGW WenKai';
     font-style: normal;
     font-weight: 400;
-    src: url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.woff2') format('woff2'),
-         url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.woff') format('woff');
-    font-display: swap;
+    src: url('/fonts/LXGWWenKai-Regular.woff2') format('woff2');
+    font-display: swap;  /* 后备字体先显示，避免白屏；有轻微闪烁但可接受 */
 }
 
-@font-face {
-    font-family: 'LXGW WenKai';
-    font-style: normal;
-    font-weight: 700;
-    src: url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-bold.woff2') format('woff2'),
-         url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-bold.woff') format('woff');
-    font-display: swap;
+/* 全局基础字体：文楷优先，降级方案为系统黑体/苹方/微软雅黑 */
+body,
+input,
+.md-typeset,
+.md-nav__link,
+.md-header,
+.md-tabs__link,
+.md-footer-copyright {
+    font-family: 'LXGW WenKai', 'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
 }
 
-@font-face {
-    font-family: 'LXGW WenKai';
-    font-style: normal;
-    font-weight: 300;
-    src: url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-light.woff2') format('woff2'),
-         url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-light.woff') format('woff');
-    font-display: swap;
-}
-
-/* 全局应用字体 */
-body, input, .md-nav, .md-tabs, .md-typeset {
-    font-family: 'LXGW WenKai', 'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif;
-}
-
-/* 标题也可以使用同款，但可以略调粗 */
+/* 标题同样使用文楷，但可适当加粗模拟粗体效果（因为无 Bold 文件） */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'LXGW WenKai', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-    font-weight: 600; /* 稍粗一点 */
+    font-weight: 700;  /* 浏览器会将 regular 字重模拟为粗体，效果尚可 */
 }
 
-/* 代码块建议保留等宽字体，避免文楷影响代码可读性 */
-code, pre, kbd {
-    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+/* 代码块仍然使用等宽字体，避免文楷影响可读性 */
+code,
+pre,
+kbd,
+tt,
+.md-typeset code,
+.md-typeset pre {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Courier New', monospace;
+}
+
+/* 可选：侧边栏导航字体微调 */
+.md-nav__title {
+    font-weight: 500;
 }
