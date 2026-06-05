@@ -49,3 +49,5 @@ extra:
 plugins:
   - search # 启用搜索插件（Material主题自带）
 
+extra_css:
+  - stylesheets/extra.css
