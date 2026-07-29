@@ -51,9 +51,13 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
 
-# 数学公式渲染（MathJax）
+# 数学公式渲染（KaTeX）
+extra_css:
+  - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css
 extra_javascript:
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js
+  - javascripts/katex.js
 
 # 扩展功能
 plugins:
