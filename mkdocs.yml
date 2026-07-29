@@ -46,6 +46,15 @@ extra:
       icon: fontawesome/brands/bilibili
       link: https://space.bilibili.com/2058282898
    
+# Markdown 扩展
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+# 数学公式渲染（MathJax）
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 # 扩展功能
 plugins:
   - search # 启用搜索插件（Material主题自带）
