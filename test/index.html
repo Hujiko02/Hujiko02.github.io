@@ -637,29 +637,29 @@
 </ul>
 </li>
 <li>hello</li>
-<li>$x^2$</li>
-<li>$x^2+ \alpha = \beta +\gamma$</li>
+<li><span class="arithmatex">\(x^2\)</span></li>
+<li><span class="arithmatex">\(x^2+ \alpha = \beta +\gamma\)</span></li>
 </ul>
 <pre><code class="language-python">print(&quot;Hello, Markdown!&quot;)
 </code></pre>
 <pre><code class="language-bash">echo &quot;HelloWorld&quot; &gt;&gt; hello.txt
 </code></pre>
-<p>$$
+<div class="arithmatex">\[
 \int_a^b f(x)\,dx = \lim_{a \to \infty}
 \sum_{i=1}^{i=\infty}f(x_i^*) \Delta x
-$$</p>
-<p>$$
+\]</div>
+<div class="arithmatex">\[
 E=mc^2
-$$</p>
-<p>$$
+\]</div>
+<div class="arithmatex">\[
 \bar{x} + \hat{x} + \vec{x} + \dot{x} + \ddot{x}
-$$</p>
-<p>$$
+\]</div>
+<div class="arithmatex">\[
 \frac{1}{2}
-$$</p>
-<p>$$
+\]</div>
+<div class="arithmatex">\[
 \lim_{x \to \infty}\frac {\sin \frac{1}{x}}{\frac{1}{x}} = 1
-$$</p>
+\]</div>
 <hr />
 <blockquote>
 <p>hellworld</p>
@@ -669,7 +669,7 @@ $$</p>
 <strong>粗体</strong><br />
 <strong><em>粗斜体</em></strong><br />
 <em>斜体</em><br />
-~~删除线  </p>
+~~删除线~~  </p>
 <blockquote>
 <p>引用快<br />
 第二行<br />
@@ -686,10 +686,6 @@ $$</p>
     &gt;第一项的引用</li>
 <li>第二项</li>
 </ul>
-<p>1</p>
-<pre><code>你好吗
-
-</code></pre>
 
 
 
@@ -764,6 +760,8 @@ $$</p>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
