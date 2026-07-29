@@ -13,32 +13,32 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/about.md",
+                "file": "docs/index.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "about"
+              "title": "index"
             }
           }
         ]
       },
       {
-        "id": "19cceca9e298177c",
+        "id": "59b37502deec3501",
         "type": "tabs",
         "children": [
           {
-            "id": "ce1c5d6699639a04",
+            "id": "de0e1d8657a7e96e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/about.md",
+                "file": "docs/index.md",
                 "mode": "preview",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "about"
+              "title": "index"
             }
           }
         ]
@@ -205,11 +205,34 @@
   },
   "active": "0d74c26b1dfe1f7a",
   "lastOpenFiles": [
-    "docs/extract/End of the World and Hard-Boiled Wonderland.md",
-    "docs/1.jpg",
-    "docs/index.md",
     "docs/about.md",
+    "site/search/search_index.json",
+    "site/search",
+    "site/extract/End of the World and Hard-Boiled Wonderland/index.html",
+    "site/extract/End of the World and Hard-Boiled Wonderland",
+    "site/extract",
+    "site/ohush-privacy/index.html",
+    "site/ohush-privacy",
+    "site/about/index.html",
+    "site/about",
+    "site/index.html",
+    "site/assets/images/favicon.png",
+    "site/1.jpg",
+    "venv/lib/python3.14/site-packages/material/templates/assets/images/favicon.png",
+    "venv/lib/python3.14/site-packages/mkdocs/themes/readthedocs/css/fonts/fontawesome-webfont.svg",
+    "venv/lib/python3.14/site-packages/mkdocs/themes/mkdocs/img/grid.png",
+    "venv/lib/python3.14/site-packages/mkdocs_get_deps-0.2.2.dist-info/licenses/LICENSE.md",
+    "venv/lib/python3.14/site-packages/pymdown_extensions-11.0.1.dist-info/licenses/LICENSE.md",
+    "venv/lib/python3.14/site-packages/backrefs-8.0.dist-info/licenses/LICENSE.md",
+    "venv/lib/python3.14/site-packages/idna-3.18.dist-info/licenses/LICENSE.md",
+    "venv/lib/python3.14/site-packages/markdown-3.10.2.dist-info/licenses/LICENSE.md",
+    "venv/lib/python3.14/site-packages/mkdocs_material_extensions-1.3.1.dist-info/licenses/LICENSE.md",
+    "venv/lib/python3.14/site-packages/pip/_vendor/idna/LICENSE.md",
+    "venv/lib/python3.14/site-packages/pip-26.1.2.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
+    "docs/1.jpg",
     "docs/ohush-privacy.md",
+    "docs/index.md",
+    "docs/extract/End of the World and Hard-Boiled Wonderland.md",
     "README.md"
   ]
 }
