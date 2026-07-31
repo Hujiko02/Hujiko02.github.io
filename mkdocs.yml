@@ -38,7 +38,8 @@ nav:
   - 隐私政策: ohush-privacy.md
   - 测试: test.md
   - 教程:
-    - Latex使用教程: tutorial/latex.md
+    - 教程: tutorial/tutorial.md
+	- Latex使用教程: tutorial/latex.md
     - Markdown使用教程: tutorial/markdown.md
 extra:
   social: 
@@ -58,11 +59,16 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
 
-# 数学公式渲染（MathJax）
+# 数学公式支持
 extra_javascript:
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - mkdocs/javascripts/katex.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
 
 # 扩展功能
 plugins:
-  - search # 启用搜索插件（Material主题自带）
+  - search # 启用搜索插件
 
