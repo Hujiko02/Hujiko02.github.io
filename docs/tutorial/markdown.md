@@ -58,15 +58,15 @@
 
 Markdown 是纯文本，任何编辑器都能写，但带「实时预览」的工具体验更好：
 
-| 工具 | 平台 | 特点 |
-|------|------|------|
-| **Typora** | Win / Mac | 所见即所得，最易上手 |
-| **VS Code** | 全平台 | 免费，装插件后支持预览 |
-| **Obsidian** | 全平台 | 免费，双向链接、笔记神器 |
-| **语雀** | Web | 阿里出品，中文友好 |
-| **GitHub / GitLab** | Web | 仓库自带 README 渲染 |
-| **Mattermost / Slack / 飞书** | Web | 聊天、文档里都支持 Markdown |
-| **Jupyter Notebook** | Web | 数据科学常用，Markdown 单元格 |
+| 工具                          | 平台        | 特点                  |
+| --------------------------- | --------- | ------------------- |
+| **Typora**                  | Win / Mac | 所见即所得，最易上手          |
+| **VS Code**                 | 全平台       | 免费，装插件后支持预览         |
+| **Obsidian**                | 全平台       | 免费，双向链接、笔记神器        |
+| **语雀**                      | Web       | 阿里出品，中文友好           |
+| **GitHub / GitLab**         | Web       | 仓库自带 README 渲染      |
+| **Mattermost / Slack / 飞书** | Web       | 聊天、文档里都支持 Markdown  |
+| **Jupyter Notebook**        | Web       | 数据科学常用，Markdown 单元格 |
 
 > 学习阶段：直接用 **VS Code** 或 **Typora**，或者任何在线 Markdown 编辑器
 > （如 <https://dillinger.io/>）即可。
