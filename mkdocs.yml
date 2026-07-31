@@ -29,6 +29,7 @@ theme:
     - toc.integrate # 集成目录
     - search.suggest # 搜索建议
     - search.highlight # 搜索高亮
+    - navigation.tabs # 返回顶部的按钮，在上滑时出现
 
 nav:
   - 首页: index.md
