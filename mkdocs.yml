@@ -39,7 +39,7 @@ nav:
   - 测试: test.md
   - 教程:
     - 教程: tutorial/tutorial.md
-	- Latex使用教程: tutorial/latex.md
+    - Latex使用教程: tutorial/latex.md
     - Markdown使用教程: tutorial/markdown.md
 extra:
   social: 
