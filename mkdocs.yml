@@ -37,6 +37,9 @@ nav:
   - 关于我: about.md
   - 隐私政策: ohush-privacy.md
   - 测试: test.md
+  - 教程:
+ 	- Latex使用教程: tutorial/latex.md
+	- Markdown使用教程: tutorial/markdown.md	
 extra:
   social: 
     - name: 我的GitHub
