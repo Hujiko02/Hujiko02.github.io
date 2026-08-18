@@ -12,7 +12,7 @@
         <meta name="author" content="无忌">
       
       
-        <link rel="canonical" href="https://Hujiko02.github.io/tutorial/Go/">
+        <link rel="canonical" href="https://Hujiko02.github.io/tutorial/verilog/">
       
       
         <link rel="prev" href="../markdown/">
@@ -29,7 +29,7 @@
     
     
       
-        <title>围棋入门 - 无忌</title>
+        <title>verilog入门 - 无忌</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#围棋零基础入门指南" class="md-skip">
+        <a href="#verilog-零基础学习教程linux--iverilog--gtkwave--vscode" class="md-skip">
           跳转至
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              围棋入门
+              verilog入门
             
           </span>
         </div>
@@ -589,7 +589,7 @@
   <span class="md-ellipsis">
     
   
-    围棋入门
+    verilog入门
   
 
     
@@ -607,7 +607,7 @@
   <span class="md-ellipsis">
     
   
-    围棋入门
+    verilog入门
   
 
     
@@ -644,22 +644,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#一什么是围棋" class="md-nav__link">
+  <a href="#1-工具安装" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、什么是围棋
+        1. 工具安装
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="一、什么是围棋">
+    <nav class="md-nav" aria-label="1. 工具安装">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#为什么值得学围棋" class="md-nav__link">
+  <a href="#11-仿真工具debianubuntu-系" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么值得学围棋？
+        1.1 仿真工具（Debian/Ubuntu 系）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-vs-code-插件" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 VS Code 插件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-验证安装" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 验证安装
       
     </span>
   </a>
@@ -672,22 +694,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#二棋盘与棋子" class="md-nav__link">
+  <a href="#2-核心概念先搞懂-4-件事" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、棋盘与棋子
+        2. 核心概念：先搞懂 4 件事
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="二、棋盘与棋子">
+    <nav class="md-nav" aria-label="2. 核心概念：先搞懂 4 件事">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#棋盘" class="md-nav__link">
+  <a href="#①-模块module-一个电路" class="md-nav__link">
     <span class="md-ellipsis">
       
-        棋盘
+        ① 模块（module）= 一个电路
       
     </span>
   </a>
@@ -695,10 +717,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#棋子" class="md-nav__link">
+  <a href="#②-input--output--引脚" class="md-nav__link">
     <span class="md-ellipsis">
       
-        棋子
+        ② input / output = 引脚
       
     </span>
   </a>
@@ -706,10 +728,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#坐标称呼" class="md-nav__link">
+  <a href="#③-assign--一根连线" class="md-nav__link">
     <span class="md-ellipsis">
       
-        坐标称呼
+        ③ assign = 一根连线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#④-时序逻辑--有记忆的电路" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ④ 时序逻辑 = 有记忆的电路
       
     </span>
   </a>
@@ -722,10 +755,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#三基本规则" class="md-nav__link">
+  <a href="#3-完整工作流一天-5-分钟记住它" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、基本规则
+        3. 完整工作流（一天 5 分钟记住它）
       
     </span>
   </a>
@@ -733,22 +766,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#四气的概念" class="md-nav__link">
+  <a href="#4-学习路线从逻辑门到小-cpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、气的概念
+        4. 学习路线：从逻辑门到小 CPU
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="四、气的概念">
+    <nav class="md-nav" aria-label="4. 学习路线：从逻辑门到小 CPU">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#举例单颗棋子的气" class="md-nav__link">
+  <a href="#阶段-0逻辑门第-12-天-已完成" class="md-nav__link">
     <span class="md-ellipsis">
       
-        举例：单颗棋子的气
+        阶段 0：逻辑门（第 1~2 天）✅ 已完成
       
     </span>
   </a>
@@ -756,10 +789,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#棋串一块棋" class="md-nav__link">
+  <a href="#阶段-1组合逻辑第-35-天" class="md-nav__link">
     <span class="md-ellipsis">
       
-        棋串（一块棋）
+        阶段 1：组合逻辑（第 3~5 天）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#阶段-2时序逻辑第-12-周" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阶段 2：时序逻辑（第 1~2 周）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#阶段-3状态机-fsm第-23-周" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阶段 3：状态机 FSM（第 2~3 周）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#阶段-4实用小模块第-35-周" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阶段 4：实用小模块（第 3~5 周）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#阶段-5小-cpu进阶12-个月" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阶段 5：小 CPU（进阶，1~2 个月）
       
     </span>
   </a>
@@ -772,22 +849,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#五提子吃子" class="md-nav__link">
+  <a href="#5-verilog-必会语法清单" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、提子（吃子）
+        5. Verilog 必会语法清单
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="五、提子（吃子）">
+    <nav class="md-nav" aria-label="5. Verilog 必会语法清单">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#怎么吃子" class="md-nav__link">
+  <a href="#数据类型" class="md-nav__link">
     <span class="md-ellipsis">
       
-        怎么吃子
+        数据类型
       
     </span>
   </a>
@@ -795,10 +872,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#例子单颗子被吃" class="md-nav__link">
+  <a href="#运算符" class="md-nav__link">
     <span class="md-ellipsis">
       
-        例子：单颗子被吃
+        运算符
       
     </span>
   </a>
@@ -806,10 +883,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#例子棋串被吃" class="md-nav__link">
+  <a href="#常用语句" class="md-nav__link">
     <span class="md-ellipsis">
       
-        例子：棋串被吃
+        常用语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#测试平台必备模板" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        测试平台必备模板
       
     </span>
   </a>
@@ -822,22 +910,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#六禁着点与打劫" class="md-nav__link">
+  <a href="#6-编译报错排查三板斧" class="md-nav__link">
     <span class="md-ellipsis">
       
-        六、禁着点与打劫
+        6. 编译报错排查三板斧
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="六、禁着点与打劫">
+    <nav class="md-nav" aria-label="6. 编译报错排查三板斧">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#禁着点自杀规则" class="md-nav__link">
+  <a href="#第一斧只看第一条报错" class="md-nav__link">
     <span class="md-ellipsis">
       
-        禁着点（自杀规则）
+        第一斧：只看第一条报错
       
     </span>
   </a>
@@ -845,10 +933,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#打劫" class="md-nav__link">
+  <a href="#第二斧看报错指向的行号" class="md-nav__link">
     <span class="md-ellipsis">
       
-        打劫
+        第二斧：看报错指向的行号
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#第三斧对照常见错误表" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第三斧：对照常见错误表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#标点三规则背下来" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        标点三规则（背下来）
       
     </span>
   </a>
@@ -861,22 +971,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#七死活与连接" class="md-nav__link">
+  <a href="#7-常见坑与避坑指南" class="md-nav__link">
     <span class="md-ellipsis">
       
-        七、死活与连接
+        7. 常见坑与避坑指南
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="七、死活与连接">
+    <nav class="md-nav" aria-label="7. 常见坑与避坑指南">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#眼" class="md-nav__link">
+  <a href="#坑-1时序逻辑用-组合逻辑用-" class="md-nav__link">
     <span class="md-ellipsis">
       
-        眼
+        坑 1：时序逻辑用 =，组合逻辑用 &lt;=
       
     </span>
   </a>
@@ -884,10 +994,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#活棋与死棋" class="md-nav__link">
+  <a href="#坑-2组合逻辑漏-else--default--产生锁存器" class="md-nav__link">
     <span class="md-ellipsis">
       
-        活棋与死棋
+        坑 2：组合逻辑漏 else / default → 产生锁存器
       
     </span>
   </a>
@@ -895,10 +1005,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#连接与切断" class="md-nav__link">
+  <a href="#坑-3always-posedge-clk-里面写了不该写的" class="md-nav__link">
     <span class="md-ellipsis">
       
-        连接与切断
+        坑 3：always @(posedge clk) 里面写了不该写的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#坑-4位宽不匹配" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑 4：位宽不匹配
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#坑-5仿真通过--能综合" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑 5：仿真通过 ≠ 能综合
       
     </span>
   </a>
@@ -911,204 +1043,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#八实地与势力" class="md-nav__link">
+  <a href="#8-免费学习资源" class="md-nav__link">
     <span class="md-ellipsis">
       
-        八、实地与势力
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="八、实地与势力">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#常见权衡" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常见权衡
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#九终局与胜负计算" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        九、终局与胜负计算
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="九、终局与胜负计算">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#对局流程" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        对局流程
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#单官" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        单官
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#胜负判定数目法" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        胜负判定（数目法）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#实战中如何结束" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        实战中如何结束
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#十基础战术技巧" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        十、基础战术技巧
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="十、基础战术技巧">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-贴与碰紧贴作战" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 贴与碰（紧贴作战）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-长与立" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 长与立
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-扳与退" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 扳与退
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-飞与跳" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 飞与跳
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-打入" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 打入
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-侵消" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. 侵消
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#7-声东击西与手筋" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. 声东击西与手筋
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#常见吃子手筋" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常见吃子手筋
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#十一常用术语速查" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        十一、常用术语速查
+        8. 免费学习资源
       
     </span>
   </a>
@@ -1116,132 +1054,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#十二常见开局" class="md-nav__link">
+  <a href="#附每日练习节奏建议" class="md-nav__link">
     <span class="md-ellipsis">
       
-        十二、常见开局
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="十二、常见开局">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#布局原则" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        布局原则
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#典型开局点" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        典型开局点
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#经典布局" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        经典布局
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#十三进阶学习路线" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        十三、进阶学习路线
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="十三、进阶学习路线">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#阶段一入门01-个月" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        阶段一：入门（0～1 个月）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#阶段二初级16-个月" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        阶段二：初级（1～6 个月）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#阶段三中级6-个月以上" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        阶段三：中级（6 个月以上）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#学习资源推荐" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        学习资源推荐
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#实用小建议" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        实用小建议
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#附录口诀快记" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        附录：口诀快记
+        附：每日练习节奏建议
       
     </span>
   </a>
@@ -1308,449 +1124,390 @@
 
 
 
-<h1 id="围棋零基础入门指南">围棋零基础入门指南</h1>
+<h1 id="verilog-零基础学习教程linux--iverilog--gtkwave--vscode">Verilog 零基础学习教程（Linux + iverilog + gtkwave + VSCode）</h1>
 <blockquote>
-<p>围棋，古称"弈"，起源于中国，是世界上最古老的棋类游戏之一，距今已有四千多年历史。它规则极简，却又变化无穷——棋盘上的可能性远超宇宙中的原子总数。本指南面向零基础读者，从棋盘、规则到入门战术，一步步带你走进围棋的世界。</p>
+<p>本文档配套项目目录：<code>/home/wuji/Projects/verilog-learn/</code>
+学习方法主线：<strong>边写边仿真边看波形</strong>，不做题海战术，不啃大部头。</p>
 </blockquote>
 <hr />
 <h2 id="目录">目录</h2>
 <ol>
-<li><a href="#一什么是围棋">什么是围棋</a></li>
-<li><a href="#二棋盘与棋子">棋盘与棋子</a></li>
-<li><a href="#三基本规则">基本规则</a></li>
-<li><a href="#四气的概念">气的概念</a></li>
-<li><a href="#五提子吃子">提子（吃子）</a></li>
-<li><a href="#六禁着点与打劫">禁着点与打劫</a></li>
-<li><a href="#七死活与连接">死活与连接</a></li>
-<li><a href="#八实地与势力">实地与势力</a></li>
-<li><a href="#九终局与胜负计算">终局与胜负计算</a></li>
-<li><a href="#十基础战术技巧">基础战术技巧</a></li>
-<li><a href="#十一常用术语速查">常用术语速查</a></li>
-<li><a href="#十二常见开局">常见开局</a></li>
-<li><a href="#十三进阶学习路线">进阶学习路线</a></li>
+<li><a href="#1-工具安装">工具安装</a></li>
+<li><a href="#2-核心概念先搞懂-4-件事">核心概念：先搞懂 4 件事</a></li>
+<li><a href="#3-完整工作流一天-5-分钟记住它">完整工作流（一天 5 分钟记住它）</a></li>
+<li><a href="#4-学习路线从逻辑门到小-cpu">学习路线：从逻辑门到小 CPU</a></li>
+<li><a href="#5-verilog-必会语法清单">Verilog 必会语法清单</a></li>
+<li><a href="#6-编译报错排查三板斧">编译报错排查三板斧</a></li>
+<li><a href="#7-常见坑与避坑指南">常见坑与避坑指南</a></li>
+<li><a href="#8-免费学习资源">免费学习资源</a></li>
 </ol>
 <hr />
-<h2 id="一什么是围棋">一、什么是围棋</h2>
-<p>围棋是两个人对弈的"围地"游戏。两位棋手分别执<strong>黑棋</strong>和<strong>白棋</strong>，轮流在棋盘交叉点上落子，最终<strong>围住的地盘更大的一方获胜</strong>。</p>
-<p>围棋的核心思想是：<strong>如何用最少的棋子，圈住最多的地盘。</strong></p>
-<h3 id="为什么值得学围棋">为什么值得学围棋？</h3>
-<ul>
-<li><strong>规则极其简单</strong>：学十分钟就能开始下，但一生都学不完</li>
-<li><strong>锻炼思维</strong>：提升逻辑推理、大局观、计算力和心理素质</li>
-<li><strong>历史悠久</strong>：被列为人类非物质文化遗产，是中华文化瑰宝</li>
-<li><strong>AI 的挑战</strong>：2016 年 AlphaGo 击败人类顶级棋手，开启围棋新纪元</li>
-</ul>
-<hr />
-<h2 id="二棋盘与棋子">二、棋盘与棋子</h2>
-<h3 id="棋盘">棋盘</h3>
-<p>标准棋盘是一个 <strong>19×19</strong> 的方格网，共有 <strong>361 个交叉点</strong>。</p>
-<ul>
-<li><strong>线</strong>：19 条横线 × 19 条竖线</li>
-<li><strong>交叉点（落子点）</strong>：19 × 19 = 361 个</li>
-<li><strong>星位</strong>：棋盘上的 9 个黑点（角、边、中央），用于定位和对局时让子</li>
-<li><strong>天元</strong>：棋盘正中央的点（最中心的那颗星位）</li>
-</ul>
-<pre><code>    19 ┌──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┐
-       │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │
-       1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19
-       └──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘
+<h2 id="1-工具安装">1. 工具安装</h2>
+<h3 id="11-仿真工具debianubuntu-系">1.1 仿真工具（Debian/Ubuntu 系）</h3>
+<pre><code class="language-bash">sudo apt update
+sudo apt install -y iverilog gtkwave
 </code></pre>
-<blockquote>
-<p>初学者也可以用 <strong>9×9</strong> 或 <strong>13×13</strong> 的小棋盘练习，一盘棋更快，更适合练手。</p>
-</blockquote>
-<h3 id="棋子">棋子</h3>
-<ul>
-<li><strong>黑棋 181 颗，白棋 180 颗</strong>，共 361 颗</li>
-<li>落子后<strong>不能移动</strong>（除非被吃）</li>
-</ul>
-<h3 id="坐标称呼">坐标称呼</h3>
-<p>为了便于记录棋局，交叉点常用坐标表示：</p>
-<ul>
-<li>横线用字母 a～s（或数字 1～19）</li>
-<li>竖线用数字 1～19（或字母）</li>
-<li>例如"星位"多位于角部星（3,3）、小目（3,4）、星位（4,4）等</li>
-</ul>
-<hr />
-<h2 id="三基本规则">三、基本规则</h2>
-<p>围棋的全部规则，可以浓缩为以下几条：</p>
-<ol>
-<li><strong>黑先白后</strong>：执黑的一方先下，白棋后下，轮流落子</li>
-<li><strong>一次一手</strong>：每次只能落一颗子，落在交叉点上</li>
-<li><strong>子不移动</strong>：落下的棋子不能移动，除非被提走（吃掉）</li>
-<li><strong>胜负看围地</strong>：终局后，谁围住的地盘（包括围住的交叉点和吃掉的棋子）更大，谁赢</li>
-<li><strong>气尽子亡</strong>：棋子（或棋串）所有气被堵死，就要从棋盘上提走</li>
-</ol>
-<hr />
-<h2 id="四气的概念">四、气的概念</h2>
-<p><strong>"气"是围棋最核心的概念。</strong> 一个棋子的气，就是与它相邻（上下左右）的空交叉点数量。</p>
-<h3 id="举例单颗棋子的气">举例：单颗棋子的气</h3>
-<pre><code>      .    .
-      │
-  . ── ● ── .
-      │
-      .    .
-</code></pre>
-<p>一颗在棋盘中间的棋子有 <strong>4 口气</strong>。</p>
-<ul>
-<li>在边上的棋子有 <strong>3 口气</strong></li>
-<li>在角上的棋子有 <strong>2 口气</strong></li>
-</ul>
-<h3 id="棋串一块棋">棋串（一块棋）</h3>
-<p>两颗或多颗<strong>直线相连</strong>（上下左右紧挨着）的同色棋子，构成一个<strong>整体</strong>，共享所有的气。这叫一个"棋串"或"一块棋"。</p>
-<pre><code>     .    .
-     │
- . ── ● ── ● ── .
-     │    │
-     .    .
-</code></pre>
-<p>上面两颗黑棋连成一块，它们的气是<strong>合并计算</strong>的，共 6 口气。</p>
-<blockquote>
-<p>口诀：<strong>斜对角不算连</strong>，只有上下左右才算"紧挨着"。</p>
-</blockquote>
-<hr />
-<h2 id="五提子吃子">五、提子（吃子）</h2>
-<h3 id="怎么吃子">怎么吃子</h3>
-<p>当一个棋串的所有气都被对方棋子堵死时，这个棋串就要被<strong>从棋盘上提走</strong>（拿掉），这叫"提子"或"吃子"。被吃掉的子按"目"算给对手。</p>
-<h3 id="例子单颗子被吃">例子：单颗子被吃</h3>
-<p>黑棋下在星位：</p>
-<pre><code>  .   .
-  │
-. ── ● ── .
-  │
-  .   .
-</code></pre>
-<p>白棋分别占满它上下左右的四个点，黑棋就死了，被提走：</p>
-<pre><code>  ○
-  │
-○ ── ● ── ○
-  │
-  ○
-</code></pre>
-<blockquote>
-<p>被提走的子放在棋盘旁边作为俘虏，终局时算入围地。</p>
-</blockquote>
-<h3 id="例子棋串被吃">例子：棋串被吃</h3>
-<p>连接在一起的棋串，只有所有棋子<strong>整体</strong>都没气了才死。所以围棋也叫"连而不断，断则生变"。</p>
-<hr />
-<h2 id="六禁着点与打劫">六、禁着点与打劫</h2>
-<h3 id="禁着点自杀规则">禁着点（自杀规则）</h3>
-<p><strong>不能落子在让自己的棋子变成"没有气"的地方</strong>（除非这一落子能吃掉对方棋子）。</p>
-<pre><code>  ○ ○
-  ○ ●   ← 黑棋这个点周围全是白棋，
-        落下去黑棋就没气了，且吃不到白子
-        所以这是&quot;禁着点&quot;，黑棋不能下这里
-</code></pre>
-<ul>
-<li>如果落子后虽然自己没气，但能<strong>提掉对方的子</strong>，那么是可以下的（这叫"提子"）</li>
-<li>自杀点（落子后自己无气且无法吃子）<strong>禁止下</strong></li>
-</ul>
-<h3 id="打劫">打劫</h3>
-<p>打劫是围棋最特殊的一条规则，防止双方无休止地互相提子。</p>
-<pre><code>  ○ ●
-  ○ ●  ← 黑棋在 ● 处提掉一颗白子后，白棋……
-</code></pre>
-<p><strong>规则</strong>：如果一方提掉对方一颗子，对方<strong>不能马上在同一个位置</strong>提回去，必须先在别处走一手（这叫"找劫材"），下一回合才能提回来。这个循环往复的过程叫<strong>打劫</strong>。</p>
-<blockquote>
-<p>打劫是围棋的精妙之处，常常决定一盘棋的生死。初学者先了解概念即可。</p>
-</blockquote>
-<hr />
-<h2 id="七死活与连接">七、死活与连接</h2>
-<h3 id="眼">眼</h3>
-<p>一块棋围住的一个或几个<strong>独立的空格</strong>（对方无法在里面落子，或落子就会被提），叫"<strong>眼</strong>"。</p>
-<h3 id="活棋与死棋">活棋与死棋</h3>
-<ul>
-<li><strong>两眼活</strong>：一块棋如果有<strong>两个或以上独立的眼</strong>，就是<strong>活棋</strong>——对方永远吃不掉它，因为对方只能堵住一只眼，另一只眼保证它还有气</li>
-<li><strong>单眼死</strong>：如果只有一只眼，这块棋最终会被对方吃掉</li>
-</ul>
-<pre><code>  活棋示例（两只眼）：
-  ● ● ●
-  ● ○ ●
-  ● ○ ●
-  ● ● ●
-  （○ 是两个独立的空格 = 两只眼，黑棋活棋）
-</code></pre>
-<h3 id="连接与切断">连接与切断</h3>
-<ul>
-<li><strong>连接</strong>：己方棋子连成一体，气更多、更安全</li>
-<li><strong>切断</strong>：把对方的棋子分隔开，让它们各自变弱，然后分别吃掉</li>
-</ul>
-<blockquote>
-<p>围棋名言："棋从断处生。"——切断是进攻的开始。</p>
-</blockquote>
-<hr />
-<h2 id="八实地与势力">八、实地与势力</h2>
-<p>围棋的两种主要"资源"：</p>
+<p>安装后自动获得 3 个命令：</p>
 <table>
 <thead>
 <tr>
-<th>概念</th>
-<th>含义</th>
-<th>特点</th>
+<th>命令</th>
+<th>作用</th>
+<th>类比</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>实地</strong></td>
-<td>已经围住的、确定的地盘</td>
-<td>稳妥可靠，但需要花手数去守</td>
+<td><code>iverilog</code></td>
+<td>把 Verilog 源码编译成 <code>.vvp</code> 文件</td>
+<td>相当于 gcc（编译）</td>
 </tr>
 <tr>
-<td><strong>势力</strong></td>
-<td>向外发展的潜在力量（外势、厚势）</td>
-<td>无形，但能影响全局</td>
+<td><code>vvp</code></td>
+<td>执行仿真，打印输出、生成波形</td>
+<td>相当于运行程序</td>
+</tr>
+<tr>
+<td><code>gtkwave</code></td>
+<td>图形界面查看 <code>.vcd</code> 波形</td>
+<td>相当于调试器</td>
 </tr>
 </tbody>
 </table>
-<h3 id="常见权衡">常见权衡</h3>
-<ul>
-<li><strong>捞实地</strong>：尽早把角、边的地盘定下来，稳扎稳打</li>
-<li><strong>取外势</strong>：舍弃一些实地，换取面向中央的强大势力，威胁全局</li>
-</ul>
 <blockquote>
-<p>初学者建议先学会"把地盘围牢"，再慢慢体会势力转换的乐趣。</p>
+<p>说明：<code>vvp</code> 不需要单独安装，装 <code>iverilog</code> 就自动带上了。</p>
 </blockquote>
-<hr />
-<h2 id="九终局与胜负计算">九、终局与胜负计算</h2>
-<h3 id="对局流程">对局流程</h3>
-<ol>
-<li><strong>对局开始</strong>：黑先落子</li>
-<li><strong>中盘战斗</strong>：双方争夺实地、攻击对方弱棋</li>
-<li><strong>官子</strong>：棋局进入尾声，抢收剩余的小地盘</li>
-<li><strong>终局</strong>：双方都认为无棋可下，或同意结束</li>
-</ol>
-<h3 id="单官">单官</h3>
-<p>当棋盘上只剩下"谁下都没有实际价值"的地方时，称为<strong>单官</strong>，填单官不改变双方目数，可以一人填一个，也可以双方协商结束。</p>
-<h3 id="胜负判定数目法">胜负判定（数目法）</h3>
-<p>以中国规则（数子法）为例：</p>
-<ul>
-<li>计算各方<strong>围住的交叉点数</strong>（目）+ <strong>吃掉的对方棋子数</strong> + <strong>贴目补偿</strong></li>
-<li><strong>贴目</strong>：由于黑棋先手占优，黑棋须贴给白棋一定的目数（中国规则通常贴 <strong>3又3/4 子</strong>，即约 7.5 目）</li>
-<li><strong>361 个交叉点 ÷ 2 = 180.5</strong>，黑棋需达到 180.5 + 3.75 = <strong>184.25 子</strong>以上才胜</li>
-</ul>
-<blockquote>
-<p>初学者可以简化：<strong>谁的目数（围住的地盘）多，谁就赢</strong>，先不用纠结贴目细节。</p>
-</blockquote>
-<h3 id="实战中如何结束">实战中如何结束</h3>
-<ul>
-<li>双方都不再落子，确认没有气可提、没有地盘可抢后，即可数子分胜负</li>
-<li>也可以在线上平台由软件自动判定</li>
-</ul>
-<hr />
-<h2 id="十基础战术技巧">十、基础战术技巧</h2>
-<h3 id="1-贴与碰紧贴作战">1. 贴与碰（紧贴作战）</h3>
-<ul>
-<li><strong>贴</strong>：紧紧贴着对方的棋子下，逼对方战斗</li>
-<li><strong>碰</strong>：主动贴上去找对方弱点</li>
-</ul>
-<h3 id="2-长与立">2. 长与立</h3>
-<ul>
-<li><strong>长</strong>：沿己方棋串方向延伸，增加气</li>
-<li><strong>立</strong>：向边上二线以下"立"一手，常见于角落作战</li>
-</ul>
-<h3 id="3-扳与退">3. 扳与退</h3>
-<ul>
-<li><strong>扳</strong>：斜着顶住对方下一步的延长点，阻止对方"长"</li>
-<li><strong>退</strong>：向己方方向缩一步，保持连接</li>
-</ul>
-<pre><code>  扳与退示意（× 为落子位置）
-  黑扳：  ●──▲       退： ●──▲
-          │      →        │
+<h3 id="12-vs-code-插件">1.2 VS Code 插件</h3>
+<pre><code class="language-bash">code --install-extension mshr-h.verilog-hdl
+code --install-extension teros-technology.teroshdl
 </code></pre>
-<h3 id="4-飞与跳">4. 飞与跳</h3>
 <ul>
-<li><strong>飞</strong>：走"日"字形（隔一个点斜走），速度快但连接较虚</li>
-<li><strong>跳</strong>：向前隔一格走（马步跳），兼顾速度和连接</li>
+<li><strong>Verilog-HDL/SystemVerilog</strong>：语法高亮、代码补全、格式化</li>
+<li><strong>TerosHDL</strong>：lint 检查（写错立刻报）、一键生成测试平台模板</li>
 </ul>
-<h3 id="5-打入">5. 打入</h3>
+<h3 id="13-验证安装">1.3 验证安装</h3>
+<pre><code class="language-bash">iverilog -V        # 有版本号 = OK
+gtkwave --version  # 有版本号 = OK
+</code></pre>
+<hr />
+<h2 id="2-核心概念先搞懂-4-件事">2. 核心概念：先搞懂 4 件事</h2>
+<p>学 Verilog 最大的误区是把它当 C 语言写。<strong>它描述的是硬件</strong>，先建立这 4 个心智模型：</p>
+<h3 id="①-模块module-一个电路">① 模块（module）= 一个电路</h3>
+<pre><code class="language-verilog">module 名字 ( 端口 );
+    // 电路内部
+endmodule
+</code></pre>
 <ul>
-<li><strong>打入</strong>：深入对方势力范围内落子，破坏对方地盘</li>
+<li>一个 <code>.v</code> 文件就是一个"电路图纸"</li>
+<li><code>module</code> 和 <code>endmodule</code> 必须成对出现</li>
 </ul>
-<h3 id="6-侵消">6. 侵消</h3>
+<h3 id="②-input--output--引脚">② input / output = 引脚</h3>
+<pre><code class="language-verilog">module gates (
+    input  wire a,      // 输入引脚
+    output wire y       // 输出引脚
+);
+</code></pre>
 <ul>
-<li><strong>侵消</strong>：在对方势力边缘轻飘飘地碰一下，压缩对方地盘又不送死</li>
+<li>对外连接的叫 <strong>引脚（port）</strong></li>
+<li>列表里两个声明之间用 <strong>逗号</strong> 隔开</li>
 </ul>
-<h3 id="7-声东击西与手筋">7. 声东击西与手筋</h3>
+<h3 id="③-assign--一根连线">③ assign = 一根连线</h3>
+<pre><code class="language-verilog">assign y = a &amp; b;   // 把 y 接到&quot;a 与 b&quot;的结果上
+</code></pre>
 <ul>
-<li><strong>手筋</strong>：局部最有效率的一手棋，往往是破解局部难题的关键</li>
-<li>学会发现<strong>断点</strong>、制造<strong>倒扑</strong>、<strong>征子</strong>、<strong>枷吃</strong>等经典手段</li>
+<li>组合逻辑（没有记忆的电路）用 <code>assign</code> 描述</li>
+<li>这是一条<strong>语句</strong>，结尾必须写 <strong>分号 <code>;</code></strong></li>
 </ul>
-<h3 id="常见吃子手筋">常见吃子手筋</h3>
+<h3 id="④-时序逻辑--有记忆的电路">④ 时序逻辑 = 有记忆的电路</h3>
+<pre><code class="language-verilog">always @(posedge clk) begin
+    q &lt;= q + 1;     // 每个时钟上升沿执行一次
+end
+</code></pre>
 <ul>
-<li><strong>征子（扭羊头）</strong>：斜向连续追杀，步步紧逼</li>
-<li><strong>枷吃（闷吃）</strong>：不求贴住，而是从远处罩住对方</li>
-<li><strong>扑</strong>：故意送吃，破坏对方眼位</li>
+<li>计数器、寄存器、状态机都属于这类</li>
+<li>只在<strong>时钟边沿</strong>触发，用 <code>&lt;=</code>（非阻塞赋值）</li>
 </ul>
 <hr />
-<h2 id="十一常用术语速查">十一、常用术语速查</h2>
+<h2 id="3-完整工作流一天-5-分钟记住它">3. 完整工作流（一天 5 分钟记住它）</h2>
+<pre><code>写 .v 文件 → iverilog 编译 → vvp 仿真 → 生成 .vcd → gtkwave 看波形
+</code></pre>
+<pre><code class="language-bash"># ① 编译（把源码编译成可仿真文件）
+iverilog -o 仿真名.vvp 设计.v 测试平台.v
+
+# ② 仿真（运行，打印输出 + 生成 .vcd 波形）
+vvp 仿真名.vvp
+
+# ③ 看波形（打开图形界面，把信号拖到右侧）
+gtkwave 波形.vcd
+</code></pre>
+<p><strong>改一行代码 → 重新编译 → 重新仿真 → 看波形</strong>，这就是你的开发闭环。</p>
+<hr />
+<h2 id="4-学习路线从逻辑门到小-cpu">4. 学习路线：从逻辑门到小 CPU</h2>
+<blockquote>
+<p>每个阶段都要动手写 + 仿真验证，不要只读。</p>
+</blockquote>
+<h3 id="阶段-0逻辑门第-12-天-已完成">阶段 0：逻辑门（第 1~2 天）✅ 已完成</h3>
+<ul>
+<li>与 <code>&amp;</code>、或 <code>|</code>、非 <code>~</code>、异或 <code>^</code></li>
+<li>掌握 <code>module</code> / <code>input</code> / <code>output</code> / <code>assign</code></li>
+<li>练习：写一个 3 输入的门电路，打印真值表</li>
+<li>项目：<code>01_gates/gates.v</code></li>
+</ul>
+<h3 id="阶段-1组合逻辑第-35-天">阶段 1：组合逻辑（第 3~5 天）</h3>
+<ul>
+<li>多路选择器（MUX）：<code>assign y = sel ? b : a;</code></li>
+<li>全加器：<code>sum = a ^ b ^ cin;</code> <code>cout = a&amp;b | a&amp;cin | b&amp;cin;</code></li>
+<li>译码器、比较器</li>
+<li>练习：用 <code>assign</code> 组合出门电路，实现 1 位全加器</li>
+</ul>
+<h3 id="阶段-2时序逻辑第-12-周">阶段 2：时序逻辑（第 1~2 周）</h3>
+<ul>
+<li>触发器、寄存器（<code>reg</code>）</li>
+<li>计数器、分频器</li>
+<li>阻塞赋值 <code>=</code> vs 非阻塞赋值 <code>&lt;=</code>（最大坑，详见第 7 节）</li>
+<li>练习：8 位计数器 + 复位（项目：<code>01_counter/</code>）</li>
+</ul>
+<h3 id="阶段-3状态机-fsm第-23-周">阶段 3：状态机 FSM（第 2~3 周）</h3>
+<ul>
+<li>三段式写法：状态转移 + 次态逻辑 + 输出逻辑</li>
+<li>练习：序列检测器（检测 "101"）</li>
+</ul>
+<h3 id="阶段-4实用小模块第-35-周">阶段 4：实用小模块（第 3~5 周）</h3>
+<ul>
+<li>同步 FIFO、UART 收发、SPI、按键消抖、数码管驱动</li>
+<li>练习：UART 发送器，能连到串口调试助手</li>
+</ul>
+<h3 id="阶段-5小-cpu进阶12-个月">阶段 5：小 CPU（进阶，1~2 个月）</h3>
+<ul>
+<li>简单 RISC-V 核（可参考开源项目 PicoRV32、serv）</li>
+<li>或学习 Yosys 综合 + FPGA 开发板（Tang Nano 9K 约 60~100 元）</li>
+</ul>
+<hr />
+<h2 id="5-verilog-必会语法清单">5. Verilog 必会语法清单</h2>
+<h3 id="数据类型">数据类型</h3>
 <table>
 <thead>
 <tr>
-<th>术语</th>
-<th>含义</th>
+<th>类型</th>
+<th>用途</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>气</td>
-<td>棋子相邻的空交叉点</td>
+<td><code>wire</code></td>
+<td>导线，组合逻辑连线</td>
+<td>由 assign 驱动</td>
 </tr>
 <tr>
-<td>棋串/块</td>
-<td>相连的同色棋子整体</td>
+<td><code>reg</code></td>
+<td>变量，有记忆</td>
+<td>在 always 里赋值；也用作测试平台输入端</td>
+</tr>
+</tbody>
+</table>
+<h3 id="运算符">运算符</h3>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&amp;</code> <code>\|</code> <code>~</code> <code>^</code></td>
+<td>与 / 或 / 非 / 异或</td>
+<td><code>assign y = a &amp; b;</code></td>
 </tr>
 <tr>
-<td>提子</td>
-<td>吃掉无气的棋子</td>
+<td><code>&amp;&amp;</code> <code>\|\|</code> <code>!</code></td>
+<td>逻辑与 / 或 / 非</td>
+<td><code>if (a &amp;&amp; b)</code></td>
 </tr>
 <tr>
-<td>眼</td>
-<td>围住的内空格</td>
+<td><code>==</code> <code>!=</code></td>
+<td>等于 / 不等于</td>
+<td><code>if (sel == 1)</code></td>
 </tr>
 <tr>
-<td>活棋/死棋</td>
-<td>有两只眼/无法做活的棋</td>
+<td><code>+</code> <code>-</code></td>
+<td>加减</td>
+<td><code>q &lt;= q + 1;</code></td>
 </tr>
 <tr>
-<td>打劫</td>
-<td>反复互提的规则</td>
+<td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td>
+<td>移位</td>
+<td><code>q &lt;= q &lt;&lt; 1;</code></td>
 </tr>
 <tr>
-<td>打吃</td>
-<td>让对方只剩最后一口气</td>
+<td><code>? :</code></td>
+<td>三目（多路选择）</td>
+<td><code>assign y = sel ? b : a;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="常用语句">常用语句</h3>
+<pre><code class="language-verilog">assign 连续赋值;              // 组合逻辑
+always @(*)                  // 组合逻辑过程块
+always @(posedge clk)        // 时序逻辑（时钟上升沿）
+if / else
+case ... endcase
+</code></pre>
+<h3 id="测试平台必备模板">测试平台必备模板</h3>
+<pre><code class="language-verilog">`timescale 1ns/1ps
+module xxx_tb;
+    reg  clk = 0;             // 输入端用 reg
+    wire out;                 // 输出端用 wire
+
+    xxx dut (.in(in), .out(out));   // 例化被测模块
+
+    always #5 clk = ~clk;     // 产生 10ns 时钟
+    initial begin
+        $dumpfile(&quot;wave.vcd&quot;);      // 导出波形
+        $dumpvars;
+        // 在这里写测试激励...
+        $finish;
+    end
+endmodule
+</code></pre>
+<hr />
+<h2 id="6-编译报错排查三板斧">6. 编译报错排查三板斧</h2>
+<h3 id="第一斧只看第一条报错">第一斧：只看第一条报错</h3>
+<pre><code>gates.v:13: syntax error
+</code></pre>
+<p><strong>永远从第一条报错看起</strong>，后面的报错基本都是连锁反应（一个错把解析搞乱，后面全报错）。</p>
+<h3 id="第二斧看报错指向的行号">第二斧：看报错指向的行号</h3>
+<p><code>gates.v:13</code> = gates.v 第 13 行。打开文件，看那一行和上一行。</p>
+<h3 id="第三斧对照常见错误表">第三斧：对照常见错误表</h3>
+<table>
+<thead>
+<tr>
+<th>报错</th>
+<th>原因</th>
+<th>修复</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>syntax error</code></td>
+<td>漏了标点</td>
+<td>查逗号/分号</td>
 </tr>
 <tr>
-<td>粘</td>
-<td>连接断点</td>
+<td><code>...has already been declared</code></td>
+<td>名字重复声明</td>
+<td>换名字，或检查是否拼错</td>
 </tr>
 <tr>
-<td>断</td>
-<td>切断对方</td>
+<td><code>Unable to bind wire/reg</code></td>
+<td>信号没连上</td>
+<td>检查例化时接线名</td>
 </tr>
 <tr>
-<td>长</td>
-<td>向己方方向延伸</td>
+<td><code>Syntax error in continuous assignment</code></td>
+<td>assign 缺分号</td>
+<td>在末尾补 <code>;</code></td>
 </tr>
 <tr>
-<td>扳</td>
-<td>阻止对方延伸的斜靠</td>
+<td><code>Errors in port declarations</code></td>
+<td>端口列表漏逗号</td>
+<td>两个声明之间加 <code>,</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="标点三规则背下来">标点三规则（背下来）</h3>
+<ol>
+<li><strong>列表</strong>（端口、例化接线）用逗号 <code>,</code></li>
+<li><strong>语句</strong>（assign、赋值）用分号 <code>;</code></li>
+<li><strong>最后一个不带</strong>（最后一个声明/连接后不写标点）</li>
+</ol>
+<hr />
+<h2 id="7-常见坑与避坑指南">7. 常见坑与避坑指南</h2>
+<h3 id="坑-1时序逻辑用-组合逻辑用-">坑 1：时序逻辑用 <code>=</code>，组合逻辑用 <code>&lt;=</code></h3>
+<pre><code class="language-verilog">// ❌ 错：时序逻辑用了阻塞赋值
+always @(posedge clk) q = q + 1;
+
+// ✅ 对：时序逻辑用非阻塞赋值
+always @(posedge clk) q &lt;= q + 1;
+</code></pre>
+<blockquote>
+<p>记法：<strong>时序（clk）用 <code>&lt;=</code>，组合（assign / always @*）用 <code>=</code></strong></p>
+</blockquote>
+<h3 id="坑-2组合逻辑漏-else--default--产生锁存器">坑 2：组合逻辑漏 else / default → 产生锁存器</h3>
+<pre><code class="language-verilog">// ❌ 错：if 没有 else，组合逻辑会生成锁存器（latch）
+always @(*) begin
+    if (sel) y = a;
+end
+
+// ✅ 对：补上 else
+always @(*) begin
+    if (sel) y = a;
+    else     y = b;
+end
+</code></pre>
+<h3 id="坑-3always-posedge-clk-里面写了不该写的">坑 3：<code>always @(posedge clk)</code> 里面写了不该写的</h3>
+<ul>
+<li>时序块里<strong>不要</strong>用 <code>#延迟</code></li>
+<li>一个 <code>always</code> 块里尽量只写一个电路</li>
+</ul>
+<h3 id="坑-4位宽不匹配">坑 4：位宽不匹配</h3>
+<ul>
+<li><code>8 位 + 8 位</code> 结果可能溢出到 9 位</li>
+<li>加法时给结果留够位宽：<code>output reg [8:0] sum;</code></li>
+</ul>
+<h3 id="坑-5仿真通过--能综合">坑 5：仿真通过 ≠ 能综合</h3>
+<ul>
+<li>可综合：<code>assign</code>、<code>always</code>、<code>if/case</code>、<code>+ - &amp; | ~ ^</code></li>
+<li>不可综合（只能仿真用）：<code>$display</code>、<code>#延迟</code>、<code>initial</code> 里的复杂循环</li>
+</ul>
+<hr />
+<h2 id="8-免费学习资源">8. 免费学习资源</h2>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>HDLBits</strong>（hdlbits.01xz.net）</td>
+<td>在线刷题，从语法到状态机，强烈推荐</td>
 </tr>
 <tr>
-<td>立</td>
-<td>向边线二线以下走</td>
+<td>本项目 <code>01_gates/</code>、<code>01_counter/</code></td>
+<td>动手实践，看波形</td>
 </tr>
 <tr>
-<td>飞</td>
-<td>隔一点斜走（日字）</td>
+<td>《数字设计和计算机体系结构》（Harris）</td>
+<td>数字电路 + 体系结构教材</td>
 </tr>
 <tr>
-<td>跳</td>
-<td>隔一格直走（马步）</td>
+<td>《Verilog HDL 高级数字设计》</td>
+<td>中文经典参考书</td>
 </tr>
 <tr>
-<td>尖</td>
-<td>斜对角紧靠己方棋</td>
+<td>ZipCPU 博客（zipcpu.com）</td>
+<td>实战风格的 Verilog/CPU 教程</td>
 </tr>
 <tr>
-<td>夹</td>
-<td>对方棋两侧各一子</td>
-</tr>
-<tr>
-<td>定式</td>
-<td>角落局部固定着法</td>
-</tr>
-<tr>
-<td>官子</td>
-<td>终局前的收官</td>
-</tr>
-<tr>
-<td>中盘</td>
-<td>全局战斗阶段</td>
-</tr>
-<tr>
-<td>全局观</td>
-<td>从整体角度判断形势</td>
-</tr>
-<tr>
-<td>贴目</td>
-<td>黑棋让给白棋的目数补偿</td>
+<td>GitHub：PicoRV32、serv</td>
+<td>开源 RISC-V 实现，进阶阅读</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="十二常见开局">十二、常见开局</h2>
-<h3 id="布局原则">布局原则</h3>
-<ol>
-<li><strong>先占角，再占边，后围中央</strong>（角最省子、最易围地）</li>
-<li><strong>金角银边草肚皮</strong>：角的效率最高</li>
-<li>布局阶段不要贪子，求快速展开</li>
-</ol>
-<h3 id="典型开局点">典型开局点</h3>
+<h2 id="附每日练习节奏建议">附：每日练习节奏建议</h2>
 <ul>
-<li><strong>星位（4,4）</strong>：兼顾实地与势力，最流行</li>
-<li><strong>小目（3,4）</strong>：稳固，古典棋风常使用</li>
-<li><strong>三三（3,3）</strong>：直接守住实地</li>
-<li><strong>高目（4,5）</strong>、<strong>目外（3,5）</strong>：偏向取势</li>
-</ul>
-<h3 id="经典布局">经典布局</h3>
-<ul>
-<li><strong>二连星</strong>：黑白角上两个星位</li>
-<li><strong>三连星</strong>：三个星位连成一线，注重外势</li>
-<li><strong>中国流</strong>：星 + 小目 + 九路星的经典布局</li>
-<li><strong>对角星</strong>、<strong>错小目</strong>等</li>
+<li><strong>每天 30~60 分钟</strong>，只做 1 个小目标</li>
+<li>每个小目标都走完整闭环：<strong>写 → 编译 → 仿真 → 看波形</strong></li>
+<li>真值表、波形图就是你的"运行结果"，学会了"看波形"才算真学会</li>
+<li>卡住超过 30 分钟就换一个练，第二天再回头看</li>
 </ul>
 <blockquote>
-<p>初学者先用最简单的方法：<strong>四个角各占一个星位</strong>，练熟后再学定式。</p>
-</blockquote>
-<hr />
-<h2 id="十三进阶学习路线">十三、进阶学习路线</h2>
-<h3 id="阶段一入门01-个月">阶段一：入门（0～1 个月）</h3>
-<ul>
-<li>完全掌握规则、气、提子、死活</li>
-<li>在 9×9 或 13×13 棋盘上对弈，先不下 19 路大棋盘</li>
-<li>完成初级死活题（"吃子"、"做眼"题）</li>
-<li>目标：能完整下完一盘棋并数清胜负</li>
-</ul>
-<h3 id="阶段二初级16-个月">阶段二：初级（1～6 个月）</h3>
-<ul>
-<li>转向 19×19 标准棋盘</li>
-<li>学习基础定式、常见死活（两眼活棋、双活、劫活）</li>
-<li>学习吃子手筋：征、枷、扑、倒扑</li>
-<li>开始做"布局、中盘、官子"分类练习</li>
-<li>建议：每天做 5～10 道死活题</li>
-</ul>
-<h3 id="阶段三中级6-个月以上">阶段三：中级（6 个月以上）</h3>
-<ul>
-<li>系统学习定式与中盘战斗</li>
-<li>研究官子的目数计算</li>
-<li>复盘分析（最好请 AI 或高手指点）</li>
-<li>参加线上对弈平台（野狐围棋、奕客、KGS 等）定期实战</li>
-</ul>
-<h3 id="学习资源推荐">学习资源推荐</h3>
-<ul>
-<li><strong>入门书</strong>：《围棋入门》《阶梯围棋初级教程》</li>
-<li><strong>经典名局</strong>：吴清源、李昌镐、柯洁等棋谱</li>
-<li><strong>AI 工具</strong>：用 KataGo、绝艺等复盘，或直接使用 AI 对战功能</li>
-<li><strong>视频课程</strong>：各大平台都有免费入门教学视频</li>
-</ul>
-<h3 id="实用小建议">实用小建议</h3>
-<ol>
-<li><strong>多下快棋</strong>：短对局积累经验比只看书快</li>
-<li><strong>多做死活题</strong>：死活题是围棋的"肌肉记忆"</li>
-<li><strong>养成复盘习惯</strong>：每盘棋后总结自己的失误</li>
-<li><strong>心态平和</strong>：围棋重在享受思考和进步的过程</li>
-</ol>
-<hr />
-<h2 id="附录口诀快记">附录：口诀快记</h2>
-<ul>
-<li>金角银边草肚皮</li>
-<li>棋从断处生</li>
-<li>两眼活，单眼死</li>
-<li>气尽子亡</li>
-<li>先做眼，再战斗</li>
-<li>打劫不急，先找劫材</li>
-</ul>
-<blockquote>
-<p><strong>围棋之道，入门极简，极致无穷。愿你从一局棋开始，享受这四千年的智慧。</strong></p>
+<p>学习顺序永远是：<strong>先跑通最简单的 → 加一点复杂度 → 再跑通 → 再加</strong>。不要一次写很多代码，一次加一个功能。</p>
 </blockquote>
 
 
