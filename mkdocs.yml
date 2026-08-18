@@ -39,7 +39,7 @@ nav:
     - 教程: tutorial/tutorial.md
     - Latex使用教程: tutorial/latex.md
     - Markdown使用教程: tutorial/markdown.md
-    - 围棋入门: tutorial/Go.md
+    - verilog入门: tutorial/verilog.md
   - 关于我: about.md
 extra:
   social: 
