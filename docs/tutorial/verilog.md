@@ -1,8 +1,6 @@
-# Verilog 零基础学习教程（Linux + iverilog + gtkwave + VSCode）
+# Verilog 零基础学习教程
 
-> 本文档配套项目目录：`/home/wuji/Projects/verilog-learn/`
 > 学习方法主线：**边写边仿真边看波形**，不做题海战术，不啃大部头。
-
 ---
 
 ## 目录
@@ -130,7 +128,7 @@ gtkwave 波形.vcd
 
 > 每个阶段都要动手写 + 仿真验证，不要只读。
 
-### 阶段 0：逻辑门（第 1~2 天）✅ 已完成
+### 阶段 0：逻辑门（第 1~2 天）
 - 与 `&`、或 `|`、非 `~`、异或 `^`
 - 掌握 `module` / `input` / `output` / `assign`
 - 练习：写一个 3 输入的门电路，打印真值表
