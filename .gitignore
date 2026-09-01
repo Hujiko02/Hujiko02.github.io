@@ -2,3 +2,4 @@ site/
 venv/
 .obsidian/
 push.sh
+push-termux.sh
