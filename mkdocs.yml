@@ -39,6 +39,7 @@ nav:
     - Markdown使用教程: tutorial/markdown.md
     - verilog入门: tutorial/verilog.md
   - 关于我: about.md
+  - 日记: diary.md  
 extra:
   social: 
     - name: 我的GitHub
