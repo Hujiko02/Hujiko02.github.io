@@ -38,8 +38,9 @@ nav:
     - Latex使用教程: tutorial/latex.md
     - Markdown使用教程: tutorial/markdown.md
     - verilog入门: tutorial/verilog.md
+  - 日记: 
+    - 2026年: diary/2026.md
   - 关于我: about.md
-  - 日记: diary/diary.md  
 extra:
   social: 
     - name: 我的GitHub
