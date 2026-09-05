@@ -18,7 +18,7 @@
         <link rel="prev" href="../markdown/">
       
       
-        <link rel="next" href="../../diary/2026/">
+        <link rel="next" href="../matplotlib/">
       
       
         
@@ -1102,6 +1102,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../matplotlib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matplotlib入门教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1256,9 +1284,9 @@
 <hr />
 <h2 id="1-工具安装">1. 工具安装</h2>
 <h3 id="11-仿真工具debianubuntu-系">1.1 仿真工具（Debian/Ubuntu 系）</h3>
-<pre><code class="language-bash">sudo apt update
-sudo apt install -y iverilog gtkwave
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>iverilog<span class="w"> </span>gtkwave
+</code></pre></div>
 <p>安装后自动获得 3 个命令：</p>
 <table>
 <thead>
@@ -1290,68 +1318,68 @@ sudo apt install -y iverilog gtkwave
 <p>说明：<code>vvp</code> 不需要单独安装，装 <code>iverilog</code> 就自动带上了。</p>
 </blockquote>
 <h3 id="12-vs-code-插件">1.2 VS Code 插件</h3>
-<pre><code class="language-bash">code --install-extension mshr-h.verilog-hdl
-code --install-extension teros-technology.teroshdl
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>--install-extension<span class="w"> </span>mshr-h.verilog-hdl
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>code<span class="w"> </span>--install-extension<span class="w"> </span>teros-technology.teroshdl
+</code></pre></div>
 <ul>
 <li><strong>Verilog-HDL/SystemVerilog</strong>：语法高亮、代码补全、格式化</li>
 <li><strong>TerosHDL</strong>：lint 检查（写错立刻报）、一键生成测试平台模板</li>
 </ul>
 <h3 id="13-验证安装">1.3 验证安装</h3>
-<pre><code class="language-bash">iverilog -V        # 有版本号 = OK
-gtkwave --version  # 有版本号 = OK
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>iverilog<span class="w"> </span>-V<span class="w">        </span><span class="c1"># 有版本号 = OK</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>gtkwave<span class="w"> </span>--version<span class="w">  </span><span class="c1"># 有版本号 = OK</span>
+</code></pre></div>
 <hr />
 <h2 id="2-核心概念先搞懂-4-件事">2. 核心概念：先搞懂 4 件事</h2>
 <p>学 Verilog 最大的误区是把它当 C 语言写。<strong>它描述的是硬件</strong>，先建立这 4 个心智模型：</p>
 <h3 id="①-模块module-一个电路">① 模块（module）= 一个电路</h3>
-<pre><code class="language-verilog">module 名字 ( 端口 );
-    // 电路内部
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">module</span><span class="w"> </span><span class="err">名字</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="err">端口</span><span class="w"> </span><span class="p">);</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="c1">// 电路内部</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">endmodule</span>
+</code></pre></div>
 <ul>
 <li>一个 <code>.v</code> 文件就是一个"电路图纸"</li>
 <li><code>module</code> 和 <code>endmodule</code> 必须成对出现</li>
 </ul>
 <h3 id="②-input--output--引脚">② input / output = 引脚</h3>
-<pre><code class="language-verilog">module gates (
-    input  wire a,      // 输入引脚
-    output wire y       // 输出引脚
-);
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">module</span><span class="w"> </span><span class="n">gates</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w">      </span><span class="c1">// 输入引脚</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">wire</span><span class="w"> </span><span class="n">y</span><span class="w">       </span><span class="c1">// 输出引脚</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">);</span>
+</code></pre></div>
 <ul>
 <li>对外连接的叫 <strong>引脚（port）</strong></li>
 <li>列表里两个声明之间用 <strong>逗号</strong> 隔开</li>
 </ul>
 <h3 id="③-assign--一根连线">③ assign = 一根连线</h3>
-<pre><code class="language-verilog">assign y = a &amp; b;   // 把 y 接到&quot;a 与 b&quot;的结果上
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">assign</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">   </span><span class="c1">// 把 y 接到"a 与 b"的结果上</span>
+</code></pre></div>
 <ul>
 <li>组合逻辑（没有记忆的电路）用 <code>assign</code> 描述</li>
 <li>这是一条<strong>语句</strong>，结尾必须写 <strong>分号 <code>;</code></strong></li>
 </ul>
 <h3 id="④-时序逻辑--有记忆的电路">④ 时序逻辑 = 有记忆的电路</h3>
-<pre><code class="language-verilog">always @(posedge clk) begin
-    q &lt;= q + 1;     // 每个时钟上升沿执行一次
-end
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span><span class="w">     </span><span class="c1">// 每个时钟上升沿执行一次</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">end</span>
+</code></pre></div>
 <ul>
 <li>计数器、寄存器、状态机都属于这类</li>
 <li>只在<strong>时钟边沿</strong>触发，用 <code>&lt;=</code>（非阻塞赋值）</li>
 </ul>
 <hr />
 <h2 id="3-完整工作流一天-5-分钟记住它">3. 完整工作流（一天 5 分钟记住它）</h2>
-<pre><code>写 .v 文件 → iverilog 编译 → vvp 仿真 → 生成 .vcd → gtkwave 看波形
-</code></pre>
-<pre><code class="language-bash"># ① 编译（把源码编译成可仿真文件）
-iverilog -o 仿真名.vvp 设计.v 测试平台.v
-
-# ② 仿真（运行，打印输出 + 生成 .vcd 波形）
-vvp 仿真名.vvp
-
-# ③ 看波形（打开图形界面，把信号拖到右侧）
-gtkwave 波形.vcd
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>写 .v 文件 → iverilog 编译 → vvp 仿真 → 生成 .vcd → gtkwave 看波形
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># ① 编译（把源码编译成可仿真文件）</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>iverilog<span class="w"> </span>-o<span class="w"> </span>仿真名.vvp<span class="w"> </span>设计.v<span class="w"> </span>测试平台.v
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># ② 仿真（运行，打印输出 + 生成 .vcd 波形）</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>vvp<span class="w"> </span>仿真名.vvp
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># ③ 看波形（打开图形界面，把信号拖到右侧）</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>gtkwave<span class="w"> </span>波形.vcd
+</code></pre></div>
 <p><strong>改一行代码 → 重新编译 → 重新仿真 → 看波形</strong>，这就是你的开发闭环。</p>
 <hr />
 <h2 id="4-学习路线从逻辑门到小-cpu">4. 学习路线：从逻辑门到小 CPU</h2>
@@ -1461,35 +1489,35 @@ gtkwave 波形.vcd
 </tbody>
 </table>
 <h3 id="常用语句">常用语句</h3>
-<pre><code class="language-verilog">assign 连续赋值;              // 组合逻辑
-always @(*)                  // 组合逻辑过程块
-always @(posedge clk)        // 时序逻辑（时钟上升沿）
-if / else
-case ... endcase
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">assign</span><span class="w"> </span><span class="err">连续赋值</span><span class="p">;</span><span class="w">              </span><span class="c1">// 组合逻辑</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="o">*</span><span class="p">)</span><span class="w">                  </span><span class="c1">// 组合逻辑过程块</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w">        </span><span class="c1">// 时序逻辑（时钟上升沿）</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">if</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">else</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">case</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">endcase</span>
+</code></pre></div>
 <h3 id="测试平台必备模板">测试平台必备模板</h3>
-<pre><code class="language-verilog">`timescale 1ns/1ps
-module xxx_tb;
-    reg  clk = 0;             // 输入端用 reg
-    wire out;                 // 输出端用 wire
-
-    xxx dut (.in(in), .out(out));   // 例化被测模块
-
-    always #5 clk = ~clk;     // 产生 10ns 时钟
-    initial begin
-        $dumpfile(&quot;wave.vcd&quot;);      // 导出波形
-        $dumpvars;
-        // 在这里写测试激励...
-        $finish;
-    end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="no">`timescale</span><span class="w"> </span><span class="mh">1</span><span class="n">ns</span><span class="o">/</span><span class="mh">1</span><span class="n">ps</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">module</span><span class="w"> </span><span class="n">xxx_tb</span><span class="p">;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="kt">reg</span><span class="w">  </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w">             </span><span class="c1">// 输入端用 reg</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="n">out</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 输出端用 wire</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="n">xxx</span><span class="w"> </span><span class="n">dut</span><span class="w"> </span><span class="p">(.</span><span class="n">in</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">out</span><span class="p">(</span><span class="n">out</span><span class="p">));</span><span class="w">   </span><span class="c1">// 例化被测模块</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="n">clk</span><span class="p">;</span><span class="w">     </span><span class="c1">// 产生 10ns 时钟</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">        </span><span class="n">$dumpfile</span><span class="p">(</span><span class="s">"wave.vcd"</span><span class="p">);</span><span class="w">      </span><span class="c1">// 导出波形</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">        </span><span class="n">$dumpvars</span><span class="p">;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">        </span><span class="c1">// 在这里写测试激励...</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">        </span><span class="nb">$finish</span><span class="p">;</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="k">endmodule</span>
+</code></pre></div>
 <hr />
 <h2 id="6-编译报错排查三板斧">6. 编译报错排查三板斧</h2>
 <h3 id="第一斧只看第一条报错">第一斧：只看第一条报错</h3>
-<pre><code>gates.v:13: syntax error
-</code></pre>
-<p><strong>永远从第一条报错看起</strong>，后面的报错基本都是连锁反应（一个错把解析搞乱，后面全报错）。</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>gates.v:13: syntax error
+</code></pre></div>
+<strong>永远从第一条报错看起</strong>，后面的报错基本都是连锁反应（一个错把解析搞乱，后面全报错）。</p>
 <h3 id="第二斧看报错指向的行号">第二斧：看报错指向的行号</h3>
 <p><code>gates.v:13</code> = gates.v 第 13 行。打开文件，看那一行和上一行。</p>
 <h3 id="第三斧对照常见错误表">第三斧：对照常见错误表</h3>
@@ -1538,27 +1566,27 @@ endmodule
 <hr />
 <h2 id="7-常见坑与避坑指南">7. 常见坑与避坑指南</h2>
 <h3 id="坑-1时序逻辑用-组合逻辑用-">坑 1：时序逻辑用 <code>=</code>，组合逻辑用 <code>&lt;=</code></h3>
-<pre><code class="language-verilog">// ❌ 错：时序逻辑用了阻塞赋值
-always @(posedge clk) q = q + 1;
-
-// ✅ 对：时序逻辑用非阻塞赋值
-always @(posedge clk) q &lt;= q + 1;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// ❌ 错：时序逻辑用了阻塞赋值</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1">// ✅ 对：时序逻辑用非阻塞赋值</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+</code></pre></div>
 <blockquote>
 <p>记法：<strong>时序（clk）用 <code>&lt;=</code>，组合（assign / always @*）用 <code>=</code></strong></p>
 </blockquote>
 <h3 id="坑-2组合逻辑漏-else--default--产生锁存器">坑 2：组合逻辑漏 else / default → 产生锁存器</h3>
-<pre><code class="language-verilog">// ❌ 错：if 没有 else，组合逻辑会生成锁存器（latch）
-always @(*) begin
-    if (sel) y = a;
-end
-
-// ✅ 对：补上 else
-always @(*) begin
-    if (sel) y = a;
-    else     y = b;
-end
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">// ❌ 错：if 没有 else，组合逻辑会生成锁存器（latch）</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sel</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="k">end</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="c1">// ✅ 对：补上 else</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sel</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="k">else</span><span class="w">     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="k">end</span>
+</code></pre></div>
 <h3 id="坑-3always-posedge-clk-里面写了不该写的">坑 3：<code>always @(posedge clk)</code> 里面写了不该写的</h3>
 <ul>
 <li>时序块里<strong>不要</strong>用 <code>#延迟</code></li>
