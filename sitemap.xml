@@ -2,42 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://Hujiko02.github.io/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
     </url>
     <url>
          <loc>https://Hujiko02.github.io/about/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
     </url>
     <url>
          <loc>https://Hujiko02.github.io/ohush-privacy/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
     </url>
     <url>
          <loc>https://Hujiko02.github.io/test/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
     </url>
     <url>
          <loc>https://Hujiko02.github.io/diary/2026/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
+    </url>
+    <url>
+         <loc>https://Hujiko02.github.io/tutorial/GitHub%E5%8A%A0%E9%80%9F%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8E%92%E6%9F%A5%E6%8C%87%E5%8D%97/</loc>
+         <lastmod>2026-09-06</lastmod>
     </url>
     <url>
          <loc>https://Hujiko02.github.io/tutorial/latex/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
     </url>
     <url>
          <loc>https://Hujiko02.github.io/tutorial/markdown/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
     </url>
     <url>
          <loc>https://Hujiko02.github.io/tutorial/matplotlib/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
     </url>
     <url>
          <loc>https://Hujiko02.github.io/tutorial/tutorial/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
     </url>
     <url>
          <loc>https://Hujiko02.github.io/tutorial/verilog/</loc>
-         <lastmod>2026-09-05</lastmod>
+         <lastmod>2026-09-06</lastmod>
     </url>
 </urlset>

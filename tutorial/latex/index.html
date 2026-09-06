@@ -2186,15 +2186,15 @@
 </code></pre></div>
 <h3 id="102-行间公式独立成行自动编号">10.2 行间公式（独立成行、自动编号）</h3>
 <p>用 <code>equation</code> 环境：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">\begin</span><span class="nb">{equation}</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nb">  E </span><span class="o">=</span><span class="nb"> mc^</span><span class="m">2</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="k">\end</span><span class="nb">{equation}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">\begin</span><span class="nb">{</span>equation<span class="nb">}</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>  E = mc<span class="nb">^</span>2
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="k">\end</span><span class="nb">{</span>equation<span class="nb">}</span>
 </code></pre></div>
 <p>带标签的编号公式（引用见 11 节）：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">\begin</span><span class="nb">{equation}</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nb">  x </span><span class="o">=</span><span class="nb"> </span><span class="nv">\frac</span><span class="nb">{</span><span class="o">-</span><span class="nb">b </span><span class="nv">\pm</span><span class="nb"> </span><span class="nv">\sqrt</span><span class="nb">{b^</span><span class="m">2</span><span class="o">-</span><span class="m">4</span><span class="nb">ac}}{</span><span class="m">2</span><span class="nb">a}</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="nb">  </span><span class="nv">\label</span><span class="nb">{eq:quadratic}</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="k">\end</span><span class="nb">{equation}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">\begin</span><span class="nb">{</span>equation<span class="nb">}</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>  x = <span class="k">\frac</span><span class="nb">{</span>-b <span class="k">\pm</span> <span class="k">\sqrt</span><span class="nb">{</span>b<span class="nb">^</span>2-4ac<span class="nb">}}{</span>2a<span class="nb">}</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>  <span class="k">\label</span><span class="nb">{</span>eq:quadratic<span class="nb">}</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="k">\end</span><span class="nb">{</span>equation<span class="nb">}</span>
 </code></pre></div>
 <p>不想编号用 <code>equation*</code> 或 <code>\[...\]</code>：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="sb">\[</span>
@@ -2204,10 +2204,10 @@
 <h3 id="103-多行公式align">10.3 多行公式（align）</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">\usepackage</span><span class="nb">{</span>amsmath<span class="nb">}</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="k">\begin</span><span class="nb">{align}</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="nb">  </span><span class="m">2</span><span class="nb">x </span><span class="o">+</span><span class="nb"> y &amp;</span><span class="o">=</span><span class="nb"> </span><span class="m">5</span><span class="nb"> </span><span class="nv">\\</span>
-<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="nb">  </span><span class="m">3</span><span class="nb">x </span><span class="o">-</span><span class="nb"> y &amp;</span><span class="o">=</span><span class="nb"> </span><span class="m">0</span>
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="k">\end</span><span class="nb">{align}</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="k">\begin</span><span class="nb">{</span>align<span class="nb">}</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>  2x + y <span class="nb">&amp;</span>= 5 <span class="k">\\</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>  3x - y <span class="nb">&amp;</span>= 0
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="k">\end</span><span class="nb">{</span>align<span class="nb">}</span>
 </code></pre></div>
 <p><code>&amp;</code> 是对齐位置，<code>\\</code> 换行。不带编号用 <code>align*</code>。</p>
 <h3 id="104-常用数学符号速查">10.4 常用数学符号速查</h3>
@@ -2326,13 +2326,13 @@
 </tbody>
 </table>
 <h3 id="105-常用结构示例">10.5 常用结构示例</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="k">\begin</span><span class="nb">{equation}</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nb">  </span><span class="nv">\lim</span><span class="nb">_{n </span><span class="nv">\to</span><span class="nb"> </span><span class="nv">\infty</span><span class="nb">} </span><span class="nv">\left</span><span class="o">(</span><span class="nb"> </span><span class="m">1</span><span class="nb"> </span><span class="o">+</span><span class="nb"> </span><span class="nv">\frac</span><span class="nb">{</span><span class="m">1</span><span class="nb">}{n} </span><span class="nv">\right</span><span class="o">)</span><span class="nb">^n </span><span class="o">=</span><span class="nb"> e</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="k">\end</span><span class="nb">{equation}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="k">\begin</span><span class="nb">{</span>equation<span class="nb">}</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>  <span class="k">\lim_</span><span class="nb">{</span>n <span class="k">\to</span> <span class="k">\infty</span><span class="nb">}</span> <span class="k">\left</span>( 1 + <span class="k">\frac</span><span class="nb">{</span>1<span class="nb">}{</span>n<span class="nb">}</span> <span class="k">\right</span>)<span class="nb">^</span>n = e
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="k">\end</span><span class="nb">{</span>equation<span class="nb">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="k">\begin</span><span class="nb">{equation}</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="nb">  P</span><span class="o">(</span><span class="nb">A </span><span class="nv">\mid</span><span class="nb"> B</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\frac</span><span class="nb">{P</span><span class="o">(</span><span class="nb">B </span><span class="nv">\mid</span><span class="nb"> A</span><span class="o">)</span><span class="nb"> P</span><span class="o">(</span><span class="nb">A</span><span class="o">)</span><span class="nb">}{P</span><span class="o">(</span><span class="nb">B</span><span class="o">)</span><span class="nb">}</span>
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="k">\end</span><span class="nb">{equation}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="k">\begin</span><span class="nb">{</span>equation<span class="nb">}</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>  P(A <span class="k">\mid</span> B) = <span class="k">\frac</span><span class="nb">{</span>P(B <span class="k">\mid</span> A) P(A)<span class="nb">}{</span>P(B)<span class="nb">}</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="k">\end</span><span class="nb">{</span>equation<span class="nb">}</span>
 </code></pre></div>
 <p><code>\left( ... \right)</code> 会自动调节括号大小（对应右括号用 <code>\right.</code> 可隐藏）。</p>
 <h3 id="106-数学字体">10.6 数学字体</h3>
@@ -2376,9 +2376,9 @@
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>详见第 <span class="k">\ref</span><span class="nb">{</span>sec:method<span class="nb">}</span> 节（第 <span class="k">\pageref</span><span class="nb">{</span>sec:method<span class="nb">}</span> 页）。
 <a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>
 <a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="c">% 公式</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="k">\begin</span><span class="nb">{equation}</span>
-<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="nb">  E </span><span class="o">=</span><span class="nb"> mc^</span><span class="m">2</span><span class="nb"> </span><span class="nv">\label</span><span class="nb">{eq:energy}</span>
-<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="k">\end</span><span class="nb">{equation}</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="k">\begin</span><span class="nb">{</span>equation<span class="nb">}</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>  E = mc<span class="nb">^</span>2 <span class="k">\label</span><span class="nb">{</span>eq:energy<span class="nb">}</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="k">\end</span><span class="nb">{</span>equation<span class="nb">}</span>
 <a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>公式 <span class="k">\ref</span><span class="nb">{</span>eq:energy<span class="nb">}</span> 是质能方程。
 </code></pre></div>
 <blockquote>
@@ -2416,7 +2416,7 @@
 <p>正文中使用：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="k">\begin</span><span class="nb">{</span>lstlisting<span class="nb">}</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>def hello(name):
-<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>    print(f"Hello, <span class="nb">{</span>name<span class="nb">}</span>!")
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>    print(f&quot;Hello, <span class="nb">{</span>name<span class="nb">}</span>!&quot;)
 <a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="k">\end</span><span class="nb">{</span>lstlisting<span class="nb">}</span>
 </code></pre></div>
 <p>需要<strong>高亮颜色</strong>时加载 <code>xcolor</code>：</p>
@@ -2425,7 +2425,7 @@
 <p>更现代的方案是 <code>minted</code> 宏包（需要编译时联网安装 Python 的 Pygments，Overleaf 免费版可用，但编译较慢）：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="k">\usepackage</span><span class="nb">{</span>minted<span class="nb">}</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="k">\begin</span><span class="nb">{</span>minted<span class="nb">}{</span>python<span class="nb">}</span>
-<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>print("hello")
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>print(&quot;hello&quot;)
 <a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="k">\end</span><span class="nb">{</span>minted<span class="nb">}</span>
 </code></pre></div>
 <hr />
@@ -2708,10 +2708,10 @@
 <a id="__codelineno-42-22" name="__codelineno-42-22" href="#__codelineno-42-22"></a>欧拉公式 <span class="s">$</span><span class="nb">e^{i</span><span class="nv">\pi</span><span class="nb">}</span><span class="o">+</span><span class="m">1</span><span class="o">=</span><span class="m">0</span><span class="s">$</span> 被称为最美丽的数学公式。
 <a id="__codelineno-42-23" name="__codelineno-42-23" href="#__codelineno-42-23"></a>
 <a id="__codelineno-42-24" name="__codelineno-42-24" href="#__codelineno-42-24"></a><span class="k">\section</span><span class="nb">{</span>数学公式<span class="nb">}</span>
-<a id="__codelineno-42-25" name="__codelineno-42-25" href="#__codelineno-42-25"></a><span class="k">\begin</span><span class="nb">{equation}</span>
-<a id="__codelineno-42-26" name="__codelineno-42-26" href="#__codelineno-42-26"></a><span class="nb">  </span><span class="nv">\label</span><span class="nb">{eq:gauss}</span>
-<a id="__codelineno-42-27" name="__codelineno-42-27" href="#__codelineno-42-27"></a><span class="nb">  </span><span class="nv">\sum</span><span class="nb">_{i</span><span class="o">=</span><span class="m">1</span><span class="nb">}^{n} i </span><span class="o">=</span><span class="nb"> </span><span class="nv">\frac</span><span class="nb">{n</span><span class="o">(</span><span class="nb">n</span><span class="o">+</span><span class="m">1</span><span class="o">)</span><span class="nb">}{</span><span class="m">2</span><span class="nb">}</span>
-<a id="__codelineno-42-28" name="__codelineno-42-28" href="#__codelineno-42-28"></a><span class="k">\end</span><span class="nb">{equation}</span>
+<a id="__codelineno-42-25" name="__codelineno-42-25" href="#__codelineno-42-25"></a><span class="k">\begin</span><span class="nb">{</span>equation<span class="nb">}</span>
+<a id="__codelineno-42-26" name="__codelineno-42-26" href="#__codelineno-42-26"></a>  <span class="k">\label</span><span class="nb">{</span>eq:gauss<span class="nb">}</span>
+<a id="__codelineno-42-27" name="__codelineno-42-27" href="#__codelineno-42-27"></a>  <span class="k">\sum_</span><span class="nb">{</span>i=1<span class="nb">}^{</span>n<span class="nb">}</span> i = <span class="k">\frac</span><span class="nb">{</span>n(n+1)<span class="nb">}{</span>2<span class="nb">}</span>
+<a id="__codelineno-42-28" name="__codelineno-42-28" href="#__codelineno-42-28"></a><span class="k">\end</span><span class="nb">{</span>equation<span class="nb">}</span>
 <a id="__codelineno-42-29" name="__codelineno-42-29" href="#__codelineno-42-29"></a>
 <a id="__codelineno-42-30" name="__codelineno-42-30" href="#__codelineno-42-30"></a>由公式 <span class="k">\eqref</span><span class="nb">{</span>eq:gauss<span class="nb">}</span> 可知，前 <span class="s">$</span><span class="nb">n</span><span class="s">$</span> 个自然数之和如上式所示。
 <a id="__codelineno-42-31" name="__codelineno-42-31" href="#__codelineno-42-31"></a>
@@ -2742,7 +2742,7 @@
 <a id="__codelineno-42-56" name="__codelineno-42-56" href="#__codelineno-42-56"></a>
 <a id="__codelineno-42-57" name="__codelineno-42-57" href="#__codelineno-42-57"></a><span class="k">\section</span><span class="nb">{</span>代码<span class="nb">}</span>
 <a id="__codelineno-42-58" name="__codelineno-42-58" href="#__codelineno-42-58"></a><span class="k">\begin</span><span class="nb">{</span>verbatim<span class="nb">}</span>
-<a id="__codelineno-42-59" name="__codelineno-42-59" href="#__codelineno-42-59"></a>print("Hello, LaTeX!")
+<a id="__codelineno-42-59" name="__codelineno-42-59" href="#__codelineno-42-59"></a>print(&quot;Hello, LaTeX!&quot;)
 <a id="__codelineno-42-60" name="__codelineno-42-60" href="#__codelineno-42-60"></a><span class="k">\end</span><span class="nb">{</span>verbatim<span class="nb">}</span>
 <a id="__codelineno-42-61" name="__codelineno-42-61" href="#__codelineno-42-61"></a>
 <a id="__codelineno-42-62" name="__codelineno-42-62" href="#__codelineno-42-62"></a><span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>

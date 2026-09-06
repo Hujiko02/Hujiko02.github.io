@@ -1352,7 +1352,7 @@
 <li>列表里两个声明之间用 <strong>逗号</strong> 隔开</li>
 </ul>
 <h3 id="③-assign--一根连线">③ assign = 一根连线</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">assign</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">   </span><span class="c1">// 把 y 接到"a 与 b"的结果上</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">assign</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">   </span><span class="c1">// 把 y 接到&quot;a 与 b&quot;的结果上</span>
 </code></pre></div>
 <ul>
 <li>组合逻辑（没有记忆的电路）用 <code>assign</code> 描述</li>
@@ -1505,7 +1505,7 @@
 <a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="n">clk</span><span class="p">;</span><span class="w">     </span><span class="c1">// 产生 10ns 时钟</span>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">        </span><span class="n">$dumpfile</span><span class="p">(</span><span class="s">"wave.vcd"</span><span class="p">);</span><span class="w">      </span><span class="c1">// 导出波形</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">        </span><span class="n">$dumpfile</span><span class="p">(</span><span class="s">&quot;wave.vcd&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// 导出波形</span>
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">        </span><span class="n">$dumpvars</span><span class="p">;</span>
 <a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">        </span><span class="c1">// 在这里写测试激励...</span>
 <a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">        </span><span class="nb">$finish</span><span class="p">;</span>
