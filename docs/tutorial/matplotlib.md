@@ -70,20 +70,6 @@ import matplotlib
 print(matplotlib.__version__)
 ```
 
-### 2.3 推荐使用方式
-
-建议使用 **Jupyter Notebook / VS Code**，或在交互式 Python 中绘图。两种「显示方式」：
-
-| 场景 | 写什么 | 效果 |
-|------|--------|------|
-| Jupyter 单元格 | 直接 `plt.show()` | 图内联显示在单元格下方 |
-| 普通 `.py` 脚本 | （先创建 `fig, ax`）再 `fig.savefig("a.png")` + `plt.show()` | 保存文件并弹出窗口 |
-
-> 如果是在**服务器/无界面**环境运行（如下面的示例脚本），请在导入后加上
-> `matplotlib.use("Agg")`，再用 `fig.savefig()` 保存，就不会因缺少显示器而报错。
-
----
-
 ## 3. 快速开始：你的第一张图
 
 下面这段代码画出了正弦 `sin(x)` 和余弦 `cos(x)` 两条曲线：
@@ -366,41 +352,6 @@ ax.grid(True, linestyle="--", alpha=0.5)   # 虚线、半透明
 ax.spines["top"].set_visible(False)  # 隐藏上边框
 ax.spines["right"].set_visible(False) # 隐藏右边框
 ```
-
-### 6.6 完整对比
-
-下面把「默认」和「美化」放在一起看差别：
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-x = np.linspace(0, 10, 200)
-
-fig, axs = plt.subplots(1, 2, figsize=(11, 4))
-
-# 左边：默认样式
-axs[0].plot(x, x ** 2, "g")
-axs[0].set_title("Default style")
-axs[0].grid(True)
-
-# 右边：美化（对数坐标 + 去掉多余边框 + 虚线网格）
-axs[1].plot(x, x ** 2, color="tab:blue", linewidth=2.5, label=r"$y=x^2$")
-axs[1].set(title="Styled", xlabel="x", ylabel="y")
-axs[1].set_ylim(0, 110)
-axs[1].legend()
-axs[1].grid(True, linestyle="--", alpha=0.5)
-axs[1].spines["top"].set_visible(False)
-axs[1].spines["right"].set_visible(False)
-axs[1].set_yscale("log")
-
-fig.tight_layout()
-fig.savefig("styled.png")
-```
-
-效果：
-
-![样式对比](images/styled.png)
 
 > `fig.tight_layout()` 能自动调整子图间距，避免标签被切掉，强烈建议每次都加。
 
