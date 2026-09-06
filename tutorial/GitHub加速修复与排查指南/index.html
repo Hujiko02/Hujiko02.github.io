@@ -836,7 +836,7 @@
 <h3 id="3-证书信任关键">3. 证书信任（关键）</h3>
 <p>Watt Toolkit 用自签 CA（<code>CN=SteamTools Certificate, O=BeyondDimension</code>）对 HTTPS 做 MITM。
 现代 Chromium 只信任 <strong>NSS 用户库</strong>，已通过以下命令添加：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>certutil<span class="w"> </span>-d<span class="w"> </span>sql:<span class="nv">$HOME</span>/.pki/nssdb<span class="w"> </span>-A<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;C,,&quot;</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;SteamTools&quot;</span><span class="w"> </span>-i<span class="w"> </span>~/.local/share/Steam++/Plugins/Accelerator/SteamTools.Certificate.cer
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>certutil<span class="w"> </span>-d<span class="w"> </span>sql:<span class="nv">$HOME</span>/.pki/nssdb<span class="w"> </span>-A<span class="w"> </span>-t<span class="w"> </span><span class="s2">"C,,"</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"SteamTools"</span><span class="w"> </span>-i<span class="w"> </span>~/.local/share/Steam++/Plugins/Accelerator/SteamTools.Certificate.cer
 </code></pre></div>
 <p>验证：<code>certutil -d sql:$HOME/.pki/nssdb -L | grep -i steamtools</code></p>
 <p>另外证书也已复制到系统 CA 库（<code>/usr/local/share/ca-certificates/SteamTools.Certificate.crt</code> + <code>update-ca-certificates</code>），
@@ -890,7 +890,7 @@
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>certutil<span class="w"> </span>-d<span class="w"> </span>sql:<span class="nv">$HOME</span>/.pki/nssdb<span class="w"> </span>-L<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>steamtools
 </code></pre></div>
 无输出 → 重新添加：
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>certutil<span class="w"> </span>-d<span class="w"> </span>sql:<span class="nv">$HOME</span>/.pki/nssdb<span class="w"> </span>-A<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;C,,&quot;</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;SteamTools&quot;</span><span class="w"> </span>-i<span class="w"> </span>~/.local/share/Steam++/Plugins/Accelerator/SteamTools.Certificate.cer
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>certutil<span class="w"> </span>-d<span class="w"> </span>sql:<span class="nv">$HOME</span>/.pki/nssdb<span class="w"> </span>-A<span class="w"> </span>-t<span class="w"> </span><span class="s2">"C,,"</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"SteamTools"</span><span class="w"> </span>-i<span class="w"> </span>~/.local/share/Steam++/Plugins/Accelerator/SteamTools.Certificate.cer
 </code></pre></div>
 添加后<strong>完全重启 Chromium</strong>。</p>
 <h3 id="6-其他常见问题">6. 其他常见问题</h3>
@@ -904,18 +904,18 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 测试代理通道（严格证书验证）</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>curl<span class="w"> </span>-sI<span class="w"> </span>-x<span class="w"> </span>http://127.0.0.1:26561<span class="w"> </span>https://github.com
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 忽略证书验证测试（区分&quot;代理不通&quot;还是&quot;证书不信任&quot;）</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 忽略证书验证测试（区分"代理不通"还是"证书不信任"）</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>curl<span class="w"> </span>-skI<span class="w"> </span>-x<span class="w"> </span>http://127.0.0.1:26561<span class="w"> </span>https://github.com
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># 查看 Chromium 进程参数</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ungoogled-chromium<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oE<span class="w"> </span><span class="s2">&quot;\-\-proxy[^ ]*&quot;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ungoogled-chromium<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oE<span class="w"> </span><span class="s2">"\-\-proxy[^ ]*"</span>
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># 完全重启 Chromium</span>
 <a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>pkill<span class="w"> </span>-f<span class="w"> </span>ungoogled-chromium
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
 <a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="c1"># 查看/添加 NSS 证书</span>
 <a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>certutil<span class="w"> </span>-d<span class="w"> </span>sql:<span class="nv">$HOME</span>/.pki/nssdb<span class="w"> </span>-L<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>steamtools
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>certutil<span class="w"> </span>-d<span class="w"> </span>sql:<span class="nv">$HOME</span>/.pki/nssdb<span class="w"> </span>-A<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;C,,&quot;</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;SteamTools&quot;</span><span class="w"> </span>-i<span class="w"> </span>~/.local/share/Steam++/Plugins/Accelerator/SteamTools.Certificate.cer
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>certutil<span class="w"> </span>-d<span class="w"> </span>sql:<span class="nv">$HOME</span>/.pki/nssdb<span class="w"> </span>-A<span class="w"> </span>-t<span class="w"> </span><span class="s2">"C,,"</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"SteamTools"</span><span class="w"> </span>-i<span class="w"> </span>~/.local/share/Steam++/Plugins/Accelerator/SteamTools.Certificate.cer
 <a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
 <a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="c1"># 重新生成 PAC 的 base64（改 PAC 后用）</span>
 <a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>base64<span class="w"> </span>-w0<span class="w"> </span>~/.config/steamtools-proxy.pac
