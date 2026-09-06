@@ -77,10 +77,10 @@ print(matplotlib.__version__)
 | 场景 | 写什么 | 效果 |
 |------|--------|------|
 | Jupyter 单元格 | 直接 `plt.show()` | 图内联显示在单元格下方 |
-| 普通 `.py` 脚本 | `plt.savefig("a.png")` + `plt.show()` | 保存文件并弹出窗口 |
+| 普通 `.py` 脚本 | （先创建 `fig, ax`）再 `fig.savefig("a.png")` + `plt.show()` | 保存文件并弹出窗口 |
 
 > 如果是在**服务器/无界面**环境运行（如下面的示例脚本），请在导入后加上
-> `matplotlib.use("Agg")`，再用 `plt.savefig()` 保存，就不会因缺少显示器而报错。
+> `matplotlib.use("Agg")`，再用 `fig.savefig()` 保存，就不会因缺少显示器而报错。
 
 ---
 
@@ -97,18 +97,21 @@ x = np.linspace(0, 2 * np.pi, 100)
 y1 = np.sin(x)
 y2 = np.cos(x)
 
-# 2. 画两条折线
-plt.plot(x, y1, label="sin(x)")
-plt.plot(x, y2, label="cos(x)")
+# 2. 创建画布和坐标轴（面向对象写法的核心）
+fig, ax = plt.subplots(figsize=(7, 4))
 
-# 3. 加上标题、坐标轴标签、图例、网格
-plt.title("Basic Line Plot")
-plt.xlabel("x")
-plt.ylabel("y")
-plt.legend()
-plt.grid(True, alpha=0.3)
+# 3. 在 ax 上画两条折线
+ax.plot(x, y1, label="sin(x)")
+ax.plot(x, y2, label="cos(x)")
 
-# 4. 显示
+# 4. 用 ax 的方法加上标题、坐标轴标签、图例、网格
+ax.set_title("Basic Line Plot")
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+# 5. 显示
 plt.show()
 ```
 
@@ -116,7 +119,7 @@ plt.show()
 
 ![折线图示例](images/line.png)
 
-**最小可运行结构**其实就是三步：**造数据 → 画图 → 显示**。其余都是「锦上添花」。
+**最小可运行结构**就是四步：**造数据 → 创建 `fig, ax` → 用 `ax` 画图/修饰 → 显示**。其余都是「锦上添花」。
 
 ---
 
@@ -131,23 +134,24 @@ plt.show()
 | **轴（线）** | `Axis` | 画区的 x / y 边界线 | 一条坐标轴，包含刻度、刻度标签、轴名 |
 
 - `plt.plot()` 这种「快速写法」由 pyplot 自动帮你建一个 `Figure` 和一个 `Axes`；
-- 想画多个子图时，就用对象写法自己创建，更清晰。
+- 本教程主要使用**面向对象写法**：先创建 `fig, ax = plt.subplots()`，再用 `ax` 的方法画图和修饰。
 
 **两种写法对比：**
 
 ```python
-# 写法一：pyplot 快速写法（简单，单图够用）
+# 写法一：pyplot 快速写法（了解即可，适合临时单图）
 plt.plot([1, 2, 3], [2, 4, 3])
 plt.show()
 
-# 写法二：面向对象写法（灵活，多图/复杂布局推荐）
+# 写法二：面向对象写法（推荐，本教程主要使用）
 fig, ax = plt.subplots(figsize=(6, 4))   # 返回 (Figure, Axes)
 ax.plot([1, 2, 3], [2, 4, 3])
 ax.set_title("my plot")
 fig.savefig("out.png")
 ```
 
-> **建议**：入门阶段两种都练一练。后面画子图时，面向对象写法会明显更好用。
+> **建议**：主要使用面向对象写法。先创建 `fig, ax`，再用 `ax` 调用画图和修饰方法；
+> 只有 `plt.subplots()`、`plt.show()`、`plt.style.use()`、`plt.rcParams` 等少数步骤还需要通过 `pyplot` 完成。
 
 ---
 
@@ -162,15 +166,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 x = np.linspace(0, 10, 100)
-plt.plot(x, x ** 2, label=r"$y=x^2$")
-plt.plot(x, x ** 3, label=r"$y=x^3$")
-plt.xlabel("x")
-plt.ylabel("y")
-plt.legend()
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.plot(x, x ** 2, label=r"$y=x^2$")
+ax.plot(x, x ** 3, label=r"$y=x^3$")
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.legend()
 plt.show()
 ```
 
-常用参数（`plt.plot` / `ax.plot`）：
+常用参数（`ax.plot`）：
 
 | 参数 | 作用 | 例子 |
 |------|------|------|
@@ -194,8 +200,9 @@ y = rng.normal(size=100)
 c = rng.random(100)        # 颜色
 s = rng.random(100) * 300 + 50   # 大小
 
-plt.scatter(x, y, c=c, s=s, alpha=0.7, cmap="viridis")
-plt.colorbar(label="value")
+fig, ax = plt.subplots(figsize=(7, 5))
+sc = ax.scatter(x, y, c=c, s=s, alpha=0.7, cmap="viridis")
+fig.colorbar(sc, ax=ax, label="value")
 plt.show()
 ```
 
@@ -205,7 +212,7 @@ plt.show()
 
 ### 5.3 柱状图
 
-用于**对比不同类别的数值大小**。`plt.bar` 画竖直柱，`plt.barh` 画水平柱。
+用于**对比不同类别的数值大小**。`ax.bar` 画竖直柱，`ax.barh` 画水平柱。
 
 ```python
 import matplotlib.pyplot as plt
@@ -213,11 +220,12 @@ import matplotlib.pyplot as plt
 names = ["A", "B", "C", "D", "E"]
 values = [12, 19, 7, 15, 24]
 
-plt.bar(names, values, color="steelblue")
-plt.xlabel("Category")
-plt.ylabel("Value")
+fig, ax = plt.subplots(figsize=(7, 4.5))
+ax.bar(names, values, color="steelblue")
+ax.set_xlabel("Category")
+ax.set_ylabel("Value")
 for i, v in enumerate(values):
-    plt.text(i, v + 0.5, str(v), ha="center")   # 在柱顶标数值
+    ax.text(i, v + 0.5, str(v), ha="center")   # 在柱顶标数值
 plt.show()
 ```
 
@@ -229,9 +237,9 @@ plt.show()
 
 | 需求 | 用哪个 |
 |------|--------|
-| 水平柱状图 | `plt.barh(y, width)` |
-| 分组柱状图 | 多次 `bar` 并调整 `x` 偏移 |
-| 堆叠柱状图 | 多次 `bar` 并设置 `bottom` 参数 |
+| 水平柱状图 | `ax.barh(y, width)` |
+| 分组柱状图 | 多次 `ax.bar` 并调整 `x` 偏移 |
+| 堆叠柱状图 | 多次 `ax.bar` 并设置 `bottom` 参数 |
 
 ### 5.4 直方图
 
@@ -242,9 +250,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 data = np.random.default_rng(1).normal(loc=0, scale=1, size=1000)
-plt.hist(data, bins=30, color="mediumseagreen", edgecolor="white")
-plt.xlabel("Value")
-plt.ylabel("Frequency")
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.hist(data, bins=30, color="mediumseagreen", edgecolor="white")
+ax.set_xlabel("Value")
+ax.set_ylabel("Frequency")
 plt.show()
 ```
 
@@ -261,8 +271,10 @@ plt.show()
 ```python
 labels = ["A", "B", "C", "D"]
 sizes = [30, 20, 25, 25]
-plt.pie(sizes, labels=labels, autopct="%.1f%%", startangle=90)
-plt.axis("equal")   # 保证饼是正圆
+
+fig, ax = plt.subplots(figsize=(5, 5))
+ax.pie(sizes, labels=labels, autopct="%.1f%%", startangle=90)
+ax.axis("equal")   # 保证饼是正圆
 plt.show()
 ```
 
@@ -276,19 +288,21 @@ import matplotlib.pyplot as plt
 
 rng = np.random.default_rng(2)
 data = [rng.normal(0, 1, 100), rng.normal(2, 1.5, 100), rng.normal(-1, 0.5, 100)]
-plt.boxplot(data, labels=["a", "b", "c"])
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.boxplot(data, labels=["a", "b", "c"])
 plt.show()
 ```
 
 ### 5.7 其他常用图
 
-| 图表 | 函数 | 用途 |
+| 图表 | 函数（`ax` 方法） | 用途 |
 |------|------|------|
-| 误差棒 | `plt.errorbar` | 展示数据的不确定性 |
-| 等高线/热力图 | `plt.contourf` / `plt.imshow` | 二维数据分布 |
-| 填充图 | `plt.fill_between` | 两条曲线之间的区域 |
-| 矢量场 | `plt.quiver` | 展示向量场 |
-| 极坐标 | `plt.polar` / `projection="polar"` | 角度数据 |
+| 误差棒 | `ax.errorbar` | 展示数据的不确定性 |
+| 等高线/热力图 | `ax.contourf` / `ax.imshow` | 二维数据分布 |
+| 填充图 | `ax.fill_between` | 两条曲线之间的区域 |
+| 矢量场 | `ax.quiver` | 展示向量场 |
+| 极坐标 | `plt.subplots(subplot_kw={"projection": "polar"})` 后 `ax.plot` | 角度数据 |
 
 ---
 
@@ -299,12 +313,12 @@ plt.show()
 ### 6.1 标题与坐标轴标签
 
 ```python
-plt.title("标题", fontsize=16)
-plt.xlabel("x", fontsize=12)
-plt.ylabel("y", fontsize=12)
+ax.set_title("标题", fontsize=16)
+ax.set_xlabel("x", fontsize=12)
+ax.set_ylabel("y", fontsize=12)
 ```
 
-在对象写法里用 `ax.set_title`，但更常用连写法：
+也可以把多个设置合并成一行：
 
 ```python
 ax.set(title="标题", xlabel="x", ylabel="y")
@@ -313,11 +327,11 @@ ax.set(title="标题", xlabel="x", ylabel="y")
 ### 6.2 图例
 
 ```python
-plt.plot(x, y1, label="线1")
-plt.plot(x, y2, label="线2")
-plt.legend()                      # 自动放在合适位置
-plt.legend(loc="upper right")     # 指定位置
-plt.legend(fontsize=10, framealpha=0.5)
+ax.plot(x, y1, label="线1")
+ax.plot(x, y2, label="线2")
+ax.legend()                         # 自动放在合适位置
+ax.legend(loc="upper right")        # 指定位置
+ax.legend(fontsize=10, framealpha=0.5)
 ```
 
 `loc` 常用值：`best`、`upper right`、`lower left`、`center` 等。
@@ -325,19 +339,19 @@ plt.legend(fontsize=10, framealpha=0.5)
 ### 6.3 坐标范围与刻度
 
 ```python
-plt.xlim(0, 10)       # x 轴范围
-plt.ylim(-1, 1)       # y 轴范围
-plt.xticks([0, 5, 10])         # 手动指定刻度位置
-plt.xticks(rotation=45)        # 旋转刻度标签（防重叠）
-plt.yscale("log")              # y 轴用对数刻度
+ax.set_xlim(0, 10)       # x 轴范围
+ax.set_ylim(-1, 1)       # y 轴范围
+ax.set_xticks([0, 5, 10])         # 手动指定刻度位置
+ax.tick_params(axis="x", rotation=45)   # 旋转刻度标签（防重叠）
+ax.set_yscale("log")              # y 轴用对数刻度
 ```
 
 ### 6.4 颜色、线型与标记
 
 ```python
-plt.plot(x, y, color="tab:blue", linewidth=2.5,
-         linestyle="--", marker="o", markersize=4,
-         label="data")
+ax.plot(x, y, color="tab:blue", linewidth=2.5,
+        linestyle="--", marker="o", markersize=4,
+        label="data")
 ```
 
 **常用颜色：** `"r"`红、`"g"`绿、`"b"`蓝、`"k"`黑、`"orange"`、`"purple"`，
@@ -347,8 +361,8 @@ plt.plot(x, y, color="tab:blue", linewidth=2.5,
 ### 6.5 网格与边框
 
 ```python
-plt.grid(True)                       # 开网格
-plt.grid(True, linestyle="--", alpha=0.5)   # 虚线、半透明
+ax.grid(True)                       # 开网格
+ax.grid(True, linestyle="--", alpha=0.5)   # 虚线、半透明
 ax.spines["top"].set_visible(False)  # 隐藏上边框
 ax.spines["right"].set_visible(False) # 隐藏右边框
 ```
@@ -434,21 +448,21 @@ plt.show()
 
 ## 8. 保存图片
 
-保存图用 `savefig`，支持非常丰富的格式。**一定要放在 `plt.show()` 之前调用**，否则保存的是空图（有些环境 `show` 会清空画布）。
+保存图用 `fig.savefig()`，支持非常丰富的格式。**一定要放在 `plt.show()` 之前调用**，否则保存的是空图（有些环境 `show` 会清空画布）。
 
 ```python
-plt.savefig("plot.png")                    # PNG，默认 dpi=100
-plt.savefig("plot.png", dpi=300)           # 高清，适合打印/论文
-plt.savefig("plot.pdf")                    # 矢量图，放大不失真
-plt.savefig("plot.svg")                    # SVG，适合网页
-plt.savefig("plot.jpg", bbox_inches="tight")  # 自动裁剪空白
+fig.savefig("plot.png")                    # PNG，默认 dpi=100
+fig.savefig("plot.png", dpi=300)           # 高清，适合打印/论文
+fig.savefig("plot.pdf")                    # 矢量图，放大不失真
+fig.savefig("plot.svg")                    # SVG，适合网页
+fig.savefig("plot.jpg", bbox_inches="tight")  # 自动裁剪空白
 ```
 
 **注意：**
 
 - 用 `bbox_inches="tight"` 可以避免标签被裁剪；
 - 论文投稿通常用 **PDF / EPS / 300dpi 的 PNG**；
-- 想保存多张图，每画完一张就 `savefig` 再 `plt.close()` 释放内存。
+- 想保存多张图，每画完一张就 `fig.savefig(...)` 再 `plt.close(fig)` 释放内存。
 
 ---
 
@@ -456,12 +470,12 @@ plt.savefig("plot.jpg", bbox_inches="tight")  # 自动裁剪空白
 
 ### 9.1 添加文字
 
-`plt.text(x, y, "文字")` 在指定坐标写文字，`plt.annotate` 可加箭头。
+`ax.text(x, y, "文字")` 在指定坐标写文字，`ax.annotate()` 可加箭头。
 
 ```python
-plt.text(2, 0.5, "注释文字", fontsize=12, color="red")
-plt.annotate("峰值", xy=(np.pi / 2, 1), xytext=(2.5, 1.2),
-             arrowprops=dict(arrowstyle="->"))
+ax.text(2, 0.5, "注释文字", fontsize=12, color="red")
+ax.annotate("峰值", xy=(np.pi / 2, 1), xytext=(2.5, 1.2),
+            arrowprops=dict(arrowstyle="->"))
 ```
 
 ### 9.2 数学公式（mathtext）
@@ -469,9 +483,12 @@ plt.annotate("峰值", xy=(np.pi / 2, 1), xytext=(2.5, 1.2),
 在标签字符串里用 **`$...$`** 就能写 LaTeX 风格的数学公式，无需额外安装任何东西。
 
 ```python
-plt.plot(x, np.exp(-x / 2) * np.sin(3 * x), label=r"$y=e^{-x/2}\sin(3x)$")
-plt.xlabel(r"$x$")
-plt.title(r"Decaying oscillation: $e^{-x/2}\sin(3x)$")
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.plot(x, np.exp(-x / 2) * np.sin(3 * x), label=r"$y=e^{-x/2}\sin(3x)$")
+ax.set_xlabel(r"$x$")
+ax.set_ylabel(r"$y$")
+ax.set_title(r"Decaying oscillation: $e^{-x/2}\sin(3x)$")
+ax.legend()
 ```
 
 效果（标题和图的公式都用上了 mathtext）：
@@ -510,11 +527,14 @@ plt.style.use("dark_background")   # 深色背景
 plt.style.use("bmh")               # 蓝色主题
 ```
 
+> 风格是**全局设置**，所以仍然通过 `plt.style.use()` 调用；设置完后，
+> 面向对象写法里的 `ax` 会自动使用该风格。
+
 查看所有风格：`print(plt.style.available)`。
 
 ### 10.2 rcParams 全局配置
 
-`plt.rcParams` 可以设置全局默认，省去每个图都重写一遍。
+`plt.rcParams` 可以设置全局默认，省去每个图都重写一遍（全局配置同样在 `pyplot` 层完成）。
 
 ```python
 plt.rcParams["figure.figsize"] = (8, 5)
@@ -541,7 +561,7 @@ plt.rcParams["lines.linewidth"] = 2
 
 - Jupyter 里请加 `%matplotlib inline`；
 - 普通脚本在 `plt.show()` 后会阻塞窗口，关闭即可继续；
-- 无界面环境用 `matplotlib.use("Agg")` + `savefig`。
+- 无界面环境用 `matplotlib.use("Agg")` + `fig.savefig(...)`。
 
 ### 11.2 中文变方框
 
@@ -598,8 +618,8 @@ df["col"].hist()          # 某列的直方图
 1. 把第 3 节的第一个例子跑起来，改成画 `x^3` 并加上标记；
 2. 生成一组随机数，画它的直方图，并试试不同 `bins`；
 3. 做一个 2x2 子图，展示正弦、余弦、正切和它们的平方；
-4. 用 `plt.pie` 画出你一天时间分配的占比；
-5. 试着用 `savefig` 导出一张 300dpi 的图，并加 `bbox_inches="tight"`。
+4. 用面向对象写法（`ax.pie`）画出你一天时间分配的占比；
+5. 试着用 `fig.savefig` 导出一张 300dpi 的图，并加 `bbox_inches="tight"`。
 
 ### 12.2 进阶方向
 
@@ -650,19 +670,21 @@ plt.show()
 
 ```
 造数据     : numpy 的 linspace / random
-画折线     : plt.plot(x, y, label=...)
-画散点     : plt.scatter(x, y, c=..., s=...)
-画柱状     : plt.bar(x, height)
-画直方图   : plt.hist(data, bins=30)
-画饼图     : plt.pie(sizes, labels=...)
+创建画布   : fig, ax = plt.subplots(figsize=...)
+画折线     : ax.plot(x, y, label=...)
+画散点     : ax.scatter(x, y, c=..., s=...)
+画柱状     : ax.bar(x, height)
+画直方图   : ax.hist(data, bins=30)
+画饼图     : ax.pie(sizes, labels=...)
 子图       : fig, axes = plt.subplots(rows, cols)
-标题/标签  : plt.title / plt.xlabel / plt.ylabel
-图例       : plt.legend(loc=...)
-范围/刻度  : plt.xlim / plt.ylim / plt.xticks
-网格       : plt.grid(True)
+标题/标签  : ax.set_title / ax.set_xlabel / ax.set_ylabel
+图例       : ax.legend(loc=...)
+范围/刻度  : ax.set_xlim / ax.set_ylim / ax.set_xticks
+网格       : ax.grid(True)
 数学公式   : 标签里写 r"$...$"
-保存       : plt.savefig(...)
+保存       : fig.savefig(...)
 布局       : fig.tight_layout()
+显示       : plt.show()
 ```
 
 祝你画图愉快，让数据自己说话！
