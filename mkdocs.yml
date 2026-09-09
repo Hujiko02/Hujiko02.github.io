@@ -30,18 +30,17 @@ theme:
 
 
 nav:
-  - 首页: index.md
-  - 隐私政策: ohush-privacy.md
-  - 测试: test.md
+  - 首页: index/index.md
   - 教程:
     - 教程: tutorial/tutorial.md
     - Latex使用教程: tutorial/latex.md
     - Markdown使用教程: tutorial/markdown.md
+    - Markdown测试: tutorial/markdown_test.md
     - verilog入门: tutorial/verilog.md
     - Matplotlib入门教程: tutorial/matplotlib.md
   - 日记: 
     - 2026年: diary/2026.md
-  - 关于我: about.md
+  - 关于我: about/about.md
 extra:
   social: 
     - name: 我的GitHub
