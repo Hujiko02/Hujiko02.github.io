@@ -14,4 +14,5 @@ git commit -m "${commit_msg:-Auto update $(date '+%Y-%m-%d %H:%M:%S')}"
 
 git pull origin main --rebase --autostash
 git push origin main
+
 python3 -m mkdocs gh-deploy --force
