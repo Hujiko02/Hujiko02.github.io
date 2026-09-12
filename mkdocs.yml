@@ -1,7 +1,7 @@
-site_name: 无忌
-site_url: https://Hujiko02.github.io
-site_author: 无忌
-site_description: 无忌的个人网站
+site_name: 胡济的个人网站
+site_url: https://hujiko02.github.io
+site_author: 胡济
+site_description: 胡济的个人网站
 
 theme:
   name: material
