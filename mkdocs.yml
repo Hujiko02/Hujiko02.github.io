@@ -6,7 +6,10 @@ site_description: 胡济的个人网站
 theme:
   name: material
   language: zh
-  favicon: material/gamma
+  custom_dir: overrides          # overrides/.icons/ 放自定义图标
+  favicon: others/images/favicon.svg
+  icon:
+    logo: huji                   # 页头图标：内联 SVG，跟随明暗主题变色
   font: false                    # 不加载 Google Fonts（国内慢又常失败）
 
   palette:
