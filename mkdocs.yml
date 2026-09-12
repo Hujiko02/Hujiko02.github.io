@@ -34,7 +34,7 @@ theme:
 nav:
   - 首页: index.md
   - 教程:
-    - 教程: tutorial/index.md
+    - tutorial/index.md
     - Latex入门教程: tutorial/latex.md
     - Markdown入门教程: tutorial/markdown.md
     - Markdown测试: tutorial/markdown_test.md
