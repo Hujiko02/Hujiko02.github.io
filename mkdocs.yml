@@ -4,10 +4,10 @@ site_author: 胡济
 site_description: 胡济的个人网站
 
 theme:
+  favicon: others/assets/images/favicon.svg                                                                                
+  logo: others/assets/images/favicon.svg
   name: material
-  # 语言设置为中文
   language: zh
-  # 配色方案（可切换明暗模式）
   palette:
     - scheme: default
       primary: indigo
@@ -21,6 +21,7 @@ theme:
       toggle:
         icon: material/weather-night
         name: 深色模式
+
 
   features:
     - navigation.instant # 即时页面加载
@@ -76,12 +77,12 @@ markdown_extensions:
 
 # 数学公式支持
 extra_javascript:
-  - javascripts/katex.js
+  - others/javascripts/katex.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
-  - stylesheets/extra.css
+  - others/stylesheets/extra.css
 
 
