@@ -3,11 +3,6 @@ site_url: https://hujiko02.github.io/
 site_author: 胡济
 site_description: 胡济的个人网站
 
-
-repo_url: https://github.com/Hujiko02/Hujiko02.github.io
-repo_name: Hujiko02/Hujiko02.github.io
-edit_uri: edit/main/docs/
-
 theme:
   name: material
   language: zh
@@ -21,14 +16,8 @@ theme:
   # 关闭 Google Fonts（fonts.googleapis.com 在国内又慢又常失败），回退到系统字体
   font: false
   palette:
-    # 自动模式：跟随系统的昼夜设置
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: 切换到浅色模式
     # 浅色模式
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
+    - scheme: default
       primary: indigo
       accent: amber
       toggle:
@@ -36,13 +25,12 @@ theme:
         # toggle.name 的语义是「点一下会发生什么」，不是当前状态
         name: 切换到深色模式
     # 深色模式
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
+    - scheme: slate
       primary: black
       accent: amber
       toggle:
         icon: material/weather-night
-        name: 切换到系统偏好
+        name: 切换到浅色模式
 
   features:
     - navigation.instant # 即时页面加载
@@ -55,8 +43,6 @@ theme:
     - content.code.copy # 代码块一键复制
     - content.code.annotate # 代码块内标注
     - content.tooltips # 缩写/术语悬浮提示
-    - content.action.edit # 右上角「编辑此页」（依赖 repo_url + edit_uri）
-    - content.action.view # 右上角「查看源码」
     - search.suggest # 搜索联想
     - search.highlight # 搜索结果高亮
 
@@ -91,7 +77,6 @@ extra:
 # Markdown 扩展
 markdown_extensions:
   - toc:
-      permalink: true # 标题旁生成可复制的锚点链接
       slugify: !!python/object/apply:pymdownx.slugs.slugify
         kwds:
           case: lower
@@ -106,9 +91,6 @@ markdown_extensions:
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.superfences:
-      # Material 内置 mermaid：会自动按需加载 unpkg 上的 mermaid@11 并渲染，
-      # 无需额外插件。注意它只在页面真的存在 mermaid 图时才会下载，
-      # 所以不开 mermaid 的页面不受影响。
       custom_fences:
         - name: mermaid
           class: mermaid
@@ -121,10 +103,7 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.arithmatex:
       generic: true
-  # 以下 6 个官方配置里都有，实测对中文文档零副作用
-  # ⚠️ 但官方那行 `pymdownx.betterem: smart_enable: all` 千万别加：
-  #    它用词边界启发式判断强调，中文词间无空格会导致 **粗体** 变成字面星号
-  #    （实测同一段文字 <strong> 从 7 个掉到 2 个）
+
   - pymdownx.caret # ^上标^
   - pymdownx.tilde # ~~删除线~~ 和 ~下标~
   - pymdownx.mark # ==高亮==
