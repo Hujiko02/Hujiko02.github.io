@@ -16,7 +16,7 @@ theme:
         icon: material/weather-sunny
         name: 浅色模式
     - scheme: slate
-      primary: indigo
+      primary: black
       accent: amber
       toggle:
         icon: material/weather-night
