@@ -4,10 +4,15 @@ site_author: 胡济
 site_description: 胡济的个人网站
 
 theme:
-  favicon: others/assets/images/favicon.svg                                                                                
-  logo: others/assets/images/favicon.svg
   name: material
   language: zh
+  # 允许用 overrides/.icons/ 放自定义图标（icon.logo 只能从这个命名空间取）
+  custom_dir: overrides
+  # 浏览器标签页图标：自带 prefers-color-scheme，深浅标签栏都看得见
+  favicon: others/images/favicon.svg
+  # 页头图标：用 icon.logo 会内联成 <svg>，fill="currentColor" 跟着明暗主题自动变色
+  icon:
+    logo: huji
   palette:
     - scheme: default
       primary: indigo
