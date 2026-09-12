@@ -41,6 +41,7 @@ nav:
     - Verilog入门教程: tutorial/verilog.md
     - Matplotlib入门教程: tutorial/matplotlib.md
   - 日记: 
+    - diary/index.md    
     - 2026年: diary/2026.md
   - 关于我:
     - me/index.md
