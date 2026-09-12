@@ -6,25 +6,19 @@ site_description: 胡济的个人网站
 theme:
   name: material
   language: zh
-  # 允许用 overrides/.icons/ 放自定义图标（icon.logo 只能从这个命名空间取）
-  custom_dir: overrides
-  # 浏览器标签页图标：自带 prefers-color-scheme，深浅标签栏都看得见
+  custom_dir: overrides          # overrides/.icons/ 放自定义图标
   favicon: others/images/favicon.svg
-  # 页头图标：用 icon.logo 会内联成 <svg>，fill="currentColor" 跟着明暗主题自动变色
   icon:
-    logo: huji
-  # 关闭 Google Fonts（fonts.googleapis.com 在国内又慢又常失败），回退到系统字体
-  font: false
+    logo: huji                   # 页头图标：内联 SVG，跟随明暗主题变色
+  font: false                    # 不加载 Google Fonts（国内慢又常失败）
+
   palette:
-    # 浅色模式
     - scheme: default
       primary: indigo
       accent: amber
       toggle:
         icon: material/weather-sunny
-        # toggle.name 的语义是「点一下会发生什么」，不是当前状态
-        name: 切换到深色模式
-    # 深色模式
+        name: 切换到深色模式      # toggle.name = 点一下会切到哪，不是当前状态
     - scheme: slate
       primary: black
       accent: amber
@@ -33,18 +27,18 @@ theme:
         name: 切换到浅色模式
 
   features:
-    - navigation.instant # 即时页面加载
-    - navigation.tabs # 顶部标签页导航
-    - navigation.indexes # 让分区标题本身可点击（index.md 当分区概览页）
-    - navigation.top # 返回顶部按钮
-    - navigation.tracking # 地址栏跟随锚点
-    - navigation.footer # 页面底部上/下一篇
-    - toc.follow # 右侧目录跟随滚动高亮
-    - content.code.copy # 代码块一键复制
-    - content.code.annotate # 代码块内标注
-    - content.tooltips # 缩写/术语悬浮提示
-    - search.suggest # 搜索联想
-    - search.highlight # 搜索结果高亮
+    - navigation.instant         # 即时加载
+    - navigation.tabs            # 顶部标签栏
+    - navigation.indexes         # 分区标题可点击，index.md 当落地页
+    - navigation.top             # 返回顶部按钮
+    - navigation.tracking        # 地址栏跟随锚点
+    - navigation.footer          # 页底上/下一篇
+    - toc.follow                 # 右侧目录跟随高亮
+    - content.code.copy          # 代码块复制按钮
+    - content.code.annotate      # 代码块内标注
+    - content.tooltips           # 术语悬浮提示
+    - search.suggest             # 搜索联想
+    - search.highlight           # 搜索高亮
 
 nav:
   - 首页: index.md
@@ -61,8 +55,7 @@ nav:
   - 关于我:
     - me/index.md
 
-# 显式声明「存在但有意不进导航」的页面，消掉构建时的 INFO 提示
-not_in_nav: |
+not_in_nav: |                    # 有意不进导航，消掉构建提示
   /ohush-privacy.md
 
 extra:
@@ -74,7 +67,6 @@ extra:
       icon: fontawesome/brands/bilibili
       link: https://space.bilibili.com/2058282898
 
-# Markdown 扩展
 markdown_extensions:
   - toc:
       slugify: !!python/object/apply:pymdownx.slugs.slugify
@@ -82,17 +74,17 @@ markdown_extensions:
           case: lower
   - admonition
   - attr_list
-  - md_in_html # 在 HTML 块里写 Markdown（做卡片/网格布局要用）
-  - abbr # 术语缩写，配合 content.tooltips 出悬浮提示
-  - def_list # 定义列表
-  - footnotes # 脚注
+  - md_in_html
+  - abbr
+  - def_list
+  - footnotes
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.superfences:
       custom_fences:
-        - name: mermaid
+        - name: mermaid         # Material 自带 mermaid，会自动加载并渲染
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.inlinehilite
@@ -103,16 +95,17 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.arithmatex:
       generic: true
-
-  - pymdownx.caret # ^上标^
-  - pymdownx.tilde # ~~删除线~~ 和 ~下标~
-  - pymdownx.mark # ==高亮==
-  - pymdownx.keys # ++ctrl+alt+del++ 按键样式
+  #    不要加官方那行 pymdownx.betterem: smart_enable: all
+  #    它按词边界判断强调，中文无空格 → **粗体** 会变成字面星号
+  - pymdownx.caret               # ^上标^
+  - pymdownx.tilde               # ~~删除线~~ ~下标~
+  - pymdownx.mark                # ==高亮==
+  - pymdownx.keys                # ++ctrl+c++
   - pymdownx.tabbed:
-      alternate_style: true # 内容标签页
-  - pymdownx.details # 可折叠块
+      alternate_style: true      # 内容标签页
+  - pymdownx.details             # 可折叠块
 
-# 数学公式支持
+# 数学公式
 extra_javascript:
   - others/javascripts/katex.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
