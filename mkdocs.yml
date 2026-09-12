@@ -25,8 +25,9 @@ theme:
   features:
     - navigation.instant # 即时页面加载
     - navigation.tabs # 顶部标签页导航
-    - navigation.sections # 侧边栏分组显示
-    - toc.integrate # 集成目录
+    - navigation.top # 返回顶部按钮
+    - navigation.tracking # 地址栏跟随锚点
+    - toc.follow # 右侧目录跟随滚动高亮
 
 
 nav:
