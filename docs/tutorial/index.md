@@ -9,4 +9,4 @@
 
 ## 说明
 
-教程均为最新的 Deepseek V4 Flash 正式版模型生成。
+教程均为 Deepseek V4 Flash 模型生成。
