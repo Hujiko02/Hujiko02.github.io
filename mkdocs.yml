@@ -25,6 +25,7 @@ theme:
   features:
     - navigation.instant # 即时页面加载
     - navigation.tabs # 顶部标签页导航
+    - navigation.indexes # 让分区标题本身可点击（index.md 当分区概览页）
     - navigation.top # 返回顶部按钮
     - navigation.tracking # 地址栏跟随锚点
     - toc.follow # 右侧目录跟随滚动高亮
@@ -33,7 +34,7 @@ theme:
 nav:
   - 首页: index.md
   - 教程:
-    - 教程: tutorial/tutorial.md
+    - 教程: tutorial/index.md
     - Latex入门教程: tutorial/latex.md
     - Markdown入门教程: tutorial/markdown.md
     - Markdown测试: tutorial/markdown_test.md
@@ -41,7 +42,8 @@ nav:
     - Matplotlib入门教程: tutorial/matplotlib.md
   - 日记: 
     - 2026年: diary/2026.md
-  - 关于我: about/about.md
+  - 关于我:
+    - me/index.md
 extra:
   social: 
     - name: 我的GitHub
@@ -79,5 +81,6 @@ extra_javascript:
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
+  - stylesheets/extra.css
 
 
