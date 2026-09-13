@@ -53,6 +53,7 @@ nav:
     - diary/2026.md
   - 关于我:
     - me/index.md
+    - me/story.md
 
 not_in_nav: |                    # 有意不进导航，消掉构建提示
   /ohush-privacy.md
