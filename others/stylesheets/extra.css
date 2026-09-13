@@ -28,3 +28,86 @@ html {
     overflow-y: scroll;
   }
 }
+
+/* --------------------------------------------------------------------------
+   平板（≥ 48em / 768px）显示常驻的左侧导航，而不是手机式的汉堡抽屉
+   --------------------------------------------------------------------------
+   Material 没有提供配置项：抽屉模式的断点 76.25em（1220px）写死在编译好的
+   CSS 里，JS 也围绕它工作。官方给的两个方案是「重新编译主题」或「CSS 覆盖」
+   （见 squidfunk/mkdocs-material#7130、#6785），这里用后者。
+
+   做法不是重写一套桌面布局，而是把 Material 自己那个「抽屉」就地钉住：
+
+       .md-sidebar--primary   position:fixed; left:-12.1rem; z-index:5
+
+   它本来就是「一个固定定位、浮在最上层、靠 left 负值藏到屏幕左边外面」的面板。
+   把 left 拉回 0，它就成了常驻侧边栏；正文整体右移给它让位即可。
+
+   好处是导航内部完全沿用 Material 手机版那套（点击区域更高、字号更大），
+   在平板上反而比桌面版好按；而且抽屉里本来就装着完整的一级导航
+   （首页 / 教程 / 日记 / 关于我），不必另外去管顶部标签栏。
+
+   断点取值都照抄 Material 自己的数字：
+       48em         = 768px   平板竖屏起点（iPad 竖屏正好 768px）
+       59.984375em  = 960px   在这之下 Material 不显示右侧目录
+       76.234375em  = 1220px  在这之上 Material 自己就是桌面布局，无需干预
+
+   为什么必须带 !important：Material 的 JS 完全不做视口判断，会无条件地给
+   .md-sidebar 写内联 top、给 .md-sidebar__scrollwrap 写内联 height。内联样式
+   的优先级高于普通声明，只有带 !important 的作者样式能盖过它。
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 48em) and (max-width: 76.234375em) {
+
+  /* 抽屉常驻屏幕左侧：原本靠 left/right 负值藏在屏幕外 */
+  [dir="ltr"] .md-sidebar--primary {
+    left: 0 !important;
+  }
+  [dir="rtl"] .md-sidebar--primary {
+    right: 0 !important;
+  }
+
+  /* 上下都拉伸到视口边缘，高度自适应。
+     top 必须钉成 0：JS 会写内联 top = 页头高度，那样抽屉会从页头下方开始，
+     左边 12.1rem 宽的一条会露出页面底色，和页头接不上。钉在 0 之后，抽屉顶部
+     正好盖住页头左侧，而两者背景色同为主色，看起来是一条连续的横栏。
+     bottom:0 + height:auto 让抽屉在 top 为 0 时依然正好铺到底部。 */
+  .md-sidebar--primary {
+    bottom: 0 !important;
+    height: auto !important;
+    top: 0 !important;
+    transition: none !important;
+  }
+
+  /* 万一还有入口勾中了抽屉的复选框，也不要让它滑走、也不要压暗正文 */
+  [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  /* 内部滚动区：Material 手机版是 position:absolute + inset:0，这里把高度
+     交还给 top/bottom，避免 JS 写进来的内联高度把它算得比抽屉还高，
+     导致导航底部一截露在视口外面够不着。 */
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    height: auto !important;
+  }
+
+  /* 正文和右侧目录整体右移，让开左侧 12.1rem 宽的导航 */
+  [dir="ltr"] .md-main__inner {
+    margin-left: 12.1rem;
+  }
+  [dir="rtl"] .md-main__inner {
+    margin-right: 12.1rem;
+  }
+
+  /* 断掉所有开关入口 */
+  .md-header__button[for="__drawer"] {
+    display: none !important;      /* 页头的汉堡按钮 */
+  }
+  .md-nav__title[for="__drawer"] {
+    cursor: default;
+    pointer-events: none;          /* 导航顶部那个标题本身就是 label，点它会勾中复选框 */
+  }
+  .md-nav__title[for="__drawer"] .md-logo {
+    pointer-events: auto;          /* 但里面的站标链接要放行，还能点回首页 */
+  }
+}
