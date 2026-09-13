@@ -1,7 +1,7 @@
-site_name: 胡济的个人网站
+site_name: Hu Ji's Personal Website
 site_url: https://hujiko02.github.io/
-site_author: 胡济
-site_description: 胡济的个人网站
+site_author: Hu Ji
+site_description: Hu Ji's Personal Website
 
 theme:
   name: material
