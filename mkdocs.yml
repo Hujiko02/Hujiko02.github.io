@@ -44,9 +44,8 @@ nav:
   - 教程:
     - tutorial/index.md
     - tutorial/latex.md
-    - Markdown:
-      - tutorial/markdown.md
-      - tutorial/markdown_test.md
+    - tutorial/markdown.md
+    - tutorial/markdown_test.md
     - tutorial/verilog.md
     - tutorial/matplotlib.md
   - 日记:
