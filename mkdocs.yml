@@ -1,7 +1,7 @@
-site_name: Hu Ji's Personal Website
+site_name: HuJi Notes
 site_url: https://hujiko02.github.io/
-site_author: Hu Ji
-site_description: Hu Ji's Personal Website
+site_author: 胡济
+site_description: 胡济的个人网站
 
 theme:
   name: material
@@ -44,8 +44,9 @@ nav:
   - 教程:
     - tutorial/index.md
     - tutorial/latex.md
-    - tutorial/markdown.md
-    - tutorial/markdown_test.md
+    - Markdown:
+      - tutorial/markdown.md
+      - tutorial/markdown_test.md
     - tutorial/verilog.md
     - tutorial/matplotlib.md
   - 日记:
