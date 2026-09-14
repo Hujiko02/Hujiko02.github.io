@@ -28,3 +28,61 @@ html {
     overflow-y: scroll;
   }
 }
+
+/* --------------------------------------------------------------------------
+   字体：正文优先用鸿蒙黑体，代码优先用 JetBrains Mono
+   --------------------------------------------------------------------------
+   背景：theme.font 设成 false 之后，Material 的 fonts 块一行都不输出，
+   --md-text-font / --md-code-font 从未被赋值，于是实际生效的字体链是
+
+       --md-text-font-family: _, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif
+       --md-code-font-family: _, SFMono-Regular, Consolas, Menlo, monospace
+
+   第一档的 `_` 是 Material 留的占位符（一个永不存在的字体名），兜底链里
+   Helvetica / Arial 都不含汉字，所以在安卓上汉字只能交给浏览器自己兜底，
+   用什么字体完全不可控。下面把中间那段换成我们自己排的名单。
+
+   两个关键点：
+
+   1. 必须写在 body 上，不能写 :root。这两个自定义属性是 Material 定义在
+      body 上的，写在 :root（html）会被 body 自己那条同名声明盖掉，完全不生效。
+
+   2. font-family 是「按顺序逐个字符去试」：名单靠前的字体先接管它认识的字，
+      不认识的字才往后传。所以顺序直接决定了中英文各归谁管。
+
+   已知取舍：系统里的 HarmonyOS_Sans_SC.ttf 只登记了 normal，没有 italic，
+   所以 *斜体* 会由浏览器合成倾斜（把正体硬斜切），不是真斜体。
+   鸿蒙 SC 是可变字体（wght 40~900），粗体和标题都能正确渲染，不存在伪粗体。
+
+   注意：整条链只在「本机装了这个字体」时生效。iPad / Windows / 非鸿蒙安卓
+   上第一档会被跳过，自动降级到后面的系统字体，这是预期行为，不是 bug。
+   -------------------------------------------------------------------------- */
+body {
+  /* 正文
+     鸿蒙排最前 → 拉丁字母和汉字都由它渲染，两者设计出自同一套，风格统一。
+     （HarmonyOS_Sans_SC.ttf 的 Basic Latin 是 95/95 全覆盖，本身就是完整的中西文
+     合一体，不是只补汉字的补丁版。）
+     后面的系统字体只服务没装鸿蒙的设备：苹果走 SF / 苹方，Windows 走
+     Segoe UI / 微软雅黑，安卓走 Arial / Noto Sans CJK。 */
+  --md-text-font-family:
+    "HarmonyOS Sans SC",
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,
+    "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC",
+    sans-serif;
+
+  /* 代码块、行内 code、kbd
+     等宽字体优先，没装就退到各系统的自带等宽。
+
+     ⚠ monospace 必须排在中文兜底前面。字体链是逐字符匹配的，如果让
+     "HarmonyOS Sans SC" 跑到 monospace 前面，那么它连 ASCII 也一起接管——
+     而它并不是等宽字体（post.isFixedPitch = 0），代码块会立刻变成比例字体，
+     缩进和列对齐全乱。放在 monospace 之后，才能做到：ASCII 命中系统等宽，
+     等宽字体没有的汉字才落给中文兜底。
+
+     JetBrains Mono 排最前：本机装了（或以后自托管了）就直接生效，
+     没装则跳过。它只含拉丁/西里尔/希腊，没有汉字。 */
+  --md-code-font-family:
+    "JetBrains Mono", SFMono-Regular, Menlo, Consolas,
+    monospace,
+    "HarmonyOS Sans SC", "Noto Sans Mono CJK SC";
+}
