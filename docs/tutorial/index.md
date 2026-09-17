@@ -6,6 +6,7 @@
 - [LaTeX 入门教程](latex.md)
 - [Markdown 入门教程](markdown.md)
 - [Matplotlib 入门教程](matplotlib.md)
+- [STM32 HAL 库入门教程](stm32-hal.md)
 
 ## 说明
 
