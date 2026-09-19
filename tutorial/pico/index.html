@@ -1,0 +1,2778 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="胡济的个人网站">
+      
+      
+        <meta name="author" content="胡济">
+      
+      
+        <link rel="canonical" href="https://hujiko02.github.io/tutorial/pico/">
+      
+      
+        <link rel="prev" href="../matplotlib/">
+      
+      
+        <link rel="next" href="../../diary/">
+      
+      
+      <link rel="icon" href="../../others/images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+    
+    
+      
+        <title>Raspberry Pi Pico 系列入门指南 - HuJi Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../others/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#raspberry-pi-pico-系列入门指南" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="HuJi Notes" class="md-header__button md-logo" aria-label="HuJi Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M11.76 19c1.16 0 1.82-1 1.82-2.71 0-1.09-.08-2.41-.28-3.62L18 5h-2.72l-2.57 4.82-.16-.49C11.83 7.19 10.82 5 8.68 5 8 5 7.45 5.18 7 5.54 6 6.39 6 8 6 8.5h.91c.06-.44.3-1.67 1.34-1.67 1.75 0 2.55 3.17 3.15 5.59-.9 2.16-1.4 3.72-1.4 4.55 0 .98.56 2.03 1.76 2.03"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HuJi Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Raspberry Pi Pico 系列入门指南
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="amber"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+    
+  
+  教程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../diary/" class="md-tabs__link">
+          
+  
+    
+  
+  日记
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../me/" class="md-tabs__link">
+          
+  
+    
+  
+  关于我
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HuJi Notes" class="md-nav__button md-logo" aria-label="HuJi Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M11.76 19c1.16 0 1.82-1 1.82-2.71 0-1.09-.08-2.41-.28-3.62L18 5h-2.72l-2.57 4.82-.16-.49C11.83 7.19 10.82 5 8.68 5 8 5 7.45 5.18 7 5.54 6 6.39 6 8 6 8.5h.91c.06-.44.3-1.67 1.34-1.67 1.75 0 2.55 3.17 3.15 5.59-.9 2.16-1.4 3.72-1.4 4.55 0 .98.56 2.03 1.76 2.03"/></svg>
+
+    </a>
+    HuJi Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    教程
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            教程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../latex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LaTeX 入门教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../markdown/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Markdown 入门教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../markdown_test/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Markdown 测试
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verilog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verilog 入门教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../matplotlib/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matplotlib 入门教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Raspberry Pi Pico 系列入门指南
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Raspberry Pi Pico 系列入门指南
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#目录" class="md-nav__link">
+    <span class="md-ellipsis">
+      目录
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-简介" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-安装-visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 安装 Visual Studio Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-安装-raspberry-pi-pico-vs-code-扩展" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 安装 Raspberry Pi Pico VS Code 扩展
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 安装 Raspberry Pi Pico VS Code 扩展">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-安装依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 安装依赖
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 安装依赖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-raspberry-pi-os" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.1 Raspberry Pi OS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.2 Linux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-安装扩展" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 安装扩展
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-加载并调试项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 加载并调试项目
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 加载并调试项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-编译并运行-blink" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 编译并运行 blink
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-修改代码并重新运行" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 修改代码并重新运行
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 调试
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-用-c-语言说-hello-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 用 C 语言说 "Hello World"
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 用 C 语言说 "Hello World"">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-pico-系列设备上的串口输入输出" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Pico 系列设备上的串口输入输出
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-创建项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 创建项目
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-构建项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 构建项目
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-查看控制台输出" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 查看控制台输出
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录-a-debugprobe调试探针" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录 A. Debugprobe（调试探针）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录 A. Debugprobe（调试探针）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-debug-probe" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1 Debug Probe
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.1 Debug Probe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a11-debug-probe-接线" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.1 Debug Probe 接线
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-用第二块-pico-或-pico-2-进行调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.2 用第二块 Pico 或 Pico 2 进行调试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.2 用第二块 Pico 或 Pico 2 进行调试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a21-安装-debugprobe" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.2.1 安装 debugprobe
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-debugprobe-接线" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.3 debugprobe 接线
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-debug-probe-接口" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.4 Debug Probe 接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-使用-uart" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.5 使用 UART
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.5 使用 UART">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a51-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.5.1 Linux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6-使用-openocd-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6 使用 OpenOCD 调试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.6 使用 OpenOCD 调试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a61-获取-openocd" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6.1 获取 OpenOCD
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a62-使用-swd-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6.2 使用 SWD 调试
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a63-rescue-debug-port救援调试端口" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6.3 Rescue Debug Port（救援调试端口）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.6.3 Rescue Debug Port（救援调试端口）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a631-从-openocd-激活-rescue-dp" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6.3.1 从 OpenOCD 激活 Rescue DP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录-b-picotool" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录 B. Picotool
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录 B. Picotool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b1-获取-picotool" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.1 获取 picotool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b2-使用-picotool" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2 使用 picotool
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B.2 使用 picotool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b21-显示信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.1 显示信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b22-保存程序" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.2 保存程序
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b23-二进制信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.3 二进制信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b24-基本信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.4 基本信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b25-引脚" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.5 引脚
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b26-完整信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.6 完整信息
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录-c-命令行工具链配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录 C. 命令行工具链配置
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录 C. 命令行工具链配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c1-通过脚本配置环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.1 通过脚本配置环境
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C.1 通过脚本配置环境">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c11-手动配置环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.1.1 手动配置环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c12-更新-pico-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.1.2 更新 Pico SDK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c2-手动创建你自己的项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.2 手动创建你自己的项目
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C.2 手动创建你自己的项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c21-调试你的项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.2.1 调试你的项目
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../diary/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    日记
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            日记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../diary/2026/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2026 年
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../me/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    关于我
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            关于我
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../me/story/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    无人问津的故事
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#目录" class="md-nav__link">
+    <span class="md-ellipsis">
+      目录
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-简介" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-安装-visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 安装 Visual Studio Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-安装-raspberry-pi-pico-vs-code-扩展" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 安装 Raspberry Pi Pico VS Code 扩展
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 安装 Raspberry Pi Pico VS Code 扩展">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-安装依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 安装依赖
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 安装依赖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-raspberry-pi-os" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.1 Raspberry Pi OS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.2 Linux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-安装扩展" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 安装扩展
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-加载并调试项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 加载并调试项目
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 加载并调试项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-编译并运行-blink" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 编译并运行 blink
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-修改代码并重新运行" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 修改代码并重新运行
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 调试
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-用-c-语言说-hello-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 用 C 语言说 "Hello World"
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 用 C 语言说 "Hello World"">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-pico-系列设备上的串口输入输出" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Pico 系列设备上的串口输入输出
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-创建项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 创建项目
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-构建项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 构建项目
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-查看控制台输出" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 查看控制台输出
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录-a-debugprobe调试探针" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录 A. Debugprobe（调试探针）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录 A. Debugprobe（调试探针）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-debug-probe" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1 Debug Probe
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.1 Debug Probe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a11-debug-probe-接线" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.1 Debug Probe 接线
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-用第二块-pico-或-pico-2-进行调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.2 用第二块 Pico 或 Pico 2 进行调试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.2 用第二块 Pico 或 Pico 2 进行调试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a21-安装-debugprobe" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.2.1 安装 debugprobe
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-debugprobe-接线" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.3 debugprobe 接线
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-debug-probe-接口" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.4 Debug Probe 接口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-使用-uart" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.5 使用 UART
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.5 使用 UART">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a51-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.5.1 Linux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6-使用-openocd-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6 使用 OpenOCD 调试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.6 使用 OpenOCD 调试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a61-获取-openocd" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6.1 获取 OpenOCD
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a62-使用-swd-调试" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6.2 使用 SWD 调试
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a63-rescue-debug-port救援调试端口" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6.3 Rescue Debug Port（救援调试端口）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.6.3 Rescue Debug Port（救援调试端口）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a631-从-openocd-激活-rescue-dp" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.6.3.1 从 OpenOCD 激活 Rescue DP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录-b-picotool" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录 B. Picotool
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录 B. Picotool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b1-获取-picotool" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.1 获取 picotool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b2-使用-picotool" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2 使用 picotool
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B.2 使用 picotool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b21-显示信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.1 显示信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b22-保存程序" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.2 保存程序
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b23-二进制信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.3 二进制信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b24-基本信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.4 基本信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b25-引脚" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.5 引脚
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b26-完整信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      B.2.6 完整信息
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#附录-c-命令行工具链配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      附录 C. 命令行工具链配置
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录 C. 命令行工具链配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c1-通过脚本配置环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.1 通过脚本配置环境
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C.1 通过脚本配置环境">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c11-手动配置环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.1.1 手动配置环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c12-更新-pico-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.1.2 更新 Pico SDK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c2-手动创建你自己的项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.2 手动创建你自己的项目
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C.2 手动创建你自己的项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c21-调试你的项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      C.2.1 调试你的项目
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="raspberry-pi-pico-系列入门指南">Raspberry Pi Pico 系列入门指南</h1>
+<p><strong>C/C++ 开发：使用 Raspberry Pi Pico 系列及其他基于 Raspberry Pi 微控制器的开发板</strong></p>
+<blockquote>
+<p><strong>原文档</strong>：<em>Getting Started with Raspberry Pi Pico-series</em>（RP-008276-DS-2）
+<strong>发布版本</strong>：24 ｜ <strong>构建日期</strong>：2026-07-03 ｜ <strong>构建版本</strong>：d4e0f1799616
+<strong>版权</strong>：© 2022-2026 Raspberry Pi Ltd，本文档采用 <a href="https://creativecommons.org/licenses/by-nd/4.0/">Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND)</a> 许可发布。</p>
+<p><strong>关于本译文</strong>：本文是上述官方文档的中文翻译。根据需求，已省略 Windows/macOS 相关的安装与操作步骤，以及原文档附录 D（其他集成开发环境，如 CLion）和附录 E（文档修订历史）。原文档开头的法律免责声明属固定样板文本，此处从略。代码、命令及程序输出保持原文，不作翻译。</p>
+</blockquote>
+<hr />
+<h2 id="目录">目录</h2>
+<ol>
+<li><a href="#1-简介">简介</a></li>
+<li><a href="#2-安装-visual-studio-code">安装 Visual Studio Code</a></li>
+<li><a href="#3-安装-raspberry-pi-pico-vs-code-扩展">安装 Raspberry Pi Pico VS Code 扩展</a></li>
+<li><a href="#31-安装依赖">3.1 安装依赖</a></li>
+<li><a href="#32-安装扩展">3.2 安装扩展</a></li>
+<li><a href="#4-加载并调试项目">加载并调试项目</a></li>
+<li><a href="#41-编译并运行-blink">4.1 编译并运行 blink</a></li>
+<li><a href="#42-修改代码并重新运行">4.2 修改代码并重新运行</a></li>
+<li><a href="#43-调试">4.3 调试</a></li>
+<li><a href="#5-用-c-语言说-hello-world">用 C 语言说 "Hello World"</a></li>
+<li><a href="#51-pico-系列设备上的串口输入输出">5.1 Pico 系列设备上的串口输入输出</a></li>
+<li><a href="#52-创建项目">5.2 创建项目</a></li>
+<li><a href="#53-构建项目">5.3 构建项目</a></li>
+<li><a href="#54-查看控制台输出">5.4 查看控制台输出</a></li>
+<li><a href="#附录-a-debugprobe调试探针">附录 A. Debugprobe（调试探针）</a></li>
+<li><a href="#附录-b-picotool">附录 B. Picotool</a></li>
+<li><a href="#附录-c-命令行工具链配置">附录 C. 命令行工具链配置</a></li>
+</ol>
+<hr />
+<h2 id="1-简介">1. 简介</h2>
+<p>要跟着本指南操作，你需要准备以下物品：</p>
+<ul>
+<li>一块 Raspberry Pi Pico 系列设备</li>
+<li>一根 Micro USB 连接线</li>
+</ul>
+<p>以下物品在后续的部分步骤中需要用到：</p>
+<ul>
+<li>Raspberry Pi Debug Probe，或者第二块 Raspberry Pi Pico 系列设备</li>
+</ul>
+<p>接下来的说明假设你使用的是 Pico 系列设备；如果你使用其他基于 Raspberry Pi 微控制器的开发板，部分细节可能有所不同。</p>
+<p>Pico 系列设备围绕 Raspberry Pi 设计的微控制器构建。官方同时提供 C/C++ SDK 与官方 MicroPython 移植版，对开发板上的开发工作提供完整支持。本书介绍如何上手 SDK，并带你完成 SDK 工具链的构建、安装和使用。</p>
+<blockquote>
+<p><strong>提示</strong></p>
+<p>本书介绍的主要方法是使用 VS Code 扩展，让你的工作更轻松。如果你想改用命令行方式开发（例如在 Raspberry Pi OS Lite 上），请参阅<a href="#附录-c-命令行工具链配置">附录 C. 命令行工具链配置</a>。</p>
+</blockquote>
+<p>关于官方 MicroPython 移植版的更多信息，请参阅：</p>
+<ul>
+<li>Raspberry Pi Pico 系列 Python SDK 的文档（<a href="https://pip.raspberrypi.com/documents/RP-008355-DS">https://pip.raspberrypi.com/documents/RP-008355-DS</a>）</li>
+<li>Raspberry Pi Press 出版的图书 <em>Get Started with MicroPython on Raspberry Pi Pico - 2nd Edition</em>（<a href="https://magazine.raspberrypi.com/books/get-started-micropython-pico-2ed">https://magazine.raspberrypi.com/books/get-started-micropython-pico-2ed</a>）</li>
+</ul>
+<p>关于 C/C++ SDK 的更多信息，请参阅 Raspberry Pi Pico 系列 C/C++ SDK 的文档（<a href="https://pip.raspberrypi.com/documents/RP-009085-KB">https://pip.raspberrypi.com/documents/RP-009085-KB</a>）。</p>
+<hr />
+<h2 id="2-安装-visual-studio-code">2. 安装 Visual Studio Code</h2>
+<p>Visual Studio Code（VS Code）是由 Microsoft 开发的一款流行的开源编辑器。Raspberry Pi Pico VS Code 扩展让安装依赖和为 Pico 系列设备构建软件变得非常简单。</p>
+<blockquote>
+<p><strong>提示</strong></p>
+<p>如果你不想使用 VS Code，可以使用 <a href="https://vscodium.com/">VSCodium</a>（社区驱动的自由开源替代品），或者手动配置你的环境。</p>
+</blockquote>
+<p>在 Raspberry Pi OS 或 Linux 上安装 Visual Studio Code（VS Code），请运行以下命令：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>code
+</span></code></pre></div>
+<p>你也可以从 <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a> 下载安装包进行安装。</p>
+<hr />
+<h2 id="3-安装-raspberry-pi-pico-vs-code-扩展">3. 安装 Raspberry Pi Pico VS Code 扩展</h2>
+<p>Raspberry Pi Pico VS Code 扩展帮助你在 Visual Studio Code 中创建、开发、运行和调试项目。它内置了项目生成器（支持多种模板选项）、工具链自动管理、一键编译项目，以及 Pico SDK 的离线文档。</p>
+<p>该 VS Code 扩展支持所有 Raspberry Pi Pico 系列设备。</p>
+<h3 id="31-安装依赖">3.1 安装依赖</h3>
+<h4 id="311-raspberry-pi-os">3.1.1 Raspberry Pi OS</h4>
+<p>无需安装任何依赖。</p>
+<blockquote>
+<p>原文此节为 "Raspberry Pi OS and Windows"，其中的 Windows 内容已按要求省略。</p>
+</blockquote>
+<h4 id="312-linux">3.1.2 Linux</h4>
+<p>大多数 Linux 发行版已预装运行该扩展所需的全部依赖。不过，某些发行版可能需要额外安装依赖。该扩展需要以下组件：</p>
+<ul>
+<li>Python 3.9 或更高版本</li>
+<li>Git</li>
+<li>Tar</li>
+<li>〔可选〕gdb-multiarch，用于调试（仅 x86_64）</li>
+<li>〔可选〕安装 <a href="https://github.com/raspberrypi/openocd/blob/sdk-2.0.0/contrib/60-openocd.rules">udev 规则</a>，以便调试时无需 <code>sudo</code> 即可使用 OpenOCD</li>
+<li>〔可选〕安装 <a href="https://github.com/raspberrypi/picotool/blob/master/udev/">udev 规则</a>，以便加载程序时无需 <code>sudo</code> 即可使用 picotool</li>
+<li>在 Ubuntu 22.04 上，需要安装 <code>libftdi1-2</code> 和 <code>libhidapi-hidraw0</code> 软件包才能使用 OpenOCD</li>
+</ul>
+<p>你可以用以下命令安装这些依赖：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3<span class="w"> </span>git<span class="w"> </span>tar
+</span></code></pre></div>
+<blockquote>
+<p>原文中 macOS 的小节（3.1.3）已按要求省略。</p>
+</blockquote>
+<h3 id="32-安装扩展">3.2 安装扩展</h3>
+<p>你可以在 VS Code 扩展市场中找到该扩展。搜索 <strong>Raspberry Pi Pico</strong> 扩展（发布者为 Raspberry Pi），然后点击 <strong>Install</strong> 按钮将其添加到 VS Code。</p>
+<p><img alt="图 1. 在 VS Code 中进行调试。" src="../images/figure-01.png" /></p>
+<p>商店页面：<a href="https://marketplace.visualstudio.com/items?itemName=raspberry-pi.raspberry-pi-pico">https://marketplace.visualstudio.com/items?itemName=raspberry-pi.raspberry-pi-pico</a></p>
+<p>扩展的源代码和发行版下载地址：<a href="https://github.com/raspberrypi/pico-vscode">https://github.com/raspberrypi/pico-vscode</a></p>
+<p>安装完成后，查看活动侧边栏（默认位于 VS Code 左侧）。如果安装成功，会出现一个新的侧边栏区域，带有一个 Raspberry Pi Pico 图标，标签为 "Raspberry Pi Pico Project"。</p>
+<hr />
+<h2 id="4-加载并调试项目">4. 加载并调试项目</h2>
+<p>VS Code 扩展可以基于 <a href="https://github.com/raspberrypi/pico-examples">https://github.com/raspberrypi/pico-examples</a> 提供的示例来创建项目。下面以创建一个让 Pico 系列设备上的 LED 闪烁的项目为例，带你走一遍整个流程：</p>
+<ol>
+<li>在 VS Code 左侧边栏中，选择 Raspberry Pi Pico 图标，其标签为 "Raspberry Pi Pico Project"。</li>
+<li>选择 <strong>New Project from Examples</strong>。</li>
+<li>在 <strong>Name</strong> 字段中，选择 <code>blink</code> 示例。</li>
+<li>选择与你的设备相匹配的开发板类型。</li>
+<li>指定一个文件夹，供扩展生成文件。VS Code 会在所选文件夹下新建一个子文件夹来存放新项目。</li>
+<li>点击 <strong>Create</strong> 创建项目。</li>
+</ol>
+<p>扩展现在会下载 SDK 和工具链，将它们安装到本地，并生成新项目。第一个项目安装工具链可能需要 5–10 分钟。由于我们为你自动生成了 <code>.vscode</code> 目录，VS Code 会询问你是否信任该目录的作者。选择「是」。</p>
+<p><img alt="图 2. 在 VS Code 中创建项目。" src="../images/figure-02.png" /></p>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>此时 CMake Tools 扩展可能会显示一些通知。忽略并关闭它们即可。</p>
+</blockquote>
+<p>现在，在 VS Code 左侧的资源管理器（Explorer）侧边栏中，你应该能看到一个文件列表。</p>
+<p>打开 <code>blink.c</code>，即可在主窗口中查看 blink 示例的源代码。</p>
+<p>Raspberry Pi Pico 扩展在屏幕右下角的状态栏中添加了一些功能：</p>
+<p><strong>Compile（编译）</strong>
+　编译源代码并构建目标 UF2 文件。你可以把这个二进制文件复制到设备上完成烧录。</p>
+<p><strong>Run（运行）</strong>
+　查找已连接的设备，把代码烧录进去并运行。</p>
+<p>扩展侧边栏中也有一些快捷功能。点击侧边菜单中的 Pico 图标，你会看到 <strong>Compile Project</strong>。</p>
+<p>点击 <strong>Compile Project</strong>，屏幕底部会打开一个终端标签页，显示编译进度。</p>
+<h3 id="41-编译并运行-blink">4.1 编译并运行 blink</h3>
+<p>运行 blink 示例的步骤如下：</p>
+<ol>
+<li>按住 Pico 系列设备上的 BOOTSEL 按钮，同时用 Micro USB 线把设备连接到你的开发主机，以此强制设备进入 USB 大容量存储模式。</li>
+<li>按下状态栏中的 <strong>Run</strong> 按钮，或侧边栏中的 <strong>Run project</strong> 按钮。</li>
+</ol>
+<p>你应该会看到窗口底部的终端标签页打开，显示代码上传的相关信息。代码上传完成后，设备会重启，你应该会看到以下输出：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>The device was rebooted to start the application.
+</span></code></pre></div>
+<p>你的 blink 代码现在开始运行了。观察设备，LED 应该每秒闪烁两次。</p>
+<h3 id="42-修改代码并重新运行">4.2 修改代码并重新运行</h3>
+<p>为了确认一切工作正常，在 VS Code 中点击 <code>blink.c</code> 文件。找到代码顶部 <code>LED_DELAY_MS</code> 的定义处：</p>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#ifndef LED_DELAY_MS</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cp">#define LED_DELAY_MS 250</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cp">#endif LED_DELAY_MS</span>
+</span></code></pre></div>
+<ol>
+<li>把 250ms（四分之一秒）改为 100（十分之一秒）：</li>
+</ol>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#ifndef LED_DELAY_MS</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="cp">#define LED_DELAY_MS 100</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="cp">#endif LED_DELAY_MS</span>
+</span></code></pre></div>
+<ol>
+<li>断开设备连接，然后按住 BOOTSEL 按钮重新连接。</li>
+<li>按下状态栏中的 <strong>Run</strong> 按钮，或侧边栏中的 <strong>Run project</strong> 按钮。</li>
+</ol>
+<p>你应该会看到窗口底部的终端标签页打开，显示代码上传的相关信息。代码上传完成后，设备会重启，你应该会看到以下输出：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>The device was rebooted to start the application.
+</span></code></pre></div>
+<p>你的 blink 代码现在开始运行了。观察设备，LED 应该闪得更快，每秒闪烁五次。</p>
+<h3 id="43-调试">4.3 调试</h3>
+<p>Raspberry Pi Debug Probe 是适用于任何基于 Arm 的计算机的调试解决方案。你也可以使用其他调试硬件配合 Pico 系列设备，但我们推荐使用 Debug Probe，因为它的配置最为简单。如果你想用一块 Pico 系列设备充当 Debug Probe，请参阅<a href="#a2-用第二块-pico-或-pico-2-进行调试">附录 A.2 用第二块 Pico 或 Pico 2 进行调试</a>。</p>
+<p>首先，通过开发板上的调试接口把 Debug Probe 连接到你的 Pico 系列设备。不同的 Pico 设备需要不同的连接器。对于 Pico、Pico W 和 Pico 2，需要用烙铁把 Debug Probe 连接器焊接到开发板上；对于 Pico H、Pico WH 以及带排针的 Pico，调试排针已经焊好，直接用附带的线缆连接 Debug Probe 即可。</p>
+<p><img alt="图 3. Debug Probe 接线" src="../images/figure-03.png" /></p>
+<p>更多信息请参阅 Debug Probe 文档。</p>
+<p>现在，把 Debug Probe 的 USB 插入你的计算机。注意 Debug Probe 不会给 Pico 设备供电，Pico 必须单独供电。</p>
+<p>启动调试器的步骤：</p>
+<ol>
+<li>点击 Pico 图标打开扩展侧边栏。</li>
+<li>选择 <strong>Debug Project</strong>，或按 <code>F5</code>。</li>
+<li>如果提示选择调试器，请选择 <strong>Pico Debug (Cortex-Debug)</strong>。</li>
+</ol>
+<p>调试器会自动把代码下载到设备，在你的 <code>main</code> 函数开头插入一个断点，并运行到该断点处停下。</p>
+<p><img alt="图 4. 在 VS Code 中进行调试。" src="../images/figure-04.png" /></p>
+<p>进入调试模式后，侧边栏中会出现若干窗口，显示设备当前状态的有用信息。顶部有一条小的控制栏，其中的按钮用于控制代码执行。把鼠标悬停在按钮上可以查看它们的名称。要继续执行代码，点击 <strong>Continue</strong>（<code>F5</code>）。</p>
+<p>你的 blink 代码现在正在运行。观察设备，LED 应该像之前一样闪烁。现在按 <strong>Restart</strong>（<code>Ctrl+Shift+F5</code>）回到 <code>main</code> 函数的开头。</p>
+<p>按一次 <strong>Step-over</strong>（<code>F10</code>）。高亮显示的行（表示下一条将要执行的语句）会前进到 <code>pico_led_init</code> 函数调用处。要步入这个函数，按 <strong>Step-into</strong>（<code>F11</code>）。源代码窗口会更新，显示执行位置现在位于该函数的开头。你可以继续单步执行代码直到函数返回 <code>main</code>，也可以按 <strong>Step-out</strong>（<code>Shift+F11</code>）直接执行完该函数。</p>
+<p>返回 <code>main</code> 函数后，查看 <strong>Local Variables</strong>（局部变量）窗口，可以看到 <code>rc</code> 的值为 <code>0</code>（<code>PICO_OK</code>）。</p>
+<p>再次按 <strong>Restart</strong>（<code>Ctrl+Shift+F5</code>）回到 <code>main</code> 函数开头。然后把光标移到 <code>pico_set_led</code> 那一行，按 <code>F9</code>。创建断点后，你会看到一个红点标示断点的位置：</p>
+<p><img alt="图 5. 在 VS Code 中进行调试。" src="../images/figure-05.png" /></p>
+<p>点击红点即可添加或移除断点。</p>
+<p>按 <strong>Continue</strong>（<code>F5</code>），执行应该会停在断点处。接着按 <strong>Step-over</strong>（<code>F10</code>），你应该会看到 LED 亮起。</p>
+<hr />
+<h2 id="5-用-c-语言说-hello-world">5. 用 C 语言说 "Hello World"</h2>
+<p>在让 LED 点亮和熄灭之后，大多数开发者接下来想做的事就是创建并使用串口，然后说一句 "Hello World"。</p>
+<h3 id="51-pico-系列设备上的串口输入输出">5.1 Pico 系列设备上的串口输入输出</h3>
+<p>串口输入（<code>stdin</code>）和输出（<code>stdout</code>）可以被定向到串口 UART 和/或 USB CDC（USB 串口）。</p>
+<p>使用串口 UART 控制台时，输入和输出通过设备上的 UART 引脚传输——默认使用 Pin 1（<code>GP0</code>）发送输出（<code>UART0_TX</code>），使用 Pin 2（<code>GP1</code>）接收输入（<code>UART0_RX</code>）。你需要把 Pico 系列设备上的 UART 引脚连接到一个 UART 转 USB 转换器（例如 Debug Probe），如 Debug Probe 接线图所示。</p>
+<p>使用 USB CDC 控制台时，输入和输出直接通过连接到你计算机的 USB 线传输，因此不需要额外接线。不过在代码开始运行时，你可能会漏掉一部分打印内容，因为设备重启后，你的计算机可能需要一两秒钟才能连接到 Pico 系列设备。</p>
+<p>使用扩展时，你可以根据自己的偏好选择其中一种控制台，或同时使用两种。</p>
+<h3 id="52-创建项目">5.2 创建项目</h3>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>Pico SDK 使用 CMake 来管理其构建系统。如果你不想使用 VS Code 扩展，请参阅<a href="#c2-手动创建你自己的项目">附录 C.2 手动创建你自己的项目</a>。</p>
+</blockquote>
+<ol>
+<li>在 VS Code 左侧边栏中，选择 Raspberry Pi Pico 图标，其标签为 "Raspberry Pi Pico Project"。</li>
+<li>选择 <strong>New Project</strong>。</li>
+<li>在 <strong>Name</strong> 字段中为项目命名，例如 "hello_world"。</li>
+<li>选择与你的设备相匹配的开发板类型。</li>
+<li>指定一个文件夹，供扩展生成文件。VS Code 会在所选文件夹下新建一个子文件夹来存放新项目。</li>
+<li>在 "STDIO support" 下，选择你想要的控制台。</li>
+<li>点击 <strong>Create</strong> 创建项目。</li>
+</ol>
+<p>扩展现在会生成新项目。由于我们为你自动生成了 <code>.vscode</code> 目录，VS Code 会询问你是否信任该目录的作者。选择「是」。</p>
+<h3 id="53-构建项目">5.3 构建项目</h3>
+<p>运行 "Hello world" 示例的步骤如下：</p>
+<ol>
+<li>按住 Pico 系列设备上的 BOOTSEL 按钮，同时用 Micro USB 线把设备连接到你的开发主机，以此强制设备进入 USB 大容量存储模式。</li>
+<li>按下状态栏中的 <strong>Run</strong> 按钮，或侧边栏中的 <strong>Run project</strong> 按钮。</li>
+</ol>
+<p>你应该会看到窗口底部的终端标签页打开，显示代码上传的相关信息。代码上传完成后，设备会重启，你应该会看到以下输出：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>The device was rebooted to start the application.
+</span></code></pre></div>
+<p>你的 "Hello world" 代码现在开始运行了。</p>
+<p>不过，虽然 "Hello World" 示例已经在运行，我们暂时还看不到输出的文本。</p>
+<h3 id="54-查看控制台输出">5.4 查看控制台输出</h3>
+<p>如果你使用的是 STDIO UART，请先确认已经完成接线。STDIO USB 除了连接到计算机之外不需要任何其他接线。</p>
+<p>在 VS Code 中，打开 <strong>View</strong> 菜单，选择 <strong>Terminal</strong> 打开底部面板。在该面板中，你会找到 <strong>Serial Monitor</strong> 标签页。选择串口——可能不止一个。波特率应为 <code>115200</code>。选择 <strong>Start Monitoring</strong> 即可看到输出。</p>
+<p><img alt="图 6. VS Code 串口监视器" src="../images/figure-06.png" /></p>
+<hr />
+<h2 id="附录-a-debugprobe调试探针">附录 A. Debugprobe（调试探针）</h2>
+<p>Raspberry Pi 提供两种调试 Pico 系列设备的方式：</p>
+<ul>
+<li>Raspberry Pi Debug Probe</li>
+<li>在第二块 Pico 或 Pico 2 上运行 debugprobe 固件</li>
+</ul>
+<p>两种方式都可以在包括 Windows、macOS 和 Linux 在内的平台上调试 Pico 系列设备。作为调试器的设备通过 USB 连接到你的常用计算机，并通过 SWD 和 UART 连接到目标 Pico。</p>
+<h3 id="a1-debug-probe">A.1 Debug Probe</h3>
+<p>调试 Pico 系列设备最简单的方法是使用 <a href="https://www.raspberrypi.com/products/debug-probe/">Raspberry Pi Debug Probe</a>。Raspberry Pi Debug Probe 提供串行线调试（SWD）以及一个通用的 USB 转串口桥。</p>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>关于 Debug Probe 的更多信息，请参阅<a href="https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html">官方文档站点</a>。</p>
+</blockquote>
+<h4 id="a11-debug-probe-接线">A.1.1 Debug Probe 接线</h4>
+<p><img alt="图 7. Debug Probe 附带的线缆。" src="../images/figure-07.png" /></p>
+<p><img alt="图 8. Debug Probe（左）与 Pico（右）之间的接线。" src="../images/figure-08.png" /></p>
+<p>要把 Debug Probe 连接到 Pico H，请连接以下线路：</p>
+<ul>
+<li>Debug Probe 的 "D" 端口 → Pico H 的 "DEBUG" SWD JST-SH 连接器</li>
+<li>Debug Probe 的 "U" 端口，使用三针 JST-SH 转 0.1 英寸排针（公头）的线缆：</li>
+<li>Debug Probe RX → Pico H TX 引脚</li>
+<li>Debug Probe TX → Pico H RX 引脚</li>
+<li>Debug Probe GND → Pico H GND 引脚</li>
+</ul>
+<p>然后连接两根 USB 线：一根从你的计算机连接到 Debug Probe 的 microUSB 端口，另一根从你的计算机连接到 Pico 的 microUSB 端口。</p>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>如果你用的是非 H 版的 Pico、Pico 2 或 Pico W（没有 JST-SH 连接器），仍然可以把它连接到 Debug Probe。把公头连接器焊接到开发板上的 <code>SWCLK</code>、<code>GND</code> 和 <code>SWDIO</code> 排针上。使用 Debug Probe 附带的另一根三针 JST-SH 转 0.1 英寸排针（母头）线缆，连接到 Debug Probe 的 "D" 端口。把 Pico 或 Pico W 上的 <code>SWCLK</code>、<code>GND</code> 和 <code>SWDIO</code> 分别连接到 Debug Probe 上的 <code>SC</code>、<code>GND</code> 和 <code>SD</code> 引脚。</p>
+</blockquote>
+<p>Pico 与 Debug Probe 之间的线束连接如图 8 所示。</p>
+<h3 id="a2-用第二块-pico-或-pico-2-进行调试">A.2 用第二块 Pico 或 Pico 2 进行调试</h3>
+<p>一块 Pico 或 Pico 2 可以使用 debugprobe 固件来为另一块重新烧录和调试，该固件把 Pico 或 Pico 2 变成一个 USB → SWD 与 UART 桥。</p>
+<p><img alt="图 9. Pico A（左）与 Pico B（右）之间的接线，其中 Pico A 充当调试器，Pico B 作为被测系统。你至少需要连接地线和两根 SWD 线。连接 UART 串口可以让你访问 Pico B 的 UART 串口输出。你也可以桥接电源，用一根 USB 线同时为两块板供电。更多信息请参阅附录 A.3 debugprobe 接线。" src="../images/figure-09.png" /></p>
+<h4 id="a21-安装-debugprobe">A.2.1 安装 debugprobe</h4>
+<p>你可以从 GitHub 上 <a href="https://github.com/raspberrypi/debugprobe/releases/latest">debugprobe 的最新发行版</a>下载 debugprobe 的 UF2 二进制文件。</p>
+<p>按住 BOOTSEL 按钮启动作为调试器的 Pico 或 Pico 2，把 <code>debugprobe_on_pico.uf2</code> 复制到设备上即可开始调试。</p>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>使用 <code>debugprobe_on_pico.uf2</code> 可以把 Pico 用作调试器；使用 <code>debugprobe_on_pico2.uf2</code> 用于 Pico 2。Debug Probe 配件硬件请使用 <code>debugprobe.uf2</code>。</p>
+</blockquote>
+<h3 id="a3-debugprobe-接线">A.3 debugprobe 接线</h3>
+<p><img alt="图 10. Pico A（左）与 Pico B（右）之间的接线，把 Pico A 配置为调试器。" src="../images/figure-10.png" /></p>
+<p>两块 Pico 开发板之间的线束连接如图 10 所示。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Pico A GND -&gt; Pico B GND
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Pico A GP2 -&gt; Pico B SWCLK
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Pico A GP3 -&gt; Pico B SWDIO
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Pico A GP4/UART1 TX -&gt; Pico B GP1/UART0 RX
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>Pico A GP5/UART1 RX -&gt; Pico B GP0/UART0 TX
+</span></code></pre></div>
+<p>通过 OpenOCD 加载和运行代码所需的最少连接是 <code>GND</code>、<code>SWCLK</code> 和 <code>SWDIO</code>。连接 UART 线，即可通过 Pico A 的 USB 连接与 Pico B 的 UART 串口通信。你也可以用这些 UART 线与任何其他 UART 串口设备通信，例如 Raspberry Pi 上的启动控制台。</p>
+<p>要用 Pico B 给 Pico A 供电，请连接以下引脚：</p>
+<ul>
+<li>当 USB 工作在设备模式或完全不使用时，连接 <code>VSYS</code> 到 <code>VSYS</code></li>
+<li>当作为 USB 主机使用时，连接 <code>VBUS</code> 到 <code>VBUS</code>，以便在 USB 连接器上提供 5V 电压</li>
+</ul>
+<h3 id="a4-debug-probe-接口">A.4 Debug Probe 接口</h3>
+<p>Debug Probe 以及任何运行 debugprobe 的 Pico 系列设备都是复合设备，具有两个 USB 接口：</p>
+<ol>
+<li>一个符合类规范的 CDC UART（串口），因此在 Windows 上开箱即用。</li>
+<li>一个厂商自定义接口，用于传输符合 CMSIS-DAP v2 规范的 SWD 探针数据。</li>
+</ol>
+<h3 id="a5-使用-uart">A.5 使用 UART</h3>
+<h4 id="a51-linux">A.5.1 Linux</h4>
+<p>在 Linux 上使用 UART 连接，请运行以下命令：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>minicom<span class="w"> </span>-D<span class="w"> </span>/dev/ttyACM0<span class="w"> </span>-b<span class="w"> </span><span class="m">115200</span>
+</span></code></pre></div>
+<blockquote>
+<p>原文中的 A.5.2（Windows）与 A.5.3（macOS）小节已按要求省略。</p>
+</blockquote>
+<h3 id="a6-使用-openocd-调试">A.6 使用 OpenOCD 调试</h3>
+<h4 id="a61-获取-openocd">A.6.1 获取 OpenOCD</h4>
+<p>支持所有 Pico 系列设备的 OpenOCD 二进制发行版可以从 GitHub 上的 <a href="https://github.com/raspberrypi/pico-sdk-tools">Pico SDK tools 仓库</a>获取。你也可以用以下命令自行构建并安装：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/raspberrypi/openocd.git<span class="w"> </span>--branch<span class="w"> </span>sdk-2.2.0
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>openocd
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>$<span class="w"> </span>./bootstrap
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>$<span class="w"> </span>./configure<span class="w"> </span>--disable-werror
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>$<span class="w"> </span>make<span class="w"> </span>-j4
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>$<span class="w"> </span>sudo<span class="w"> </span>make<span class="w"> </span>install
+</span></code></pre></div>
+<p>有了 Debug Probe，你就可以通过 SWD 端口和 OpenOCD 来加载二进制文件。</p>
+<p>首先构建一个二进制文件。然后运行以下命令把该二进制文件上传到 Pico，其中把 <code>blink.elf</code> 替换为你刚构建的 ELF 文件名：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>openocd<span class="w"> </span>-f<span class="w"> </span>interface/cmsis-dap.cfg<span class="w"> </span>-f<span class="w"> </span>target/rp2040.cfg<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;adapter speed 5000&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;program blink.elf verify reset exit&quot;</span>
+</span></code></pre></div>
+<p>如果你使用的是基于 RP2350 的开发板，则使用：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>openocd<span class="w"> </span>-f<span class="w"> </span>interface/cmsis-dap.cfg<span class="w"> </span>-f<span class="w"> </span>target/rp2350.cfg<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;adapter speed 5000&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;program blink.elf verify reset exit&quot;</span>
+</span></code></pre></div>
+<h4 id="a62-使用-swd-调试">A.6.2 使用 SWD 调试</h4>
+<p>你也可以让 OpenOCD 运行在服务器模式下，并连接一个能够提供断点等功能的调试器。</p>
+<blockquote>
+<p><strong>重要</strong></p>
+<p>为了让调试更容易，你可以使用 <code>CMAKE_BUILD_TYPE</code> 选项以 Debug 构建类型来构建二进制文件：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/pico/pico-examples/
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>$<span class="w"> </span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug<span class="w"> </span>-DPICO_BOARD<span class="o">=</span>pico
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>$<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>build
+</span></code></pre></div>
+<p>注意：对于 Raspberry Pi Pico 2，应使用 <code>-DPICO_BOARD=pico2</code>。</p>
+<p>Debug 构建进行的优化较少，这使得在调试器中运行时更容易看清程序的执行过程。</p>
+</blockquote>
+<p>首先，运行一个 OpenOCD 服务器：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>openocd<span class="w"> </span>-f<span class="w"> </span>interface/cmsis-dap.cfg<span class="w"> </span>-f<span class="w"> </span>target/rp2040.cfg<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;adapter speed 5000&quot;</span>
+</span></code></pre></div>
+<p>对于基于 RP2350 的设备，请改用 <code>-f target/rp2350.cfg</code>。</p>
+<p>然后打开第二个终端窗口，启动调试器并把你的二进制文件作为参数传入：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$<span class="w"> </span>gdb<span class="w"> </span>blink.elf
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>&gt;<span class="w"> </span>target<span class="w"> </span>remote<span class="w"> </span>localhost:3333
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>&gt;<span class="w"> </span>monitor<span class="w"> </span>reset<span class="w"> </span>init
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>&gt;<span class="w"> </span>load
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>&gt;<span class="w"> </span><span class="k">continue</span>
+</span></code></pre></div>
+<p>GDB 并非在所有平台上都可用。请根据你的操作系统和设备，改用以下替代方案之一来代替 <code>gdb</code>：</p>
+<ul>
+<li>在非 Raspberry Pi 的 Linux 设备上，使用 <code>gdb-multiarch</code>。</li>
+<li>在基于 Arm 的 macOS 设备上，使用 <code>lldb</code>。</li>
+</ul>
+<h4 id="a63-rescue-debug-port救援调试端口">A.6.3 Rescue Debug Port（救援调试端口）</h4>
+<p>如果用户往 flash 中烧录了一些有问题的代码，可以使用 RP2040 或 RP2350 上的救援调试端口（Rescue DP）把芯片复位到已知状态。例如，关闭了系统时钟的代码会导致处理器调试端口无法访问，但救援 DP 仍然可用，因为它由 SWD 接口的 SWCLK 提供时钟。一次成功的救援 DP 操作会复位芯片，并在启动流程早期暂停 bootrom。</p>
+<h5 id="a631-从-openocd-激活-rescue-dp">A.6.3.1 从 OpenOCD 激活 Rescue DP</h5>
+<p>提供了两个用于访问救援 DP 的目标配置：</p>
+<ul>
+<li><code>rp2040-rescue.cfg</code></li>
+<li><code>rp2350-rescue.cfg</code></li>
+</ul>
+<p>使用与你目标设备相对应的配置文件启动 OpenOCD。</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$<span class="w"> </span>openocd<span class="w"> </span>-f<span class="w"> </span>interface/cmsis-dap.cfg<span class="w"> </span>-f<span class="w"> </span>target/rp2040-rescue.cfg
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>...
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>Warn<span class="w"> </span>:<span class="w"> </span>gdb<span class="w"> </span>services<span class="w"> </span>need<span class="w"> </span>one<span class="w"> </span>or<span class="w"> </span>more<span class="w"> </span>targets<span class="w"> </span>defined
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>Now<span class="w"> </span>attach<span class="w"> </span>a<span class="w"> </span>debugger<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>RP2040<span class="w"> </span>and<span class="w"> </span>load<span class="w"> </span>some<span class="w"> </span>code
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>Info<span class="w"> </span>:<span class="w"> </span>Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> </span><span class="m">6666</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>tcl<span class="w"> </span>connections
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>Info<span class="w"> </span>:<span class="w"> </span>Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> </span><span class="m">4444</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>telnet<span class="w"> </span>connections
+</span></code></pre></div>
+<p>按 <code>Ctrl + C</code> 停止。</p>
+<p>现在用普通配置启动 OpenOCD。</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>$<span class="w"> </span>openocd<span class="w"> </span>-f<span class="w"> </span>interface/cmsis-dap.cfg<span class="w"> </span>-f<span class="w"> </span>target/rp2040.cfg
+</span></code></pre></div>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>在 RP2350 上，<code>CRIT1.DEBUG_DISABLE</code> 和 <code>CRIT1.SECURE_DEBUG_DISABLE</code> 这两个 OTP 标志（或设置了调试密钥索引）所带来的效果，无法通过救援 DP 复位来解除。</p>
+</blockquote>
+<hr />
+<h2 id="附录-b-picotool">附录 B. Picotool</h2>
+<p>你可以把信息嵌入到 Pico 系列的二进制文件中，这些信息可以通过一个名为 <code>picotool</code> 的命令行工具读取出来。</p>
+<h3 id="b1-获取-picotool">B.1 获取 picotool</h3>
+<p><code>picotool</code> 工具位于它自己的仓库中。如果你没有使用 VS Code 扩展，或者没有运行过 <code>pico-setup</code> 脚本，那么你需要下载预编译的二进制文件，或者自行构建——两种方式的详细说明都可以在 <a href="https://github.com/raspberrypi/picotool#readme">picotool README.md</a> 中找到。</p>
+<h3 id="b2-使用-picotool">B.2 使用 picotool</h3>
+<p><code>picotool</code> 二进制文件内置了命令行帮助功能，会列出所有可用命令：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>$ picotool help
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>PICOTOOL:
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    Tool for interacting with RP-series device(s) in BOOTSEL mode, or with an RP-series binary
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>SYNOPSIS:
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    picotool info [-b] [-m] [-p] [-d] [--debug] [-l] [-a] [device-selection]
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    picotool info [-b] [-m] [-p] [-d] [--debug] [-l] [-a] &lt;filename&gt; [-t &lt;type&gt;]
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>    picotool config [-s &lt;key&gt; &lt;value&gt;] [-g &lt;group&gt;] [device-selection]
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    picotool config [-s &lt;key&gt; &lt;value&gt;] [-g &lt;group&gt;] &lt;filename&gt; [-t &lt;type&gt;]
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>    picotool load [--ignore-partitions] [--family &lt;family_id&gt;] [-p &lt;partition&gt;] [-n] [-N] [-u]
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>                  [-v] [-x] &lt;filename&gt; [-t &lt;type&gt;] [-o &lt;offset&gt;] [device-selection]
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>    picotool encrypt [--quiet] [--verbose] [--embed] [--fast-rosc] [--use-mbedtls]
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>                  [--otp-key-page &lt;page&gt;] [--hash] [--sign] &lt;infile&gt; [-t &lt;type&gt;] [-o &lt;offset&gt;]
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>                  &lt;outfile&gt; [-t &lt;type&gt;] &lt;aes_key&gt; &lt;iv_salt&gt; &lt;signing_key&gt; &lt;otp&gt;
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>    picotool seal [--quiet] [--verbose] [--hash] [--sign] [--clear] &lt;infile&gt; [-t &lt;type&gt;] [-o
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>                  &lt;offset&gt;] &lt;outfile&gt; [-t &lt;type&gt;] &lt;key&gt; &lt;otp&gt; [--major &lt;major&gt;] [--minor &lt;minor&gt;]
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>                  [--rollback &lt;rollback&gt; [&lt;rows&gt;..]]
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>    picotool link [--quiet] [--verbose] &lt;outfile&gt; [-t &lt;type&gt;] &lt;infile1&gt; [-t &lt;type&gt;] &lt;infile2&gt;
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>                  [-t &lt;type&gt;] [&lt;infile3&gt;] [-t &lt;type&gt;] [-p &lt;pad&gt;]
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>    picotool save [-p] [-v] [--family &lt;family_id&gt;] &lt;filename&gt; [-t &lt;type&gt;] [device-selection]
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>    picotool save -a [-v] [--family &lt;family_id&gt;] &lt;filename&gt; [-t &lt;type&gt;] [device-selection]
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>    picotool save -r &lt;from&gt; &lt;to&gt; [-v] [--family &lt;family_id&gt;] &lt;filename&gt; [-t &lt;type&gt;]
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>                  [device-selection]
+</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>    picotool erase [-a] [device-selection]
+</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>    picotool erase -p &lt;partition&gt; [device-selection]
+</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>    picotool erase -r &lt;from&gt; &lt;to&gt; [device-selection]
+</span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>    picotool verify &lt;filename&gt; [-t &lt;type&gt;] [device-selection] [-r &lt;from&gt; &lt;to&gt;] [-o &lt;offset&gt;]
+</span><span id="__span-17-29"><a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>                  [device-selection]
+</span><span id="__span-17-30"><a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>    picotool reboot [-a] [-u] [-g &lt;partition&gt;] [-c &lt;cpu&gt;] [device-selection]
+</span><span id="__span-17-31"><a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a>    picotool otp list|get|set|load|dump|permissions|white-label
+</span><span id="__span-17-32"><a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a>    picotool partition info|create
+</span><span id="__span-17-33"><a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>    picotool uf2 info|convert
+</span><span id="__span-17-34"><a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>    picotool version [-s] [&lt;version&gt;]
+</span><span id="__span-17-35"><a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a>    picotool coprodis [--quiet] [--verbose] &lt;infile&gt; &lt;outfile&gt;
+</span><span id="__span-17-36"><a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a>    picotool help [&lt;cmd&gt;]
+</span><span id="__span-17-37"><a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>
+</span><span id="__span-17-38"><a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>
+</span><span id="__span-17-39"><a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>COMMANDS:
+</span><span id="__span-17-40"><a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>    info          Display information from the target device(s) or file.
+</span><span id="__span-17-41"><a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a>                  Without any arguments, this will display basic information for all connected
+</span><span id="__span-17-42"><a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a>                  RP-series devices in BOOTSEL mode
+</span><span id="__span-17-43"><a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a>    config        Display or change program configuration settings from the target device(s) or
+</span><span id="__span-17-44"><a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>                  file.
+</span><span id="__span-17-45"><a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a>    load          Load the program / memory range stored in a file onto the device.
+</span><span id="__span-17-46"><a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a>    encrypt       Encrypt the program.
+</span><span id="__span-17-47"><a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a>    seal          Add final metadata to a binary, optionally including a hash and/or signature.
+</span><span id="__span-17-48"><a id="__codelineno-17-48" name="__codelineno-17-48" href="#__codelineno-17-48"></a>    link          Link multiple binaries into one block loop.
+</span><span id="__span-17-49"><a id="__codelineno-17-49" name="__codelineno-17-49" href="#__codelineno-17-49"></a>    save          Save the program / memory stored in flash on the device to a file.
+</span><span id="__span-17-50"><a id="__codelineno-17-50" name="__codelineno-17-50" href="#__codelineno-17-50"></a>    erase         Erase the program / memory stored in flash on the device.
+</span><span id="__span-17-51"><a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a>    verify        Check that the device contents match those in the file.
+</span><span id="__span-17-52"><a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a>    reboot        Reboot the device
+</span><span id="__span-17-53"><a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a>    otp           Commands related to the RP2350 OTP (One-Time-Programmable) Memory
+</span><span id="__span-17-54"><a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a>    partition     Commands related to RP2350 Partition Tables
+</span><span id="__span-17-55"><a id="__codelineno-17-55" name="__codelineno-17-55" href="#__codelineno-17-55"></a>    uf2           Commands related to UF2 creation and status
+</span><span id="__span-17-56"><a id="__codelineno-17-56" name="__codelineno-17-56" href="#__codelineno-17-56"></a>    version       Display picotool version
+</span><span id="__span-17-57"><a id="__codelineno-17-57" name="__codelineno-17-57" href="#__codelineno-17-57"></a>    coprodis      Post-process coprocessor instructions in disassembly files.
+</span><span id="__span-17-58"><a id="__codelineno-17-58" name="__codelineno-17-58" href="#__codelineno-17-58"></a>    help          Show general help or help for a specific command
+</span><span id="__span-17-59"><a id="__codelineno-17-59" name="__codelineno-17-59" href="#__codelineno-17-59"></a>
+</span><span id="__span-17-60"><a id="__codelineno-17-60" name="__codelineno-17-60" href="#__codelineno-17-60"></a>
+</span><span id="__span-17-61"><a id="__codelineno-17-61" name="__codelineno-17-61" href="#__codelineno-17-61"></a>Use &quot;picotool help &lt;cmd&gt;&quot; for more info
+</span></code></pre></div>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>大多数命令都需要连接一台处于 BOOTSEL 模式的 Raspberry Pi 微控制器设备。</p>
+<p><strong>重要</strong></p>
+<p>如果你收到错误信息 <code>No accessible RP2040/RP2350 devices in BOOTSEL mode were found.</code>，并伴有类似 <code>Device at bus 1, address 7 appears to be a RP2040 device in BOOTSEL mode, but picotool was unable to connect</code> 的提示——这表明确实连接了一台 Pico 系列设备——那么你可以用 <code>sudo</code> 运行 picotool，例如：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>picotool<span class="w"> </span>info<span class="w"> </span>-a
+</span></code></pre></div>
+<p>原文此处还包含一条针对 Windows 上 RP2040 需要安装驱动（Zadig/WinUSB）的说明，按需求已省略。</p>
+</blockquote>
+<p>从 picotool 1.1 版本开始，你还可以与不在 BOOTSEL 模式、但使用了 Pico SDK 的 USB stdio 支持的 Raspberry Pi 微控制器交互，方法是使用 picotool 的 <code>-f</code> 参数。</p>
+<h4 id="b21-显示信息">B.2.1 显示信息</h4>
+<p>SDK 现在支持 Binary Information（二进制信息），可以方便地存储供 picotool 查找的紧凑信息（见下文 <a href="#b23-二进制信息">B.2.3 二进制信息</a>）。<code>info</code> 命令就是用来读取这些信息的。</p>
+<p>这些信息可以从一台或多台处于 BOOTSEL 模式的已连接 Raspberry Pi 微控制器上读取，也可以从文件中读取。文件可以是 ELF、UF2 或 BIN 文件。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>$ picotool help info
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>INFO:
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    Display information from the target device(s) or file.
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    Without any arguments, this will display basic information for all connected RP-series
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    devices in BOOTSEL mode
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>SYNOPSIS:
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>    picotool info [-b] [-m] [-p] [-d] [--debug] [-l] [-a] [device-selection]
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    picotool info [-b] [-m] [-p] [-d] [--debug] [-l] [-a] &lt;filename&gt; [-t &lt;type&gt;]
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>OPTIONS:
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>    Information to display
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>        -b, --basic
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>            Include basic information. This is the default
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>        -m, --metadata
+</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>            Include all metadata blocks
+</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>        -p, --pins
+</span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>            Include pin information
+</span><span id="__span-19-21"><a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>        -d, --device
+</span><span id="__span-19-22"><a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a>            Include device information
+</span><span id="__span-19-23"><a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a>        --debug
+</span><span id="__span-19-24"><a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a>            Include device debug information
+</span><span id="__span-19-25"><a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a>        -l, --build
+</span><span id="__span-19-26"><a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a>            Include build attributes
+</span><span id="__span-19-27"><a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a>        -a, --all
+</span><span id="__span-19-28"><a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a>            Include all information
+</span><span id="__span-19-29"><a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a>
+</span><span id="__span-19-30"><a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a>
+</span><span id="__span-19-31"><a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a>TARGET SELECTION:
+</span><span id="__span-19-32"><a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a>    To target one or more connected RP-series device(s) in BOOTSEL mode (the default)
+</span><span id="__span-19-33"><a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a>        --bus &lt;bus&gt;
+</span><span id="__span-19-34"><a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a>            Filter devices by USB bus number
+</span><span id="__span-19-35"><a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a>        --address &lt;addr&gt;
+</span><span id="__span-19-36"><a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a>            Filter devices by USB device address
+</span><span id="__span-19-37"><a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a>        --vid &lt;vid&gt;
+</span><span id="__span-19-38"><a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a>            Filter by vendor id
+</span><span id="__span-19-39"><a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a>        --pid &lt;pid&gt;
+</span><span id="__span-19-40"><a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a>            Filter by product id
+</span><span id="__span-19-41"><a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a>        --ser &lt;ser&gt;
+</span><span id="__span-19-42"><a id="__codelineno-19-42" name="__codelineno-19-42" href="#__codelineno-19-42"></a>            Filter by serial number
+</span><span id="__span-19-43"><a id="__codelineno-19-43" name="__codelineno-19-43" href="#__codelineno-19-43"></a>        -f, --force
+</span><span id="__span-19-44"><a id="__codelineno-19-44" name="__codelineno-19-44" href="#__codelineno-19-44"></a>            Force a device not in BOOTSEL mode but running compatible code to reset so the
+</span><span id="__span-19-45"><a id="__codelineno-19-45" name="__codelineno-19-45" href="#__codelineno-19-45"></a>            command can be executed. After executing the command (unless the command itself is a
+</span><span id="__span-19-46"><a id="__codelineno-19-46" name="__codelineno-19-46" href="#__codelineno-19-46"></a>            &#39;reboot&#39;) the device will be rebooted back to application mode
+</span><span id="__span-19-47"><a id="__codelineno-19-47" name="__codelineno-19-47" href="#__codelineno-19-47"></a>        -F, --force-no-reboot
+</span><span id="__span-19-48"><a id="__codelineno-19-48" name="__codelineno-19-48" href="#__codelineno-19-48"></a>            Force a device not in BOOTSEL mode but running compatible code to reset so the
+</span><span id="__span-19-49"><a id="__codelineno-19-49" name="__codelineno-19-49" href="#__codelineno-19-49"></a>            command can be executed. After executing the command (unless the command itself is a
+</span><span id="__span-19-50"><a id="__codelineno-19-50" name="__codelineno-19-50" href="#__codelineno-19-50"></a>            &#39;reboot&#39;) the device will be left connected and accessible to picotool, but without
+</span><span id="__span-19-51"><a id="__codelineno-19-51" name="__codelineno-19-51" href="#__codelineno-19-51"></a>            the USB drive mounted
+</span><span id="__span-19-52"><a id="__codelineno-19-52" name="__codelineno-19-52" href="#__codelineno-19-52"></a>    To target a file
+</span><span id="__span-19-53"><a id="__codelineno-19-53" name="__codelineno-19-53" href="#__codelineno-19-53"></a>        &lt;filename&gt;
+</span><span id="__span-19-54"><a id="__codelineno-19-54" name="__codelineno-19-54" href="#__codelineno-19-54"></a>            The file name
+</span><span id="__span-19-55"><a id="__codelineno-19-55" name="__codelineno-19-55" href="#__codelineno-19-55"></a>        -t &lt;type&gt;
+</span><span id="__span-19-56"><a id="__codelineno-19-56" name="__codelineno-19-56" href="#__codelineno-19-56"></a>            Specify file type (uf2 | elf | bin) explicitly, ignoring file extension
+</span></code></pre></div>
+<p>例如，先按住 BOOTSEL 按钮再插入 USB，把你的 Pico 系列设备以大容量存储模式连接到计算机。然后打开终端窗口，输入：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>$ sudo picotool info
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Program Information
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a> name:          hello_world
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a> features:      stdout to UART
+</span></code></pre></div>
+<p>或者：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>$ sudo picotool info -a
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Program Information
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a> name:                hello_world
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a> features:            stdout to UART
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a> binary start:        0x10000000
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a> binary end:          0x1000606c
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>Fixed Pin Information
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a> 20:   UART1 TX
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a> 21:   UART1 RX
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>Build Information
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a> build date:              Dec 31 2020
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a> build attributes:        Debug build
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>Device Information
+</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a> flash size:       2048K
+</span><span id="__span-21-21"><a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a> ROM version:         2
+</span></code></pre></div>
+<p>想了解更多信息，或者你也可以只查看所用引脚的信息：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$ sudo picotool info -bp
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>Program Information
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a> name:           hello_world
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a> features:       stdout to UART
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>Fixed Pin Information
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a> 20:    UART1 TX
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a> 21:    UART1 RX
+</span></code></pre></div>
+<p>该工具也可以用于仍在你本地文件系统中的二进制文件：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>$ picotool info -a lcd_1602_i2c.uf2
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>File lcd_1602_i2c.uf2:
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>Program Information
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a> name:                 lcd_1602_i2c
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a> web site:             https://github.com/raspberrypi/pico-examples/tree/HEAD/i2c/lcd_1602_i2c
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a> binary start:         0x10000000
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a> binary end:           0x10003c1c
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>Fixed Pin Information
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a> 4:    I2C0 SDA
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a> 5:    I2C0 SCL
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>Build Information
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a> build date:        Dec 31 2020
+</span></code></pre></div>
+<h4 id="b22-保存程序">B.2.2 保存程序</h4>
+<p><code>save</code> 允许你把设备上的一段内存、某个程序或整个 flash 保存为 BIN 文件或 UF2 文件。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>$ picotool help save
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>SAVE:
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    Save the program / memory stored in flash on the device to a file.
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>SYNOPSIS:
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    picotool save [-p] [-v] [--family &lt;family_id&gt;] &lt;filename&gt; [-t &lt;type&gt;] [device-selection]
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>    picotool save -a [-v] [--family &lt;family_id&gt;] &lt;filename&gt; [-t &lt;type&gt;] [device-selection]
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>    picotool save -r &lt;from&gt; &lt;to&gt; [-v] [--family &lt;family_id&gt;] &lt;filename&gt; [-t &lt;type&gt;]
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>                     [device-selection]
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>
+</span><span id="__span-24-13"><a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>OPTIONS:
+</span><span id="__span-24-14"><a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>    Selection of data to save
+</span><span id="__span-24-15"><a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>        -p, --program
+</span><span id="__span-24-16"><a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>            Save the installed program only. This is the default
+</span><span id="__span-24-17"><a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>        -a, --all
+</span><span id="__span-24-18"><a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>            Save all of flash memory
+</span><span id="__span-24-19"><a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>        -r, --range
+</span><span id="__span-24-20"><a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>            Save a range of memory. Note that UF2s always store complete 256 byte-aligned blocks
+</span><span id="__span-24-21"><a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>            of 256 bytes, and the range is expanded accordingly
+</span><span id="__span-24-22"><a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a>        &lt;from&gt;
+</span><span id="__span-24-23"><a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a>            The lower address bound in hex
+</span><span id="__span-24-24"><a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a>        &lt;to&gt;
+</span><span id="__span-24-25"><a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a>            The upper address bound in hex
+</span><span id="__span-24-26"><a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a>    Other
+</span><span id="__span-24-27"><a id="__codelineno-24-27" name="__codelineno-24-27" href="#__codelineno-24-27"></a>        -v, --verify
+</span><span id="__span-24-28"><a id="__codelineno-24-28" name="__codelineno-24-28" href="#__codelineno-24-28"></a>            Verify the data was saved correctly
+</span><span id="__span-24-29"><a id="__codelineno-24-29" name="__codelineno-24-29" href="#__codelineno-24-29"></a>        --family
+</span><span id="__span-24-30"><a id="__codelineno-24-30" name="__codelineno-24-30" href="#__codelineno-24-30"></a>            Specify the family ID to save the file as
+</span><span id="__span-24-31"><a id="__codelineno-24-31" name="__codelineno-24-31" href="#__codelineno-24-31"></a>        &lt;family_id&gt;
+</span><span id="__span-24-32"><a id="__codelineno-24-32" name="__codelineno-24-32" href="#__codelineno-24-32"></a>            family ID to save file as
+</span><span id="__span-24-33"><a id="__codelineno-24-33" name="__codelineno-24-33" href="#__codelineno-24-33"></a>    File to save to
+</span><span id="__span-24-34"><a id="__codelineno-24-34" name="__codelineno-24-34" href="#__codelineno-24-34"></a>        &lt;filename&gt;
+</span><span id="__span-24-35"><a id="__codelineno-24-35" name="__codelineno-24-35" href="#__codelineno-24-35"></a>            The file name
+</span><span id="__span-24-36"><a id="__codelineno-24-36" name="__codelineno-24-36" href="#__codelineno-24-36"></a>        -t &lt;type&gt;
+</span><span id="__span-24-37"><a id="__codelineno-24-37" name="__codelineno-24-37" href="#__codelineno-24-37"></a>            Specify file type (uf2 | elf | bin) explicitly, ignoring file extension
+</span><span id="__span-24-38"><a id="__codelineno-24-38" name="__codelineno-24-38" href="#__codelineno-24-38"></a>    Source device selection
+</span><span id="__span-24-39"><a id="__codelineno-24-39" name="__codelineno-24-39" href="#__codelineno-24-39"></a>        --bus &lt;bus&gt;
+</span><span id="__span-24-40"><a id="__codelineno-24-40" name="__codelineno-24-40" href="#__codelineno-24-40"></a>            Filter devices by USB bus number
+</span><span id="__span-24-41"><a id="__codelineno-24-41" name="__codelineno-24-41" href="#__codelineno-24-41"></a>        --address &lt;addr&gt;
+</span><span id="__span-24-42"><a id="__codelineno-24-42" name="__codelineno-24-42" href="#__codelineno-24-42"></a>            Filter devices by USB device address
+</span><span id="__span-24-43"><a id="__codelineno-24-43" name="__codelineno-24-43" href="#__codelineno-24-43"></a>        --vid &lt;vid&gt;
+</span><span id="__span-24-44"><a id="__codelineno-24-44" name="__codelineno-24-44" href="#__codelineno-24-44"></a>            Filter by vendor id
+</span><span id="__span-24-45"><a id="__codelineno-24-45" name="__codelineno-24-45" href="#__codelineno-24-45"></a>        --pid &lt;pid&gt;
+</span><span id="__span-24-46"><a id="__codelineno-24-46" name="__codelineno-24-46" href="#__codelineno-24-46"></a>            Filter by product id
+</span><span id="__span-24-47"><a id="__codelineno-24-47" name="__codelineno-24-47" href="#__codelineno-24-47"></a>        --ser &lt;ser&gt;
+</span><span id="__span-24-48"><a id="__codelineno-24-48" name="__codelineno-24-48" href="#__codelineno-24-48"></a>            Filter by serial number
+</span><span id="__span-24-49"><a id="__codelineno-24-49" name="__codelineno-24-49" href="#__codelineno-24-49"></a>        -f, --force
+</span><span id="__span-24-50"><a id="__codelineno-24-50" name="__codelineno-24-50" href="#__codelineno-24-50"></a>            Force a device not in BOOTSEL mode but running compatible code to reset so the
+</span><span id="__span-24-51"><a id="__codelineno-24-51" name="__codelineno-24-51" href="#__codelineno-24-51"></a>            command can be executed. After executing the command (unless the command itself is a
+</span><span id="__span-24-52"><a id="__codelineno-24-52" name="__codelineno-24-52" href="#__codelineno-24-52"></a>            &#39;reboot&#39;) the device will be rebooted back to application mode
+</span><span id="__span-24-53"><a id="__codelineno-24-53" name="__codelineno-24-53" href="#__codelineno-24-53"></a>        -F, --force-no-reboot
+</span><span id="__span-24-54"><a id="__codelineno-24-54" name="__codelineno-24-54" href="#__codelineno-24-54"></a>            Force a device not in BOOTSEL mode but running compatible code to reset so the
+</span><span id="__span-24-55"><a id="__codelineno-24-55" name="__codelineno-24-55" href="#__codelineno-24-55"></a>            command can be executed. After executing the command (unless the command itself is a
+</span><span id="__span-24-56"><a id="__codelineno-24-56" name="__codelineno-24-56" href="#__codelineno-24-56"></a>            &#39;reboot&#39;) the device will be left connected and accessible to picotool, but without
+</span><span id="__span-24-57"><a id="__codelineno-24-57" name="__codelineno-24-57" href="#__codelineno-24-57"></a>            the USB drive mounted
+</span></code></pre></div>
+<p>例如：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>$ sudo picotool info
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>Program Information
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>name:         lcd_1602_i2c
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>web site:     https://github.com/raspberrypi/pico-examples/tree/HEAD/i2c/lcd_1602_i2c
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>$ picotool save spoon.uf2
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>Saving file: [==============================]      100%
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>Wrote 51200 bytes to spoon.uf2
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>$ picotool info spoon.uf2
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>File spoon.uf2:
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>Program Information
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>name:         lcd_1602_i2c
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>web site:     https://github.com/raspberrypi/pico-examples/tree/HEAD/i2c/lcd_1602_i2c
+</span></code></pre></div>
+<h4 id="b23-二进制信息">B.2.3 二进制信息</h4>
+<p>二进制信息（Binary Information）是在构建时嵌入到二进制文件中的、机器可定位且机器可读的信息。</p>
+<h4 id="b24-基本信息">B.2.4 基本信息</h4>
+<p>当你拿到一块 Pico 系列设备却不知道里面烧了什么程序时，这些信息非常有用！</p>
+<p>基本信息包括：</p>
+<ul>
+<li>程序名称</li>
+<li>程序描述</li>
+<li>程序版本字符串</li>
+<li>程序构建日期</li>
+<li>程序 URL</li>
+<li>程序结束地址</li>
+<li>程序功能特性（program features）：这是由二进制文件中的各个字符串构成的列表，可以显示出来（例如 SDK 中会有一个用于 UART stdio、一个用于 USB stdio）</li>
+<li>构建属性（build attributes）：这是一个类似的字符串列表，用于描述与二进制文件本身相关的内容（例如 Debug Build）</li>
+</ul>
+<h4 id="b25-引脚">B.2.5 引脚</h4>
+<p>当你手头有个可执行文件 <code>hello_serial.elf</code>，却忘了它是为哪块基于 Raspberry Pi 微控制器的开发板构建的时候，这个功能就非常方便了——因为不同的开发板引出的引脚可能不同。</p>
+<p>静态（固定）引脚分配可以以非常紧凑的形式记录在二进制文件中：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>$ picotool info --pins sprite_demo.elf
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>File sprite_demo.elf:
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>Fixed Pin Information
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>0-4:         Red 0-4
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>6-10:        Green 0-4
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>11-15:       Blue 0-4
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>16:          HSync
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>17:          VSync
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>18:          Display Enable
+</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>19:          Pixel Clock
+</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>20:          UART1 TX
+</span><span id="__span-26-14"><a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a>21:          UART1 RX
+</span></code></pre></div>
+<h4 id="b26-完整信息">B.2.6 完整信息</h4>
+<p>使用 <code>-a</code> 选项可以显示完整信息：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>$ picotool info -a i2c_bus_scan.elf
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>File i2c_bus_scan.elf:
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>Program Information
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a> name:                 i2c_bus_scan
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a> web site:             https://github.com/raspberrypi/pico-examples/tree/HEAD/i2c/bus_scan
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a> features:             UART stdin / stdout
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a> binary start:         0x10000000
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a> binary end:           0x10004c74
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>Fixed Pin Information
+</span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a> 0:     UART0 TX
+</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a> 1:     UART0 RX
+</span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a> 4:     I2C0 SDA
+</span><span id="__span-27-17"><a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a> 5:     I2C0 SCL
+</span><span id="__span-27-18"><a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>
+</span><span id="__span-27-19"><a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a>
+</span><span id="__span-27-20"><a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a>Build Information
+</span><span id="__span-27-21"><a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a> sdk version:              2.0.0-develop
+</span><span id="__span-27-22"><a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a> pico_board:               pico
+</span><span id="__span-27-23"><a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a> build date:               Aug    1 2024
+</span><span id="__span-27-24"><a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a> build attributes:         Debug
+</span></code></pre></div>
+<hr />
+<h2 id="附录-c-命令行工具链配置">附录 C. 命令行工具链配置</h2>
+<h3 id="c1-通过脚本配置环境">C.1 通过脚本配置环境</h3>
+<p>如果你在运行 Raspberry Pi OS 的 Raspberry Pi 上为 Pico 系列设备开发，那么可以使用 <code>pico_setup.sh</code> 脚本来搭建命令行环境。</p>
+<p>该脚本会自动完成以下配置工作：</p>
+<ul>
+<li>在你运行 <code>pico_setup.sh</code> 脚本的文件夹中创建一个名为 <code>pico</code> 的目录</li>
+<li>安装所需的依赖</li>
+<li>下载 <code>pico-sdk</code>、<code>pico-examples</code>、<code>pico-extras</code> 和 <code>pico-playground</code> 仓库</li>
+<li>在你的 <code>~/.bashrc</code> 中定义 <code>PICO_SDK_PATH</code>、<code>PICO_EXAMPLES_PATH</code>、<code>PICO_EXTRAS_PATH</code> 和 <code>PICO_PLAYGROUND_PATH</code></li>
+<li>下载、构建并安装 picotool（参见<a href="#附录-b-picotool">附录 B. Picotool</a>）</li>
+<li>下载并构建 debugprobe（参见<a href="#附录-a-debugprobe调试探针">附录 A. Debugprobe</a>）</li>
+<li>构建 <code>blink</code> 和 <code>hello_world</code> 示例项目</li>
+<li>下载并编译 OpenOCD（用于调试支持）</li>
+<li>配置你的开发用 Raspberry Pi 的 UART，使其可与 Pico 系列设备配合使用</li>
+</ul>
+<p><code>pico_setup.sh</code> 的 <a href="https://github.com/raspberrypi/pico-setup/blob/master/README.md">README.md</a> 中还包含如何在命令行下为 Pico 系列设备构建、加载和调试程序的说明。</p>
+<blockquote>
+<p><strong>提示</strong></p>
+<p>该配置脚本需要约 4 GB 的 SD 卡磁盘空间，因此运行前请确认有足够的可用空间。你可以用 <code>df -h</code> 命令查看剩余磁盘空间。</p>
+</blockquote>
+<p>首先运行以下命令安装 <code>wget</code>：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>wget
+</span></code></pre></div>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/raspberrypi/pico-setup/master/pico_setup.sh
+</span></code></pre></div>
+<p>然后用 <code>chmod</code> 把脚本标记为可执行：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>$<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>pico_setup.sh
+</span></code></pre></div>
+<p>用以下命令运行该脚本：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>$<span class="w"> </span>./pico_setup.sh
+</span></code></pre></div>
+<p>最后，重启你的 Raspberry Pi 以加载 UART 配置的改动：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>reboot
+</span></code></pre></div>
+<h4 id="c11-手动配置环境">C.1.1 手动配置环境</h4>
+<p>关于手动配置环境的详细信息，请参阅 <code>pico_setup.sh</code> 的 README.md。</p>
+<h4 id="c12-更新-pico-sdk">C.1.2 更新 Pico SDK</h4>
+<p>当新版本的 Pico SDK 发布后，你必须更新本地的 SDK 副本，并且建议删除所有本地构建目录。更新时，进入 <code>pico-sdk</code> 目录并运行以下命令（对于 <code>pico-examples</code> 也应做同样的操作）：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>pico-sdk
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>$<span class="w"> </span>git<span class="w"> </span>pull
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>$<span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </span>update
+</span></code></pre></div>
+<p>你还需要更新本地的 picotool 副本，并重新构建和安装它——进入 <code>picotool</code> 目录并运行以下命令：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>picotool
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>$<span class="w"> </span>git<span class="w"> </span>pull
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>$<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>build
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>$<span class="w"> </span>sudo<span class="w"> </span>cmake<span class="w"> </span>--install<span class="w"> </span>build
+</span></code></pre></div>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>如果想及时获知新版本发布，可以在 pico-sdk 的 GitHub 仓库上设置自定义关注（watch）。仓库地址：<a href="https://github.com/raspberrypi/pico-sdk">https://github.com/raspberrypi/pico-sdk</a></p>
+</blockquote>
+<h3 id="c2-手动创建你自己的项目">C.2 手动创建你自己的项目</h3>
+<p>先创建一个目录来存放你的测试项目，让它与 <code>pico-sdk</code> 目录并列：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/pico
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>$<span class="w"> </span>ls<span class="w"> </span>-la
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>total<span class="w"> </span><span class="m">16</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>drwxr-xr-x<span class="w">        </span><span class="m">7</span><span class="w"> </span>aa<span class="w">   </span>staff<span class="w">   </span><span class="m">224</span><span class="w">   </span><span class="m">6</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">10</span>:41<span class="w"> </span>./
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>drwx------@<span class="w"> </span><span class="m">27</span><span class="w"> </span>aa<span class="w">        </span>staff<span class="w">   </span><span class="m">864</span><span class="w">   </span><span class="m">6</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">10</span>:41<span class="w"> </span>../
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>drwxr-xr-x<span class="w">      </span><span class="m">10</span><span class="w"> </span>aa<span class="w">        </span>staff<span class="w">   </span><span class="m">320</span><span class="w">   </span><span class="m">6</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">09</span>:29<span class="w"> </span>pico-examples/
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>drwxr-xr-x<span class="w">      </span><span class="m">13</span><span class="w"> </span>aa<span class="w">        </span>staff<span class="w">   </span><span class="m">416</span><span class="w">   </span><span class="m">6</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">09</span>:22<span class="w"> </span>pico-sdk/
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>$<span class="w"> </span>mkdir<span class="w"> </span><span class="nb">test</span>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span><span class="nb">test</span>
+</span></code></pre></div>
+<p>然后在该目录中创建一个 <code>test.c</code> 文件：</p>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;pico/stdlib.h&quot;</span>
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hardware/gpio.h&quot;</span>
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;pico/binary_info.h&quot;</span>
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>
+</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>
+</span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="k">const</span><span class="w"> </span><span class="n">uint</span><span class="w"> </span><span class="n">LED_PIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span>
+</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>
+</span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>
+</span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>
+</span><span id="__span-36-12"><a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>
+</span><span id="__span-36-13"><a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a><span class="w">    </span><span class="n">bi_decl</span><span class="p">(</span><span class="n">bi_program_description</span><span class="p">(</span><span class="s">&quot;This is a test binary.&quot;</span><span class="p">));</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span>
+</span><span id="__span-36-14"><a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a><span class="w">    </span><span class="n">bi_decl</span><span class="p">(</span><span class="n">bi_1pin_with_name</span><span class="p">(</span><span class="n">LED_PIN</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;On-board LED&quot;</span><span class="p">));</span>
+</span><span id="__span-36-15"><a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>
+</span><span id="__span-36-16"><a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a>
+</span><span id="__span-36-17"><a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a><span class="w">    </span><span class="n">stdio_init_all</span><span class="p">();</span>
+</span><span id="__span-36-18"><a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>
+</span><span id="__span-36-19"><a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a>
+</span><span id="__span-36-20"><a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a><span class="w">    </span><span class="n">gpio_init</span><span class="p">(</span><span class="n">LED_PIN</span><span class="p">);</span>
+</span><span id="__span-36-21"><a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a><span class="w">    </span><span class="n">gpio_set_dir</span><span class="p">(</span><span class="n">LED_PIN</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_OUT</span><span class="p">);</span>
+</span><span id="__span-36-22"><a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-36-23"><a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a><span class="w">           </span><span class="n">gpio_put</span><span class="p">(</span><span class="n">LED_PIN</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span><span id="__span-36-24"><a id="__codelineno-36-24" name="__codelineno-36-24" href="#__codelineno-36-24"></a><span class="w">           </span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">250</span><span class="p">);</span>
+</span><span id="__span-36-25"><a id="__codelineno-36-25" name="__codelineno-36-25" href="#__codelineno-36-25"></a><span class="w">           </span><span class="n">gpio_put</span><span class="p">(</span><span class="n">LED_PIN</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-36-26"><a id="__codelineno-36-26" name="__codelineno-36-26" href="#__codelineno-36-26"></a><span class="w">           </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-36-27"><a id="__codelineno-36-27" name="__codelineno-36-27" href="#__codelineno-36-27"></a><span class="w">           </span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span><span id="__span-36-28"><a id="__codelineno-36-28" name="__codelineno-36-28" href="#__codelineno-36-28"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-36-29"><a id="__codelineno-36-29" name="__codelineno-36-29" href="#__codelineno-36-29"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>在 Pico 和 Pico 2 上，板载 LED 连接到 <code>GP25</code>；如果你是为 Pico W 构建，LED 连接到 <code>CYW43_WL_GPIO_LED_PIN</code>。更多信息请参阅 pico-examples GitHub 仓库中的 Pico W blink 示例。上面 <code>&lt;1&gt;</code>、<code>&lt;2&gt;</code> 标记的这些行会往二进制文件中添加字符串，可用 picotool 查看，参见<a href="#附录-b-picotool">附录 B. Picotool</a>。</p>
+<p>再创建一个 <code>CMakeLists.txt</code> 文件：</p>
+<div class="language-cmake highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.13</span><span class="p">)</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="nb">include</span><span class="p">(</span><span class="s">pico_sdk_import.cmake</span><span class="p">)</span>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="nb">project</span><span class="p">(</span><span class="s">test_project</span><span class="w"> </span><span class="s">C</span><span class="w"> </span><span class="s">CXX</span><span class="w"> </span><span class="s">ASM</span><span class="p">)</span>
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_C_STANDARD</span><span class="w"> </span><span class="s">11</span><span class="p">)</span>
+</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">17</span><span class="p">)</span>
+</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="nb">pico_sdk_init</span><span class="p">()</span>
+</span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>
+</span><span id="__span-37-12"><a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a>
+</span><span id="__span-37-13"><a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a><span class="nb">add_executable</span><span class="p">(</span><span class="s">test</span>
+</span><span id="__span-37-14"><a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a><span class="w">       </span><span class="s">test.c</span>
+</span><span id="__span-37-15"><a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a><span class="p">)</span>
+</span><span id="__span-37-16"><a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a>
+</span><span id="__span-37-17"><a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a>
+</span><span id="__span-37-18"><a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">test</span><span class="w"> </span><span class="s">pico_stdlib</span><span class="p">)</span>
+</span><span id="__span-37-19"><a id="__codelineno-37-19" name="__codelineno-37-19" href="#__codelineno-37-19"></a>
+</span><span id="__span-37-20"><a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a>
+</span><span id="__span-37-21"><a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a><span class="nb">pico_enable_stdio_usb</span><span class="p">(</span><span class="s">test</span><span class="w"> </span><span class="s">1</span><span class="p">)</span><span class="err">&lt;1&gt;</span>
+</span><span id="__span-37-22"><a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a><span class="nb">pico_enable_stdio_uart</span><span class="p">(</span><span class="s">test</span><span class="w"> </span><span class="s">1</span><span class="p">)</span><span class="err">&lt;2&gt;</span>
+</span><span id="__span-37-23"><a id="__codelineno-37-23" name="__codelineno-37-23" href="#__codelineno-37-23"></a>
+</span><span id="__span-37-24"><a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a>
+</span><span id="__span-37-25"><a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a><span class="nb">pico_add_extra_outputs</span><span class="p">(</span><span class="s">test</span><span class="p">)</span>
+</span></code></pre></div>
+<ul>
+<li><code>&lt;1&gt;</code> 启用通过 USB 的串口输出。这会创建一个 USB CDC 接口，以支持通过 USB 串口（CDC）进行 stdin/stdout 通信。</li>
+<li><code>&lt;2&gt;</code> 启用通过 UART 的串口输出。这会添加对开发板上默认 UART 引脚（Pico 系列设备为 GPIO 0 和 1）进行 stdin/stdout 通信的支持。</li>
+</ul>
+<p>然后把你 pico-sdk 安装目录中 <code>external</code> 文件夹下的 <code>pico_sdk_import.cmake</code> 文件复制到你的测试项目文件夹中：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>$<span class="w"> </span>cp<span class="w"> </span>../pico-sdk/external/pico_sdk_import.cmake<span class="w"> </span>.
+</span></code></pre></div>
+<p>现在你的目录看起来应该像这样：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>$<span class="w"> </span>ls<span class="w"> </span>-la
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>total<span class="w"> </span><span class="m">24</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>drwxr-xr-x<span class="w">      </span><span class="m">5</span><span class="w"> </span>aa<span class="w">   </span>staff<span class="w">    </span><span class="m">160</span><span class="w">    </span><span class="m">6</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">10</span>:46<span class="w"> </span>./
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>drwxr-xr-x<span class="w">      </span><span class="m">7</span><span class="w"> </span>aa<span class="w">   </span>staff<span class="w">    </span><span class="m">224</span><span class="w">    </span><span class="m">6</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">10</span>:41<span class="w"> </span>../
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a>-rw-r--r--@<span class="w"> </span><span class="m">1</span><span class="w"> </span>aa<span class="w">       </span>staff<span class="w">    </span><span class="m">394</span><span class="w">    </span><span class="m">6</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">10</span>:37<span class="w"> </span>CMakeLists.txt
+</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a>-rw-r--r--<span class="w">      </span><span class="m">1</span><span class="w"> </span>aa<span class="w">       </span>staff<span class="w">   </span><span class="m">2744</span><span class="w">    </span><span class="m">6</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">10</span>:40<span class="w"> </span>pico_sdk_import.cmake
+</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a>-rw-r--r--<span class="w">      </span><span class="m">1</span><span class="w"> </span>aa<span class="w">       </span>staff<span class="w">    </span><span class="m">383</span><span class="w">    </span><span class="m">6</span><span class="w"> </span>Apr<span class="w"> </span><span class="m">10</span>:37<span class="w"> </span>test.c
+</span></code></pre></div>
+<p>然后就可以像构建 <code>pico-examples</code> 一样构建它了：</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>$<span class="w"> </span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>$<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>build
+</span></code></pre></div>
+<blockquote>
+<p><strong>重要</strong></p>
+<p>默认情况下 SDK 为 Raspberry Pi Pico 构建二进制文件。要为其他开发板构建，请向 CMake 传入 <code>-DPICO_BOARD=&lt;board&gt;</code> 选项，把 <code>&lt;board&gt;</code> 占位符替换为你要面向的开发板名称。为 Pico 2 构建请传入 <code>-DPICO_BOARD=pico2</code>；为 Pico W 构建请传入 <code>-DPICO_BOARD=pico_w</code>。如果要指定 Pico W 应连接的 Wi-Fi 网络和密码，请传入 <code>-DWIFI_SSID="Your Network" -DWIFI_PASSWORD="Your Password"</code>。</p>
+</blockquote>
+<p>构建过程会生成多种不同的文件，其中比较重要的文件如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>文件扩展名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.bin</code></td>
+<td>程序代码和数据的原始二进制转储</td>
+</tr>
+<tr>
+<td><code>.elf</code></td>
+<td>完整的程序输出，可能包含调试信息</td>
+</tr>
+<tr>
+<td><code>.uf2</code></td>
+<td>UF2 格式的程序代码和数据，可以在设备作为 USB 驱动器挂载时拖放烧录到设备上</td>
+</tr>
+<tr>
+<td><code>.dis</code></td>
+<td>编译后二进制文件的反汇编</td>
+</tr>
+<tr>
+<td><code>.hex</code></td>
+<td>编译后二进制文件的十六进制转储</td>
+</tr>
+<tr>
+<td><code>.map</code></td>
+<td>与 <code>.elf</code> 文件配套的映射（map）文件，描述链接器如何把各个段安排在内存中</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>UF2（USB Flashing Format）是 Microsoft 开发的一种文件格式，用于通过 USB 给 Raspberry Pi 微控制器烧录固件。更多信息请参阅 <a href="https://github.com/Microsoft/uf2">Microsoft UF2 规范仓库</a>。</p>
+<p><strong>注意</strong></p>
+<p>如果你想构建一个在 SRAM 而不是 Flash 中运行的二进制文件，可以在 cmake 构建时设置 <code>-DPICO_NO_FLASH=1</code>，或者在 <code>CMakeLists.txt</code> 中为每个二进制目标单独添加 <code>pico_set_binary_type(TARGET_NAME no_flash)</code> 来控制。你可以通过 UF2 把 RAM 二进制文件下载到 Raspberry Pi 微控制器上。例如，如果你的开发板上没有 flash 芯片，就可以用 UF2 下载一个在片上 RAM 中运行的二进制文件，因为 UF2 只是指定了数据要去的地址。注意：你只能下载到 RAM 或 FLASH 之一，不能同时下载到两者。</p>
+</blockquote>
+<h4 id="c21-调试你的项目">C.2.1 调试你的项目</h4>
+<p>在命令行下调试你自己的项目，流程与<a href="#a62-使用-swd-调试">附录 A.6.2 使用 SWD 调试</a>相同。</p>
+<blockquote>
+<p><strong>需要更多细节？</strong></p>
+<p>这里的内容应该足以让你上手，但你可能会好奇为什么需要这些文件和这些“咒语”。Raspberry Pi Pico 系列 C/C++ SDK 一书深入讲解了你的项目究竟是如何构建的，以及我们这里的 <code>CMakeLists.txt</code> 文件中的各行与 SDK 结构之间的关系——如果将来你想了解更多，可以查阅该书。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/Hujiko02" target="_blank" rel="noopener" title="我的GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://space.bilibili.com/2058282898" target="_blank" rel="noopener" title="我的Bilibili" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M488.6 104.1c16.7 18.1 24.4 39.7 23.3 65.7v202.4c-.4 26.4-9.2 48.1-26.5 65.1-17.2 17-39.1 25.9-65.5 26.7H92.02c-26.45-.8-48.21-9.8-65.28-27.2C9.682 419.4.767 396.5 0 368.2V169.8c.767-26 9.682-47.6 26.74-65.7C43.81 87.75 65.57 78.77 92.02 78h29.38L96.05 52.19c-5.75-5.73-8.63-13-8.63-21.79 0-8.8 2.88-16.06 8.63-21.797C101.8 2.868 109.1 0 117.9 0q13.2 0 21.9 8.603L213.1 78h88l74.5-69.397C381.7 2.868 389.2 0 398 0q13.2 0 21.9 8.603c5.7 5.737 8.6 12.997 8.6 21.797 0 8.79-2.9 16.06-8.6 21.79L394.6 78h29.3c26.4.77 48 9.75 64.7 26.1m-38.8 69.7c-.4-9.6-3.7-17.4-10.7-23.5-5.2-6.1-14-9.4-22.7-9.8H96.05c-9.59.4-17.45 3.7-23.58 9.8-6.14 6.1-9.4 13.9-9.78 23.5v194.4c0 9.2 3.26 17 9.78 23.5s14.38 9.8 23.58 9.8H416.4c9.2 0 17-3.3 23.3-9.8s9.7-14.3 10.1-23.5zm-264.3 42.7c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2-6.2 6.3-14 9.5-23.6 9.5s-17.5-3.2-23.6-9.5-9.4-14-9.8-23.2v-33.3c.4-9.1 3.8-16.9 10.1-23.2s13.2-9.6 23.3-10c9.2.4 17 3.7 23.3 10m191.5 0c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2s-14 9.5-23.6 9.5-17.4-3.2-23.6-9.5c-7-6.3-9.4-14-9.7-23.2v-33.3c.3-9.1 3.7-16.9 10-23.2s14.1-9.6 23.3-10c9.2.4 17 3.7 23.3 10"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.indexes", "navigation.top", "navigation.tracking", "toc.follow", "content.code.copy", "content.code.annotate", "content.tooltips", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+        <script src="../../others/javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
