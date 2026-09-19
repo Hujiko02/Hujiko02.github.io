@@ -48,6 +48,7 @@ nav:
     - tutorial/markdown_test.md
     - tutorial/verilog.md
     - tutorial/matplotlib.md
+    - tutorial/pico.md
   - 日记:
     - diary/index.md
     - diary/2026.md

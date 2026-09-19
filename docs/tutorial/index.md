@@ -6,6 +6,7 @@
 - [LaTeX 入门教程](latex.md)
 - [Markdown 入门教程](markdown.md)
 - [Matplotlib 入门教程](matplotlib.md)
+- [Raspberry Pi Pico 系列入门指南](pico.md)
 
 ## 说明
 
