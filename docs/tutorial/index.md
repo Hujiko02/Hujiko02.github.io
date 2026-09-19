@@ -10,4 +10,4 @@
 
 ## 说明
 
-教程均为 Deepseek V4 Flash 模型生成。
+教程为 Deepseek V4 Flash 模型生成或翻译。
