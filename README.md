@@ -1,4 +1,6 @@
-# 胡济的个人网站
+# HuJi Notes
+
+## 关于本站
 
 这是使用 MkDocs 和 Material 主题构建的静态个人网站。
 
