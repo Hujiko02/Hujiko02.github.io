@@ -1,0 +1,40 @@
+# push 到 main 后，由 GitHub 在云端构建，并把产物发布到 gh-pages 分支。
+# 本地（桌面 / Termux）只需要 git push，不需要安装 zensical。
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:              # 也可以在 Actions 页面手动触发
+
+permissions:
+  contents: write                 # ghp-import 需要往 gh-pages 推送
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false       # 部署排队执行，不互相打断
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6   # v7 也已发布，想升级改这里
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: Install Zensical
+        run: pip install zensical==0.0.65 ghp-import
+
+      - name: Build
+        run: zensical build --clean --strict
+
+      - name: Publish to gh-pages
+        env:
+          # ghp-import 走 git fast-import 造提交，必须有提交者身份
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: ghp-import -n -p -f -m "Deploy $(date -u '+%F %T UTC')" site
