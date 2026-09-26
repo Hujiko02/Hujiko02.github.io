@@ -2,7 +2,7 @@
 
 ## 关于本站
 
-这是使用 MkDocs 和 Material 主题构建的静态网站。
+这是使用 Zensical 构建的静态网站。
 
 <img src="index.jpg" style="zoom:50%;" />  
 
