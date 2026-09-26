@@ -1,5 +1,4 @@
 site/
 .obsidian/
-.venv
 __pycache__/
 .cache/
