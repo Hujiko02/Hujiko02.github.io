@@ -1,4 +1,4 @@
-# Verilog 上手教程（Debian + Icarus Verilog + GTKWave）
+# Verilog 入门教程
 
 > **面向读者**：学过一点数字电路（知道与或非、触发器、时序图、状态图），但没写过 Verilog。
 > **环境**：Debian（bookworm 及以上），`iverilog 13.0` + `vvp` + `gtkwave 3.3`。
