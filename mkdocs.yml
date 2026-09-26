@@ -2,9 +2,11 @@ site_name: HuJi Notes
 site_url: https://hujiko02.github.io/
 site_author: 胡济
 site_description: 胡济的个人网站
+site_dir: site                   # 显式指定：Zensical 没有 gh-deploy / --site-dir
 
 theme:
   name: material
+  variant: modern                # Zensical 专属：modern（新外观）/ classic（Material 原样）
   language: zh
   custom_dir: overrides          # overrides/.icons/ 放自定义图标
   favicon: others/images/favicon.svg
@@ -36,7 +38,7 @@ theme:
     - content.code.copy          # 代码块复制按钮
     - content.code.annotate      # 代码块内标注
     - content.tooltips           # 术语悬浮提示
-    - search.suggest             # 搜索联想
+    #   Zensical 搜索是自己的引擎，没有 Lunr 的 suggest 实现，本项已移除
     - search.highlight           # 搜索高亮
 
 nav:
@@ -56,8 +58,8 @@ nav:
     - me/index.md
     - me/story.md
 
-not_in_nav: |                    # 有意不进导航，消掉构建提示
-  /ohush-privacy.md
+not_in_nav: |                    # 有意不进导航（Zensical 会静默忽略该键，保留只为语义清晰）
+  ohush-privacy.md
 
 extra:
   social:
@@ -92,8 +94,11 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:zensical.extensions.emoji.twemoji
+      emoji_generator: !!python/name:zensical.extensions.emoji.to_svg
+      options:
+        custom_icons:           # Zensical 要求显式声明，才能用 huji 这类 .icons 自定义图标
+          - overrides/.icons
   - pymdownx.arithmatex:
       generic: true
   #    不要加官方那行 pymdownx.betterem: smart_enable: all

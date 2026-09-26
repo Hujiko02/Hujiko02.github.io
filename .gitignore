@@ -1,2 +1,4 @@
 site/
 .obsidian/
+.venv
+__pycache__/
