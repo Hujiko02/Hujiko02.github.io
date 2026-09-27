@@ -1,7 +1,7 @@
 site_name: HuJi Notes
 site_url: https://hujiko02.github.io/
-site_author: 胡济
-site_description: 胡济的个人网站
+site_author: HuJi
+site_description: HuJi Notes —— 胡济的个人网站，记录教程、日记与笔记
 
 # 页头右上角的仓库入口；星标、收藏、release 版本号在 extra.css 里隐藏
 repo_url: https://github.com/Hujiko02/Hujiko02.github.io

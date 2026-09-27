@@ -225,7 +225,7 @@ hr { margin: 0.5rem 0 !important; }
 <h1>Hi, I'm Hu Ji.</h1>
 
 <p class="lead">
-Welcome to my Website!
+Welcome to HuJi Notes!
 </p>
 
 <p class="sub">I'm an undergraduate at Hainan University, majoring in Electronic Science and Technology.</p>
