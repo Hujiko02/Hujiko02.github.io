@@ -1,5 +1,5 @@
 ---
-title: 欢迎来到我的网站！
+title: 首页
 # 隐藏左侧导航、右侧目录、页脚和反馈组件，让首页变成一张「着陆页」
 hide:
   - navigation
@@ -10,22 +10,16 @@ hide:
 
 <style>
 /* ==========================================================================
-   首页专用样式
+   首页样式
    --------------------------------------------------------------------------
-   整块写在 Markdown 里，Zensical 原样输出 → 只在这一页生效，不影响其他页面。
-   颜色一律走主题 CSS 变量，明暗模式与配色自动跟随（当前 indigo + amber）。
+   写在 Markdown 里由 Zensical 原样输出 → 只在这一页生效，不动其他页面。
+   颜色全部走主题变量，明暗模式自动跟随（当前 indigo + amber）。
    ========================================================================== */
 
-/* 隐藏「编辑此页 / 查看源码」按钮和标题锚点链接 */
-.md-content__button {
-    display: none !important;
-}
-.md-typeset .headerlink {
-    display: none !important;
-    pointer-events: none;
-}
+/* 隐藏「编辑此页 / 查看源码」按钮和标题锚点 */
+.md-content__button { display: none !important; }
+.md-typeset .headerlink { display: none !important; pointer-events: none; }
 
-/* 外层容器：比正文窄一点，视觉更聚拢 */
 .home-container {
     max-width: 920px;
     margin: 0 auto;
@@ -36,257 +30,209 @@ hide:
 }
 
 /* --------------------------------------------------------------------------
-   英雄区：左侧文字 + 右侧头像，背景是点阵
+   英雄区：左文右头像，背景是方格线（1px，比点阵安静）
    -------------------------------------------------------------------------- */
 .hero-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2.3rem 2.7rem;
+    gap: 2rem;
+    padding: 2.4rem 2.6rem;
     margin: 0.5rem 0;
-    position: relative;
-    /* 点阵背景：1.2px 的圆点，间距 18px */
-    background-image: radial-gradient(var(--md-default-fg-color--lightest) 1.2px, transparent 1.2px);
-    background-size: 18px 18px;
-    border-radius: 16px;
+    background-image:
+        linear-gradient(to right, var(--md-default-fg-color--lightest) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--md-default-fg-color--lightest) 1px, transparent 1px);
+    background-size: 22px 22px;
+    border-radius: 4px;
 }
+.hero-content { flex: 1; min-width: 0; }
 
-.hero-content {
-    flex: 1;
-    text-align: left;
-    z-index: 2;
-}
-
-.hero-title {
-    font-size: 2.1rem !important;
+.hero-name {
+    font-size: 2.5rem;
     font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
     margin: 0;
     color: var(--md-default-fg-color);
-    line-height: 1.3;
+}
+
+/* 身份行：等宽字体，小字距 */
+.hero-role {
+    font-family: var(--md-code-font-family);
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    color: var(--md-default-fg-color--light);
+    margin-top: 0.75rem;
 }
 
 /* 加 .md-typeset 提权，压过主题的正文样式 */
 .md-typeset .hero-intro {
-    font-size: 1.65rem !important;
-    margin: 0.65rem 0 1.2rem 0 !important;
+    font-size: 1.02rem !important;
+    line-height: 1.85;
+    margin: 1.3rem 0 0 0 !important;
+    color: var(--md-default-fg-color);
+    max-width: 27rem;
+    text-wrap: balance;      /* 换行更均匀，避免最后一行只剩两三个字 */
+}
+.md-typeset .hero-intro em {
+    font-style: normal;
     color: var(--md-default-fg-color--light);
-    font-weight: 500;
 }
 
-/* 马克笔涂抹：只给下半部分上色 */
-.marker-highlight {
-    background: linear-gradient(to bottom, transparent 60%, rgba(99, 102, 241, 0.28) 0%);
-    padding: 0 6px;
-    border-radius: 4px;
-    color: var(--md-primary-fg-color);
-}
-
-/* --------------------------------------------------------------------------
-   打字机
-   -------------------------------------------------------------------------- */
-.typewriter-container {
-    height: 1.8rem;
-    margin: 1rem 0;
-    display: flex;
-    align-items: center;
-}
-#typewriter-text {
+/* 技术栈行：这就是本站的目录 */
+.stack {
     font-family: var(--md-code-font-family);
-    font-size: 1.28rem;
-    font-weight: 700;
+    font-size: 0.78rem;
     color: var(--md-default-fg-color--light);
+    margin-top: 1.1rem;
+    letter-spacing: 0.02em;
 }
-.cursor {
-    display: inline-block;
-    width: 3px;
-    height: 1.4rem;
-    background-color: var(--md-primary-fg-color);
-    margin-left: 5px;
-    animation: blink 0.8s infinite;
-}
-@keyframes blink { 50% { opacity: 0; } }
+.stack b { font-weight: 400; color: var(--md-primary-fg-color); }
 
 /* --------------------------------------------------------------------------
-   头像：渐变光环 + 彩色投影
+   头像：单色细描边，不用渐变光环
    -------------------------------------------------------------------------- */
-.avatar-glow {
-    width: 11.9rem;
-    height: 11.9rem;
+.avatar-ring {
+    width: 11rem;
+    height: 11rem;
     border-radius: 50%;
-    padding: 4px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: 0 10px 30px rgba(118, 75, 162, 0.4);
+    padding: 5px;
+    border: 1px solid color-mix(in srgb, var(--md-primary-fg-color) 45%, transparent);
     flex-shrink: 0;
-    margin-right: 0.3rem;
-    transform: translateY(4px);
 }
-.avatar-glow img {
+.avatar-ring img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    background: var(--md-default-bg-color);
-}
-
-/* 按钮组
-   -------------------------------------------------------------------------------
-   注意：这两个按钮必须是手写 HTML —— .hero-content 是原始 HTML 块，
-   嵌套在里面的 markdown="1" 不会被解析（md_in_html 只处理直接子元素），
-   写 Markdown 链接语法会原样显示成文字。图标同理，直接内联 SVG。
-   -------------------------------------------------------------------------- */
-.hero-btns {
-    display: flex;
-    gap: 15px;
-    margin-top: 1.5rem;
-}
-.md-typeset .custom-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0.38rem 0.95rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1.2;
-    text-decoration: none !important;
-    transition: all 0.2s;
-}
-.md-typeset .btn-primary {
-    background-color: var(--md-primary-fg-color);
-    color: var(--md-primary-bg-color) !important;
-}
-.md-typeset .btn-secondary {
-    background-color: var(--md-default-fg-color--lightest);
-    color: var(--md-default-fg-color) !important;
-}
-.md-typeset .custom-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-.custom-btn .twemoji {
-    width: 1.1rem;
-    height: 1.1rem;
+    display: block;
 }
 
 /* --------------------------------------------------------------------------
-   四格磁贴（2×2）
+   按钮：主按钮实心，次按钮描边（不再用灰底块）
+   -------------------------------------------------------------------------- */
+.hero-btns { display: flex; gap: 12px; margin-top: 1.7rem; }
+.custom-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.34rem 0.9rem;
+    border-radius: 4px;
+    font-size: 0.86rem;
+    font-weight: 500;
+    line-height: 1.3;
+    text-decoration: none !important;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+.btn-primary {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color) !important;
+}
+.btn-primary:hover { background-color: var(--md-primary-fg-color--dark); }
+.btn-secondary {
+    border: 1px solid var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color) !important;
+}
+.btn-secondary:hover { border-color: var(--md-primary-fg-color); }
+.custom-btn .twemoji { width: 1.05rem; height: 1.05rem; }
+
+/* --------------------------------------------------------------------------
+   四格：左侧竖线的说明块，无圆角无阴影
    -------------------------------------------------------------------------- */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin: 1.2rem 0 1.35rem;
+    gap: 1.6rem 2.4rem;
+    margin: 2.2rem 0 0.5rem;
 }
 .grid-card {
-    background: var(--md-default-bg-color);
-    border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 12px;
-    padding: 0.9rem 1rem;
-    position: relative;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 0.35rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    border-left: 2px solid var(--md-default-fg-color--lightest);
+    padding: 0.15rem 0 0.15rem 1rem;
+    transition: border-color 0.25s ease;
 }
-.grid-card:hover {
-    border-color: var(--md-primary-fg-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
-}
-.grid-card h3 {
-    margin: 0 0 0.1rem 0 !important;
-    font-size: 1rem !important;
+.grid-card:hover { border-color: var(--md-primary-fg-color); }
+.md-typeset .grid-card > h3 {
+    margin: 0 !important;
+    font-size: 1rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     color: var(--md-default-fg-color);
 }
-.grid-card p {
-    margin: 0 !important;
-    font-size: 0.82rem;
-    line-height: 1.5;
+.grid-card > p {
+    margin: 0.5rem 0 0 0 !important;
+    font-size: 0.84rem;
+    line-height: 1.65;
     color: var(--md-default-fg-color--light);
+}
+/* 卡片里的真实数字 */
+.grid-card .stat {
+    font-family: var(--md-code-font-family);
+    font-size: 0.76rem;
+    color: var(--md-primary-fg-color);
+    margin-top: 0.55rem;
 }
 
 /* --------------------------------------------------------------------------
-   标签行：# 号标签 + 带箭头的链接
+   标签行 / 次级链接
    -------------------------------------------------------------------------- */
 .tag-box {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 0.4rem;
     align-items: center;
+    margin-top: 0.6rem;
 }
 .tag-box span {
     font-size: 0.72rem;
     color: var(--md-default-fg-color--light);
+    opacity: 0.85;
     display: inline-flex;
     align-items: center;
-    font-weight: 400;
-    opacity: 0.8;
-}
-/* 用伪元素加 # 号，不用写进 Markdown */
-.tag-box span::before {
-    content: "#";
-    margin-right: 1px;
-    color: var(--md-default-fg-color--light);
-    font-family: var(--md-code-font-family);
-    opacity: 0.6;
 }
 .md-typeset .tag-link {
     display: inline-flex;
     align-items: center;
     gap: 2px;
-    font-size: 0.72rem;
+    font-size: 0.76rem;
+    font-weight: 700;
     color: var(--md-primary-fg-color) !important;
     text-decoration: none !important;
-    font-weight: 700;
     transition: opacity 0.2s;
 }
-.md-typeset .tag-link:hover { opacity: 0.8; }
+.md-typeset .tag-link:hover { opacity: 0.75; }
 .jump-icon {
     width: 13px;
     height: 13px;
     fill: currentColor;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.25s ease;
 }
-.tag-link:hover .jump-icon {
-    transform: translate(3px, -3px);
-}
+.tag-link:hover .jump-icon { transform: translate(3px, -3px); }
 
 /* --------------------------------------------------------------------------
-   推荐阅读标题：居中 + 两侧渐隐横线
+   小节标题：左对齐 + 右侧真实计数，不用渐隐装饰线
    -------------------------------------------------------------------------- */
-.md-typeset .rec-title {
-    margin: 2rem 0 1.5rem !important;
-    font-weight: 700;
-    color: var(--md-default-fg-color) !important;
+.sec-head {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    text-align: center;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 2.6rem 0 1.1rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
 }
-.rec-title .twemoji {
-    color: var(--md-primary-fg-color);
-    width: 1.2rem;
-    height: 1.2rem;
+.md-typeset .sec-head > h2 {
+    margin: 0 !important;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--md-default-fg-color);
 }
-.rec-title::before,
-.rec-title::after {
-    content: "";
-    display: block;
-    height: 1px;
-    flex: 1;
-    max-width: 200px;
-    background: linear-gradient(90deg, transparent, var(--md-default-fg-color--light));
-    opacity: 0.6;
-}
-.rec-title::after {
-    background: linear-gradient(90deg, var(--md-default-fg-color--light), transparent);
+.sec-head > span {
+    font-family: var(--md-code-font-family);
+    font-size: 0.7rem;
+    color: var(--md-default-fg-color--light);
+    white-space: nowrap;
 }
 
 /* 紧凑化主题自带的 grid cards */
@@ -295,44 +241,25 @@ hr { margin: 0.5rem 0 !important; }
 .md-typeset .grid.cards > ul > li { padding: 0.8rem !important; }
 
 /* --------------------------------------------------------------------------
-   移动端：头像移到上方，整体居中
+   移动端
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 768px) {
     .home-container { padding-left: 0; padding-right: 0; }
-
     .hero-wrapper {
-        flex-direction: column-reverse;   /* 头像在上，文字在下 */
-        padding: 1.25rem 0.85rem;
-        background-position: center -3px;
-        gap: 1.5rem;
+        flex-direction: column-reverse;   /* 头像在上 */
+        gap: 1.6rem;
+        padding: 1.5rem 1.1rem;
         text-align: center;
     }
-    .hero-content { text-align: center !important; width: 100%; }
-    .hero-avatar-area {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .avatar-glow {
-        width: 8rem;
-        height: 8rem;
-        margin: 0 auto !important;
-    }
-    .hero-title { font-size: 1.7rem !important; text-align: center; display: block; }
-    .md-typeset .hero-intro {
-        font-size: 1.35rem !important;
-        margin: 0.5rem 0 1rem 0 !important;
-        line-height: 1.3;
-        text-align: center;
-    }
-    #typewriter-text { font-size: 1.1rem; }
-    .typewriter-container { justify-content: center; }
-    .hero-btns { justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 1rem; }
-    .md-typeset .custom-btn { font-size: 0.75rem; }
-    .grid-container { grid-template-columns: 1fr; gap: 0.6rem; }
-    .grid-card { padding: 0.85rem 0.95rem; }
-    .tag-box { gap: 8px; }
+    .hero-content { width: 100%; }
+    .hero-name { font-size: 1.9rem; }
+    .md-typeset .hero-intro { font-size: 0.95rem !important; margin-left: auto !important; margin-right: auto !important; }
+    /* 手机上去掉强制换行，让文字自然回流 */
+    .md-typeset .hero-intro br { display: none; }
+    .stack { font-size: 0.72rem; }
+    .avatar-ring { width: 8rem; height: 8rem; margin: 0 auto; }
+    .hero-btns { justify-content: center; flex-wrap: wrap; }
+    .grid-container { grid-template-columns: 1fr; gap: 1.2rem; }
 }
 </style>
 
@@ -341,16 +268,15 @@ hr { margin: 0.5rem 0 !important; }
 <div class="hero-wrapper">
 <div class="hero-content">
 
-<div class="hero-title">
-Hi, I'm <span class="marker-highlight">胡济</span>.
-</div>
-<h1 class="hero-intro">
-欢迎来到我的网站！👋
-</h1>
+<h1 class="hero-name">胡济</h1>
+<div class="hero-role">海南大学 · 电子科学与技术 · 2024 级</div>
 
-<div class="typewriter-container">
-<span id="typewriter-text"></span><span class="cursor"></span>
-</div>
+<p class="hero-intro">
+把学过的东西整理成能照着做的教程。<br>
+<em>写得比较长，因为跳过的步骤最后都要补回来。</em>
+</p>
+
+<div class="stack">Verilog · Raspberry Pi Pico · LaTeX · Markdown · Matplotlib</div>
 
 <div class="hero-btns">
 <a href="https://github.com/Hujiko02" class="custom-btn btn-primary" target="_blank" rel="noopener">
@@ -365,8 +291,8 @@ Hi, I'm <span class="marker-highlight">胡济</span>.
 </div>
 
 <div class="hero-avatar-area">
-<div class="avatar-glow">
-<img src="others/images/avatar.jpeg" alt="头像">
+<div class="avatar-ring">
+<img src="others/images/avatar.jpeg" alt="胡济">
 </div>
 </div>
 </div>
@@ -376,24 +302,27 @@ Hi, I'm <span class="marker-highlight">胡济</span>.
 <div class="grid-card" markdown="1">
 ### :octicons-mortar-board-24: 教程
 
-把踩过的坑、好不容易弄懂的东西写下来，省掉别人摸索的那段时间。
+五套从零开始的入门教程。数字电路、单片机、排版、画图，都是自己卡过一遍才写的。
+
+<div class="stat">82 节 · 513 段代码</div>
 
 <div class="tag-box">
     <a href="tutorial/" class="tag-link">
-        进入专栏
+        进入教程
         <svg class="jump-icon" viewBox="0 0 24 24"><path d="M5 17.59L15.59 7H9V5h10v10h-2V8.41L6.41 19 5 17.59z"/></svg>
     </a>
     <span>Verilog</span>
-    <span>LaTeX</span>
-    <span>Markdown</span>
     <span>Pico</span>
+    <span>LaTeX</span>
 </div>
 </div>
 
 <div class="grid-card" markdown="1">
 ### :octicons-note-24: 日记
 
-记录所思所想。把日子过成以后还能翻回来看看的文字。
+想到什么写什么。多数是在记「今天到底卡在哪、后来怎么通的」。
+
+<div class="stat">2026 年 · 9 月至今</div>
 
 <div class="tag-box">
     <a href="diary/2026/" class="tag-link">
@@ -404,14 +333,15 @@ Hi, I'm <span class="marker-highlight">胡济</span>.
         全部日记
         <svg class="jump-icon" viewBox="0 0 24 24"><path d="M5 17.59L15.59 7H9V5h10v10h-2V8.41L6.41 19 5 17.59z"/></svg>
     </a>
-    <span>随笔</span>
 </div>
 </div>
 
 <div class="grid-card" markdown="1">
 ### :octicons-person-24: 关于我
 
-海南大学电子科学与技术专业。写代码，也写点故事。
+海南大学电子科学与技术专业本科生。长跑、电影、小说。
+
+<div class="stat">2024.12 入学至今</div>
 
 <div class="tag-box">
     <a href="me/" class="tag-link">
@@ -428,7 +358,9 @@ Hi, I'm <span class="marker-highlight">胡济</span>.
 <div class="grid-card" markdown="1">
 ### :octicons-star-24: 本站
 
-用 Zensical 配合 Material 主题搭建，源码公开在 GitHub，欢迎来交流。
+用 Zensical 配合 Material 主题搭建，内容提交后由 GitHub Actions 自动构建发布。
+
+<div class="stat">纯静态 · 无分析脚本</div>
 
 <div class="tag-box">
     <a href="https://github.com/Hujiko02/Hujiko02.github.io" class="tag-link" target="_blank" rel="noopener">
@@ -442,7 +374,10 @@ Hi, I'm <span class="marker-highlight">胡济</span>.
 
 </div>
 
-### :octicons-book-16: 推荐阅读 {.rec-title}
+<div class="sec-head">
+<h2>推荐阅读</h2>
+<span>5 篇教程 · 2 篇日记 · 2 篇关于</span>
+</div>
 
 <div class="grid cards" markdown>
 
@@ -451,10 +386,10 @@ Hi, I'm <span class="marker-highlight">胡济</span>.
     ---
 
     -   [Verilog 入门教程](tutorial/verilog.md)
+    -   [Raspberry Pi Pico 系列入门指南](tutorial/pico.md)
     -   [LaTeX 入门教程](tutorial/latex.md)
     -   [Markdown 入门教程](tutorial/markdown.md)
     -   [Matplotlib 入门教程](tutorial/matplotlib.md)
-    -   [Raspberry Pi Pico 系列入门指南](tutorial/pico.md)
 
 -   :octicons-note-16:{ .lg .middle } __日记__{.middle}
 
@@ -481,69 +416,3 @@ Hi, I'm <span class="marker-highlight">胡济</span>.
 </div>
 
 </div>
-
-<script>
-  (() => {
-    // 想改打字内容就改这个数组
-    const phrases = [
-      "海南大学 · 电子科学与技术",
-      "A Tech Enthusiast!",
-      "记录所思所想。",
-      "谁又能毫不茫然地抓住良机呢。",
-      "生如逆旅，一苇以航。"
-    ];
-    let typeTimeout = null;
-
-    function runTypewriter() {
-      const textElement = document.getElementById('typewriter-text');
-
-      // 不在首页（没有这个容器）就直接退出
-      if (!textElement) return;
-
-      let phraseIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
-      let typeSpeed = 100;
-
-      if (typeTimeout) clearTimeout(typeTimeout);
-
-      function type() {
-        // 元素已被移除（用户快速切页）就停手
-        if (!document.body.contains(textElement)) return;
-
-        const currentPhrase = phrases[phraseIndex];
-
-        if (isDeleting) {
-          textElement.textContent = currentPhrase.substring(0, charIndex - 1);
-          charIndex--;
-          typeSpeed = 50;
-        } else {
-          textElement.textContent = currentPhrase.substring(0, charIndex + 1);
-          charIndex++;
-          typeSpeed = 150;
-        }
-
-        if (!isDeleting && charIndex === currentPhrase.length) {
-          isDeleting = true;
-          typeSpeed = 2000;          // 整句写完停 2 秒
-        } else if (isDeleting && charIndex === 0) {
-          isDeleting = false;
-          phraseIndex = (phraseIndex + 1) % phrases.length;
-          typeSpeed = 500;
-        }
-
-        typeTimeout = setTimeout(type, typeSpeed);
-      }
-
-      type();
-    }
-
-    // document$ 是主题提供的页面加载流：开了 instant navigation 时切页不会触发
-    // 原生加载事件，只有它可靠。没有它就降级回 DOMContentLoaded。
-    if (typeof document$ !== 'undefined') {
-      document$.subscribe(runTypewriter);
-    } else {
-      document.addEventListener('DOMContentLoaded', runTypewriter);
-    }
-  })();
-</script>
