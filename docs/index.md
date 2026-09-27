@@ -228,7 +228,7 @@ hr { margin: 0.5rem 0 !important; }
 Welcome to my Website!
 </p>
 
-<p class="sub">An undergraduate student at HNU.</p>
+<p class="sub">I'm an undergraduate at Hainan University, majoring in Electronic Science and Technology.</p>
 
 <p class="btns">
 <a href="https://github.com/Hujiko02" target="_blank" rel="noopener">GitHub</a>
