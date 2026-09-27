@@ -56,6 +56,7 @@ nav:
     - me/story.md
 
 extra:
+  generator: false              # 去掉页脚的「Made with Zensical」
   social:
     - name: 我的GitHub
       icon: fontawesome/brands/github
