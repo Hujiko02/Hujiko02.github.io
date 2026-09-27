@@ -166,13 +166,6 @@ hide:
     line-height: 1.65;
     color: var(--md-default-fg-color--light);
 }
-/* 卡片里的真实数字 */
-.grid-card .stat {
-    font-family: var(--md-code-font-family);
-    font-size: 0.76rem;
-    color: var(--md-primary-fg-color);
-    margin-top: 0.55rem;
-}
 
 /* --------------------------------------------------------------------------
    标签行 / 次级链接
@@ -268,15 +261,13 @@ hr { margin: 0.5rem 0 !important; }
 <div class="hero-wrapper">
 <div class="hero-content">
 
-<h1 class="hero-name">胡济</h1>
-<div class="hero-role">海南大学 · 电子科学与技术 · 2024 级</div>
+<h1 class="hero-name">Hi, I'm HuJi.</h1>
 
 <p class="hero-intro">
-把学过的东西整理成能照着做的教程。<br>
-<em>写得比较长，因为跳过的步骤最后都要补回来。</em>
+Welcome to my Website! <br>
 </p>
 
-<div class="stack">Verilog · Raspberry Pi Pico · LaTeX · Markdown · Matplotlib</div>
+<div class="stack">An undergraduate student at HNU.</div>
 
 <div class="hero-btns">
 <a href="https://github.com/Hujiko02" class="custom-btn btn-primary" target="_blank" rel="noopener">
@@ -302,10 +293,7 @@ hr { margin: 0.5rem 0 !important; }
 <div class="grid-card" markdown="1">
 ### :octicons-mortar-board-24: 教程
 
-五套从零开始的入门教程。数字电路、单片机、排版、画图，都是自己卡过一遍才写的。
-
-<div class="stat">82 节 · 513 段代码</div>
-
+教程为 Deepseek V4 Flash 模型生成或翻译。
 <div class="tag-box">
     <a href="tutorial/" class="tag-link">
         进入教程
@@ -320,10 +308,7 @@ hr { margin: 0.5rem 0 !important; }
 <div class="grid-card" markdown="1">
 ### :octicons-note-24: 日记
 
-想到什么写什么。多数是在记「今天到底卡在哪、后来怎么通的」。
-
-<div class="stat">2026 年 · 9 月至今</div>
-
+记录所思所想。
 <div class="tag-box">
     <a href="diary/2026/" class="tag-link">
         2026 年
@@ -339,13 +324,10 @@ hr { margin: 0.5rem 0 !important; }
 <div class="grid-card" markdown="1">
 ### :octicons-person-24: 关于我
 
-海南大学电子科学与技术专业本科生。长跑、电影、小说。
-
-<div class="stat">2024.12 入学至今</div>
-
+海南大学电子科学与技术专业本科生。爱好长跑、电影、小说。
 <div class="tag-box">
     <a href="me/" class="tag-link">
-        认识一下
+        关于我
         <svg class="jump-icon" viewBox="0 0 24 24"><path d="M5 17.59L15.59 7H9V5h10v10h-2V8.41L6.41 19 5 17.59z"/></svg>
     </a>
     <a href="me/story.md" class="tag-link">
@@ -359,9 +341,6 @@ hr { margin: 0.5rem 0 !important; }
 ### :octicons-star-24: 本站
 
 用 Zensical 配合 Material 主题搭建，内容提交后由 GitHub Actions 自动构建发布。
-
-<div class="stat">纯静态 · 无分析脚本</div>
-
 <div class="tag-box">
     <a href="https://github.com/Hujiko02/Hujiko02.github.io" class="tag-link" target="_blank" rel="noopener">
         仓库地址
@@ -376,7 +355,6 @@ hr { margin: 0.5rem 0 !important; }
 
 <div class="sec-head">
 <h2>推荐阅读</h2>
-<span>5 篇教程 · 2 篇日记 · 2 篇关于</span>
 </div>
 
 <div class="grid cards" markdown>

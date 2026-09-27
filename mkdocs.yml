@@ -3,6 +3,10 @@ site_url: https://hujiko02.github.io/
 site_author: 胡济
 site_description: 胡济的个人网站
 
+# 页头右上角的仓库入口；星标、收藏、release 版本号在 extra.css 里隐藏
+repo_url: https://github.com/Hujiko02/Hujiko02.github.io
+repo_name: 前往仓库
+
 theme:
   variant: modern
   language: zh
@@ -10,6 +14,7 @@ theme:
   favicon: others/images/favicon.svg
   icon:
     logo: huji                   # 页头图标：内联 SVG，跟随明暗主题变色
+    repo: fontawesome/brands/github   # 仓库入口用 GitHub 图标，不用默认 git 图标
   font: false                    # 不加载 Google Fonts（国内慢又常失败）
 
   palette:
