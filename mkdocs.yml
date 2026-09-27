@@ -20,13 +20,13 @@ theme:
   palette:
     - scheme: default
       primary: indigo
-      accent: amber
+      accent: indigo
       toggle:
         icon: material/weather-sunny
         name: 切换到深色模式      # toggle.name = 点一下会切到哪，不是当前状态
     - scheme: slate
-      primary: black
-      accent: amber
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/weather-night
         name: 切换到浅色模式
