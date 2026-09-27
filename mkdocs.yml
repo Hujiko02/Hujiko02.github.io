@@ -5,7 +5,6 @@ site_description: 胡济的个人网站
 
 # 页头右上角的仓库入口；星标、收藏、release 版本号在 extra.css 里隐藏
 repo_url: https://github.com/Hujiko02/Hujiko02.github.io
-repo_name: 前往仓库
 
 theme:
   variant: modern
