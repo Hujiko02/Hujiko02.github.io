@@ -325,7 +325,7 @@ Welcome to HuJi Notes!
 
     -   [:octicons-repo-16: 本站源码](https://github.com/Hujiko02/Hujiko02.github.io)
     -   [:octicons-mark-github-16: GitHub 主页](https://github.com/Hujiko02)
-    -   [:fontawesome/brands/bilibili: Bilibili](https://space.bilibili.com/2058282898)
+    -   [:fontawesome-brands-bilibili: Bilibili](https://space.bilibili.com/2058282898)
 
 </div>
 

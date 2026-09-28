@@ -2,13 +2,23 @@
 
 <div class="grid cards" markdown>
 
--   :octicons-mortar-board-16:{ .lg .middle } __入门教程__{.middle}
+-   :octicons-file-16:{ .lg .middle } __文档与排版__
 
     ---
 
-    -   [Markdown 入门教程](markdown.md)
     -   [LaTeX 入门教程](latex.md)
+    -   [Markdown 入门教程](markdown.md)
+
+-   :octicons-graph-16:{ .lg .middle } __数据可视化__
+
+    ---
+
     -   [Matplotlib 入门教程](matplotlib.md)
+
+-   :octicons-code-16:{ .lg .middle } __硬件与嵌入式__
+
+    ---
+
     -   [Verilog 入门教程](verilog.md)
     -   [Raspberry Pi Pico 系列入门指南](pico.md)
 
