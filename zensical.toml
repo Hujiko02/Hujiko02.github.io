@@ -1,17 +1,24 @@
 # ==============================================================================
-# 项目基础信息 (Project basics)
+# Zensical 配置（官方 `zensical new` 模板风格）
+# 文档：https://zensical.org/docs/setup/basics/
+#
+# TOML 顺序规则（很重要）：
+#   [project] 的直属键 → [project.xxx] 子表 → 更深的子表。
+#   一旦写了子表，就再也不能回头给父表加键；写错位置不会报错，只会静默失效。
 # ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 基础信息
+# ------------------------------------------------------------------------------
 [project]
 site_name = "HuJi Notes"
 site_url = "https://hujiko02.github.io/"
 site_author = "HuJi"
 site_description = "HuJi Notes —— 胡济的个人网站，记录教程、日记与笔记"
 
-# 仓库信息 (Repository)
 repo_url = "https://github.com/Hujiko02/Hujiko02.github.io"
 repo_name = "Hujiko02/Hujiko02.github.io"
 
-# 导航 (Navigation)
 nav = [
     { "首页" = "index.md" },
     { "教程" = [
@@ -32,7 +39,7 @@ nav = [
     ] },
 ]
 
-# 额外 CSS 和 JavaScript (Extra CSS & JavaScript)，路径相对于 docs_dir
+# 路径相对于 docs_dir
 extra_css = [
     "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css",
     "others/stylesheets/extra.css",
@@ -44,32 +51,22 @@ extra_javascript = [
     "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js",
 ]
 
-# ==============================================================================
-# 社交链接 (Social links)
-# ==============================================================================
-[project.extra]
-social = [
-    { name = "我的GitHub", icon = "fontawesome/brands/github", link = "https://github.com/Hujiko02" },
-    { name = "我的Bilibili", icon = "fontawesome/brands/bilibili", link = "https://space.bilibili.com/2058282898" },
-]
-
-# ==============================================================================
-# 主题配置 (Theme configuration)
-# ==============================================================================
+# ------------------------------------------------------------------------------
+# 主题
+# ------------------------------------------------------------------------------
 [project.theme]
-variant = "modern"                    # 主题变体：modern 或 classic (Material 风格)
-language = "zh"                       # 界面语言
-custom_dir = "overrides"              # 自定义模板目录，用于覆盖模板或存放自定义图标
-favicon = "others/images/favicon.svg" # 网站图标
-font = false                          # 禁用 Google Fonts（字体由 extra.css 自托管）
+# variant = "modern"   # modern 是默认值，官方模板里就注释掉了；classic = 老 Material 外观
+language = "zh"
+custom_dir = "overrides"              # overrides/.icons/ 放自定义图标
+favicon = "others/images/favicon.svg"
+font = false                          # 不加载 Google Fonts（字体由 extra.css 自托管）
 
-# 主题功能特性 (Theme features)
-# 注意：features 必须写在 [[project.theme.palette]] 之前，
-# 否则 TOML 会把它塞进最后一个 palette 条目，功能全部静默失效。
+# features 必须写在 [project.theme.icon] 和 [[project.theme.palette]] 之前，
+# 否则 TOML 会把它塞进后面的子表，全部功能静默失效。
 features = [
     "navigation.instant",        # 即时加载
     "navigation.tabs",           # 顶部标签栏
-    "navigation.indexes",        # 分区标题可点击，index.md 作为落地页
+    "navigation.indexes",        # 分区标题可点击，index.md 当落地页
     "navigation.top",            # 返回顶部按钮
     "navigation.tracking",       # 地址栏跟随锚点
     "navigation.path",           # 面包屑导航
@@ -80,82 +77,69 @@ features = [
     "search.highlight",          # 搜索高亮
 ]
 
-# 页头图标 (Header icons)
-# 图标名必须写在这里；[project.theme] 下的 logo 只接受图片文件路径（如 assets/logo.png）
+# 页头图标：图标名（huji / lucide/* / fontawesome/*）写在这里；
+# [project.theme] 下的 logo 只接受图片文件路径（如 assets/logo.png）
 [project.theme.icon]
-logo = "huji"                         # 自定义图标，来自 overrides/.icons/huji.svg
-repo = "fontawesome/brands/github"    # 仓库入口的图标
+logo = "huji"                         # 内联 SVG，跟随明暗主题变色
+repo = "fontawesome/brands/github"
 
-# 颜色方案 (Color palette)
+# 两档调色板：默认浅色，点一下切深色（不加 media 就是官方文档里的「手动切换」写法）
 [[project.theme.palette]]
 scheme = "default"
-primary = "indigo"
-accent = "indigo"
-toggle = { icon = "material/weather-sunny", name = "切换到深色模式" }
+toggle.icon = "material/weather-sunny"
+toggle.name = "切换到深色模式"        # name = 点一下会切到哪，不是当前状态
 
 [[project.theme.palette]]
 scheme = "slate"
-primary = "indigo"
-accent = "indigo"
-toggle = { icon = "material/weather-night", name = "切换到浅色模式" }
+toggle.icon = "material/weather-night"
+toggle.name = "切换到浅色模式"
 
-# ==============================================================================
-# Markdown 扩展 (Markdown extensions)
-# ==============================================================================
-# 注意：在 Zensical 中，一旦定义了任何一个扩展，默认扩展集会被替换。
-# 因此，必须在这里显式声明所有需要使用的扩展。
+# ------------------------------------------------------------------------------
+# 社交链接
+# ------------------------------------------------------------------------------
+[[project.extra.social]]
+name = "我的GitHub"
+icon = "fontawesome/brands/github"
+link = "https://github.com/Hujiko02"
+
+[[project.extra.social]]
+name = "我的Bilibili"
+icon = "fontawesome/brands/bilibili"
+link = "https://space.bilibili.com/2058282898"
+
+# ------------------------------------------------------------------------------
+# Markdown 扩展
+#
+# 注意：Zensical 自带一套默认扩展，但只要你在这里写了 markdown_extensions，
+# 默认集就被整体替换 → 需要用的必须全部显式声明。
+# 官方默认集里有 pymdownx.betterem（smart_enable = "all"），
+# 它按词边界判断强调，中文没空格 → **粗体** 会变成字面星号，所以这里不要加。
+# ------------------------------------------------------------------------------
 [project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
 
-# --- 基础扩展 ---
-abbr = {}                         # 缩写
-admonition = {}                   # 提示框（admonition）
-attr_list = {}                    # 属性列表，用于添加 CSS 类
-def_list = {}                     # 定义列表
-footnotes = {}                    # 脚注
-md_in_html = {}                   # 允许在 HTML 块中使用 Markdown
+# toc.slugify 必须写成子表（object + kwds），写成字符串会在构建时崩：
+# RuntimeError: TypeError: 'str' object is not callable
+toc.slugify = { object = "pymdownx.slugs.slugify", kwds = { case = "lower" } }
 
-# --- 目录 (Table of Contents) ---
-# Zensical 里 slugify 要写成子表（object + kwds），不能写成字符串，
-# 否则构建时直接报 "'str' object is not callable"。
-[project.markdown_extensions.toc]
-slugify = { object = "pymdownx.slugs.slugify", kwds = { case = "lower" } }
-
-# --- 代码高亮 (Syntax Highlighting) ---
-[project.markdown_extensions.pymdownx.highlight]
-anchor_linenums = true
-line_spans = "__span"
-pygments_lang_class = true
-
-[project.markdown_extensions.pymdownx.inlinehilite]
-
-# --- 代码块自定义围栏 (Superfences) ---
-[[project.markdown_extensions.pymdownx.superfences.custom_fences]]
-name = "mermaid"
-class = "mermaid"
-format = "pymdownx.superfences.fence_code_format"
-
-# --- 任务列表 (Tasklist) ---
-[project.markdown_extensions.pymdownx.tasklist]
-custom_checkbox = true
-
-# --- 表情与图标 (Emoji & Icons) ---
-[project.markdown_extensions.pymdownx.emoji]
-emoji_index = "zensical.extensions.emoji.twemoji"
-emoji_generator = "zensical.extensions.emoji.to_svg"
-
-# --- 数学公式 (Arithmatex) ---
-[project.markdown_extensions.pymdownx.arithmatex]
-generic = true
-
-# --- 其他 Pymdownx 扩展 ---
-# 不要加官方默认里的 pymdownx.betterem（smart_enable = "all"）：
-# 它按词边界判断强调，中文没有空格 → **粗体** 会变成字面星号。
-[project.markdown_extensions.pymdownx.caret]   # ^上标^
-[project.markdown_extensions.pymdownx.tilde]   # ~~删除线~~ 和 ~下标~
-[project.markdown_extensions.pymdownx.mark]    # ==高亮==
-[project.markdown_extensions.pymdownx.keys]    # ++ctrl+c++
-
-[project.markdown_extensions.pymdownx.tabbed]
-alternate_style = true
-
-[project.markdown_extensions.pymdownx.details]
+# pymdownx.* 在官方模板里统一写成「去掉前缀 + 分组」的形式
+[project.markdown_extensions.pymdownx]
+arithmatex = { generic = true }       # 数学公式（$...$ / $$...$$）
+caret = {}                            # ^上标^
+details = {}                          # 可折叠块
+emoji = { emoji_index = "zensical.extensions.emoji.twemoji", emoji_generator = "zensical.extensions.emoji.to_svg" }
+highlight = { anchor_linenums = true, line_spans = "__span", pygments_lang_class = true }
+inlinehilite = {}                     # 行内代码高亮
+keys = {}                             # ++ctrl+c++
+mark = {}                             # ==高亮==
+superfences = { custom_fences = [     # 代码块；Material 自带 mermaid，自动加载渲染
+    { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+] }
+tabbed = { alternate_style = true }   # 内容标签页
+tasklist = { custom_checkbox = true } # 任务列表
+tilde = {}                            # ~~删除线~~ 和 ~下标~
