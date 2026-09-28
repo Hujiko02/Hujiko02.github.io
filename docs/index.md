@@ -295,7 +295,7 @@ Welcome to HuJi Notes!
 
 <div class="grid cards" markdown>
 
--   :octicons-mortar-board-16:{ .lg .middle } __教程__{.middle}
+-   :octicons-mortar-board-16:{ .lg .middle } __教程__
 
     ---
 
@@ -305,27 +305,27 @@ Welcome to HuJi Notes!
     -   [Verilog 入门教程](tutorial/verilog.md)
     -   [Raspberry Pi Pico 系列入门指南](tutorial/pico.md)
 
--   :octicons-note-16:{ .lg .middle } __日记__{.middle}
+-   :octicons-note-16:{ .lg .middle } __日记__
 
     ---
 
     -   [2026 年](diary/2026.md)
     -   [日记总览](diary/index.md)
 
--   :octicons-person-16:{ .lg .middle } __关于我__{.middle}
+-   :octicons-person-16:{ .lg .middle } __关于我__
 
     ---
 
     -   [关于我](me/index.md)
-    -   [无人问津的故事](me/story.md)
+    -   [我的邮箱](mailto:ji_hu@foxmail.com)
 
--   :octicons-link-16:{ .lg .middle } __更多__{.middle}
+-   :octicons-link-16:{ .lg .middle } __更多__
 
     ---
 
     -   [:octicons-repo-16: 本站源码](https://github.com/Hujiko02/Hujiko02.github.io)
     -   [:octicons-mark-github-16: GitHub 主页](https://github.com/Hujiko02)
-    -   [:fontawesome-brands-bilibili: Bilibili](https://space.bilibili.com/2058282898)
+    -   [:fontawesome-brands-bilibili: Bilibili 主页](https://space.bilibili.com/2058282898)
 
 </div>
 
