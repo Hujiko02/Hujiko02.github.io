@@ -2,102 +2,49 @@
    自定义样式
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   仓库入口：只保留「图标 + 名称」
-   --------------------------------------------------------------------------
-   repo_url 设上之后，Zensical 会去 GitHub API 拉星标、fork 数和最新 release
-   版本号，渲染在 .md-source__facts 里。这里整块隐藏。
-   -------------------------------------------------------------------------- */
+/* 仓库入口只留「图标 + 名称」：隐藏 GitHub 星标 / fork / release 那几项 */
 .md-source__facts {
   display: none !important;
 }
 
-/* --------------------------------------------------------------------------
-   链接：去掉下划线
-   --------------------------------------------------------------------------
-   主题（modern 变体）默认给正文链接加了 .md-typeset a{text-decoration:underline}，
-   这里关掉。链接靠颜色区分，不靠下划线。
-   -------------------------------------------------------------------------- */
+/* 链接去掉下划线，靠颜色区分（主题默认给 .md-typeset a 加了 underline） */
 .md-typeset a {
   text-decoration: none;
 }
 
-
-/* --------------------------------------------------------------------------
-   字体：自托管鸿蒙黑体（正文）
+/* ==========================================================================
+   字体：自托管（正文鸿蒙黑体 + 代码 JetBrains Maple Mono）
    --------------------------------------------------------------------------
-   背景：theme.font 设成 false 之后，主题的 fonts 块一行都不输出，
-   本段在 MkDocs Material 与 Zensical（modern / classic）下都成立，
-   Zensical 的 main.css 同样在 body 上定义下面两条自定义属性。
-   --md-text-font / --md-code-font 从未被赋值，于是默认字体链是
+   源文件：~/Downloads/HarmonyOS-Sans.zip
+     HarmonyOS_Sans_SC/{Regular,Bold}.ttf → woff2 放在 docs/others/fonts/
+     Regular 8.26 MB → 4.28 MB，Bold 8.16 MB → 4.40 MB，两份字表一致
+     代码字体另见下方 @font-face；三个 woff2 合计 14.3 MB，只在首访下载
 
-       --md-text-font-family: _, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif
-       --md-code-font-family: _, SFMono-Regular, Consolas, Menlo, monospace
+   重新生成（改了源字体时）：
+     python3 -m fontTools.ttLib.woff2 compress HarmonyOS_Sans_SC_Regular.ttf \
+       -o docs/others/fonts/HarmonyOS_Sans_SC_Regular.woff2
 
-   第一档的 `_` 是 Material 留的占位符（一个永不存在的字体名），兜底链里
-   Helvetica / Arial 都不含汉字，所以在安卓上汉字只能交给浏览器自己兜底，
-   用什么字体完全不可控。现在改成自托管，所有设备渲染结果一致。
-
-   两个关键点：
-
-   1. 必须写在 body 上，不能写 :root。这两个自定义属性是主题定义在
-      body 上的，写在 :root（html）会被 body 自己那条同名声明盖掉，完全不生效。
-
-   2. font-family 是「按顺序逐个字符去试」：名单靠前的字体先接管它认识的字，
-      不认识的字才往后传。所以顺序直接决定了中英文各归谁管。
-
-   自托管方案：
-
-   - 源文件来自 ~/Downloads/HarmonyOS-Sans.zip（52 MB 全家族包）：
-
-         HarmonyOS Sans/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Regular.ttf  8.26 MB
-         HarmonyOS Sans/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Bold.ttf     8.16 MB
-
-     两个都是静态单实例（无 fvar 可变轴），字表完全一致（cmap 58126，
-     CJK 基本区命中 20902/20992）。转成 woff2 放在 docs/others/fonts/：
-
-         Regular 8.26 MB → 4.28 MB
-         Bold    8.16 MB → 4.40 MB
-
-     需要重新生成时（换了源字体或想再压一压）：
-
-         python3 -m fontTools.ttLib.woff2 compress \
-           HarmonyOS_Sans_SC_Regular.ttf \
-           -o docs/others/fonts/HarmonyOS_Sans_SC_Regular.woff2
-
-   - extra.css 在 others/stylesheets/，字体在 others/fonts/，所以是 ../fonts/。
-     MkDocs 会把 docs/ 下所有非 md 文件原样拷进 site/，不用改 mkdocs.yml。
-
-   - font-display: swap：字体没加载完先用兜底字体显示，不白屏。
-
-   两个字重：
-
-   - 400 = Regular，700 = Bold（均声明 font-style: normal）。
-     字重 300/500/600 的请求由浏览器就近取 400（不会被描粗），
-     所以 h1/h2（Material 默认 300）看起来和原来一致。
-   - 注意：之前系统里装的那份鸿蒙黑体，经 md5 对比与 Regular 源文件字节完全相同
-     （静态 Regular，无 bold 位），所以粗体/标题以前一直是伪粗体；现在有真 Bold 了，
-     本机算是真正变好的那一项。
-
-   已知取舍：
-
-   1. 斜体仍是合成倾斜（硬斜切），不是真斜体——SC 家族包里本来就没单独提供
-      中文斜体，下载包只有 Latin 部分的 HarmonyOS_Sans_Italic。
-   2. 两个文件共 8.68 MB，浏览器缓存后不再重复下载（首访会有一次明显加载）。
-
-   「唯一字体」策略：字体链里不再保留任何系统字体名，所有设备都用鸿蒙，
-   视觉完全统一。代价是字体文件加载失败时直接掉到浏览器默认字体，
-   不会降级到苹方 / 微软雅黑。
-   -------------------------------------------------------------------------- */
+   几个坑：
+   - 变量必须写在 body 上，不能写 :root：这两个属性是主题定义在 body 上的，
+     写 :root 会被 body 的同名声明盖掉，完全不生效。
+   - 字体链逐字符匹配，靠前的先接管它认识的字；代码链只放自托管那一档，
+     它 ASCII 和汉字都有且 2:1，不存在「比例字体吃掉 ASCII」的老问题。
+   - 策略是「唯一字体」，不列任何系统字体名，各设备渲染一致；
+     代价是字体加载失败就直接掉浏览器默认字体，不降级到苹方 / 微软雅黑。
+   - 斜体仍是合成倾斜（SC 包里没有中文斜体，只有 Latin 的 HarmonyOS_Sans_Italic）。
+   - woff2 转换：python3 -m fontTools.ttLib.woff2 compress 源.ttf -o 目标.woff2
+     （Maple Mono 转一次约 40 秒；子集化对它没用，汉字占了大头，砍不掉多少）
+   ========================================================================== */
 
 @font-face {
   font-family: "HarmonyOS Sans SC";
   src: url("../fonts/HarmonyOS_Sans_SC_Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: swap; /* 没加载完先用兜底字体显示，不白屏 */
 }
 
+/* 主题里 strong/b 和 h1~h6 都是 700，这份就是它们命中的真粗体 */
 @font-face {
   font-family: "HarmonyOS Sans SC";
   src: url("../fonts/HarmonyOS_Sans_SC_Bold.woff2") format("woff2");
@@ -105,32 +52,25 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* 代码字体：JetBrains Maple Mono（JetBrains Mono 与 Maple Mono 合并版）
+   等宽且带汉字，Latin 0.6em / 汉字 1.2em 严格 2:1，所以含中文的代码行也能对齐。
+   源 /usr/local/share/fonts/j/JetBrainsMapleMono_Regular.ttf 16.7 MB → 5.59 MB。
+   静态单实例（无 fvar），只有 Regular，代码里的加粗由浏览器合成。 */
+@font-face {
+  font-family: "JetBrains Maple Mono";
+  src: url("../fonts/JetBrainsMapleMono_Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
-  /* 正文：只列自托管字体，中英文全由它渲染（拉丁字母和汉字都由同一套设计，
-     风格统一；Basic Latin 95/95 全覆盖，不是只补汉字的补丁版）。
-     不写系统字体兜底，是为了让所有设备渲染完全一致。
-     Regular(400) 与 Bold(700) 两份 @font-face 都用这个 family 名，
-     浏览器会自动按 font-weight 选，不用在这里写字重。 */
+  /* 正文：只列自托管字体，中英文都由它渲染，所有设备一致 */
   --md-text-font-family: "HarmonyOS Sans SC";
 
-  /* 代码块、行内 code、kbd
-     等宽字体优先，没装就退到各系统的自带等宽。
-
-     ⚠ monospace 必须排在中文兜底前面。字体链是逐字符匹配的，如果让
-     "HarmonyOS Sans SC" 跑到 monospace 前面，那么它连 ASCII 也一起接管——
-     而它并不是等宽字体（post.isFixedPitch = 0），代码块会立刻变成比例字体，
-     缩进和列对齐全乱。放在 monospace 之后，才能做到：ASCII 命中系统等宽，
-     等宽字体没有的汉字才落给中文兜底。
-
-     JetBrains Mono 排最前：本机装了（或以后自托管了）就直接生效，
-     没装则跳过。它只含拉丁/西里尔/希腊，没有汉字。
-
-     末尾的 "HarmonyOS Sans SC" 就是上面 @font-face 那份自托管字体（正文
-     Regular，代码块里的中文会回退到它），所以代码块里的中文现在在所有设备上
-     都能正常显示（以前只在装了鸿蒙的机器上生效）。等宽字体本身暂不自托管，
-     等宽先不管。 */
-  --md-code-font-family:
-    "JetBrains Mono", SFMono-Regular, Menlo, Consolas,
-    monospace,
-    "HarmonyOS Sans SC", "Noto Sans Mono CJK SC";
+  /* 代码块 / 行内 code / kbd：只列自托管那一个（与正文同策略，不再列任何系统等宽）。
+     它自带等宽汉字，Latin 0.6em / 汉字 1.2em 严格 2:1，不需要中文兜底。
+     若以后要加系统字体兜底，必须排在它后面，否则等宽字体可能吃掉汉字或反之。 */
+  --md-code-font-family: "JetBrains Maple Mono";
 }
