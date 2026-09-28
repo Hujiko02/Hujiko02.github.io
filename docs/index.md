@@ -1,11 +1,8 @@
 ---
 title: 首页
-# ↓ 这几项控制「首页要不要显示侧边栏 / 目录 / 页脚」，想显示哪个就把它删掉
 hide:
   - navigation
   - toc
-  - footer
-  - feedback
 ---
 
 <!--
@@ -229,7 +226,7 @@ Welcome to HuJi Notes!
 <div class="entry" markdown="1">
 ### :octicons-mortar-board-24: 教程
 
-教程为 DeepSeek V4 Flash 模型生成或翻译。
+一些简单的入门教程。
 
 <div class="links">
 <a href="tutorial/">进入教程</a>
@@ -252,7 +249,7 @@ Welcome to HuJi Notes!
 <div class="entry" markdown="1">
 ### :octicons-person-24: 关于我
 
-海南大学电子科学与技术专业本科生。爱好长跑、电影、小说。
+海南大学电子科学与技术专业本科生。爱好长跑与动漫。
 
 <div class="links">
 <a href="me/">关于我</a>
