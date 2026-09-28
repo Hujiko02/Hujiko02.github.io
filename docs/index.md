@@ -30,6 +30,7 @@ hide:
   --avatar-size: 12rem;     /* 头像大小 */
   --grid-gap: 22px;         /* 背景方格的大小 */
   --card-columns: 2;        /* 卡片列数：改成 1 就变单列 */
+  --card-gap: 1.6rem 2.4rem;  /* 卡片之间的间距（行 列），上下两处卡片共用 */
 
   max-width: var(--page-width);
   margin: 0 auto;
@@ -132,7 +133,7 @@ hide:
 .entries {
   display: grid;
   grid-template-columns: repeat(var(--card-columns), 1fr);
-  gap: 1.6rem 2.4rem;
+  gap: var(--card-gap);
   margin: 2.2rem 0 0.5rem;
 }
 .entry {
@@ -189,7 +190,13 @@ hide:
   font-weight: 700;
 }
 hr { margin: 0.5rem 0 !important; }
-.md-typeset .grid.cards { margin-top: 0 !important; margin-bottom: 0 !important; }
+.md-typeset .grid.cards {
+  /* 和上面的 .entries 用同一套列数与间距，中间的分隔线才能对齐 */
+  grid-template-columns: repeat(var(--card-columns), 1fr);
+  gap: var(--card-gap);
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 .md-typeset .grid.cards > ul > li { padding: 0.8rem !important; }
 
 /* ==========================================================================
@@ -209,6 +216,8 @@ hr { margin: 0.5rem 0 !important; }
   .avatar { width: 8rem; height: 8rem; margin: 0 auto; }
   .btns { justify-content: center; }
   .entries { grid-template-columns: 1fr; gap: 1.2rem; }
+  /* 手机上「推荐阅读」也跟着变单列 */
+  .md-typeset .grid.cards { grid-template-columns: 1fr; }
 }
 </style>
 
@@ -246,12 +255,12 @@ Welcome to HuJi Notes!
 <div class="entry" markdown="1">
 ### :octicons-mortar-board-24: 教程
 
-教程为 Deepseek V4 Flash 模型生成或翻译。
+教程为 DeepSeek V4 Flash 模型生成或翻译。
 
 <div class="links">
 <a href="tutorial/">进入教程</a>
 <span class="tag">Markdown</span>
-<span class="tag">LaTex</span>
+<span class="tag">LaTeX</span>
 <span class="tag">Pico2</span>
 </div>
 </div>

@@ -25,5 +25,5 @@
 </div>
 
 
-!!! tip
+!!! tip ""
     教程为 DeepSeek V4 Flash 模型生成或翻译。
