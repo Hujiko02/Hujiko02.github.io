@@ -15,25 +15,36 @@
 /* ==========================================================================
    字体：自托管（正文鸿蒙黑体 + 代码 JetBrains Maple Mono）
    --------------------------------------------------------------------------
-   源文件：~/Downloads/HarmonyOS-Sans.zip
-     HarmonyOS_Sans_SC/{Regular,Bold}.ttf → woff2 放在 docs/others/fonts/
-     Regular 8.26 MB → 4.28 MB，Bold 8.16 MB → 4.40 MB，两份字表一致
-     代码字体另见下方 @font-face；三个 woff2 合计 14.3 MB，只在首访下载
+   三个 woff2 在 docs/others/fonts/，都是**子集化**的产物：打包字符 = 站点实际用字
+   ＋ GB2312 一级汉字（常用 3755 字）＋ 常见符号码位，共 3942 字；
+   全量 14.3 MB → 1.92 MB（预加载的正文两面 1.01 MB，代码字体 0.96 MB）。
+   带常用一级汉字是为了以后新文章基本不会再缺字；真正生僻的字才会掉兜底字体。
 
-   重新生成（改了源字体时）：
-     python3 -m fontTools.ttLib.woff2 compress HarmonyOS_Sans_SC_Regular.ttf \
-       -o docs/others/fonts/HarmonyOS_Sans_SC_Regular.woff2
+   子集怎么做的（以后子集外出现新字、要补字时照着跑）：
+     打包字符 = 全站实际用字 + GB2312 一级汉字(3755) + 符号范围
+                U+0020-007E 00A0-00FF 2000-206F 2190-21FF 2500-257F 25A0-25FF
+                3000-303F FF00-FFEF
+     源字体（不在仓库里）：~/Downloads/HarmonyOS-Sans.zip 里的
+       HarmonyOS Sans/HarmonyOS_Sans_SC/{Regular,Bold}.ttf
+       /usr/local/share/fonts/j/JetBrainsMapleMono_Regular.ttf
+     命令：python3 -m fontTools.subset 源.ttf --text-file=用字表.txt \
+             --unicodes="U+0020-007E,..." --layout-features='*' --flavor=woff2 \
+             --output-file=docs/others/fonts/目标.woff2
+     （筛全站用字：把 docs 下所有 md 的字符 join 成一个 txt 就是用字表）
+
+   注意：没有校验了。新文章里出现常用字之外的字（生僻字、罕见符号）会静静地
+   掉到兜底字体，得自己记得按上面重建一次。
 
    几个坑：
    - 变量必须写在 body 上，不能写 :root：这两个属性是主题定义在 body 上的，
      写 :root 会被 body 的同名声明盖掉，完全不生效。
-   - 字体链逐字符匹配，靠前的先接管它认识的字；代码链只放自托管那一档，
-     它 ASCII 和汉字都有且 2:1，不存在「比例字体吃掉 ASCII」的老问题。
-   - 策略是「唯一字体」，不列任何系统字体名，各设备渲染一致；
-     代价是字体加载失败就直接掉浏览器默认字体，不降级到苹方 / 微软雅黑。
+   - font-display: block = 文字等字体到位再显示（最多 3s），换字一次成型不跳；
+     Regular/Bold 已在 overrides/main.html 里 preload。
+   - 正文链只列自托管字体（「唯一字体」策略）：加载失败就掉浏览器默认字体，
+     不降级到苹方 / 微软雅黑。
+   - 代码链同样只列一个：JetBrains Maple Mono 自带等宽汉字，Latin 0.6em /
+     汉字 1.2em 严格 2:1，含中文的代码行也能对齐，不需要中文兜底。
    - 斜体仍是合成倾斜（SC 包里没有中文斜体，只有 Latin 的 HarmonyOS_Sans_Italic）。
-   - woff2 转换：python3 -m fontTools.ttLib.woff2 compress 源.ttf -o 目标.woff2
-     （Maple Mono 转一次约 40 秒；子集化对它没用，汉字占了大头，砍不掉多少）
    ========================================================================== */
 
 @font-face {
@@ -41,7 +52,7 @@
   src: url("../fonts/HarmonyOS_Sans_SC_Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap; /* 没加载完先用兜底字体显示，不白屏 */
+  font-display: block; /* 等字体到位再显示，避免换字跳变（见下） */
 }
 
 /* 主题里 strong/b 和 h1~h6 都是 700，这份就是它们命中的真粗体 */
@@ -50,19 +61,18 @@
   src: url("../fonts/HarmonyOS_Sans_SC_Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 /* 代码字体：JetBrains Maple Mono（JetBrains Mono 与 Maple Mono 合并版）
-   等宽且带汉字，Latin 0.6em / 汉字 1.2em 严格 2:1，所以含中文的代码行也能对齐。
-   源 /usr/local/share/fonts/j/JetBrainsMapleMono_Regular.ttf 16.7 MB → 5.59 MB。
+   等宽且带汉字，含中文的代码行也能对齐；源 15.96 MB → 子集 0.96 MB。
    静态单实例（无 fvar），只有 Regular，代码里的加粗由浏览器合成。 */
 @font-face {
   font-family: "JetBrains Maple Mono";
   src: url("../fonts/JetBrainsMapleMono_Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 body {
