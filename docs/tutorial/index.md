@@ -1,3 +1,9 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
 # 教程总览
 
 <div class="grid cards" markdown>
