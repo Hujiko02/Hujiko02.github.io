@@ -295,7 +295,7 @@ Welcome to HuJi Notes!
 
 <div class="grid cards" markdown>
 
--   :octicons-mortar-board-16:{ .lg .middle } __教程__
+-   :octicons-mortar-board-16:{ .lg .middle } __教程__{.middle}
 
     ---
 
@@ -305,21 +305,21 @@ Welcome to HuJi Notes!
     -   [Verilog 入门教程](tutorial/verilog.md)
     -   [Raspberry Pi Pico 系列入门指南](tutorial/pico.md)
 
--   :octicons-note-16:{ .lg .middle } __日记__
+-   :octicons-note-16:{ .lg .middle } __日记__{.middle}
 
     ---
 
     -   [2026 年](diary/2026.md)
     -   [日记总览](diary/index.md)
 
--   :octicons-person-16:{ .lg .middle } __关于我__
+-   :octicons-person-16:{ .lg .middle } __关于我__{.middle}
 
     ---
 
     -   [关于我](me/index.md)
     -   [我的邮箱](mailto:ji_hu@foxmail.com)
 
--   :octicons-link-16:{ .lg .middle } __更多__
+-   :octicons-link-16:{ .lg .middle } __更多__{.middle}
 
     ---
 
