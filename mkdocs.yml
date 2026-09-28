@@ -48,11 +48,11 @@ nav:
   - 首页: index.md
   - 教程:
     - tutorial/index.md
-    - tutorial/latex.md
     - tutorial/markdown.md
     - tutorial/markdown_test.md
-    - tutorial/verilog.md
+    - tutorial/latex.md
     - tutorial/matplotlib.md
+    - tutorial/verilog.md
     - tutorial/pico.md
   - 日记:
     - diary/index.md

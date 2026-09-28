@@ -250,20 +250,19 @@ Welcome to HuJi Notes!
 
 <div class="links">
 <a href="tutorial/">进入教程</a>
-<span class="tag">Verilog</span>
-<span class="tag">Pico</span>
-<span class="tag">LaTeX</span>
+<span class="tag">Markdown</span>
+<span class="tag">LaTex</span>
+<span class="tag">Pico2</span>
 </div>
 </div>
 
 <div class="entry" markdown="1">
 ### :octicons-note-24: 日记
 
-记录所思所想。
+记录所思所想和无聊琐事。
 
 <div class="links">
 <a href="diary/2026/">2026 年</a>
-<a href="diary/">全部日记</a>
 </div>
 </div>
 
@@ -274,12 +273,11 @@ Welcome to HuJi Notes!
 
 <div class="links">
 <a href="me/">关于我</a>
-<a href="me/story.md">我的故事</a>
 </div>
 </div>
 
 <div class="entry" markdown="1">
-### :octicons-star-24: 本站
+### :octicons-book-24: 本站
 
 用 Zensical 配合 Material 主题搭建，内容提交后由 GitHub Actions 自动构建发布。
 
@@ -301,11 +299,11 @@ Welcome to HuJi Notes!
 
     ---
 
+    -   [Markdown 入门教程](tutorial/markdown.md)
+    -   [LaTeX 入门教程](tutorial/latex.md)
+    -   [Matplotlib 入门教程](tutorial/matplotlib.md)
     -   [Verilog 入门教程](tutorial/verilog.md)
     -   [Raspberry Pi Pico 系列入门指南](tutorial/pico.md)
-    -   [LaTeX 入门教程](tutorial/latex.md)
-    -   [Markdown 入门教程](tutorial/markdown.md)
-    -   [Matplotlib 入门教程](tutorial/matplotlib.md)
 
 -   :octicons-note-16:{ .lg .middle } __日记__{.middle}
 
@@ -327,7 +325,7 @@ Welcome to HuJi Notes!
 
     -   [:octicons-repo-16: 本站源码](https://github.com/Hujiko02/Hujiko02.github.io)
     -   [:octicons-mark-github-16: GitHub 主页](https://github.com/Hujiko02)
-    -   [:octicons-device-camera-video-16: Bilibili](https://space.bilibili.com/2058282898)
+    -   [:fontawesome/brands/bilibili: Bilibili](https://space.bilibili.com/2058282898)
 
 </div>
 

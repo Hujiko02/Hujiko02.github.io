@@ -6,10 +6,10 @@
 
     ---
 
-    -   [Verilog 入门教程](verilog.md)
-    -   [LaTeX 入门教程](latex.md)
     -   [Markdown 入门教程](markdown.md)
+    -   [LaTeX 入门教程](latex.md)
     -   [Matplotlib 入门教程](matplotlib.md)
+    -   [Verilog 入门教程](verilog.md)
     -   [Raspberry Pi Pico 系列入门指南](pico.md)
 
 </div>
