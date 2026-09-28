@@ -29,8 +29,6 @@ hide:
   --page-width: 920px;      /* 首页整体宽度 */
   --avatar-size: 12rem;     /* 头像大小 */
   --grid-gap: 22px;         /* 背景方格的大小 */
-  --card-columns: 2;        /* 卡片列数：改成 1 就变单列 */
-  --card-gap: 1.6rem 2.4rem;  /* 卡片之间的间距（行 列），上下两处卡片共用 */
 
   max-width: var(--page-width);
   margin: 0 auto;
@@ -129,11 +127,15 @@ hide:
 
 /* ==========================================================================
    四张卡片
+   ——列宽和间距写成跟主题自带的 .grid 一样的值（minmax(16rem) + .4rem），
+     这样竖线才能和下面「推荐阅读」的默认网格对开；
+     窄屏会自动变单列，不用手写手机样式。
    ========================================================================== */
 .entries {
   display: grid;
-  grid-template-columns: repeat(var(--card-columns), 1fr);
-  gap: var(--card-gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  /* 间距：行距 1.6rem（不然上下两排贴一起），列距用主题默认的 .4rem（保证竖线对齐） */
+  gap: 1.6rem 0.4rem;
   margin: 2.2rem 0 0.5rem;
 }
 .entry {
@@ -180,7 +182,8 @@ hide:
 }
 
 /* ==========================================================================
-   推荐阅读（用的是主题自带的两栏卡片 grid cards，样式只需微调）
+   推荐阅读：直接用主题自带的 grid cards，这里一行样式都不写
+   （用法和 docs/tutorial/index.md 里完全一样）
    ========================================================================== */
 .md-typeset .section-title {
   margin: 2.6rem 0 1.1rem;
@@ -189,15 +192,6 @@ hide:
   font-size: 1rem;
   font-weight: 700;
 }
-hr { margin: 0.5rem 0 !important; }
-.md-typeset .grid.cards {
-  /* 和上面的 .entries 用同一套列数与间距，中间的分隔线才能对齐 */
-  grid-template-columns: repeat(var(--card-columns), 1fr);
-  gap: var(--card-gap);
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-.md-typeset .grid.cards > ul > li { padding: 0.8rem !important; }
 
 /* ==========================================================================
    手机屏幕（宽度小于 768px 时生效）
@@ -215,9 +209,6 @@ hr { margin: 0.5rem 0 !important; }
   .md-typeset .hero .lead { font-size: 0.95rem; margin-left: auto; margin-right: auto; }
   .avatar { width: 8rem; height: 8rem; margin: 0 auto; }
   .btns { justify-content: center; }
-  .entries { grid-template-columns: 1fr; gap: 1.2rem; }
-  /* 手机上「推荐阅读」也跟着变单列 */
-  .md-typeset .grid.cards { grid-template-columns: 1fr; }
 }
 </style>
 
