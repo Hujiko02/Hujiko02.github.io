@@ -1,9 +1,3 @@
----
-hide:
-  - navigation
-  - toc
----
-
 # 关于我
 
 ## 学业
