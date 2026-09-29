@@ -79,7 +79,36 @@ hide:
   border: 1px solid color-mix(in srgb, var(--md-primary-fg-color) 45%, transparent);
 }
 
-.md-typeset .hero .md-button { margin: 1.7rem 0 0; }
+.btns {                                      /* 按钮区 */
+  margin-top: 1.7rem;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  --icon-github: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M216.5 362.5c-66-8-112.5-55.5-112.5-117 0-25 9-52 24-70-6.5-16.5-5.5-51.5 2-66 20-2.5 47 8 63 22.5 19-6 39-9 63.5-9s44.5 3 62.5 8.5c15.5-14 43-24.5 63-22 7 13.5 8 48.5 1.5 65.5 16 19 24.5 44.5 24.5 70.5 0 61.5-46.5 108-113.5 116.5 17 11 28.5 35 28.5 62.5v52c0 15 12.5 23.5 27.5 17.5C441 459.5 512 369 512 257 512 115.5 397 0 255.5 0S0 115.5 0 257c0 111 70.5 203 165.5 237.5 13.5 5 26.5-4 26.5-17.5v-40c-7 3-16 5-24 5-33 0-52.5-18-66.5-51.5-5.5-13.5-11.5-21.5-23-23-6-.5-8-3-8-6 0-6 10-10.5 20-10.5 14.5 0 27 9 40 27.5 10 14.5 20.5 21 33 21s20.5-4.5 32-16c8.5-8.5 15-16 21-21'/%3E%3C/svg%3E");
+}
+.md-typeset .btns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.34rem 0.9rem;
+  font-size: 0.86rem;
+  font-weight: 500;
+  line-height: 1.3;
+  border-radius: 4px;
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  transition: background-color 0.2s;
+}
+.md-typeset .btns a:hover { background-color: var(--md-primary-fg-color--dark); }
+/* 按钮里的 GitHub 图标（想换图标改上面的 --icon-github；不想要就删掉这两行 ::before） */
+.md-typeset .btns a::before {
+  content: "";
+  width: 1.05rem;
+  height: 1.05rem;
+  background: currentColor;
+  -webkit-mask: var(--icon-github) center / contain no-repeat;
+  mask: var(--icon-github) center / contain no-repeat;
+}
 
 /* ==========================================================================
    四张卡片
@@ -159,6 +188,7 @@ hide:
   .md-typeset .hero h1 { font-size: 1.9rem; }
   .md-typeset .hero .lead { font-size: 0.95rem; margin-left: auto; margin-right: auto; }
   .avatar { width: 8rem; height: 8rem; margin: 0 auto; }
+  .btns { justify-content: center; }
 }
 </style>
 
@@ -170,7 +200,7 @@ hide:
 
 <!-- ① 上半部分：名字、欢迎语、身份、按钮、头像 -->
 <div class="hero">
-<div class="hero-text" markdown="1">
+<div class="hero-text">
 
 <h1>Hi, I'm Hu Ji.</h1>
 
@@ -180,7 +210,9 @@ Welcome to HuJi Notes!
 
 <p class="sub">I'm an undergraduate at Hainan University, majoring in Electronic Science and Technology.</p>
 
-[GitHub :fontawesome-brands-github:](https://github.com/Hujiko02){ .md-button .md-button--primary target=_blank rel=noopener }
+<p class="btns">
+<a href="https://github.com/Hujiko02" target="_blank" rel="noopener">GitHub</a>
+</p>
 
 </div>
 
