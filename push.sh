@@ -13,7 +13,7 @@ git diff --cached --quiet ||
 if ! git pull origin main --rebase --autostash; then
   cat >&2 <<'EOF'
 
-⚠️  rebase 冲突：远端和你本地改了同一处内容（比如同一篇文章同时改了两边）。
+    rebase 冲突：远端和你本地改了同一处内容（比如同一篇文章同时改了两边）。
     当前状态是「rebase 进行中」，你的本地提交还在，没有丢。
     解决：改好冲突文件 → git add <文件> → git rebase --continue → ./push.sh
     放弃这次 rebase（保留本地提交，回到推送前的样子）：git rebase --abort
