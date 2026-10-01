@@ -1,5 +1,8 @@
 # push 到 main 后，由 GitHub 在云端构建，再用官方 Pages Actions 发布。
 # 本地（桌面 / Termux）只需要 git push，不需要安装 zensical。
+#
+# 单个 job 即可（官方 starter-workflows/pages/static.yml 同构）。权限必须写在 workflow
+# 级：job 级 permissions 会把没列出的权限清零，那样 checkout 拿不到 contents 会失败。
 name: Deploy site
 
 on:
@@ -15,22 +18,27 @@ on:
   workflow_dispatch:              # 也可以在 Actions 页面手动触发
 
 permissions:
-  contents: read                  # 默认最小权限，写权限只给下面的 deploy job
+  contents: read                  # checkout 需要
+  pages: write                    # 发布到 GitHub Pages
+  id-token: write                 # OIDC 校验部署来源
 
 concurrency:
   group: pages
   cancel-in-progress: false       # 部署排队执行，不互相打断
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6   # v7 也已发布，想升级改这里
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"    # 固定小版本，避免 3.x 每次解析到不同解释器
           cache: pip                # 缓存 wheel，省去每次重新下载
@@ -52,17 +60,6 @@ jobs:
         with:
           path: site
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    permissions:
-      pages: write                # 发布到 GitHub Pages
-      id-token: write             # OIDC 校验部署来源
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
