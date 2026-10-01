@@ -1,22 +1,34 @@
-# push 到 main 后，由 GitHub 在云端构建，并把产物发布到 gh-pages 分支。
+# push 到 main 后，由 GitHub 在云端构建，再用官方 Pages Actions 发布。
 # 本地（桌面 / Termux）只需要 git push，不需要安装 zensical。
+#
+# 首次使用前需在仓库做两件事（只需一次）：
+#   1. Settings → Pages → Source 改成 “GitHub Actions”
+#   2. 旧的 gh-pages 分支可以删掉：git push origin --delete gh-pages
 name: Deploy site
 
 on:
   push:
     branches: [main]
+    # 只改这些文件时不必重新构建整站
+    paths-ignore:
+      - "README.md"
+      - "push.sh"
+      - ".gitignore"
+      - ".obsidian/**"
+      - ".cache/**"
   workflow_dispatch:              # 也可以在 Actions 页面手动触发
 
 permissions:
-  contents: write                 # ghp-import 需要往 gh-pages 推送
+  contents: read                  # 默认最小权限，写权限只给下面的 deploy job
 
 concurrency:
-  group: deploy
+  group: pages
   cancel-in-progress: false       # 部署排队执行，不互相打断
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6   # v7 也已发布，想升级改这里
@@ -24,17 +36,46 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.x"
+          python-version: "3.13"    # 固定小版本，避免 3.x 每次解析到不同解释器
+          cache: pip                # 缓存 wheel，省去每次重新下载
+          # 没有 requirements.txt，直接对钉了版本的 workflow 文件取哈希
+          cache-dependency-path: .github/workflows/docs.yml
 
       - name: Install Zensical
-        run: pip install zensical==0.0.65 ghp-import
+        run: pip install zensical==0.0.67
 
       - name: Build
         run: zensical build --clean --strict
 
-      - name: Publish to gh-pages
+      - name: Sanity check
+        # --strict 只保证没警告，这里确认产物真的生成了主页面
+        run: test -s site/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write                # 发布到 GitHub Pages
+      id-token: write             # OIDC 校验部署来源
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      - name: Verify deployed site
+        # deploy 成功 ≠ 线上内容正确（历史上出现过 artifact 格式不匹配、
+        # 结果线上返回 README 的情况），所以抓一次首页确认标题在。
         env:
-          # ghp-import 走 git fast-import 造提交，必须有提交者身份
-          GIT_COMMITTER_NAME: github-actions[bot]
-          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-        run: ghp-import -n -p -f -m "Deploy $(date -u '+%F %T UTC')" site
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          curl -fsS --retry 5 --retry-all-errors --retry-delay 5 "$PAGE_URL" \
+            | grep -q "HuJi Notes"
