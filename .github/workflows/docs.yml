@@ -1,9 +1,5 @@
 # push 到 main 后，由 GitHub 在云端构建，再用官方 Pages Actions 发布。
 # 本地（桌面 / Termux）只需要 git push，不需要安装 zensical。
-#
-# 首次使用前需在仓库做两件事（只需一次）：
-#   1. Settings → Pages → Source 改成 “GitHub Actions”
-#   2. 旧的 gh-pages 分支可以删掉：git push origin --delete gh-pages
 name: Deploy site
 
 on:
