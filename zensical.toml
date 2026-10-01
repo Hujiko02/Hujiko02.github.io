@@ -41,15 +41,14 @@ nav = [
 
 # 路径相对于 docs_dir
 extra_css = [
-    # KaTeX 自托管（版本/来源/升级步骤见 docs/others/katex/VENDOR.txt）：
-    # 样式表留在 head 里同步加载，避免公式页先闪一下未渲染的 $...$
-    "others/katex/katex.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.18.9/katex.min.css",
     "others/stylesheets/extra.css",
 ]
 
 extra_javascript = [
-    # 只有这一个入口；katex.min.js / auto-render.min.js 由它检测到公式后才注入
     "others/javascripts/katex.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.18.9/katex.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.18.9/contrib/auto-render.min.js",
 ]
 
 # ------------------------------------------------------------------------------
