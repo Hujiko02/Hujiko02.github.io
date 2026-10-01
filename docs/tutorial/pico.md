@@ -117,7 +117,7 @@ $ sudo apt install python3 git tar
 
 你可以在 VS Code 扩展市场中找到该扩展。搜索 **Raspberry Pi Pico** 扩展（发布者为 Raspberry Pi），然后点击 **Install** 按钮将其添加到 VS Code。
 
-![图 1. 在 VS Code 中进行调试。](images/figure-01.png)
+![图 1. 在 VS Code 中进行调试。](images/pico/figure-01.png)
 
 商店页面：<https://marketplace.visualstudio.com/items?itemName=raspberry-pi.raspberry-pi-pico>
 
@@ -140,7 +140,7 @@ VS Code 扩展可以基于 <https://github.com/raspberrypi/pico-examples> 提供
 
 扩展现在会下载 SDK 和工具链，将它们安装到本地，并生成新项目。第一个项目安装工具链可能需要 5–10 分钟。由于我们为你自动生成了 `.vscode` 目录，VS Code 会询问你是否信任该目录的作者。选择「是」。
 
-![图 2. 在 VS Code 中创建项目。](images/figure-02.png)
+![图 2. 在 VS Code 中创建项目。](images/pico/figure-02.png)
 
 > **注意**
 >
@@ -212,7 +212,7 @@ Raspberry Pi Debug Probe 是适用于任何基于 Arm 的计算机的调试解�
 
 首先，通过开发板上的调试接口把 Debug Probe 连接到你的 Pico 系列设备。不同的 Pico 设备需要不同的连接器。对于 Pico、Pico W 和 Pico 2，需要用烙铁把 Debug Probe 连接器焊接到开发板上；对于 Pico H、Pico WH 以及带排针的 Pico，调试排针已经焊好，直接用附带的线缆连接 Debug Probe 即可。
 
-![图 3. Debug Probe 接线](images/figure-03.png)
+![图 3. Debug Probe 接线](images/pico/figure-03.png)
 
 更多信息请参阅 Debug Probe 文档。
 
@@ -226,7 +226,7 @@ Raspberry Pi Debug Probe 是适用于任何基于 Arm 的计算机的调试解�
 
 调试器会自动把代码下载到设备，在你的 `main` 函数开头插入一个断点，并运行到该断点处停下。
 
-![图 4. 在 VS Code 中进行调试。](images/figure-04.png)
+![图 4. 在 VS Code 中进行调试。](images/pico/figure-04.png)
 
 进入调试模式后，侧边栏中会出现若干窗口，显示设备当前状态的有用信息。顶部有一条小的控制栏，其中的按钮用于控制代码执行。把鼠标悬停在按钮上可以查看它们的名称。要继续执行代码，点击 **Continue**（`F5`）。
 
@@ -238,7 +238,7 @@ Raspberry Pi Debug Probe 是适用于任何基于 Arm 的计算机的调试解�
 
 再次按 **Restart**（`Ctrl+Shift+F5`）回到 `main` 函数开头。然后把光标移到 `pico_set_led` 那一行，按 `F9`。创建断点后，你会看到一个红点标示断点的位置：
 
-![图 5. 在 VS Code 中进行调试。](images/figure-05.png)
+![图 5. 在 VS Code 中进行调试。](images/pico/figure-05.png)
 
 点击红点即可添加或移除断点。
 
@@ -299,7 +299,7 @@ The device was rebooted to start the application.
 
 在 VS Code 中，打开 **View** 菜单，选择 **Terminal** 打开底部面板。在该面板中，你会找到 **Serial Monitor** 标签页。选择串口——可能不止一个。波特率应为 `115200`。选择 **Start Monitoring** 即可看到输出。
 
-![图 6. VS Code 串口监视器](images/figure-06.png)
+![图 6. VS Code 串口监视器](images/pico/figure-06.png)
 
 ---
 
@@ -322,9 +322,9 @@ Raspberry Pi 提供两种调试 Pico 系列设备的方式：
 
 #### A.1.1 Debug Probe 接线
 
-![图 7. Debug Probe 附带的线缆。](images/figure-07.png)
+![图 7. Debug Probe 附带的线缆。](images/pico/figure-07.png)
 
-![图 8. Debug Probe（左）与 Pico（右）之间的接线。](images/figure-08.png)
+![图 8. Debug Probe（左）与 Pico（右）之间的接线。](images/pico/figure-08.png)
 
 要把 Debug Probe 连接到 Pico H，请连接以下线路：
 
@@ -346,7 +346,7 @@ Pico 与 Debug Probe 之间的线束连接如图 8 所示。
 
 一块 Pico 或 Pico 2 可以使用 debugprobe 固件来为另一块重新烧录和调试，该固件把 Pico 或 Pico 2 变成一个 USB → SWD 与 UART 桥。
 
-![图 9. Pico A（左）与 Pico B（右）之间的接线，其中 Pico A 充当调试器，Pico B 作为被测系统。你至少需要连接地线和两根 SWD 线。连接 UART 串口可以让你访问 Pico B 的 UART 串口输出。你也可以桥接电源，用一根 USB 线同时为两块板供电。更多信息请参阅附录 A.3 debugprobe 接线。](images/figure-09.png)
+![图 9. Pico A（左）与 Pico B（右）之间的接线，其中 Pico A 充当调试器，Pico B 作为被测系统。你至少需要连接地线和两根 SWD 线。连接 UART 串口可以让你访问 Pico B 的 UART 串口输出。你也可以桥接电源，用一根 USB 线同时为两块板供电。更多信息请参阅附录 A.3 debugprobe 接线。](images/pico/figure-09.png)
 
 #### A.2.1 安装 debugprobe
 
@@ -360,7 +360,7 @@ Pico 与 Debug Probe 之间的线束连接如图 8 所示。
 
 ### A.3 debugprobe 接线
 
-![图 10. Pico A（左）与 Pico B（右）之间的接线，把 Pico A 配置为调试器。](images/figure-10.png)
+![图 10. Pico A（左）与 Pico B（右）之间的接线，把 Pico A 配置为调试器。](images/pico/figure-10.png)
 
 两块 Pico 开发板之间的线束连接如图 10 所示。
 

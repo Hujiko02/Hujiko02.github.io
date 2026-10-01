@@ -103,7 +103,7 @@ plt.show()
 
 效果：
 
-![折线图示例](images/line.png)
+![折线图示例](images/matplotlib/line.png)
 
 **最小可运行结构**就是四步：**造数据 → 创建 `fig, ax` → 用 `ax` 画图/修饰 → 显示**。其余都是「锦上添花」。
 
@@ -194,7 +194,7 @@ plt.show()
 
 效果（颜色代表数值，颜色条 `colorbar` 说明含义）：
 
-![散点图示例](images/scatter.png)
+![散点图示例](images/matplotlib/scatter.png)
 
 ### 5.3 柱状图
 
@@ -217,7 +217,7 @@ plt.show()
 
 效果：
 
-![柱状图示例](images/bar.png)
+![柱状图示例](images/matplotlib/bar.png)
 
 **其他柱状图变体：**
 
@@ -246,7 +246,7 @@ plt.show()
 
 效果：
 
-![直方图示例](images/hist.png)
+![直方图示例](images/matplotlib/hist.png)
 
 关键参数：`bins` 决定柱子的数量/边界，`density=True` 可把纵轴改为概率密度。
 
@@ -384,7 +384,7 @@ plt.show()
 
 效果：
 
-![子图示例](images/subplot.png)
+![子图示例](images/matplotlib/subplot.png)
 
 **进阶技巧：**
 
@@ -444,7 +444,7 @@ ax.legend()
 
 效果（标题和图的公式都用上了 mathtext）：
 
-![数学公式示例](images/mathtext.png)
+![数学公式示例](images/matplotlib/mathtext.png)
 
 **常用写法：**
 
