@@ -67,8 +67,12 @@ jobs:
       - name: Verify deployed site
         # deploy 成功 ≠ 线上内容正确（历史上出现过 artifact 格式不匹配、
         # 结果线上返回 README 的情况），所以抓一次首页确认标题在。
+        # 注意不能写成 curl | grep -q：grep -q 命中后立刻退出会关掉管道，
+        # curl 报 (23) Failure writing output to destination，而 --retry-all-errors
+        # 会把这个错误也重试 5 次（实测白烧 25 秒）。所以先落盘再 grep。
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
-          curl -fsS --retry 5 --retry-all-errors --retry-delay 5 "$PAGE_URL" \
-            | grep -q "HuJi Notes"
+          curl -fsS --retry 5 --retry-all-errors --retry-delay 3 --max-time 30 \
+            -o index.html "$PAGE_URL"
+          grep -q "HuJi Notes" index.html
