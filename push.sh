@@ -1,6 +1,7 @@
 #!/bin/bash
-# 提交源码并推送。构建和部署由 GitHub Actions 完成（见 .github/workflows/docs.yml），
-# 桌面和 Termux 用同一个脚本，不需要本地装 zensical。
+# 提交并推送。GitHub Pages 从 main 分支根目录直接发布，不需要本地构建，
+# 也没有 GitHub Actions（见 README）。
+# 桌面和 Termux 用同一个脚本。
 # 用法：./push.sh [提交信息]（不传则用时间戳信息）
 set -e
 cd "$(dirname "$0")"

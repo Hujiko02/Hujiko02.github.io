@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Markdown 入门教程 - HuJi Notes</title>
+  <link rel="stylesheet" href="../assets/tufte/tufte.css">
+  <link rel="stylesheet" href="../assets/tufte/local.css">
+
+  <link rel="preload" href="../assets/tufte/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff">
+  <link rel="preload" href="../assets/tufte/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff">
+  <link rel="preload" href="../assets/tufte/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff">
+  <link rel="preload" href="../assets/tufte/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff">
+
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+</head>
+
+<body>
+
+<header>
+  ₍^. .^₎⟆
+  <a href="../index.html">首页</a>
+  <a href="../diary/index.html">日记</a>
+  <a href="../about/index.html">关于</a>
+</header>
+
+<article>
+
+  <h1 id="markdown-入门教程">Markdown 入门教程</h1>
+
+  <section>
+
+    <blockquote>
+      <p>本教程面向 <strong>零基础</strong> 读者。
+Markdown 是一种轻量级的标记语言，用简单的符号即可写出格式规整的文档，
+被广泛用于 README、博客、笔记、GitHub、技术文档等场景。
+你不需要任何特殊软件，<strong>任何文本编辑器都能写 Markdown</strong>。</p>
+    </blockquote>
+    <hr>
+    <h2 id="目录">目录</h2>
+    <ol>
+      <li><a href="#1-markdown-是什么">Markdown 是什么</a></li>
+      <li><a href="#2-常用编辑器与预览工具">常用编辑器与预览工具</a></li>
+      <li><a href="#3-标题">标题</a></li>
+      <li><a href="#4-段落与换行">段落与换行</a></li>
+      <li><a href="#5-强调粗体斜体删除线">强调：粗体、斜体、删除线</a></li>
+      <li><a href="#6-列表">列表</a></li>
+      <li><a href="#7-链接">链接</a></li>
+      <li><a href="#8-图片">图片</a></li>
+      <li><a href="#9-引用">引用</a></li>
+      <li><a href="#10-代码">代码</a></li>
+      <li><a href="#11-表格">表格</a></li>
+      <li><a href="#12-分割线与转义">分割线与转义</a></li>
+      <li><a href="#13-任务清单">任务清单</a></li>
+      <li><a href="#14-脚注与其他扩展语法">脚注与其他扩展语法</a></li>
+      <li><a href="#15-进阶markdown-变体与实用技巧">进阶：Markdown 变体与实用技巧</a></li>
+      <li><a href="#16-推荐工具与下一步学习">推荐工具与下一步学习</a></li>
+    </ol>
+    <hr>
+    <h2 id="1-markdown-是什么">1. Markdown 是什么</h2>
+    <p><strong>Markdown</strong> 由 John Gruber 于 2004 年创建，是一种<strong>轻量级标记语言</strong>：</p>
+    <ul>
+      <li>用一些<strong>简单的符号</strong>（如 <code>#</code>、<code>*</code>、<code>-</code>）表示格式；</li>
+      <li>文件是<strong>纯文本</strong>，后缀为 <code>.md</code> 或 <code>.markdown</code>；</li>
+      <li>可以被转换成 <strong>HTML / PDF / Word</strong> 等格式，最终渲染成美观的页面。</li>
+    </ul>
+    <p><strong>核心思想：</strong> 写起来像普通文本，读起来也像普通文本，渲染出来却是排版好的文档。</p>
+    <p><strong>优点：</strong></p>
+    <ul>
+      <li>语法简单，几分钟即可上手；</li>
+      <li>纯文本，跨平台、易版本管理（Git）；</li>
+      <li>几乎所有技术社区都在用（GitHub、知乎、语雀、Obsidian、Typora…）；</li>
+      <li>专注内容本身，不用纠结格式。</li>
+    </ul>
+    <p><strong>缺点：</strong></p>
+    <ul>
+      <li>复杂排版能力有限（如精确分页、页眉页脚）；</li>
+      <li>不同工具对部分「扩展语法」支持不一致。</li>
+    </ul>
+    <blockquote>
+      <p>一句话总结：<strong>Markdown 让你用写邮件的方式，写出带格式的文档。</strong></p>
+    </blockquote>
+    <hr>
+    <h2 id="2-常用编辑器与预览工具">2. 常用编辑器与预览工具</h2>
+    <p>Markdown 是纯文本，任何编辑器都能写，但带「实时预览」的工具体验更好：</p>
+    <table>
+      <thead>
+        <tr><th>工具</th><th>平台</th><th>特点</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Typora</strong></td><td>Win / Mac</td><td>所见即所得，最易上手</td></tr>
+        <tr><td><strong>VS Code</strong></td><td>全平台</td><td>免费，装插件后支持预览</td></tr>
+        <tr><td><strong>Obsidian</strong></td><td>全平台</td><td>免费，双向链接、笔记神器</td></tr>
+        <tr><td><strong>语雀</strong></td><td>Web</td><td>阿里出品，中文友好</td></tr>
+        <tr><td><strong>GitHub / GitLab</strong></td><td>Web</td><td>仓库自带 README 渲染</td></tr>
+        <tr><td><strong>Mattermost / Slack / 飞书</strong></td><td>Web</td><td>聊天、文档里都支持 Markdown</td></tr>
+        <tr><td><strong>Jupyter Notebook</strong></td><td>Web</td><td>数据科学常用，Markdown 单元格</td></tr>
+      </tbody>
+    </table>
+    <blockquote>
+      <p>学习阶段：直接用 <strong>VS Code</strong> 或 <strong>Typora</strong>，或者任何在线 Markdown 编辑器
+（如 <a href="https://dillinger.io/">https://dillinger.io/</a>）即可。</p>
+    </blockquote>
+    <hr>
+    <h2 id="3-标题">3. 标题</h2>
+    <p>用 <code>#</code> 表示标题，<code>#</code> 的数量对应标题层级（1~6 级）。</p>
+    <pre><code class="language-markdown"># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+</code></pre>
+    <p><strong>语法说明：</strong></p>
+    <ul>
+      <li><code>#</code> 和标题文字之间要有<strong>一个空格</strong>（规范写法）；</li>
+      <li>1~2 级标题下可加一条分割线作为替代（见下），但推荐直接用 <code>#</code>。</li>
+    </ul>
+    <pre><code class="language-markdown">一级标题（替代写法）
+===================
+
+二级标题（替代写法）
+-------------------
+</code></pre>
+    <blockquote>
+      <p>实际效果见本教程顶部的各级标题。</p>
+    </blockquote>
+    <hr>
+    <h2 id="4-段落与换行">4. 段落与换行</h2>
+    <ul>
+      <li><strong>段落</strong>：由一或多行文字组成，段落之间用<strong>空行</strong>分隔。</li>
+      <li><strong>换行</strong>：</li>
+      <li>在行尾加 <strong>两个空格</strong> 再回车 → 换行（标准 Markdown）；</li>
+      <li>或者直接敲 <strong>两次回车</strong>（即空行）→ 变成新段落；</li>
+      <li>很多工具（如 Typora、GitHub）也支持行尾 <code>\</code> 或直接单回车换行。</li>
+    </ul>
+    <pre><code class="language-markdown">这是第一段。
+（上面没有空行，这里不算换行，会连在一起显示）
+
+这是第二段，和第一段之间有空行。
+
+这是第三段。  
+这一行末尾有两个空格，所以换行到下一行。
+</code></pre>
+    <table>
+      <thead>
+        <tr><th>写法</th><th>效果</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>一个回车</td><td>合并为同一行（中间变空格）</td></tr>
+        <tr><td>行尾两个空格 + 回车</td><td>换行（不另起段落）</td></tr>
+        <tr><td>两个回车（空行）</td><td>另起新段落</td></tr>
+      </tbody>
+    </table>
+    <hr>
+    <h2 id="5-强调粗体斜体删除线">5. 强调：粗体、斜体、删除线</h2>
+    <table>
+      <thead>
+        <tr><th>语法</th><th>效果</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>**粗体**</code></td><td><strong>粗体</strong></td></tr>
+        <tr><td><code>*斜体*</code></td><td><em>斜体</em></td></tr>
+        <tr><td><code>***粗斜体***</code></td><td><strong><em>粗斜体</em></strong></td></tr>
+        <tr><td><code>~~删除线~~</code></td><td>~~删除线~~</td></tr>
+        <tr><td><code>&lt;u&gt;下划线&lt;/u&gt;</code></td><td><u>下划线</u>（HTML 标签，部分工具支持）</td></tr>
+      </tbody>
+    </table>
+    <pre><code class="language-markdown">**重点内容**，*补充说明*，***标题强调***，~~过时信息~~。
+</code></pre>
+    <blockquote>
+      <p>注意：<code>*</code> 与文字之间<strong>不要有空格</strong>，否则会被当成普通字符。
+部分工具（如 GitHub）也支持用 <code>_</code> 代替 <code>*</code>：<code>_斜体_</code>、<code>__粗体__</code>。</p>
+    </blockquote>
+    <hr>
+    <h2 id="6-列表">6. 列表</h2>
+    <h3 id="61-无序列表">6.1 无序列表</h3>
+    <p>用 <code>-</code>、<code>*</code> 或 <code>+</code> 加空格：</p>
+    <pre><code class="language-markdown">- 苹果
+- 香蕉
+- 橘子
+</code></pre>
+    <h3 id="62-有序列表">6.2 有序列表</h3>
+    <p>用 <code>1.</code> 加空格：</p>
+    <pre><code class="language-markdown">1. 第一步
+2. 第二步
+3. 第三步
+</code></pre>
+    <blockquote>
+      <p>序号可以随意写，多数渲染器会<strong>自动按顺序编号</strong>（如全部写 <code>1.</code> 也能正确递增）。</p>
+    </blockquote>
+    <h3 id="63-嵌套列表">6.3 嵌套列表</h3>
+    <p>子列表前缩进 <strong>2~4 个空格</strong>：</p>
+    <pre><code class="language-markdown">- 水果
+  - 苹果
+  - 香蕉
+- 蔬菜
+  1. 白菜
+  2. 萝卜
+</code></pre>
+    <h3 id="64-列表中的段落与代码">6.4 列表中的段落与代码</h3>
+    <p>在列表项内换行写内容时，需要保持缩进；代码块用 4 个空格或反引号：</p>
+    <pre><code class="language-markdown">- 第一项
+
+  这里是与第一项同级的段落（缩进 2 格）。
+
+  ```python
+  print("hello")
+  ```
+
+- 第二项
+</code></pre>
+    <hr>
+    <h2 id="7-链接">7. 链接</h2>
+    <h3 id="71-行内式链接">7.1 行内式链接</h3>
+    <pre><code class="language-markdown">[链接文字](https://example.com)
+
+[带标题的链接](https://example.com "鼠标悬停提示")
+</code></pre>
+    <p>效果：<a href="https://example.com">链接文字</a></p>
+    <h3 id="72-引用式链接">7.2 引用式链接</h3>
+    <p>把链接定义在文档任意位置，多次引用：</p>
+    <pre><code class="language-markdown">[Overleaf][overleaf] 和 [GitHub][gh] 都支持 Markdown。
+
+[overleaf]: https://www.overleaf.com
+[gh]: https://github.com
+</code></pre>
+    <h3 id="73-自动链接">7.3 自动链接</h3>
+    <pre><code class="language-markdown">&lt;https://www.overleaf.com&gt;
+</code></pre>
+    <p>效果：<a href="https://www.overleaf.com">https://www.overleaf.com</a></p>
+    <h3 id="74-锚点链接跳转到文档内标题">7.4 锚点链接（跳转到文档内标题）</h3>
+    <pre><code class="language-markdown">[跳转到开头](#markdown-是什么)
+</code></pre>
+    <blockquote>
+      <p>锚点规则：标题全小写、空格变连字符、去掉标点。不同工具规则略有差异，
+但大多遵循这个约定。</p>
+    </blockquote>
+    <h3 id="75-相对链接本地文件">7.5 相对链接（本地文件）</h3>
+    <pre><code class="language-markdown">[查看说明文档](docs/readme.md)
+[下载文件](files/report.pdf)
+</code></pre>
+    <p>GitHub 等平台会自动跳转到仓库内对应文件。</p>
+    <hr>
+    <h2 id="8-图片">8. 图片</h2>
+    <p>语法与链接类似，前面加一个 <code>!</code>：</p>
+    <pre><code class="language-markdown">![图片的替代文字](图片路径或URL)
+
+![带标题的图片](https://example.com/img.png "标题")
+</code></pre>
+    <p>示例（本地相对路径）：</p>
+    <pre><code class="language-markdown">![项目结构](./images/project-structure.png)
+</code></pre>
+    <p><strong>说明：</strong></p>
+    <ul>
+      <li><code>!</code> 后面的方括号里是<strong>替代文字</strong>（图片加载失败或屏幕阅读器会用到）；</li>
+      <li>圆括号里是图片路径：可以是本地相对路径，也可以是网络 URL；</li>
+      <li>想要<strong>控制图片大小</strong>，标准 Markdown 做不到，可借助 HTML（见第 15 节）。</li>
+    </ul>
+    <hr>
+    <h2 id="9-引用">9. 引用</h2>
+    <p>用 <code>&gt;</code> 表示引用，可嵌套，可包含其他 Markdown 语法：</p>
+    <pre><code class="language-markdown">&gt; 这是一段引用。
+
+&gt; 多行引用
+&gt; 每行前面都可以加 `&gt;`。
+
+&gt; 引用可以嵌套
+&gt;
+&gt; &gt; 这是嵌套的引用。
+
+&gt; 引用里也能放列表：
+&gt;
+&gt; - 第一项
+&gt; - 第二项
+</code></pre>
+    <p>效果：</p>
+    <blockquote>
+      <p>这是一段引用。</p>
+      <p>引用里也能放列表：</p>
+      <ul>
+        <li>第一项</li>
+        <li>第二项</li>
+      </ul>
+    </blockquote>
+    <hr>
+    <h2 id="10-代码">10. 代码</h2>
+    <h3 id="101-行内代码">10.1 行内代码</h3>
+    <p>用一对反引号包裹：</p>
+    <pre><code class="language-markdown">请在终端运行 `npm install` 命令。
+</code></pre>
+    <p>效果：请在终端运行 <code>npm install</code> 命令。</p>
+    <h3 id="102-代码块围栏式">10.2 代码块（围栏式）</h3>
+    <p>用三个反引号包裹，<strong>可指定语言</strong>以启用语法高亮：</p>
+    <pre><code class="language-markdown">```python
+def hello(name):
+    print(f"Hello, {name}!")
+```
+
+```javascript
+console.log("Hello, world!");
+```
+</code></pre>
+    <p>渲染效果：</p>
+    <pre><code class="language-python">def hello(name):
+    print(f"Hello, {name}!")
+</code></pre>
+    <blockquote>
+      <p>语言标识可选：<code>python</code>、<code>javascript</code>、<code>bash</code>、<code>json</code>、<code>java</code>、<code>c</code>、<code>cpp</code>、
+<code>sql</code>、<code>html</code>、<code>latex</code> 等。不写语言也能显示纯文本代码块。</p>
+    </blockquote>
+    <h3 id="103-代码块缩进式">10.3 代码块（缩进式）</h3>
+    <p>缩进 4 个空格或一个 Tab 也表示代码块（老式语法），但不能高亮：</p>
+    <pre><code class="language-markdown">    print("这是一行代码")
+</code></pre>
+    <h3 id="104-代码块内含有三个反引号">10.4 代码块内含有三个反引号</h3>
+    <p>如果代码内容本身就包含三个反引号，用<strong>四个反引号</strong>包裹：</p>
+    <pre><code class="language-markdown">````markdown
+```python
+print("hello")
+```
+````
+</code></pre>
+    <hr>
+    <h2 id="11-表格">11. 表格</h2>
+    <p>用管道符 <code>|</code> 和连字符 <code>-</code> 构建表格，第二行定义对齐方式：</p>
+    <pre><code class="language-markdown">| 左对齐 | 居中 | 右对齐 |
+| :----- | :--: | -----: |
+| 苹果   | 香蕉 |  橘子  |
+| 100    | 200  |  300   |
+</code></pre>
+    <p>渲染效果：</p>
+    <table>
+      <thead>
+        <tr><th style="text-align: left;">左对齐</th><th style="text-align: center;">居中</th><th style="text-align: right;">右对齐</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="text-align: left;">苹果</td><td style="text-align: center;">香蕉</td><td style="text-align: right;">橘子</td></tr>
+        <tr><td style="text-align: left;">100</td><td style="text-align: center;">200</td><td style="text-align: right;">300</td></tr>
+      </tbody>
+    </table>
+    <p><strong>语法说明：</strong></p>
+    <table>
+      <thead>
+        <tr><th>第二行写法</th><th>对齐</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>------</code></td><td>默认左对齐</td></tr>
+        <tr><td><code>:-----</code></td><td>左对齐</td></tr>
+        <tr><td><code>:----:</code></td><td>居中对齐</td></tr>
+        <tr><td><code>-----:</code></td><td>右对齐</td></tr>
+      </tbody>
+    </table>
+    <p><strong>注意：</strong></p>
+    <ul>
+      <li>每行的列数要一致，表头分隔行<strong>必须有</strong>（至少 3 个 <code>-</code>）；</li>
+      <li>单元格内可以放链接、行内代码等，但<strong>不能</strong>直接放列表或多行段落；</li>
+      <li>单元格内有 <code>|</code> 时需转义为 <code>\|</code>。</li>
+    </ul>
+    <pre><code class="language-markdown">| 函数 | 说明 |
+|------|------|
+| `abs(x)` | 返回绝对值 `\|x\|` |
+</code></pre>
+    <hr>
+    <h2 id="12-分割线与转义">12. 分割线与转义</h2>
+    <h3 id="121-分割线">12.1 分割线</h3>
+    <p>用三个或以上连续的 <code>-</code>、<code>*</code> 或 <code>_</code>（独占一行）：</p>
+    <pre><code class="language-markdown">---
+
+***
+
+___
+</code></pre>
+    <p>渲染效果：</p>
+    <hr>
+    <blockquote>
+      <p>注意：单独一行的 <code>-</code> 若下方紧跟文字，可能被识别为二级标题，请确保分割线上下都是空行。</p>
+    </blockquote>
+    <h3 id="122-转义特殊字符">12.2 转义特殊字符</h3>
+    <p>Markdown 的格式符号需要转义才能原样显示，用反斜杠 <code>\</code>：</p>
+    <pre><code class="language-markdown">\*星号\* 不会变成斜体
+\# 井号不会变成标题
+\[ 方括号 \] 不会变成链接
+</code></pre>
+    <p><strong>需要转义的字符：</strong></p>
+    <pre><code>\ ` * _ { } [ ] ( ) # + - . !
+</code></pre>
+    <p>示例：<code>2 \* 3</code> 显示为 <code>2 * 3</code>。</p>
+    <hr>
+    <h2 id="13-任务清单">13. 任务清单</h2>
+    <p>GitHub / Typora / Obsidian 等支持任务清单语法：</p>
+    <pre><code class="language-markdown">- [ ] 未完成的任务
+- [x] 已完成的任务
+</code></pre>
+    <p>效果：</p>
+    <ul>
+      <li><input disabled="" type="checkbox"/> 未完成的任务</li>
+      <li><input checked="" disabled="" type="checkbox"/> 已完成的任务</li>
+    </ul>
+    <blockquote>
+      <p>空格或 <code>x</code>（不区分大小写）放在方括号内。部分工具点击方框即可切换完成状态。</p>
+    </blockquote>
+    <hr>
+    <h2 id="14-脚注与其他扩展语法">14. 脚注与其他扩展语法</h2>
+    <p>以下语法属于 <strong>GitHub 风格 / 各工具扩展</strong>，并非所有平台都支持。</p>
+    <h3 id="141-脚注">14.1 脚注</h3>
+    <pre><code class="language-markdown">这是一段话[^1]。
+
+[^1]: 这是脚注的内容，通常在页面底部显示。
+</code></pre>
+    <h3 id="142-高亮">14.2 高亮</h3>
+    <pre><code class="language-markdown">==高亮文字==
+</code></pre>
+    <p>效果：<mark>高亮文字</mark>（部分工具支持）</p>
+    <h3 id="143-上下标部分工具支持">14.3 上下标（部分工具支持）</h3>
+    <pre><code class="language-markdown">H~2~O         （下标，GitHub 支持）
+x^2^          （上标，Typora 支持）
+</code></pre>
+    <h3 id="144-emoji">14.4 Emoji</h3>
+    <pre><code class="language-markdown">:smile:  :rocket:  :tada:
+</code></pre>
+    <p>效果：:smile: :rocket: :tada:（部分平台会自动渲染为图标）</p>
+    <h3 id="145-目录部分工具支持">14.5 目录（部分工具支持）</h3>
+    <pre><code class="language-markdown">[TOC]
+</code></pre>
+    <p>在 Typora 等工具中会生成文档目录。</p>
+    <h3 id="146-折叠块github-支持">14.6 折叠块（GitHub 支持）</h3>
+    <pre><code class="language-markdown">&lt;details&gt;
+&lt;summary&gt;点击展开查看详情&lt;/summary&gt;
+
+这里是折叠的内容。
+
+&lt;/details&gt;
+</code></pre>
+    <hr>
+    <h2 id="15-进阶markdown-变体与实用技巧">15. 进阶：Markdown 变体与实用技巧</h2>
+    <h3 id="151-常见变体方言">15.1 常见变体（方言）</h3>
+    <table>
+      <thead>
+        <tr><th>变体</th><th>平台</th><th>主要扩展</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>GFM</strong></td><td>GitHub</td><td>任务清单、表格、删除线、自动链接</td></tr>
+        <tr><td><strong>CommonMark</strong></td><td>通用标准</td><td>标准化的核心语法</td></tr>
+        <tr><td><strong>Typora</strong></td><td>本地</td><td>TOC、上下标、流程图</td></tr>
+        <tr><td><strong>Obsidian</strong></td><td>本地</td><td>双向链接、Callout、LaTeX 公式</td></tr>
+        <tr><td><strong>GitLab Flavored</strong></td><td>GitLab</td><td>类似 GFM，额外支持 Mermaid</td></tr>
+      </tbody>
+    </table>
+    <blockquote>
+      <p>建议以 <strong>CommonMark + GFM</strong> 为基准写，兼容性最好。</p>
+    </blockquote>
+    <h3 id="152-在-markdown-中插入-html">15.2 在 Markdown 中插入 HTML</h3>
+    <p>Markdown 允许内嵌 HTML，可用来实现标准语法做不到的效果：</p>
+    <pre><code class="language-markdown">&lt;div align="center"&gt;
+  &lt;img src="logo.png" width="200"&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+</code></pre>
+    <h3 id="153-数学公式latex">15.3 数学公式（LaTeX）</h3>
+    <p>不少工具（Typora、Obsidian、GitHub、语雀）支持在 Markdown 中写 LaTeX 公式：</p>
+    <pre><code class="language-markdown">行内公式：$e^{i\pi} + 1 = 0$
+
+行间公式：
+$$
+\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}
+$$
+</code></pre>
+    <p>渲染效果（以支持公式的工具为例）：</p>
+    <p>$$
+\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}
+$$</p>
+    <h3 id="154-画流程图mermaid">15.4 画流程图（Mermaid）</h3>
+    <p>GitHub、语雀、Obsidian 等支持 Mermaid 图表：</p>
+    <pre><code class="language-markdown">```mermaid
+graph TD
+    A[开始] --&gt; B{判断}
+    B --&gt;|是| C[执行]
+    B --&gt;|否| D[结束]
+```
+</code></pre>
+    <h3 id="155-实用写作技巧">15.5 实用写作技巧</h3>
+    <ol>
+      <li><strong>空行大法</strong>：空行是「段落」的分界，也是很多语法（标题、列表、代码块）正确解析的前提，拿不准就加空行。</li>
+      <li><strong>先打草稿再排版</strong>：先用普通文本写内容，再套用 <code>#</code>、<code>-</code>、<code>**</code> 等标记。</li>
+      <li><strong>统一格式</strong>：列表符号全用 <code>-</code>，标题层级不跳级（比如不要从 <code>#</code> 直接跳 <code>###</code>）。</li>
+      <li><strong>用相对路径引用图片/文件</strong>，方便整个仓库移植。</li>
+      <li><strong>重要数据用表格</strong>，重点用 <strong>粗体</strong>，举例用 <code>行内代码</code>，条理立刻清晰。</li>
+    </ol>
+    <hr>
+    <h2 id="16-推荐工具与下一步学习">16. 推荐工具与下一步学习</h2>
+    <h3 id="161-工具推荐">16.1 工具推荐</h3>
+    <table>
+      <thead>
+        <tr><th>场景</th><th>推荐</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>快速编辑 + 预览</td><td>Typora、VS Code + Markdown All in One 插件</td></tr>
+        <tr><td>知识笔记管理</td><td>Obsidian、语雀、Notion</td></tr>
+        <tr><td>技术文档 / README</td><td>GitHub、GitLab、VitePress、Docusaurus</td></tr>
+        <tr><td>博客写作</td><td>Hexo、Hugo、VuePress、Halo</td></tr>
+        <tr><td>命令行快速编辑</td><td>vim / nano（加上预览插件）</td></tr>
+      </tbody>
+    </table>
+    <h3 id="162-下一步进阶方向">16.2 下一步进阶方向</h3>
+    <ol>
+      <li><strong>静态网站 / 博客</strong>：用 VitePress、Hugo、Hexo 把 Markdown 变成网站。</li>
+      <li><strong>API 文档工具</strong>：MkDocs、Docusaurus。</li>
+      <li><strong>与 LaTeX 结合</strong>：Markdown 写正文 + 用 Pandoc 转成 PDF/Word，公式与引用交给 LaTeX 引擎。</li>
+      <li><strong>CI 自动化</strong>：GitHub Actions 中自动把 Markdown 渲染成 PDF 发布。</li>
+      <li><strong>数据可视化</strong>：用 Mermaid / PlantUML 在 Markdown 里画图。</li>
+    </ol>
+    <h3 id="163-学习资源">16.3 学习资源</h3>
+    <ul>
+      <li>CommonMark 规范：<a href="https://commonmark.org">https://commonmark.org</a></li>
+      <li>GitHub Markdown 文档：<a href="https://docs.github.com/zh/get-started/writing-on-github">https://docs.github.com/zh/get-started/writing-on-github</a></li>
+      <li>Markdown Guide：<a href="https://www.markdownguide.org">https://www.markdownguide.org</a></li>
+      <li>Pandoc（格式转换神器）：<a href="https://pandoc.org">https://pandoc.org</a></li>
+    </ul>
+    <hr>
+    <h2 id="附录完整示例">附录：完整示例</h2>
+    <p>把下面内容保存为 <code>demo.md</code>，用任意支持 Markdown 的工具打开预览：</p>
+    <pre><code class="language-markdown"># 项目说明文档
+
+## 简介
+
+这是一个 **演示项目**，用于展示 *Markdown* 的基本写法。
+
+## 功能列表
+
+- [x] 支持标题
+- [x] 支持列表与表格
+- [ ] 支持自定义主题
+
+## 快速开始
+
+```bash
+npm install
+npm run dev
+</code></pre>
+    <h2 id="配置示例">配置示例</h2>
+    <table>
+      <thead>
+        <tr><th>配置项</th><th style="text-align: center;">默认值</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>theme</code></td><td style="text-align: center;">light</td><td>主题色</td></tr>
+        <tr><td><code>lang</code></td><td style="text-align: center;">zh-CN</td><td>界面语言</td></tr>
+        <tr><td><code>debug</code></td><td style="text-align: center;">false</td><td>是否开启调试</td></tr>
+      </tbody>
+    </table>
+    <h2 id="目录结构">目录结构</h2>
+    <pre><code class="language-text">project/
+├── src/       源码目录
+├── docs/      文档目录
+└── README.md  本文件
+</code></pre>
+    <h2 id="引用与链接">引用与链接</h2>
+    <blockquote>
+      <p>更多说明请访问 <a href="https://example.com">项目主页</a>。</p>
+    </blockquote>
+    <h2 id="公式需工具支持">公式（需工具支持）</h2>
+    <p>$$
+S(n) = \sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$</p>
+    <hr>
+    <h3 id="快速记忆卡">快速记忆卡</h3>
+    <pre><code>标题       : #  ~  ######
+段落       : 空行分隔
+换行       : 行尾两个空格
+粗体       : **文字**
+斜体       : *文字*
+删除线     : ~~文字~~
+无序列表   : - 项
+有序列表   : 1. 项
+链接       : [文字](URL)
+图片       : ![替代文字](路径)
+引用       : &gt; 内容
+行内代码   : `code`
+代码块     : ```语言
+表格       : | a | b |  +  --- 行
+分割线     : ---
+任务清单   : - [ ] / - [x]
+</code></pre>
+    <p>祝写作愉快，让排版回归简单！</p>
+
+  </section>
+
+</article>
+
+<footer>
+© 2026 HuJi
+</footer>
+</body>
+</html>
