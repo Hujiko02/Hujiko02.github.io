@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>katex 测试页 - HuJi Notes</title>
+  <link rel="stylesheet" href="./assets/tufte/tufte.css">
+  <link rel="stylesheet" href="./assets/tufte/local.css">
+
+  <link rel="stylesheet" href="./assets/katex/katex.min.css">
+  <script defer src="./assets/katex/katex.min.js"></script>
+  <script defer src="./assets/katex/auto-render.min.js"></script>
+  <script defer src="./assets/katex/init.js"></script>
+
+  <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml">
+</head>
+
+<body>
+
+<header>
+  <p>
+    ₍^. .^₎⟆
+    <a href="./index.html">首页</a>
+    <a href="./diary/index.html">日记</a>
+    <a href="./about/index.html">关于</a>
+  </p>
+</header>
+
+<article>
+
+  <h1>Tufte 完整示例</h1>
+  <p class="subtitle">所有可用功能各演一遍</p>
+
+  <!-- ───────────────────────────────────────────────
+       每个 <section> 是一个带上下留白的段落块。
+       正文文字必须写进 section，宽度的 55% 规则来自
+       section > p，直接写在 article 下不会被约束。
+       ─────────────────────────────────────────────── -->
+  <section>
+    <h2>Katex演示</h2>
+    <p>行内公式：$e^{i\pi}+1=0$</p>
+    <p>行间公式：$$\int_{-\infty}^{\infty} e^{-x^2}\,\mathrm{d}x=\sqrt{\pi}$$</p>
+    <p>$$E = mc^2$$</p>
+    <p>代码块里的不渲染：<code>$x^2$</code></p>
+    <!-- 作者规矩：newthought（小型大写）与 <h2> 标题二选一，全站统一。
+         中文没有小型大写，newthought 对汉字无视觉效果的，
+         所以中文站点用 <h2> 更合适。此处两行演示 newthought 仅供拉丁文。 -->
+    <p><span class="newthought">Tufte 风格</span>的核心不是装饰，
+    而是把「与正文相关但非必需」的信息——引注、旁白、小图——放到页边，
+    让读者的视线不必跳到底部。</p>
+
+    <p>这一行演示行内引用样式<label for="sn-demo" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-demo" class="margin-toggle"><span class="sidenote">这是一条投注（sidenote）。它带自动编号，编号由 CSS counter 生成，没有 JavaScript。</span>，
+    注意编号是紧挨着这句话的，而内容写在页边。缩窄窗口到 760px 以下，
+    边注会折叠成可点击的行内注。</p>
+
+    <p>颜色只保留灰阶，彩色留给图表：纸白底 <code>#fffff8</code>、近黑正文
+    <code>#111</code>。tufte.css 1.9.0 已内置 <code>prefers-color-scheme: dark</code>
+    暗色模式，无需额外代码。</p>
+  </section>
+
+  <!-- ───────────────────────────────────────────────
+       边注与 margin note
+       结构必须严格照抄，尤其是 input 和内容 span 之间的相邻关系：
+       CSS 用 .margin-toggle:checked + .sidenote 选中它，
+       中间插任何元素都会让窄屏折叠失效。
+       id 前缀约定：sidenote 用 sn-，marginnote 用 mn-。
+       ─────────────────────────────────────────────── -->
+  <section>
+    <h2>两种边注</h2>
+
+    <p>带编号的投注用 <code>sidenote-number</code><label for="sn-numbered" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-numbered" class="margin-toggle"><span class="sidenote">编号来自 <code>counter-increment: sidenote-counter</code>，
+    所以你不必手工写数字，插入删除都不会错位。</span>，编号与内容一一对应，
+    适合引文出处。</p>
+
+    <p>不带编号的叫 margin note<label for="mn-oplus" class="margin-toggle">⊕</label><input type="checkbox" id="mn-oplus" class="margin-toggle"><span class="marginnote">宽屏下 margin note 与投注外观相同，只是省略了编号。<code>⊕</code> 这个符号在宽屏被 <code>label.margin-toggle:not(.sidenote-number)</code> 隐藏，只在窄屏出现，作为展开开关。</span>，
+    适合与正文没有严格指向关系的旁白，或者干脆放一张小图。</p>
+
+    <p>窄屏下投注靠 <code>&lt;label&gt;</code> + 隐藏复选框折叠，这是纯 CSS 方案；
+    作者明确拒绝用 JS 做这件事，他认为 JS 方案「常常更好」但不在本项目范围内。</p>
+  </section>
+
+  <!-- ───────────────────────────────────────────────
+       正文栏内图 / 满宽图 / 页边图
+       规矩：figure 不要塞进 <p> 里。
+       ─────────────────────────────────────────────── -->
+  <section>
+    <h2>三种图</h2>
+
+    <p>正文栏内的图默认限制在 55% 宽：</p>
+
+    <figure>
+      <img src="./assets/images/1.jpg" alt="示例图，来自 images/1.jpg">
+      <figcaption>正文栏内图。图注向右浮动，最宽占图片宽度的 40%，不会跑到边注栏里去。</figcaption>
+    </figure>
+
+    <p>满宽图加 <code>fullwidth</code> 类，必须仍在 <code>article</code> 内才会撑开：</p>
+
+    <figure class="fullwidth">
+      <img src="./assets/images/1.jpg" alt="满宽示例图">
+      <figcaption>满宽图。用于时间线、地图、数据可视化这类拒绝缩水的图形，图注此时右对齐。</figcaption>
+    </figure>
+
+    <p>页边小图：把 <code>&lt;img&gt;</code> 直接放进 margin note 里，无需 figure 包裹<label for="mn-inline-img" class="margin-toggle">⊕</label><input type="checkbox" id="mn-inline-img" class="margin-toggle"><span class="marginnote"><img src="./assets/images/1.jpg" alt="页边小图">页边图与它注释的那句话相邻，读者不用来回翻。</span>，这样图和它的引用就贴在一起。</p>
+
+  </section>
+
+  <!-- ───────────────────────────────────────────────
+       Epigraph：章节题词，blockquote 内用 <footer> 放出处
+       ─────────────────────────────────────────────── -->
+  <section>
+    <h2>题词</h2>
+
+    <div class="epigraph">
+      <blockquote>
+        <p>上述引文说明，量化的证据若无恰当的呈现，便失去其说服力。</p>
+        <footer>Edward Tufte, <cite>The Visual Display of Quantitative Information</cite></footer>
+      </blockquote>
+    </div>
+
+    <p>题词用 <code>div.epigraph</code> 包裹一组 <code>blockquote</code>，
+    可以叠放多条；出处写进 <code>blockquote</code> 内的 <code>footer</code>。</p>
+  </section>
+
+  <!-- ───────────────────────────────────────────────
+       表格：外层 div.table-wrapper 负责窄屏横向滚动
+       ─────────────────────────────────────────────── -->
+  <section>
+    <h2>表格</h2>
+
+    <p>宽表必须包一层 <code>div.table-wrapper</code>，否则窄屏会撑破版心。
+    注意：tufte.css 1.9.0 完全没写表格的边框样式，零边框是它的原生状态，
+    横线样式由 <code>assets/tufte/local.css</code> 里的第 4 节补上。</p>
+
+    <div class="table-wrapper">
+      <table>
+        <caption>三种边注对照</caption>
+        <thead>
+          <tr><th>元素</th><th>类名</th><th>编号</th><th>窄屏表现</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>投注</td><td><code>sidenote</code></td><td>自动</td><td>折叠为可点编号</td></tr>
+          <tr><td>边注</td><td><code>marginnote</code></td><td>无</td><td>折叠为 ⊕ 开关</td></tr>
+          <tr><td>页边图</td><td><code>marginnote</code> + <code>img</code></td><td>无</td><td>同上</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────────────────
+       代码与列表
+       ─────────────────────────────────────────────── -->
+  <section>
+    <h2>代码与列表</h2>
+
+    <p>行内代码用 <code>&lt;code&gt;</code>。整段代码放 <code>pre &gt; code</code>，
+    它会自动限宽并横向滚动：</p>
+
+    <pre><code>
+# 本地预览本模板
+cd /home/wuji/Projects/html
+python3 -m http.server 8000
+# 然后打开 http://localhost:8000/tufte.html
+    </code></pre>
+
+    <p>列表限宽 50%，缩进 5%，与段落左边缘对齐：</p>
+    <ul>
+      <li>CSS 只做样式，交互靠隐藏复选框</li>
+      <li>不处理打印版本</li>
+      <li>不集成静态站点生成器，那部分留给上层工具</li>
+    </ul>
+  </section>
+
+  <!-- ───────────────────────────────────────────────
+       结尾：把本模板的改动集中在可检查的清单里
+       ─────────────────────────────────────────────── -->
+  <section>
+    <h2>本模板相对官方改了什么</h2>
+
+    <ul>
+      <li>新增 <code>assets/tufte/local.css</code>：中文回退字体、CJK 行高、标点挤压、表格横线</li>
+      <li><code>assets/tufte/tufte.css</code> 与 <code>assets/tufte/et-book/</code> 为官方 1.9.0 原样，未修改</li>
+      <li>预加载了一个 woff 正文字体，属可选优化，删掉不影响功能</li>
+      <li>示例正文改用 <code>&lt;h2&gt;</code> 而非 <code>newthought</code>，因为中文没有小型大写</li>
+    </ul>
+
+    <p>要换内容时，保留 <code>&lt;article&gt;</code> 和 <code>&lt;section&gt;</code> 骨架、
+    保留边注那三件套（label + input + span）的相邻写法，其余随便改。</p>
+  </section>
+
+</article>
+<footer>
+© 2026 HuJi
+</footer>
+
+</body>
+</html>
