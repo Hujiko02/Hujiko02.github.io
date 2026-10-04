@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./assets/tufte/local.css">
+
+  <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml">
+</head>
+
+<body>
+
+<article>
+
+  <h1>Verilog 作业</h1>
+  <p>姓名：胡济 学号：20243000124 日期：2026-10-04</p>
+  
+  <section>
+    <h3>3.44 使用 Verilog HDL 设计一个由四个 4 位加法器组成的 16 位二进制加法器及其测试程序。</h3>
+    <p>4位加法器 adder4.v</p>
+    <pre><code>
+    // 4位加法器
+    module adder4(
+        input  [3:0] a,
+        input  [3:0] b,
+        input        cin,
+        output [3:0] sum,
+        output       cout
+    );
+        assign {cout, sum} = a + b + cin;
+    endmodule
+    </code></pre>
+
+    <p>16位加法器 adder16.v</p>
+    <pre><code>
+    // 16位加法器 = 4个4位加法器首尾相连
+    module adder16(
+        input  [15:0] a,
+        input  [15:0] b,
+        input         cin,
+        output [15:0] sum,
+        output        cout
+    );
+        wire c1, c2, c3;   // 中间进位
+
+        adder4 u0 (.a(a[3:0]),   .b(b[3:0]),   .cin(cin), .sum(sum[3:0]),   .cout(c1));
+        adder4 u1 (.a(a[7:4]),   .b(b[7:4]),   .cin(c1),  .sum(sum[7:4]),   .cout(c2));
+        adder4 u2 (.a(a[11:8]),  .b(b[11:8]),  .cin(c2),  .sum(sum[11:8]),  .cout(c3));
+        adder4 u3 (.a(a[15:12]), .b(b[15:12]), .cin(c3),  .sum(sum[15:12]), .cout(cout));
+    endmodule
+    </code></pre>
+    <p>16位加法器测试程序  tb_adder16.v</p>
+    <pre><code>
+    // 16位加法器测试程序
+    `timescale 1ns/1ps
+
+    module tb_adder16;
+        reg  [15:0] a, b;      // 输入用 reg
+        reg         cin;
+        wire [15:0] sum;       // 输出用 wire
+        wire        cout;
+
+        adder16 uut (
+            .a(a), .b(b), .cin(cin),
+            .sum(sum), .cout(cout)
+        );
+
+        initial begin
+            // ---------- 第1组测试 ----------
+            a = 16'b0000000000000000; b = 16'b0000000000000000; cin = 1'b0;
+            #10;
+            $display("a=%b b=%b cin=%b  ->  cout=%b sum=%b",
+                    a, b, cin, cout, sum);
+            // ---------- 第2组测试 ----------
+            a = 16'b0011000000111001; b = 16'b0001101010000101; cin = 1'b0;
+            #10;
+            $display("a=%b b=%b cin=%b  ->  cout=%b sum=%b",
+                    a, b, cin, cout, sum);
+            // ---------- 第3组测试: 溢出 ----------
+            a = 16'b1111111111111111; b = 16'b0000000000000001; cin = 1'b0;
+            #10;
+            $display("a=%b b=%b cin=%b  ->  cout=%b sum=%b",
+                    a, b, cin, cout, sum);
+            $finish;
+        end
+    endmodule
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>3.47 用 Verilog HDL 设计一个用 2-4 译码器构成的 3-8 译码器。</h3>
+    <p>2-4编码器 decoder2to4.v</p>
+    <pre><code>
+    // 2-4 译码器 (带使能 en)
+    module decoder2to4(
+        input      [1:0] in,
+        input            en,
+        output reg [3:0] out
+    );
+        always @(*) begin
+            if (en)
+                out = 4'b0001 << in;   // 第 in 位为1
+            else
+                out = 4'b0000;
+        end
+    endmodule
+    </code></pre>
+
+    <p>3-8编码器 decoder3to8.v</p>
+    <pre><code>
+    // 3-8 译码器 = 两个 2-4 译码器
+    // in[2]=0 用低片, in[2]=1 用高片
+    module decoder3to8(
+        input      [2:0] in,
+        output     [7:0] out
+    );
+        wire [3:0] lo, hi;
+
+        decoder2to4 u0 (.in(in[1:0]), .en(~in[2]), .out(lo));  // 低4位
+        decoder2to4 u1 (.in(in[1:0]), .en( in[2]), .out(hi));  // 高4位
+
+        assign out = {hi, lo};   // 拼成8位
+    endmodule
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>3.48 用 Verilog HDL 设计一个用 8 位奇校验位发生器任务构成的 16 位偶校验位发生器。</h3>
+    <p>8位奇校验位发生器 odd_parity8.v</p>
+    <pre><code>
+    // 8位奇校验位发生器
+    // 奇校验: {data, p} 中 1 的个数是奇数  ->  p = ~^data
+    module odd_parity8(
+        input  [7:0] data,
+        output       p
+    );
+        assign p = ~^data;   // ^data 是8位异或, 取反就是奇校验位
+    endmodule
+    </code></pre>
+    
+    <p>16位偶校验位发生器 parity16.v</p>
+    <pre><code>
+    // 16位偶校验位发生器 = 用两个8位奇校验位发生器构成
+    // 偶校验: {data16, p} 中 1 的个数是偶数  ->  p = ^data16
+    module parity16(
+        input  [15:0] data,
+        output        p_even
+    );
+        wire p_low, p_high;   // 两个8位奇校验位
+
+        odd_parity8 u0 (.data(data[7:0]),  .p(p_low));   // 低8位
+        odd_parity8 u1 (.data(data[15:8]), .p(p_high));  // 高8位
+
+        // 两个奇校验位异或 = 16位偶校验位
+        assign p_even = p_low ^ p_high;
+    endmodule
+    </code></pre>
+  </section>
+
+</article>
+
+</body>
+</html>

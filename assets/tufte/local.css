@@ -41,6 +41,18 @@ div.table-wrapper,
         sans-serif;
 }
 
+
+code, kbd, pre, samp, pre > code,
+.mono {
+    font-family:
+        "JetBrains Maple Mono",     /* 本机已装的拉丁等宽 */
+        "Noto Sans Mono CJK SC",    /* 本机已装的中文等宽，紧跟其后 */
+        "Sarasa Mono SC",           /* 别的平台装了才命中；排 Noto 之后，否则会被 fontconfig 顶替劫持 */
+        "SF Mono", Menlo, Consolas, "Liberation Mono", Courier,
+        "PingFang SC", "Microsoft YaHei",
+        monospace;
+}
+
 /* 2) 表格：booktabs 三线表
    tufte.css（连上游）里一条 th/td 规则都没有，所以表格既没有线也没内边距，
    浏览器又把 th 默认居中、td 默认居左，表头和内容对不齐。
