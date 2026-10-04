@@ -26,7 +26,6 @@ body {
         et-book,
         "Noto Serif CJK SC",        /* 本机已装的宋体，中文首选 */
         "Source Han Serif SC",      /* 思源宋体：macOS / Windows 上装了则命中 */
-        "书宋-简"
         "Songti SC",                /* macOS 宋体 */
         "SimSun", "STSong",         /* Windows 宋体 */
         Palatino, "Palatino Linotype", Georgia, serif;
