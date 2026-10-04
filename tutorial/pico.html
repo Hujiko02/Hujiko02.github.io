@@ -41,20 +41,20 @@
       <li><a href="#1-简介">简介</a></li>
       <li><a href="#2-安装-visual-studio-code">安装 Visual Studio Code</a></li>
       <li><a href="#3-安装-raspberry-pi-pico-vs-code-扩展">安装 Raspberry Pi Pico VS Code 扩展</a>
-   - <a href="#31-安装依赖">3.1 安装依赖</a>
-   - <a href="#32-安装扩展">3.2 安装扩展</a></li>
+        - <a href="#31-安装依赖">3.1 安装依赖</a>
+        - <a href="#32-安装扩展">3.2 安装扩展</a></li>
       <li><a href="#4-加载并调试项目">加载并调试项目</a>
-   - <a href="#41-编译并运行-blink">4.1 编译并运行 blink</a>
-   - <a href="#42-修改代码并重新运行">4.2 修改代码并重新运行</a>
-   - <a href="#43-调试">4.3 调试</a></li>
+        - <a href="#41-编译并运行-blink">4.1 编译并运行 blink</a>
+        - <a href="#42-修改代码并重新运行">4.2 修改代码并重新运行</a>
+        - <a href="#43-调试">4.3 调试</a></li>
       <li><a href="#5-用-c-语言说-hello-world">用 C 语言说 "Hello World"</a>
-   - <a href="#51-pico-系列设备上的串口输入输出">5.1 Pico 系列设备上的串口输入输出</a>
-   - <a href="#52-创建项目">5.2 创建项目</a>
-   - <a href="#53-构建项目">5.3 构建项目</a>
-   - <a href="#54-查看控制台输出">5.4 查看控制台输出</a>
-- <a href="#附录-a-debugprobe调试探针">附录 A. Debugprobe（调试探针）</a>
-- <a href="#附录-b-picotool">附录 B. Picotool</a>
-- <a href="#附录-c-命令行工具链配置">附录 C. 命令行工具链配置</a></li>
+        - <a href="#51-pico-系列设备上的串口输入输出">5.1 Pico 系列设备上的串口输入输出</a>
+        - <a href="#52-创建项目">5.2 创建项目</a>
+        - <a href="#53-构建项目">5.3 构建项目</a>
+        - <a href="#54-查看控制台输出">5.4 查看控制台输出</a>
+        - <a href="#附录-a-debugprobe调试探针">附录 A. Debugprobe（调试探针）</a>
+        - <a href="#附录-b-picotool">附录 B. Picotool</a>
+        - <a href="#附录-c-命令行工具链配置">附录 C. 命令行工具链配置</a></li>
     </ol>
     <hr>
     <h2 id="1-简介">1. 简介</h2>
@@ -170,9 +170,9 @@ $ sudo apt install code
       <li>把 250ms（四分之一秒）改为 100（十分之一秒）：</li>
     </ol>
     <p><code>c
-   #ifndef LED_DELAY_MS
-   #define LED_DELAY_MS 100
-   #endif LED_DELAY_MS</code></p>
+    #ifndef LED_DELAY_MS
+    #define LED_DELAY_MS 100
+    #endif LED_DELAY_MS</code></p>
     <ol start="2">
       <li>断开设备连接，然后按住 BOOTSEL 按钮重新连接。</li>
       <li>按下状态栏中的 <strong>Run</strong> 按钮，或侧边栏中的 <strong>Run project</strong> 按钮。</li>
