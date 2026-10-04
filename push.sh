@@ -8,7 +8,7 @@ cd "$(dirname "$0")"
 
 git add -A
 git diff --cached --quiet ||
-  git commit -m "${1:-docs: update $(date '+%F %T')}"
+git commit -m "${1:-docs: update $(date '+%F %T')}"
 
 # 多机协作：远端可能已有新提交，先 rebase 再推
 if ! git pull origin main --rebase --autostash; then
