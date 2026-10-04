@@ -1,0 +1,61 @@
+@page {
+  size: A4;
+  margin: 2.54cm 3.18cm; /* 上下 2.54cm，左右 3.18cm，即 Word 默认 */
+}
+
+/* 正文：中文宋体，英文/数字 Times New Roman */
+body {
+  font-family:
+    "Times New Roman",          /* 英文、数字：论文标准 */
+    "Noto Serif CJK SC",        /* 思源宋体 / Noto Serif CJK，中文首选 */
+    serif;
+  font-size: 12pt;              /* 小四；如果要求五号，改成 10.5pt */
+  line-height: 1.5;             /* 或按学校要求改成 20pt / 22pt */
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+/* 各级标题：中文黑体，英文/数字 Times New Roman */
+h1, h2, h3, h4, h5, h6,
+.title,
+.heading,
+.sans {
+  font-family:
+    "Times New Roman",
+    "Noto Sans CJK SC",         /* 思源黑体 / Noto Sans CJK */
+    sans-serif;
+  font-weight: 700;
+}
+
+/* 表格内容：论文里表内文字通常也用宋体 */
+div.table-wrapper,
+table {
+  font-family:
+    "Times New Roman",
+    "Noto Serif CJK SC",
+    serif;
+}
+
+/* 表题、图题：通常用黑体 */
+caption,
+.table-title,
+.figure-title {
+  font-family:
+    "Times New Roman",
+    "Noto Sans CJK SC",
+    sans-serif;
+  font-weight: 700;
+}
+
+/* 代码、等宽内容：保留你原来的设置 */
+code, kbd, pre, samp, pre > code,
+.mono {
+  font-family:
+    "JetBrains Maple Mono",
+    monospace;
+}
+/* 可选：正文段落首行缩进 2 字符。按学校模板决定是否启用 */
+p {
+  margin: 0 0 0.5em;
+  text-indent: 2em;
+}

@@ -3,10 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./assets/tufte/local.css">
-
-  <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/tufte/homework.css">
 </head>
 
 <body>
@@ -14,7 +11,7 @@
 <article>
 
   <h1>Verilog 作业</h1>
-  <p>姓名：胡济 学号：20243000124 日期：2026-10-04</p>
+  <p>姓名：胡济  学号：20243000124</p>
   
   <section>
     <h3>3.44 使用 Verilog HDL 设计一个由四个 4 位加法器组成的 16 位二进制加法器及其测试程序。</h3>
@@ -90,7 +87,7 @@
 
   <section>
     <h3>3.47 用 Verilog HDL 设计一个用 2-4 译码器构成的 3-8 译码器。</h3>
-    <p>2-4编码器 decoder2to4.v</p>
+    <p>2-4译码器 decoder2to4.v</p>
     <pre><code>
     // 2-4 译码器 (带使能 en)
     module decoder2to4(
@@ -127,33 +124,32 @@
 
   <section>
     <h3>3.48 用 Verilog HDL 设计一个用 8 位奇校验位发生器任务构成的 16 位偶校验位发生器。</h3>
-    <p>8位奇校验位发生器 odd_parity8.v</p>
-    <pre><code>
-    // 8位奇校验位发生器
-    // 奇校验: {data, p} 中 1 的个数是奇数  ->  p = ~^data
-    module odd_parity8(
-        input  [7:0] data,
-        output       p
-    );
-        assign p = ~^data;   // ^data 是8位异或, 取反就是奇校验位
-    endmodule
-    </code></pre>
     
     <p>16位偶校验位发生器 parity16.v</p>
     <pre><code>
-    // 16位偶校验位发生器 = 用两个8位奇校验位发生器构成
-    // 偶校验: {data16, p} 中 1 的个数是偶数  ->  p = ^data16
-    module parity16(
+    module even_parity16(
         input  [15:0] data,
-        output        p_even
+        output        even
     );
-        wire p_low, p_high;   // 两个8位奇校验位
 
-        odd_parity8 u0 (.data(data[7:0]),  .p(p_low));   // 低8位
-        odd_parity8 u1 (.data(data[15:8]), .p(p_high));  // 高8位
+    reg odd_hi, odd_lo;
 
-        // 两个奇校验位异或 = 16位偶校验位
-        assign p_even = p_low ^ p_high;
+    // 8位奇校验位发生器任务
+    task odd8;
+        input  [7:0] d;
+        output       p;
+        begin
+            p = ~^d;   // 8位奇校验位：使 d+p 中 1 的个数为奇数
+        end
+    endtask
+
+    always @(*) begin
+        odd8(data[15:8], odd_hi);
+        odd8(data[7:0],  odd_lo);
+    end
+
+    // 16位偶校验位 = 两个8位奇校验位异或
+    assign even = odd_hi ^ odd_lo;
     endmodule
     </code></pre>
   </section>
