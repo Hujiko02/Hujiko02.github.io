@@ -34,7 +34,6 @@ Matplotlib 是 Python 里最常用的<strong>绘图库</strong>，只需几行�
 折线图、散点图、柱状图、直方图等，还能把图保存成 PNG、PDF、SVG 等格式。
 本教程所有插图均用真实代码生成，跟着做就能得到一模一样的结果。</p>
     </blockquote>
-    <hr>
     <h2 id="目录">目录</h2>
     <ol>
       <li><a href="#1-matplotlib-是什么">Matplotlib 是什么</a></li>
@@ -50,7 +49,6 @@ Matplotlib 是 Python 里最常用的<strong>绘图库</strong>，只需几行�
       <li><a href="#11-常见问题与技巧">常见问题与技巧</a></li>
       <li><a href="#12-下一步学习">下一步学习</a></li>
     </ol>
-    <hr>
     <h2 id="1-matplotlib-是什么">1. Matplotlib 是什么</h2>
     <p><strong>Matplotlib</strong> 是 Python 生态中最经典、最通用的<strong>二维绘图库</strong>，由 John D. Hunter 于 2003 年创建：</p>
     <ul>
@@ -73,7 +71,6 @@ Matplotlib 是 Python 里最常用的<strong>绘图库</strong>，只需几行�
     <blockquote>
       <p>一句话总结：<strong>Matplotlib 让你用 Python 把数据变成图片。</strong></p>
     </blockquote>
-    <hr>
     <h2 id="2-安装与环境">2. 安装与环境</h2>
     <h3 id="21-安装">2.1 安装</h3>
     <pre><code class="language-bash"># 只装 matplotlib
@@ -117,9 +114,11 @@ ax.grid(True, alpha=0.3)
 plt.show()
 </code></pre>
     <p>效果：</p>
-    <p><img alt="折线图示例" src="images/matplotlib/line.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/matplotlib/line.png" alt="折线图示例">
+      <figcaption>折线图示例</figcaption>
+    </figure>
     <p><strong>最小可运行结构</strong>就是四步：<strong>造数据 → 创建 <code>fig, ax</code> → 用 <code>ax</code> 画图/修饰 → 显示</strong>。其余都是「锦上添花」。</p>
-    <hr>
     <h2 id="4-核心概念figure-与-axes">4. 核心概念：Figure 与 Axes</h2>
     <p>这是 Matplotlib 最重要、也最让新手困惑的一组概念。</p>
     <table class="fullwidth">
@@ -136,7 +135,7 @@ plt.show()
       <li><code>plt.plot()</code> 这种「快速写法」由 pyplot 自动帮你建一个 <code>Figure</code> 和一个 <code>Axes</code>；</li>
       <li>本教程主要使用<strong>面向对象写法</strong>：先创建 <code>fig, ax = plt.subplots()</code>，再用 <code>ax</code> 的方法画图和修饰。</li>
     </ul>
-    <p><strong>两种写法对比：</strong></p>
+    <p><strong>两种写法对比：</strong><label for="sn-mpl-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-mpl-1" class="margin-toggle"><span class="sidenote"><strong>建议</strong>：主要使用面向对象写法。先创建 <code>fig, ax</code>，再用 <code>ax</code> 调用画图和修饰方法； 只有 <code>plt.subplots()</code>、<code>plt.show()</code>、<code>plt.style.use()</code>、<code>plt.rcParams</code> 等少数步骤还需要通过 <code>pyplot</code> 完成。</span></p>
     <pre><code class="language-python"># 写法一：pyplot 快速写法（了解即可，适合临时单图）
 plt.plot([1, 2, 3], [2, 4, 3])
 plt.show()
@@ -147,11 +146,6 @@ ax.plot([1, 2, 3], [2, 4, 3])
 ax.set_title("my plot")
 fig.savefig("out.png")
 </code></pre>
-    <blockquote>
-      <p><strong>建议</strong>：主要使用面向对象写法。先创建 <code>fig, ax</code>，再用 <code>ax</code> 调用画图和修饰方法；
-只有 <code>plt.subplots()</code>、<code>plt.show()</code>、<code>plt.style.use()</code>、<code>plt.rcParams</code> 等少数步骤还需要通过 <code>pyplot</code> 完成。</p>
-    </blockquote>
-    <hr>
     <h2 id="5-常用图表类型">5. 常用图表类型</h2>
     <h3 id="51-折线图">5.1 折线图</h3>
     <p>用于看数据<strong>随某个变量（通常是 x）的变化趋势</strong>。</p>
@@ -198,7 +192,10 @@ fig.colorbar(sc, ax=ax, label="value")
 plt.show()
 </code></pre>
     <p>效果（颜色代表数值，颜色条 <code>colorbar</code> 说明含义）：</p>
-    <p><img alt="散点图示例" src="images/matplotlib/scatter.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/matplotlib/scatter.png" alt="散点图示例">
+      <figcaption>散点图示例</figcaption>
+    </figure>
     <h3 id="53-柱状图">5.3 柱状图</h3>
     <p>用于<strong>对比不同类别的数值大小</strong>。<code>ax.bar</code> 画竖直柱，<code>ax.barh</code> 画水平柱。</p>
     <pre><code class="language-python">import matplotlib.pyplot as plt
@@ -215,7 +212,10 @@ for i, v in enumerate(values):
 plt.show()
 </code></pre>
     <p>效果：</p>
-    <p><img alt="柱状图示例" src="images/matplotlib/bar.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/matplotlib/bar.png" alt="柱状图示例">
+      <figcaption>柱状图示例</figcaption>
+    </figure>
     <p><strong>其他柱状图变体：</strong></p>
     <table>
       <thead>
@@ -241,7 +241,10 @@ ax.set_ylabel("Frequency")
 plt.show()
 </code></pre>
     <p>效果：</p>
-    <p><img alt="直方图示例" src="images/matplotlib/hist.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/matplotlib/hist.png" alt="直方图示例">
+      <figcaption>直方图示例</figcaption>
+    </figure>
     <p>关键参数：<code>bins</code> 决定柱子的数量/边界，<code>density=True</code> 可把纵轴改为概率密度。</p>
     <h3 id="55-饼图">5.5 饼图</h3>
     <p>用于展示<strong>各部分占整体的比例</strong>。</p>
@@ -278,7 +281,6 @@ plt.show()
         <tr><td>极坐标</td><td><code>plt.subplots(subplot_kw={"projection": "polar"})</code> 后 <code>ax.plot</code></td><td>角度数据</td></tr>
       </tbody>
     </table>
-    <hr>
     <h2 id="6-美化你的图">6. 美化你的图</h2>
     <p>好的图清楚、美观。这里列出最常用的美化手段。</p>
     <h3 id="61-标题与坐标轴标签">6.1 标题与坐标轴标签</h3>
@@ -318,10 +320,7 @@ ax.grid(True, linestyle="--", alpha=0.5)   # 虚线、半透明
 ax.spines["top"].set_visible(False)  # 隐藏上边框
 ax.spines["right"].set_visible(False) # 隐藏右边框
 </code></pre>
-    <blockquote>
-      <p><code>fig.tight_layout()</code> 能自动调整子图间距，避免标签被切掉，强烈建议每次都加。</p>
-    </blockquote>
-    <hr>
+    <p><label for="mn-mpl-1" class="margin-toggle">⊕</label><input type="checkbox" id="mn-mpl-1" class="margin-toggle"><span class="marginnote"><code>fig.tight_layout()</code> 能自动调整子图间距，避免标签被切掉，强烈建议每次都加。</span></p>
     <h2 id="7-子图subplots">7. 子图：subplots</h2>
     <p>一图放多个小图，适合<strong>对比展示多组数据</strong>。最常用的是 <code>plt.subplots(m, n)</code>，它返回一个 <code>Figure</code> 和一个 <code>Axes</code> 组成的二维数组。</p>
     <pre class="fullwidth"><code class="language-python">import numpy as np
@@ -344,7 +343,10 @@ fig.tight_layout()
 plt.show()
 </code></pre>
     <p>效果：</p>
-    <p><img alt="子图示例" src="images/matplotlib/subplot.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/matplotlib/subplot.png" alt="子图示例">
+      <figcaption>子图示例</figcaption>
+    </figure>
     <p><strong>进阶技巧：</strong></p>
     <table>
       <thead>
@@ -357,7 +359,6 @@ plt.show()
         <tr><td>双子坐标轴</td><td>用 <code>ax.twinx()</code> 在右侧再加一个 y 轴</td></tr>
       </tbody>
     </table>
-    <hr>
     <h2 id="8-保存图片">8. 保存图片</h2>
     <p>保存图用 <code>fig.savefig()</code>，支持非常丰富的格式。<strong>一定要放在 <code>plt.show()</code> 之前调用</strong>，否则保存的是空图（有些环境 <code>show</code> 会清空画布）。</p>
     <pre><code class="language-python">fig.savefig("plot.png")                    # PNG，默认 dpi=100
@@ -372,7 +373,6 @@ fig.savefig("plot.jpg", bbox_inches="tight")  # 自动裁剪空白
       <li>论文投稿通常用 <strong>PDF / EPS / 300dpi 的 PNG</strong>；</li>
       <li>想保存多张图，每画完一张就 <code>fig.savefig(...)</code> 再 <code>plt.close(fig)</code> 释放内存。</li>
     </ul>
-    <hr>
     <h2 id="9-文本注释与数学公式">9. 文本注释与数学公式</h2>
     <h3 id="91-添加文字">9.1 添加文字</h3>
     <p><code>ax.text(x, y, "文字")</code> 在指定坐标写文字，<code>ax.annotate()</code> 可加箭头。</p>
@@ -390,8 +390,11 @@ ax.set_title(r"Decaying oscillation: $e^{-x/2}\sin(3x)$")
 ax.legend()
 </code></pre>
     <p>效果（标题和图的公式都用上了 mathtext）：</p>
-    <p><img alt="数学公式示例" src="images/matplotlib/mathtext.png"/></p>
-    <p><strong>常用写法：</strong></p>
+    <figure class="fullwidth">
+      <img src="images/matplotlib/mathtext.png" alt="数学公式示例">
+      <figcaption>数学公式示例</figcaption>
+    </figure>
+    <p><strong>常用写法：</strong><label for="sn-mpl-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-mpl-2" class="margin-toggle"><span class="sidenote">提示：字符串前加 <code>r</code>（如 <code>r"$...$"</code>）表示原始字符串，可避免反斜杠被转义。</span></p>
     <table>
       <thead>
         <tr><th>想要的效果</th><th>写法</th></tr>
@@ -407,13 +410,9 @@ ax.legend()
         <tr><td>函数名</td><td><code>\sin</code>、<code>\cos</code>、<code>\log</code></td></tr>
       </tbody>
     </table>
-    <blockquote>
-      <p>提示：字符串前加 <code>r</code>（如 <code>r"$...$"</code>）表示原始字符串，可避免反斜杠被转义。</p>
-    </blockquote>
-    <hr>
     <h2 id="10-全局样式与风格">10. 全局样式与风格</h2>
     <h3 id="101-主题风格">10.1 主题风格</h3>
-    <p>Matplotlib 内置多种<strong>整体风格</strong>，一条命令切换：</p>
+    <p>Matplotlib 内置多种<strong>整体风格</strong>，一条命令切换：<label for="sn-mpl-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-mpl-3" class="margin-toggle"><span class="sidenote">风格是<strong>全局设置</strong>，所以仍然通过 <code>plt.style.use()</code> 调用；设置完后， 面向对象写法里的 <code>ax</code> 会自动使用该风格。</span></p>
     <pre><code class="language-python">import matplotlib.pyplot as plt
 
 plt.style.use("seaborn-v0_8")      # 更现代、更柔和
@@ -421,28 +420,18 @@ plt.style.use("ggplot")            # 类似 R 的 ggplot 风格
 plt.style.use("dark_background")   # 深色背景
 plt.style.use("bmh")               # 蓝色主题
 </code></pre>
-    <blockquote>
-      <p>风格是<strong>全局设置</strong>，所以仍然通过 <code>plt.style.use()</code> 调用；设置完后，
-面向对象写法里的 <code>ax</code> 会自动使用该风格。</p>
-    </blockquote>
     <p>查看所有风格：<code>print(plt.style.available)</code>。</p>
     <h3 id="102-rcparams-全局配置">10.2 rcParams 全局配置</h3>
-    <p><code>plt.rcParams</code> 可以设置全局默认，省去每个图都重写一遍（全局配置同样在 <code>pyplot</code> 层完成）。</p>
+    <p><code>plt.rcParams</code> 可以设置全局默认，省去每个图都重写一遍（全局配置同样在 <code>pyplot</code> 层完成）。<label for="sn-mpl-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-mpl-4" class="margin-toggle"><span class="sidenote"><strong>关于中文</strong>：Matplotlib 默认字体不含中文，直接画中文会显示成方框。 解决办法是设置一个中文字体（如 <code>SimHei</code>、<code>Noto Sans CJK SC</code>）。 若你的系统没有中文字体，最简单是先用英文标签。</span></p>
     <pre><code class="language-python">plt.rcParams["figure.figsize"] = (8, 5)
 plt.rcParams["font.family"] = "sans-serif"
 plt.rcParams["font.sans-serif"] = ["SimHei", "DejaVu Sans"]  # 中文字体
 plt.rcParams["axes.unicode_minus"] = False   # 正常显示负号
 plt.rcParams["lines.linewidth"] = 2
 </code></pre>
-    <blockquote>
-      <p><strong>关于中文</strong>：Matplotlib 默认字体不含中文，直接画中文会显示成方框。
-解决办法是设置一个中文字体（如 <code>SimHei</code>、<code>Noto Sans CJK SC</code>）。
-若你的系统没有中文字体，最简单是先用英文标签。</p>
-    </blockquote>
     <h3 id="103-默认配色tab10">10.3 默认配色（tab10）</h3>
     <p>新版 matplotlib 默认用一套对色盲友好、同一色系不同深浅的 <code>tab</code> 配色，
 一组曲线时自动轮换，不用手动指定，效果也足够好。</p>
-    <hr>
     <h2 id="11-常见问题与技巧">11. 常见问题与技巧</h2>
     <h3 id="111-图没显示一下闪过">11.1 图没显示/一下闪过</h3>
     <ul>
@@ -485,7 +474,6 @@ df["col"].hist()          # 某列的直方图
         <tr><td>保存</td><td><code>fig.savefig(...)</code></td></tr>
       </tbody>
     </table>
-    <hr>
     <h2 id="12-下一步学习">12. 下一步学习</h2>
     <h3 id="121-练习建议">12.1 练习建议</h3>
     <ol>
@@ -514,7 +502,6 @@ df["col"].hist()          # 某列的直方图
       <li>官方教程：<a href="https://matplotlib.org/stable/tutorials/index.html">https://matplotlib.org/stable/tutorials/index.html</a></li>
       <li>画廊（大量示例，直接复制改）：<a href="https://matplotlib.org/stable/gallery/">https://matplotlib.org/stable/gallery/</a></li>
     </ul>
-    <hr>
     <h2 id="附录一张图从-0-到-1-的标准模板">附录：一张图从 0 到 1 的标准模板</h2>
     <p>把下面代码保存为 <code>demo.py</code>，替换数据即可直接用：</p>
     <pre class="fullwidth"><code class="language-python">import numpy as np

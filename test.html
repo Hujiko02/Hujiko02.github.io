@@ -90,8 +90,7 @@
     <p>正文栏内的图默认限制在 55% 宽：</p>
 
     <figure>
-      <img src="./assets/images/1.jpg" alt="示例图，来自 images/1.jpg">
-      <figcaption>正文栏内图。图注向右浮动，最宽占图片宽度的 40%，不会跑到边注栏里去。</figcaption>
+      <img src="./assets/images/1.jpg" alt="示例图，来自 images/1.jpg"><label for="mn-oplus" class="margin-toggle">⊕</label><input type="checkbox" id="mn-oplus" class="margin-toggle"><span class="marginnote">半宽图的注释1要写在边注上。</span>
     </figure>
 
     <p>满宽图加 <code>fullwidth</code> 类，必须仍在 <code>article</code> 内才会撑开：</p>
@@ -195,8 +194,8 @@ python3 -m http.server 8000
       </blockquote>
     </div>
 
-  <pre><code>#include &lt;stdio.h&gt;
-
+    <pre><code>
+#include &lt;stdio.h&gt;
 int main(void) 
 {
     int sum = 0;
@@ -206,12 +205,9 @@ int main(void)
     }
     printf("sum = %d\n", sum);
     return 0;
-}</code></pre>
+}
     </code></pre>
-
-
   </section>
-
 </article>
 
 <footer>

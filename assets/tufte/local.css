@@ -41,15 +41,17 @@ code, kbd, pre, samp, pre > code,
    按 tufte 自己的书（tufte-latex 的 booktabs）补三条线，表头改左对齐。
    border-collapse 必须写：默认是 separate + border-spacing: 2px，
    表头那条下线会被切成一段一段的。
-   颜色用 #ccc：tufte.css 第 60 行有深色模式（body 背景 #151515、文字 #ddd），
-   写 #111 就是黑线画在近黑背景上；#ccc 和官方 hr 同色，两个主题都看得清。 */
+   颜色用 currentColor：tufte.css 第 60 行有深色模式（body 背景 #151515、文字 #ddd），
+   写死 #111 会在深色下把黑线画在近黑背景上，写死 #ccc 又在浅色的纸白 #fffff8 上发灰。
+   currentColor 自动取正文色（浅色 #111 / 深色 #ddd），两个主题都清晰，
+   也更接近 Tufte 书里那种实黑规矩线。 */
 table {
     border-collapse: collapse;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
+    border-top: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
 }
 th {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid currentColor;
 }
 th,
 td {
@@ -62,6 +64,37 @@ td:last-child {
     padding-right: 0;       /* 让表格右边缘和正文栏右边缘对齐 */
 }
 
-
-
+/* 3) h4–h6
+   tufte.css 只定义到 h3（斜体、常规字重，字号 3.2/2.2/1.7rem），
+   h4 及以下回落成浏览器默认的加粗小字，和上面断档。
+   这里按同一套比例把层级接下去。
+   中文没有真正的斜体，浏览器会合成倾斜；若觉得字形发虚，
+   把下面几条的 font-style 改成 normal 即可，其余不用动。 */
+h4 {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin-top: 1.8rem;
+    margin-bottom: 1.2rem;
+    line-height: 1;
+}
+h5 {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.25rem;
+    margin-top: 1.6rem;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+h6 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.15rem;
+    margin-top: 1.4rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+}
+      
+  
 

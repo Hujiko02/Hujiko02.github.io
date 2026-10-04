@@ -35,28 +35,38 @@
 <strong>版权</strong>：© 2022-2026 Raspberry Pi Ltd，本文档采用 <a href="https://creativecommons.org/licenses/by-nd/4.0/">Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND)</a> 许可发布。</p>
       <p><strong>关于本译文</strong>：本文是上述官方文档的中文翻译。根据需求，已省略 Windows/macOS 相关的安装与操作步骤，以及原文档附录 D（其他集成开发环境，如 CLion）和附录 E（文档修订历史）。原文档开头的法律免责声明属固定样板文本，此处从略。代码、命令及程序输出保持原文，不作翻译。</p>
     </blockquote>
-    <hr>
     <h2 id="目录">目录</h2>
     <ol>
       <li><a href="#1-简介">简介</a></li>
       <li><a href="#2-安装-visual-studio-code">安装 Visual Studio Code</a></li>
-      <li><a href="#3-安装-raspberry-pi-pico-vs-code-扩展">安装 Raspberry Pi Pico VS Code 扩展</a>
-        - <a href="#31-安装依赖">3.1 安装依赖</a>
-        - <a href="#32-安装扩展">3.2 安装扩展</a></li>
-      <li><a href="#4-加载并调试项目">加载并调试项目</a>
-        - <a href="#41-编译并运行-blink">4.1 编译并运行 blink</a>
-        - <a href="#42-修改代码并重新运行">4.2 修改代码并重新运行</a>
-        - <a href="#43-调试">4.3 调试</a></li>
-      <li><a href="#5-用-c-语言说-hello-world">用 C 语言说 "Hello World"</a>
-        - <a href="#51-pico-系列设备上的串口输入输出">5.1 Pico 系列设备上的串口输入输出</a>
-        - <a href="#52-创建项目">5.2 创建项目</a>
-        - <a href="#53-构建项目">5.3 构建项目</a>
-        - <a href="#54-查看控制台输出">5.4 查看控制台输出</a>
-        - <a href="#附录-a-debugprobe调试探针">附录 A. Debugprobe（调试探针）</a>
-        - <a href="#附录-b-picotool">附录 B. Picotool</a>
-        - <a href="#附录-c-命令行工具链配置">附录 C. 命令行工具链配置</a></li>
+      <li>
+        <a href="#3-安装-raspberry-pi-pico-vs-code-扩展">安装 Raspberry Pi Pico VS Code 扩展</a>
+        <ul>
+          <li><a href="#31-安装依赖">3.1 安装依赖</a></li>
+          <li><a href="#32-安装扩展">3.2 安装扩展</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#4-加载并调试项目">加载并调试项目</a>
+        <ul>
+          <li><a href="#41-编译并运行-blink">4.1 编译并运行 blink</a></li>
+          <li><a href="#42-修改代码并重新运行">4.2 修改代码并重新运行</a></li>
+          <li><a href="#43-调试">4.3 调试</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#5-用-c-语言说-hello-world">用 C 语言说 "Hello World"</a>
+        <ul>
+          <li><a href="#51-pico-系列设备上的串口输入输出">5.1 Pico 系列设备上的串口输入输出</a></li>
+          <li><a href="#52-创建项目">5.2 创建项目</a></li>
+          <li><a href="#53-构建项目">5.3 构建项目</a></li>
+          <li><a href="#54-查看控制台输出">5.4 查看控制台输出</a></li>
+        </ul>
+      </li>
+      <li><a href="#附录-a-debugprobe调试探针">附录 A. Debugprobe（调试探针）</a></li>
+      <li><a href="#附录-b-picotool">附录 B. Picotool</a></li>
+      <li><a href="#附录-c-命令行工具链配置">附录 C. 命令行工具链配置</a></li>
     </ol>
-    <hr>
     <h2 id="1-简介">1. 简介</h2>
     <p>要跟着本指南操作，你需要准备以下物品：</p>
     <ul>
@@ -68,63 +78,49 @@
       <li>Raspberry Pi Debug Probe，或者第二块 Raspberry Pi Pico 系列设备</li>
     </ul>
     <p>接下来的说明假设你使用的是 Pico 系列设备；如果你使用其他基于 Raspberry Pi 微控制器的开发板，部分细节可能有所不同。</p>
-    <p>Pico 系列设备围绕 Raspberry Pi 设计的微控制器构建。官方同时提供 C/C++ SDK 与官方 MicroPython 移植版，对开发板上的开发工作提供完整支持。本书介绍如何上手 SDK，并带你完成 SDK 工具链的构建、安装和使用。</p>
-    <blockquote>
-      <p><strong>提示</strong></p>
-      <p>本书介绍的主要方法是使用 VS Code 扩展，让你的工作更轻松。如果你想改用命令行方式开发（例如在 Raspberry Pi OS Lite 上），请参阅<a href="#附录-c-命令行工具链配置">附录 C. 命令行工具链配置</a>。</p>
-    </blockquote>
+    <p>Pico 系列设备围绕 Raspberry Pi 设计的微控制器构建。官方同时提供 C/C++ SDK 与官方 MicroPython 移植版，对开发板上的开发工作提供完整支持。本书介绍如何上手 SDK，并带你完成 SDK 工具链的构建、安装和使用。<label for="sn-pico-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-1" class="margin-toggle"><span class="sidenote">本书的主要方法是使用 VS Code 扩展，让工作更轻松。若要改用命令行方式开发（例如在 Raspberry Pi OS Lite 上），见<a href="#附录-c-命令行工具链配置">附录 C</a>。</span></p>
     <p>关于官方 MicroPython 移植版的更多信息，请参阅：</p>
     <ul>
       <li>Raspberry Pi Pico 系列 Python SDK 的文档（<a href="https://pip.raspberrypi.com/documents/RP-008355-DS">https://pip.raspberrypi.com/documents/RP-008355-DS</a>）</li>
       <li>Raspberry Pi Press 出版的图书 <em>Get Started with MicroPython on Raspberry Pi Pico - 2nd Edition</em>（<a href="https://magazine.raspberrypi.com/books/get-started-micropython-pico-2ed">https://magazine.raspberrypi.com/books/get-started-micropython-pico-2ed</a>）</li>
     </ul>
     <p>关于 C/C++ SDK 的更多信息，请参阅 Raspberry Pi Pico 系列 C/C++ SDK 的文档（<a href="https://pip.raspberrypi.com/documents/RP-009085-KB">https://pip.raspberrypi.com/documents/RP-009085-KB</a>）。</p>
-    <hr>
     <h2 id="2-安装-visual-studio-code">2. 安装 Visual Studio Code</h2>
-    <p>Visual Studio Code（VS Code）是由 Microsoft 开发的一款流行的开源编辑器。Raspberry Pi Pico VS Code 扩展让安装依赖和为 Pico 系列设备构建软件变得非常简单。</p>
-    <blockquote>
-      <p><strong>提示</strong></p>
-      <p>如果你不想使用 VS Code，可以使用 <a href="https://vscodium.com/">VSCodium</a>（社区驱动的自由开源替代品），或者手动配置你的环境。</p>
-    </blockquote>
+    <p>Visual Studio Code（VS Code）是由 Microsoft 开发的一款流行的开源编辑器。Raspberry Pi Pico VS Code 扩展让安装依赖和为 Pico 系列设备构建软件变得非常简单。<label for="sn-pico-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-2" class="margin-toggle"><span class="sidenote">不想用 VS Code 的话，可以改用 <a href="https://vscodium.com/">VSCodium</a>（社区驱动的自由开源替代品），或者手动配置环境。</span></p>
     <p>在 Raspberry Pi OS 或 Linux 上安装 Visual Studio Code（VS Code），请运行以下命令：</p>
     <pre><code class="language-sh">$ sudo apt update
 $ sudo apt install code
 </code></pre>
     <p>你也可以从 <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a> 下载安装包进行安装。</p>
-    <hr>
     <h2 id="3-安装-raspberry-pi-pico-vs-code-扩展">3. 安装 Raspberry Pi Pico VS Code 扩展</h2>
     <p>Raspberry Pi Pico VS Code 扩展帮助你在 Visual Studio Code 中创建、开发、运行和调试项目。它内置了项目生成器（支持多种模板选项）、工具链自动管理、一键编译项目，以及 Pico SDK 的离线文档。</p>
     <p>该 VS Code 扩展支持所有 Raspberry Pi Pico 系列设备。</p>
     <h3 id="31-安装依赖">3.1 安装依赖</h3>
     <h4 id="311-raspberry-pi-os">3.1.1 Raspberry Pi OS</h4>
-    <p>无需安装任何依赖。</p>
-    <blockquote>
-      <p>原文此节为 "Raspberry Pi OS and Windows"，其中的 Windows 内容已按要求省略。</p>
-    </blockquote>
+    <p>无需安装任何依赖。<label for="mn-pico-1" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-1" class="margin-toggle"><span class="marginnote">原文此节题为 “Raspberry Pi OS and Windows”，其中 Windows 内容已按要求省略。</span></p>
     <h4 id="312-linux">3.1.2 Linux</h4>
     <p>大多数 Linux 发行版已预装运行该扩展所需的全部依赖。不过，某些发行版可能需要额外安装依赖。该扩展需要以下组件：</p>
     <ul>
       <li>Python 3.9 或更高版本</li>
       <li>Git</li>
       <li>Tar</li>
-      <li>〔可选〕gdb-multiarch，用于调试（仅 x86_64）</li>
-      <li>〔可选〕安装 <a href="https://github.com/raspberrypi/openocd/blob/sdk-2.0.0/contrib/60-openocd.rules">udev 规则</a>，以便调试时无需 <code>sudo</code> 即可使用 OpenOCD</li>
-      <li>〔可选〕安装 <a href="https://github.com/raspberrypi/picotool/blob/master/udev/">udev 规则</a>，以便加载程序时无需 <code>sudo</code> 即可使用 picotool</li>
+      <li>（可选）gdb-multiarch，用于调试（仅 x86_64）</li>
+      <li>（可选）安装 <a href="https://github.com/raspberrypi/openocd/blob/sdk-2.0.0/contrib/60-openocd.rules">udev 规则</a>，以便调试时无需 <code>sudo</code> 即可使用 OpenOCD</li>
+      <li>（可选）安装 <a href="https://github.com/raspberrypi/picotool/blob/master/udev/">udev 规则</a>，以便加载程序时无需 <code>sudo</code> 即可使用 picotool</li>
       <li>在 Ubuntu 22.04 上，需要安装 <code>libftdi1-2</code> 和 <code>libhidapi-hidraw0</code> 软件包才能使用 OpenOCD</li>
     </ul>
-    <p>你可以用以下命令安装这些依赖：</p>
+    <p>你可以用以下命令安装这些依赖：<label for="mn-pico-2" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-2" class="margin-toggle"><span class="marginnote">原文中 macOS 小节（3.1.3）已按要求省略。</span></p>
     <pre><code class="language-sh">$ sudo apt install python3 git tar
 </code></pre>
-    <blockquote>
-      <p>原文中 macOS 的小节（3.1.3）已按要求省略。</p>
-    </blockquote>
     <h3 id="32-安装扩展">3.2 安装扩展</h3>
     <p>你可以在 VS Code 扩展市场中找到该扩展。搜索 <strong>Raspberry Pi Pico</strong> 扩展（发布者为 Raspberry Pi），然后点击 <strong>Install</strong> 按钮将其添加到 VS Code。</p>
-    <p><img alt="图 1. 在 VS Code 中进行调试。" src="images/pico/figure-01.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/pico/figure-01.png" alt="VS Code 扩展市场中的 Raspberry Pi Pico 扩展页面。">
+      <figcaption>图 1. 在 VS Code 中进行调试。</figcaption>
+    </figure>
     <p>商店页面：<a href="https://marketplace.visualstudio.com/items?itemName=raspberry-pi.raspberry-pi-pico">https://marketplace.visualstudio.com/items?itemName=raspberry-pi.raspberry-pi-pico</a></p>
     <p>扩展的源代码和发行版下载地址：<a href="https://github.com/raspberrypi/pico-vscode">https://github.com/raspberrypi/pico-vscode</a></p>
     <p>安装完成后，查看活动侧边栏（默认位于 VS Code 左侧）。如果安装成功，会出现一个新的侧边栏区域，带有一个 Raspberry Pi Pico 图标，标签为 "Raspberry Pi Pico Project"。</p>
-    <hr>
     <h2 id="4-加载并调试项目">4. 加载并调试项目</h2>
     <p>VS Code 扩展可以基于 <a href="https://github.com/raspberrypi/pico-examples">https://github.com/raspberrypi/pico-examples</a> 提供的示例来创建项目。下面以创建一个让 Pico 系列设备上的 LED 闪烁的项目为例，带你走一遍整个流程：</p>
     <ol>
@@ -136,11 +132,11 @@ $ sudo apt install code
       <li>点击 <strong>Create</strong> 创建项目。</li>
     </ol>
     <p>扩展现在会下载 SDK 和工具链，将它们安装到本地，并生成新项目。第一个项目安装工具链可能需要 5–10 分钟。由于我们为你自动生成了 <code>.vscode</code> 目录，VS Code 会询问你是否信任该目录的作者。选择「是」。</p>
-    <p><img alt="图 2. 在 VS Code 中创建项目。" src="images/pico/figure-02.png"/></p>
-    <blockquote>
-      <p><strong>注意</strong></p>
-      <p>此时 CMake Tools 扩展可能会显示一些通知。忽略并关闭它们即可。</p>
-    </blockquote>
+    <figure class="fullwidth">
+      <img src="images/pico/figure-02.png" alt="VS Code 中由扩展创建新项目的界面。">
+      <figcaption>图 2. 在 VS Code 中创建项目。</figcaption>
+    </figure>
+    <p>此时 CMake Tools 扩展可能会弹出一些通知<label for="sn-pico-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-3" class="margin-toggle"><span class="sidenote">忽略并关闭它们即可，不影响项目创建。</span>。</p>
     <p>现在，在 VS Code 左侧的资源管理器（Explorer）侧边栏中，你应该能看到一个文件列表。</p>
     <p>打开 <code>blink.c</code>，即可在主窗口中查看 blink 示例的源代码。</p>
     <p>Raspberry Pi Pico 扩展在屏幕右下角的状态栏中添加了一些功能：</p>
@@ -169,10 +165,10 @@ $ sudo apt install code
     <ol>
       <li>把 250ms（四分之一秒）改为 100（十分之一秒）：</li>
     </ol>
-    <p><code>c
-    #ifndef LED_DELAY_MS
-    #define LED_DELAY_MS 100
-    #endif LED_DELAY_MS</code></p>
+    <pre><code class="language-c">#ifndef LED_DELAY_MS
+#define LED_DELAY_MS 100
+#endif LED_DELAY_MS
+</code></pre>
     <ol start="2">
       <li>断开设备连接，然后按住 BOOTSEL 按钮重新连接。</li>
       <li>按下状态栏中的 <strong>Run</strong> 按钮，或侧边栏中的 <strong>Run project</strong> 按钮。</li>
@@ -184,7 +180,10 @@ $ sudo apt install code
     <h3 id="43-调试">4.3 调试</h3>
     <p>Raspberry Pi Debug Probe 是适用于任何基于 Arm 的计算机的调试解决方案。你也可以使用其他调试硬件配合 Pico 系列设备，但我们推荐使用 Debug Probe，因为它的配置最为简单。如果你想用一块 Pico 系列设备充当 Debug Probe，请参阅<a href="#a2-用第二块-pico-或-pico-2-进行调试">附录 A.2 用第二块 Pico 或 Pico 2 进行调试</a>。</p>
     <p>首先，通过开发板上的调试接口把 Debug Probe 连接到你的 Pico 系列设备。不同的 Pico 设备需要不同的连接器。对于 Pico、Pico W 和 Pico 2，需要用烙铁把 Debug Probe 连接器焊接到开发板上；对于 Pico H、Pico WH 以及带排针的 Pico，调试排针已经焊好，直接用附带的线缆连接 Debug Probe 即可。</p>
-    <p><img alt="图 3. Debug Probe 接线" src="images/pico/figure-03.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/pico/figure-03.png" alt="Debug Probe 与 Pico 调试接口的接线示意。">
+      <figcaption>图 3. Debug Probe 接线。</figcaption>
+    </figure>
     <p>更多信息请参阅 Debug Probe 文档。</p>
     <p>现在，把 Debug Probe 的 USB 插入你的计算机。注意 Debug Probe 不会给 Pico 设备供电，Pico 必须单独供电。</p>
     <p>启动调试器的步骤：</p>
@@ -194,28 +193,29 @@ $ sudo apt install code
       <li>如果提示选择调试器，请选择 <strong>Pico Debug (Cortex-Debug)</strong>。</li>
     </ol>
     <p>调试器会自动把代码下载到设备，在你的 <code>main</code> 函数开头插入一个断点，并运行到该断点处停下。</p>
-    <p><img alt="图 4. 在 VS Code 中进行调试。" src="images/pico/figure-04.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/pico/figure-04.png" alt="VS Code 中断点命中时的调试界面。">
+      <figcaption>图 4. 在 VS Code 中进行调试。</figcaption>
+    </figure>
     <p>进入调试模式后，侧边栏中会出现若干窗口，显示设备当前状态的有用信息。顶部有一条小的控制栏，其中的按钮用于控制代码执行。把鼠标悬停在按钮上可以查看它们的名称。要继续执行代码，点击 <strong>Continue</strong>（<code>F5</code>）。</p>
     <p>你的 blink 代码现在正在运行。观察设备，LED 应该像之前一样闪烁。现在按 <strong>Restart</strong>（<code>Ctrl+Shift+F5</code>）回到 <code>main</code> 函数的开头。</p>
     <p>按一次 <strong>Step-over</strong>（<code>F10</code>）。高亮显示的行（表示下一条将要执行的语句）会前进到 <code>pico_led_init</code> 函数调用处。要步入这个函数，按 <strong>Step-into</strong>（<code>F11</code>）。源代码窗口会更新，显示执行位置现在位于该函数的开头。你可以继续单步执行代码直到函数返回 <code>main</code>，也可以按 <strong>Step-out</strong>（<code>Shift+F11</code>）直接执行完该函数。</p>
     <p>返回 <code>main</code> 函数后，查看 <strong>Local Variables</strong>（局部变量）窗口，可以看到 <code>rc</code> 的值为 <code>0</code>（<code>PICO_OK</code>）。</p>
     <p>再次按 <strong>Restart</strong>（<code>Ctrl+Shift+F5</code>）回到 <code>main</code> 函数开头。然后把光标移到 <code>pico_set_led</code> 那一行，按 <code>F9</code>。创建断点后，你会看到一个红点标示断点的位置：</p>
-    <p><img alt="图 5. 在 VS Code 中进行调试。" src="images/pico/figure-05.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/pico/figure-05.png" alt="VS Code 中设置断点后的界面。">
+      <figcaption>图 5. 在 VS Code 中进行调试。</figcaption>
+    </figure>
     <p>点击红点即可添加或移除断点。</p>
     <p>按 <strong>Continue</strong>（<code>F5</code>），执行应该会停在断点处。接着按 <strong>Step-over</strong>（<code>F10</code>），你应该会看到 LED 亮起。</p>
-    <hr>
     <h2 id="5-用-c-语言说-hello-world">5. 用 C 语言说 "Hello World"</h2>
     <p>在让 LED 点亮和熄灭之后，大多数开发者接下来想做的事就是创建并使用串口，然后说一句 "Hello World"。</p>
     <h3 id="51-pico-系列设备上的串口输入输出">5.1 Pico 系列设备上的串口输入输出</h3>
     <p>串口输入（<code>stdin</code>）和输出（<code>stdout</code>）可以被定向到串口 UART 和/或 USB CDC（USB 串口）。</p>
     <p>使用串口 UART 控制台时，输入和输出通过设备上的 UART 引脚传输——默认使用 Pin 1（<code>GP0</code>）发送输出（<code>UART0_TX</code>），使用 Pin 2（<code>GP1</code>）接收输入（<code>UART0_RX</code>）。你需要把 Pico 系列设备上的 UART 引脚连接到一个 UART 转 USB 转换器（例如 Debug Probe），如 Debug Probe 接线图所示。</p>
     <p>使用 USB CDC 控制台时，输入和输出直接通过连接到你计算机的 USB 线传输，因此不需要额外接线。不过在代码开始运行时，你可能会漏掉一部分打印内容，因为设备重启后，你的计算机可能需要一两秒钟才能连接到 Pico 系列设备。</p>
-    <p>使用扩展时，你可以根据自己的偏好选择其中一种控制台，或同时使用两种。</p>
+    <p>使用扩展时，你可以根据自己的偏好选择其中一种控制台，或同时使用两种。<label for="sn-pico-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-4" class="margin-toggle"><span class="sidenote">Pico SDK 使用 CMake 管理构建系统。若不想用 VS Code 扩展，见<a href="#c2-手动创建你自己的项目">附录 C.2</a>。</span></p>
     <h3 id="52-创建项目">5.2 创建项目</h3>
-    <blockquote>
-      <p><strong>注意</strong></p>
-      <p>Pico SDK 使用 CMake 来管理其构建系统。如果你不想使用 VS Code 扩展，请参阅<a href="#c2-手动创建你自己的项目">附录 C.2 手动创建你自己的项目</a>。</p>
-    </blockquote>
     <ol>
       <li>在 VS Code 左侧边栏中，选择 Raspberry Pi Pico 图标，其标签为 "Raspberry Pi Pico Project"。</li>
       <li>选择 <strong>New Project</strong>。</li>
@@ -240,8 +240,10 @@ $ sudo apt install code
     <h3 id="54-查看控制台输出">5.4 查看控制台输出</h3>
     <p>如果你使用的是 STDIO UART，请先确认已经完成接线。STDIO USB 除了连接到计算机之外不需要任何其他接线。</p>
     <p>在 VS Code 中，打开 <strong>View</strong> 菜单，选择 <strong>Terminal</strong> 打开底部面板。在该面板中，你会找到 <strong>Serial Monitor</strong> 标签页。选择串口——可能不止一个。波特率应为 <code>115200</code>。选择 <strong>Start Monitoring</strong> 即可看到输出。</p>
-    <p><img alt="图 6. VS Code 串口监视器" src="images/pico/figure-06.png"/></p>
-    <hr>
+    <figure class="fullwidth">
+      <img src="images/pico/figure-06.png" alt="VS Code 中的 Serial Monitor 面板。">
+      <figcaption>图 6. VS Code 串口监视器。</figcaption>
+    </figure>
     <h2 id="附录-a-debugprobe调试探针">附录 A. Debugprobe（调试探针）</h2>
     <p>Raspberry Pi 提供两种调试 Pico 系列设备的方式：</p>
     <ul>
@@ -250,14 +252,16 @@ $ sudo apt install code
     </ul>
     <p>两种方式都可以在包括 Windows、macOS 和 Linux 在内的平台上调试 Pico 系列设备。作为调试器的设备通过 USB 连接到你的常用计算机，并通过 SWD 和 UART 连接到目标 Pico。</p>
     <h3 id="a1-debug-probe">A.1 Debug Probe</h3>
-    <p>调试 Pico 系列设备最简单的方法是使用 <a href="https://www.raspberrypi.com/products/debug-probe/">Raspberry Pi Debug Probe</a>。Raspberry Pi Debug Probe 提供串行线调试（SWD）以及一个通用的 USB 转串口桥。</p>
-    <blockquote>
-      <p><strong>注意</strong></p>
-      <p>关于 Debug Probe 的更多信息，请参阅<a href="https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html">官方文档站点</a>。</p>
-    </blockquote>
+    <p>调试 Pico 系列设备最简单的方法是使用 <a href="https://www.raspberrypi.com/products/debug-probe/">Raspberry Pi Debug Probe</a>。Raspberry Pi Debug Probe 提供串行线调试（SWD）以及一个通用的 USB 转串口桥。<label for="sn-pico-5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-5" class="margin-toggle"><span class="sidenote">关于 Debug Probe 的更多信息，见<a href="https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html">官方文档站点</a>。</span></p>
     <h4 id="a11-debug-probe-接线">A.1.1 Debug Probe 接线</h4>
-    <p><img alt="图 7. Debug Probe 附带的线缆。" src="images/pico/figure-07.png"/></p>
-    <p><img alt="图 8. Debug Probe（左）与 Pico（右）之间的接线。" src="images/pico/figure-08.png"/></p>
+    <figure class="fullwidth">
+      <img src="images/pico/figure-07.png" alt="Debug Probe 附带的各根线缆。">
+      <figcaption>图 7. Debug Probe 附带的线缆。</figcaption>
+    </figure>
+    <figure class="fullwidth">
+      <img src="images/pico/figure-08.png" alt="Debug Probe（左）与 Pico（右）之间的接线。">
+      <figcaption>图 8. Debug Probe（左）与 Pico（右）之间的接线。</figcaption>
+    </figure>
     <p>要把 Debug Probe 连接到 Pico H，请连接以下线路：</p>
     <ul>
       <li>Debug Probe 的 "D" 端口 → Pico H 的 "DEBUG" SWD JST-SH 连接器</li>
@@ -266,24 +270,23 @@ $ sudo apt install code
       <li>Debug Probe TX → Pico H RX 引脚</li>
       <li>Debug Probe GND → Pico H GND 引脚</li>
     </ul>
-    <p>然后连接两根 USB 线：一根从你的计算机连接到 Debug Probe 的 microUSB 端口，另一根从你的计算机连接到 Pico 的 microUSB 端口。</p>
-    <blockquote>
-      <p><strong>注意</strong></p>
-      <p>如果你用的是非 H 版的 Pico、Pico 2 或 Pico W（没有 JST-SH 连接器），仍然可以把它连接到 Debug Probe。把公头连接器焊接到开发板上的 <code>SWCLK</code>、<code>GND</code> 和 <code>SWDIO</code> 排针上。使用 Debug Probe 附带的另一根三针 JST-SH 转 0.1 英寸排针（母头）线缆，连接到 Debug Probe 的 "D" 端口。把 Pico 或 Pico W 上的 <code>SWCLK</code>、<code>GND</code> 和 <code>SWDIO</code> 分别连接到 Debug Probe 上的 <code>SC</code>、<code>GND</code> 和 <code>SD</code> 引脚。</p>
-    </blockquote>
+    <p>然后连接两根 USB 线：一根从你的计算机连接到 Debug Probe 的 microUSB 端口，另一根从你的计算机连接到 Pico 的 microUSB 端口。<label for="sn-pico-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-6" class="margin-toggle"><span class="sidenote">如果你用的是非 H 版的 Pico、Pico 2 或 Pico W（没有 JST-SH 连接器），仍然可以把它接到 Debug Probe：把公头连接器焊到板上的 <code>SWCLK</code>、<code>GND</code>、<code>SWDIO</code> 排针，再用另一根三针 JST-SH 转 0.1 英寸排针（母头）线缆接到 Debug Probe 的 “D” 端口，对应关系为 <code>SC</code>↔<code>SWCLK</code>、<code>GND</code>↔<code>GND</code>、<code>SD</code>↔<code>SWDIO</code>。</span></p>
     <p>Pico 与 Debug Probe 之间的线束连接如图 8 所示。</p>
     <h3 id="a2-用第二块-pico-或-pico-2-进行调试">A.2 用第二块 Pico 或 Pico 2 进行调试</h3>
     <p>一块 Pico 或 Pico 2 可以使用 debugprobe 固件来为另一块重新烧录和调试，该固件把 Pico 或 Pico 2 变成一个 USB → SWD 与 UART 桥。</p>
-    <p><img alt="图 9. Pico A（左）与 Pico B（右）之间的接线，其中 Pico A 充当调试器，Pico B 作为被测系统。你至少需要连接地线和两根 SWD 线。连接 UART 串口可以让你访问 Pico B 的 UART 串口输出。你也可以桥接电源，用一根 USB 线同时为两块板供电。更多信息请参阅附录 A.3 debugprobe 接线。" src="images/pico/figure-09.png"/></p>
+    <figure>
+      <img src="images/pico/figure-09.png" alt="Pico A 作为调试器、Pico B 作为被测系统的接线图。">
+      <label for="mn-pico-6" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-6" class="margin-toggle"><span class="marginnote">图 9. Pico A（左）作为调试器，Pico B（右）作为被测系统。</span>
+    </figure>
+    <p>两块板之间至少需要连接地线和两根 SWD 线。连接 UART 可以让你访问 Pico B 的串口输出；也可以桥接电源，用一根 USB 线同时为两块板供电。完整接线见附录 A.3。</p>
     <h4 id="a21-安装-debugprobe">A.2.1 安装 debugprobe</h4>
     <p>你可以从 GitHub 上 <a href="https://github.com/raspberrypi/debugprobe/releases/latest">debugprobe 的最新发行版</a>下载 debugprobe 的 UF2 二进制文件。</p>
-    <p>按住 BOOTSEL 按钮启动作为调试器的 Pico 或 Pico 2，把 <code>debugprobe_on_pico.uf2</code> 复制到设备上即可开始调试。</p>
-    <blockquote>
-      <p><strong>注意</strong></p>
-      <p>使用 <code>debugprobe_on_pico.uf2</code> 可以把 Pico 用作调试器；使用 <code>debugprobe_on_pico2.uf2</code> 用于 Pico 2。Debug Probe 配件硬件请使用 <code>debugprobe.uf2</code>。</p>
-    </blockquote>
+    <p>按住 BOOTSEL 按钮启动作为调试器的 Pico 或 Pico 2，把 <code>debugprobe_on_pico.uf2</code> 复制到设备上即可开始调试。<label for="sn-pico-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-7" class="margin-toggle"><span class="sidenote">用 <code>debugprobe_on_pico.uf2</code> 把 Pico 用作调试器，用 <code>debugprobe_on_pico2.uf2</code> 用于 Pico 2；Debug Probe 配件硬件则用 <code>debugprobe.uf2</code>。</span></p>
     <h3 id="a3-debugprobe-接线">A.3 debugprobe 接线</h3>
-    <p><img alt="图 10. Pico A（左）与 Pico B（右）之间的接线，把 Pico A 配置为调试器。" src="images/pico/figure-10.png"/></p>
+    <figure>
+      <img src="images/pico/figure-10.png" alt="Pico A 配置为调试器的接线图。">
+      <label for="mn-pico-7" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-7" class="margin-toggle"><span class="marginnote">图 10. Pico A（左）与 Pico B（右）之间的接线，把 Pico A 配置为调试器。</span>
+    </figure>
     <p>两块 Pico 开发板之间的线束连接如图 10 所示。</p>
     <pre><code class="language-text">Pico A GND -&gt; Pico B GND
 Pico A GP2 -&gt; Pico B SWCLK
@@ -305,12 +308,9 @@ Pico A GP5/UART1 RX -&gt; Pico B GP0/UART0 TX
     </ol>
     <h3 id="a5-使用-uart">A.5 使用 UART</h3>
     <h4 id="a51-linux">A.5.1 Linux</h4>
-    <p>在 Linux 上使用 UART 连接，请运行以下命令：</p>
+    <p>在 Linux 上使用 UART 连接，请运行以下命令：<label for="mn-pico-3" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-3" class="margin-toggle"><span class="marginnote">原文中 A.5.2（Windows）与 A.5.3（macOS）小节已按要求省略。</span></p>
     <pre><code class="language-sh">$ sudo minicom -D /dev/ttyACM0 -b 115200
 </code></pre>
-    <blockquote>
-      <p>原文中的 A.5.2（Windows）与 A.5.3（macOS）小节已按要求省略。</p>
-    </blockquote>
     <h3 id="a6-使用-openocd-调试">A.6 使用 OpenOCD 调试</h3>
     <h4 id="a61-获取-openocd">A.6.1 获取 OpenOCD</h4>
     <p>支持所有 Pico 系列设备的 OpenOCD 二进制发行版可以从 GitHub 上的 <a href="https://github.com/raspberrypi/pico-sdk-tools">Pico SDK tools 仓库</a>获取。你也可以用以下命令自行构建并安装：</p>
@@ -330,16 +330,12 @@ $ sudo make install
 </code></pre>
     <h4 id="a62-使用-swd-调试">A.6.2 使用 SWD 调试</h4>
     <p>你也可以让 OpenOCD 运行在服务器模式下，并连接一个能够提供断点等功能的调试器。</p>
-    <blockquote>
-      <p><strong>重要</strong></p>
-      <p>为了让调试更容易，你可以使用 <code>CMAKE_BUILD_TYPE</code> 选项以 Debug 构建类型来构建二进制文件：</p>
-      <p><code>sh
-$ cd ~/pico/pico-examples/
+    <p>为了让调试更容易，可以用 <code>CMAKE_BUILD_TYPE</code> 选项以 Debug 构建类型来构建二进制文件：</p>
+    <pre><code class="language-sh">$ cd ~/pico/pico-examples/
 $ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DPICO_BOARD=pico
-$ cmake --build build</code></p>
-      <p>注意：对于 Raspberry Pi Pico 2，应使用 <code>-DPICO_BOARD=pico2</code>。</p>
-      <p>Debug 构建进行的优化较少，这使得在调试器中运行时更容易看清程序的执行过程。</p>
-    </blockquote>
+$ cmake --build build
+</code></pre>
+    <p>在 Raspberry Pi Pico 2 上应改用 <code>-DPICO_BOARD=pico2</code><label for="sn-pico-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-8" class="margin-toggle"><span class="sidenote">Debug 构建优化较少，在调试器中运行时更容易看清程序的执行过程。</span>。</p>
     <p>首先，运行一个 OpenOCD 服务器：</p>
     <pre class="fullwidth"><code class="language-sh">$ sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
 </code></pre>
@@ -373,14 +369,9 @@ Info : Listening on port 6666 for tcl connections
 Info : Listening on port 4444 for telnet connections
 </code></pre>
     <p>按 <code>Ctrl + C</code> 停止。</p>
-    <p>现在用普通配置启动 OpenOCD。</p>
+    <p>现在用普通配置启动 OpenOCD。<label for="sn-pico-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-9" class="margin-toggle"><span class="sidenote">在 RP2350 上，<code>CRIT1.DEBUG_DISABLE</code> 和 <code>CRIT1.SECURE_DEBUG_DISABLE</code> 这两个 OTP 标志（或设置了调试密钥索引）带来的效果，无法通过救援 DP 复位解除。</span></p>
     <pre><code class="language-sh">$ openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg
 </code></pre>
-    <blockquote>
-      <p><strong>注意</strong></p>
-      <p>在 RP2350 上，<code>CRIT1.DEBUG_DISABLE</code> 和 <code>CRIT1.SECURE_DEBUG_DISABLE</code> 这两个 OTP 标志（或设置了调试密钥索引）所带来的效果，无法通过救援 DP 复位来解除。</p>
-    </blockquote>
-    <hr>
     <h2 id="附录-b-picotool">附录 B. Picotool</h2>
     <p>你可以把信息嵌入到 Pico 系列的二进制文件中，这些信息可以通过一个名为 <code>picotool</code> 的命令行工具读取出来。</p>
     <h3 id="b1-获取-picotool">B.1 获取 picotool</h3>
@@ -449,15 +440,7 @@ COMMANDS:
 
 Use "picotool help &lt;cmd&gt;" for more info
 </code></pre>
-    <blockquote>
-      <p><strong>注意</strong></p>
-      <p>大多数命令都需要连接一台处于 BOOTSEL 模式的 Raspberry Pi 微控制器设备。</p>
-      <p><strong>重要</strong></p>
-      <p>如果你收到错误信息 <code>No accessible RP2040/RP2350 devices in BOOTSEL mode were found.</code>，并伴有类似 <code>Device at bus 1, address 7 appears to be a RP2040 device in BOOTSEL mode, but picotool was unable to connect</code> 的提示——这表明确实连接了一台 Pico 系列设备——那么你可以用 <code>sudo</code> 运行 picotool，例如：</p>
-      <p><code>sh
-$ sudo picotool info -a</code></p>
-      <p>原文此处还包含一条针对 Windows 上 RP2040 需要安装驱动（Zadig/WinUSB）的说明，按需求已省略。</p>
-    </blockquote>
+    <p>大多数命令都需要连接一台处于 BOOTSEL 模式的 Raspberry Pi 微控制器设备。<label for="sn-pico-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-10" class="margin-toggle"><span class="sidenote">若报错 <code>No accessible RP2040/RP2350 devices in BOOTSEL mode were found.</code>，并附带 “...appears to be a RP2040 device in BOOTSEL mode, but picotool was unable to connect”，说明设备已连上但无权限，可用 <code>sudo picotool info -a</code> 重试。</span><label for="mn-pico-4" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-4" class="margin-toggle"><span class="marginnote">原文此处还有一条 Windows 上 RP2040 需安装驱动（Zadig/WinUSB）的说明，按需求已省略。</span></p>
     <p>从 picotool 1.1 版本开始，你还可以与不在 BOOTSEL 模式、但使用了 Pico SDK 的 USB stdio 支持的 Raspberry Pi 微控制器交互，方法是使用 picotool 的 <code>-f</code> 参数。</p>
     <h4 id="b21-显示信息">B.2.1 显示信息</h4>
     <p>SDK 现在支持 Binary Information（二进制信息），可以方便地存储供 picotool 查找的紧凑信息（见下文 <a href="#b23-二进制信息">B.2.3 二进制信息</a>）。<code>info</code> 命令就是用来读取这些信息的。</p>
@@ -713,7 +696,6 @@ Build Information
  build date:               Aug    1 2024
  build attributes:         Debug
 </code></pre>
-    <hr>
     <h2 id="附录-c-命令行工具链配置">附录 C. 命令行工具链配置</h2>
     <h3 id="c1-通过脚本配置环境">C.1 通过脚本配置环境</h3>
     <p>如果你在运行 Raspberry Pi OS 的 Raspberry Pi 上为 Pico 系列设备开发，那么可以使用 <code>pico_setup.sh</code> 脚本来搭建命令行环境。</p>
@@ -729,11 +711,7 @@ Build Information
       <li>下载并编译 OpenOCD（用于调试支持）</li>
       <li>配置你的开发用 Raspberry Pi 的 UART，使其可与 Pico 系列设备配合使用</li>
     </ul>
-    <p><code>pico_setup.sh</code> 的 <a href="https://github.com/raspberrypi/pico-setup/blob/master/README.md">README.md</a> 中还包含如何在命令行下为 Pico 系列设备构建、加载和调试程序的说明。</p>
-    <blockquote>
-      <p><strong>提示</strong></p>
-      <p>该配置脚本需要约 4 GB 的 SD 卡磁盘空间，因此运行前请确认有足够的可用空间。你可以用 <code>df -h</code> 命令查看剩余磁盘空间。</p>
-    </blockquote>
+    <p><code>pico_setup.sh</code> 的 <a href="https://github.com/raspberrypi/pico-setup/blob/master/README.md">README.md</a> 中还包含如何在命令行下为 Pico 系列设备构建、加载和调试程序的说明。<label for="sn-pico-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-11" class="margin-toggle"><span class="sidenote">该脚本需要约 4 GB 的 SD 卡空间，运行前请用 <code>df -h</code> 确认剩余空间。</span></p>
     <p>首先运行以下命令安装 <code>wget</code>：</p>
     <pre><code class="language-sh">$ sudo apt install wget
 </code></pre>
@@ -756,25 +734,21 @@ Build Information
 $ git pull
 $ git submodule update
 </code></pre>
-    <p>你还需要更新本地的 picotool 副本，并重新构建和安装它——进入 <code>picotool</code> 目录并运行以下命令：</p>
+    <p>你还需要更新本地的 picotool 副本，并重新构建和安装它——进入 <code>picotool</code> 目录并运行以下命令：<label for="sn-pico-12" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-12" class="margin-toggle"><span class="sidenote">想及时获知新版本，可以在 <a href="https://github.com/raspberrypi/pico-sdk">pico-sdk 仓库</a>上设置自定义关注（watch）。</span></p>
     <pre><code class="language-sh">$ cd picotool
 $ git pull
 $ cmake --build build
 $ sudo cmake --install build
 </code></pre>
-    <blockquote>
-      <p><strong>注意</strong></p>
-      <p>如果想及时获知新版本发布，可以在 pico-sdk 的 GitHub 仓库上设置自定义关注（watch）。仓库地址：<a href="https://github.com/raspberrypi/pico-sdk">https://github.com/raspberrypi/pico-sdk</a></p>
-    </blockquote>
     <h3 id="c2-手动创建你自己的项目">C.2 手动创建你自己的项目</h3>
     <p>先创建一个目录来存放你的测试项目，让它与 <code>pico-sdk</code> 目录并列：</p>
     <pre><code class="language-sh">$ cd ~/pico
 $ ls -la
 total 16
-drwxr-xr-x        7 aa   staff   224   6 Apr 10:41 ./
-drwx------@ 27 aa        staff   864   6 Apr 10:41 ../
-drwxr-xr-x      10 aa        staff   320   6 Apr 09:29 pico-examples/
-drwxr-xr-x      13 aa        staff   416   6 Apr 09:22 pico-sdk/
+drwxr-xr-x       7 aa   staff   224   6 Apr 10:41 ./
+drwx------      27 aa   staff   864   6 Apr 10:41 ../
+drwxr-xr-x      10 aa   staff   320   6 Apr 09:29 pico-examples/
+drwxr-xr-x      13 aa   staff   416   6 Apr 09:22 pico-sdk/
 $ mkdir test
 $ cd test
 </code></pre>
@@ -849,19 +823,15 @@ pico_add_extra_outputs(test)
 total 24
 drwxr-xr-x      5 aa   staff    160    6 Apr 10:46 ./
 drwxr-xr-x      7 aa   staff    224    6 Apr 10:41 ../
--rw-r--r--@ 1 aa       staff    394    6 Apr 10:37 CMakeLists.txt
--rw-r--r--      1 aa       staff   2744    6 Apr 10:40 pico_sdk_import.cmake
--rw-r--r--      1 aa       staff    383    6 Apr 10:37 test.c
+-rw-r--r--      1 aa   staff    394    6 Apr 10:37 CMakeLists.txt
+-rw-r--r--      1 aa   staff   2744    6 Apr 10:40 pico_sdk_import.cmake
+-rw-r--r--      1 aa   staff    383    6 Apr 10:37 test.c
 </code></pre>
-    <p>然后就可以像构建 <code>pico-examples</code> 一样构建它了：</p>
+    <p>然后就可以像构建 <code>pico-examples</code> 一样构建它了：<label for="sn-pico-13" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-13" class="margin-toggle"><span class="sidenote">SDK 默认面向 Raspberry Pi Pico。其他开发板用 <code>-DPICO_BOARD=&lt;board&gt;</code> 指定：Pico 2 用 <code>-DPICO_BOARD=pico2</code>，Pico W 用 <code>-DPICO_BOARD=pico_w</code>。Pico W 的 Wi-Fi 网络与密码用 <code>-DWIFI_SSID="..." -DWIFI_PASSWORD="..."</code> 传入。</span></p>
     <pre><code class="language-sh">$ cmake -S . -B build
 $ cmake --build build
 </code></pre>
-    <blockquote>
-      <p><strong>重要</strong></p>
-      <p>默认情况下 SDK 为 Raspberry Pi Pico 构建二进制文件。要为其他开发板构建，请向 CMake 传入 <code>-DPICO_BOARD=&lt;board&gt;</code> 选项，把 <code>&lt;board&gt;</code> 占位符替换为你要面向的开发板名称。为 Pico 2 构建请传入 <code>-DPICO_BOARD=pico2</code>；为 Pico W 构建请传入 <code>-DPICO_BOARD=pico_w</code>。如果要指定 Pico W 应连接的 Wi-Fi 网络和密码，请传入 <code>-DWIFI_SSID="Your Network" -DWIFI_PASSWORD="Your Password"</code>。</p>
-    </blockquote>
-    <p>构建过程会生成多种不同的文件，其中比较重要的文件如下表所示。</p>
+    <p>构建过程会生成多种不同的文件，其中比较重要的文件如下表所示。<label for="sn-pico-14" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-14" class="margin-toggle"><span class="sidenote">UF2（USB Flashing Format）是 Microsoft 制定的一种格式，用于通过 USB 给 Raspberry Pi 微控制器烧录固件，详见 <a href="https://github.com/Microsoft/uf2">Microsoft UF2 规范仓库</a>。</span></p>
     <table>
       <thead>
         <tr><th>文件扩展名</th><th>说明</th></tr>
@@ -875,18 +845,9 @@ $ cmake --build build
         <tr><td><code>.map</code></td><td>与 <code>.elf</code> 文件配套的映射（map）文件，描述链接器如何把各个段安排在内存中</td></tr>
       </tbody>
     </table>
-    <blockquote>
-      <p><strong>注意</strong></p>
-      <p>UF2（USB Flashing Format）是 Microsoft 开发的一种文件格式，用于通过 USB 给 Raspberry Pi 微控制器烧录固件。更多信息请参阅 <a href="https://github.com/Microsoft/uf2">Microsoft UF2 规范仓库</a>。</p>
-      <p><strong>注意</strong></p>
-      <p>如果你想构建一个在 SRAM 而不是 Flash 中运行的二进制文件，可以在 cmake 构建时设置 <code>-DPICO_NO_FLASH=1</code>，或者在 <code>CMakeLists.txt</code> 中为每个二进制目标单独添加 <code>pico_set_binary_type(TARGET_NAME no_flash)</code> 来控制。你可以通过 UF2 把 RAM 二进制文件下载到 Raspberry Pi 微控制器上。例如，如果你的开发板上没有 flash 芯片，就可以用 UF2 下载一个在片上 RAM 中运行的二进制文件，因为 UF2 只是指定了数据要去的地址。注意：你只能下载到 RAM 或 FLASH 之一，不能同时下载到两者。</p>
-    </blockquote>
+    <p>要让二进制文件在 SRAM 而非 Flash 中运行，可以在 cmake 构建时设置 <code>-DPICO_NO_FLASH=1</code>，或在 <code>CMakeLists.txt</code> 中为每个目标单独添加 <code>pico_set_binary_type(TARGET_NAME no_flash)</code>。UF2 只指定了数据要去的地址，因此也能把 RAM 二进制文件下载到设备上——例如开发板上没有 flash 芯片时。注意只能选择 RAM 或 Flash 之一，不能同时下载到两者。</p>
     <h4 id="c21-调试你的项目">C.2.1 调试你的项目</h4>
-    <p>在命令行下调试你自己的项目，流程与<a href="#a62-使用-swd-调试">附录 A.6.2 使用 SWD 调试</a>相同。</p>
-    <blockquote>
-      <p><strong>需要更多细节？</strong></p>
-      <p>这里的内容应该足以让你上手，但你可能会好奇为什么需要这些文件和这些“咒语”。Raspberry Pi Pico 系列 C/C++ SDK 一书深入讲解了你的项目究竟是如何构建的，以及我们这里的 <code>CMakeLists.txt</code> 文件中的各行与 SDK 结构之间的关系——如果将来你想了解更多，可以查阅该书。</p>
-    </blockquote>
+    <p>在命令行下调试你自己的项目，流程与<a href="#a62-使用-swd-调试">附录 A.6.2 使用 SWD 调试</a>相同。<label for="mn-pico-5" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-5" class="margin-toggle"><span class="marginnote">这些“咒语”为何必要，Raspberry Pi Pico 系列 C/C++ SDK 一书有完整解释：它讲清了项目如何构建，以及本文 <code>CMakeLists.txt</code> 每一行与 SDK 结构的关系。</span></p>
 
   </section>
 

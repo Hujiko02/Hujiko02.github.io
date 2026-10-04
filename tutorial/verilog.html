@@ -53,7 +53,6 @@
       <li><a href="#附录-d-练习题">附录 D 练习题</a></li>
       <li><a href="#附录-e-继续学习">附录 E 继续学习</a></li>
     </ul>
-    <hr>
     <h2 id="第-0-章-先把工具链跑通">第 0 章 先把工具链跑通</h2>
     <h3 id="01-三个工具的分工">0.1 三个工具的分工</h3>
     <p>初学者最容易糊涂的就是这三个命令谁管谁。一句话记住：</p>
@@ -174,7 +173,6 @@ tb_ex01_and_gate.v:19: $finish called at 40000 (1ps)
       <li><strong>编译顺序无所谓，但文件名要写全。</strong> iverilog 会把所有文件合成一个设计，模块名重复会报 <code>already been declared</code>。</li>
       <li><strong><code>$finish</code> 不要漏。</strong> 另外 <code>$stop</code> 是暂停（交互式调试用），<code>$finish</code> 才是结束。</li>
     </ol>
-    <hr>
     <h2 id="第-1-章-verilog-是什么用文字画电路">第 1 章 Verilog 是什么：用文字画电路</h2>
     <h3 id="11-你写的是电路不是程序">1.1 你写的是电路，不是程序</h3>
     <p>这是从软件转过来最难接受的一点：<strong>Verilog 里的所有 <code>always</code> 块和 <code>assign</code> 是同时存在的电路，不是按行执行的代码。</strong></p>
@@ -251,7 +249,6 @@ $dumpvars(1, tb_ex09_fsm.u_bin);     // 只 dump 这一个子模块
         <tr><td>电路板上的多块芯片互联</td><td>顶层模块里例化多个子模块</td></tr>
       </tbody>
     </table>
-    <hr>
     <h2 id="第-2-章-数据类型位宽与赋值">第 2 章 数据类型、位宽与赋值</h2>
     <h3 id="21-四种值01xz">2.1 四种值：0、1、x、z</h3>
     <table class="fullwidth">
@@ -284,10 +281,7 @@ always @* y_comb = a &amp; b;          // 综合出来是一个与门，没有�
 reg q_seq;                         // 时序逻辑
 always @(posedge clk) q_seq &lt;= d;  // 综合出来才是 D 触发器
 </code></pre>
-    <p>决定电路形态的是 <strong><code>always</code> 的敏感列表和赋值方式</strong>，不是 <code>reg</code>/<code>wire</code> 关键字。</p>
-    <blockquote>
-      <p>补充：SystemVerilog 用 <code>logic</code> 统一了两者（<code>-g2012</code> 可用）。为了兼容性和理解清晰，本文全程用经典写法。</p>
-    </blockquote>
+    <p>决定电路形态的是 <strong><code>always</code> 的敏感列表和赋值方式</strong>，不是 <code>reg</code>/<code>wire</code> 关键字。<label for="sn-vlog-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-vlog-1" class="margin-toggle"><span class="sidenote">补充：SystemVerilog 用 <code>logic</code> 统一了两者（<code>-g2012</code> 可用）。为了兼容性和理解清晰，本文全程用经典写法。</span></p>
     <h3 id="23-向量位选部分选择拼接">2.3 向量、位选、部分选择、拼接</h3>
     <pre><code class="language-verilog">wire [7:0] a;            // 8 位，a[7] 是最高位 MSB，a[0] 是最低位 LSB
 wire [7:0] b = a[3:0];   // 部分选择：取低 4 位（高位补 0）
@@ -483,7 +477,6 @@ initial begin
 end
 </code></pre>
     <p>（这个"为什么波形开头有一段 x"的问题，答案通常就在这里。）</p>
-    <hr>
     <h2 id="第-3-章-组合逻辑">第 3 章 组合逻辑</h2>
     <p>组合逻辑 = 输出只跟当前输入有关，没有记忆。两种写法：</p>
     <pre><code class="language-verilog">assign y = a &amp; b;               // 写法一：连续赋值（concurrent assignment）
@@ -900,7 +893,6 @@ end
       <li><input disabled="" type="checkbox"/> 没有在组合块里用非阻塞赋值</li>
       <li><input disabled="" type="checkbox"/> <code>-Wall</code> 编译后没有 warning</li>
     </ul>
-    <hr>
     <h2 id="第-4-章-时序逻辑">第 4 章 时序逻辑</h2>
     <h3 id="41-数电回顾锁存器与触发器">4.1 数电回顾：锁存器与触发器</h3>
     <table>
@@ -1401,7 +1393,6 @@ LFSR 回到初值 00000001 用了 255 次移位（理论 2^8-1 = 255）
       <li><strong>LFSR 的抽头（taps）不能乱选</strong>。<code>q[7]^q[5]^q[4]^q[3]</code>（对应多项式 x⁸+x⁶+x⁵+x⁴+1）是 8 位的一个本原多项式，所以能跑满 255 个非零状态。抽头选错，周期会变得很短。要换位数时去查"本原多项式表"。</li>
       <li><strong>LFSR 的种子不能是 0</strong>：全 0 是吸收态，异或永远是 0，会卡死。</li>
     </ul>
-    <hr>
     <h2 id="第-5-章-状态机fsm">第 5 章 状态机（FSM）</h2>
     <h3 id="51-数电从状态图到电路">5.1 数电：从状态图到电路</h3>
     <p>状态机的三段式推导过程（你的数电课应该见过）：</p>
@@ -1755,7 +1746,6 @@ Moore 的输出要等一拍（状态先变化），Mealy 与最后一位同拍
       <li>状态数变了但忘记改 <code>reg [2:0] state</code> 的位宽。</li>
       <li><strong>时序逻辑里用了阻塞赋值</strong>，导致次态和现态短路。</li>
     </ul>
-    <hr>
     <h2 id="第-6-章-存储器与总线">第 6 章 存储器与总线</h2>
     <h3 id="61-同步-ram">6.1 同步 RAM</h3>
     <p><strong>数电</strong>：存储阵列就是"地址译码 + 存储单元"，写操作需要写使能，读操作是地址经过译码后选出某一行输出。同步 RAM 的地址、数据、控制都在时钟沿采样。</p>
@@ -2211,7 +2201,6 @@ B 驱动 5a : bus = 01011010
       <li><strong><code>inout</code> 端口</strong> 写法：<code>inout wire [7:0] d;</code>，模块内部用 <code>assign</code> 驱动（配三态），同时可以直接读它。一般只出现在<strong>顶层 IO</strong>，芯片内部很少用三态总线（内部用 MUX 更安全，也更好做时序分析）。</li>
       <li>综合工具通常报 <code>inout</code> 的 warning，这是正常的；关键是你在协议层保证任何时候只有一个 <code>oe</code> 有效。</li>
     </ul>
-    <hr>
     <h2 id="第-7-章-测试平台testbench">第 7 章 测试平台（Testbench）</h2>
     <p>tb 的作用：给 DUT 喂激励、观察输出、自动判断对错。好的 tb 比设计本身更值钱。</p>
     <h3 id="71-tb-的标准骨架">7.1 tb 的标准骨架</h3>
@@ -2512,7 +2501,6 @@ FATAL: tb_ex16_techniques.v:72: 共 1 个错误，直接终止仿真
       <li><strong>忘记 <code>$finish</code></strong> → 仿真跑到天荒地老。</li>
       <li><strong>一个 tb 测太多东西</strong>：tb 太大后一个失败要看半天。按场景拆成多个小 tb，用 Makefile 串起来跑。</li>
     </ol>
-    <hr>
     <h2 id="第-8-章-gtkwave-实战">第 8 章 GTKWave 实战</h2>
     <h3 id="81-启动">8.1 启动</h3>
     <pre><code class="language-bash">gtkwave tb_ex01_and_gate.vcd &amp;                    # 最简单：直接给 VCD
@@ -2568,9 +2556,7 @@ gtkwave --dark tb_ex01_and_gate.vcd &amp;              # 暗色主题（夜里�
         <tr><td>跳到开头/结尾</td><td>菜单 <code>Time → Goto Start / Goto End</code></td></tr>
       </tbody>
     </table>
-    <blockquote>
-      <p>菜单项的措辞在不同版本略有差异（GTKWave 是活跃维护的老牌工具），找不到就用 <code>Time</code> 菜单挨个看一遍，或者直接拖框——<strong>拖框是最高效的，先学会它就够用了</strong>。</p>
-    </blockquote>
+    <p><label for="mn-vlog-1" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-1" class="margin-toggle"><span class="marginnote">菜单项的措辞在不同版本略有差异（GTKWave 是活跃维护的老牌工具），找不到就用 <code>Time</code> 菜单挨个看一遍，或者直接拖框——<strong>拖框是最高效的，先学会它就够用了</strong>。</span></p>
     <h3 id="84-数据格式右键信号">8.4 数据格式（右键信号）</h3>
     <p>在信号列表里<strong>右键信号名 → Data Format</strong>，可以切换：</p>
     <table>
@@ -2629,7 +2615,6 @@ fst2vcd tb_ex14_fifo.fst &gt; back.vcd            # 需要时也能转回 VCD
       <li>Tcl 脚本：<code>gtkwave -S script.tcl dump.vcd</code>，可以自动加载信号、自动导出图片，适合做回归测试报告。</li>
       <li>把 VCD 换 FST 再用命令行工具 <code>fst2vcd</code> 处理，可以写进 CI 脚本里做波形比对。</li>
     </ul>
-    <hr>
     <h2 id="第-9-章-可综合风格与工程约定">第 9 章 可综合风格与工程约定</h2>
     <h3 id="91-哪些能综合哪些只能仿真">9.1 哪些能综合，哪些只能仿真</h3>
     <table class="fullwidth">
@@ -2776,7 +2761,6 @@ yosys -p "read_verilog dut.v; hierarchy -top dut; proc; opt; stat"
         <tr><td>20</td><td>只靠肉眼验波形</td><td>漏错、浪费生命</td><td>自检（参考模型 + 错误计数 + <code>$fatal</code>）</td></tr>
       </tbody>
     </table>
-    <hr>
     <h2 id="附录-a-命令行速查">附录 A 命令行速查</h2>
     <pre class="fullwidth"><code class="language-bash"># ---------- 编译与仿真 ----------
 iverilog -Wall -g2012 -o sim.vvp tb_top.v dut.v      # 编译（-Wall 必加）
@@ -2815,7 +2799,6 @@ yosys -p "read_verilog dut.v; hierarchy -top dut; proc; opt; stat"
         <tr><td><code>-p</code></td><td>传参数给各种子系统，如 <code>-pfileline=1</code></td></tr>
       </tbody>
     </table>
-    <hr>
     <h2 id="附录-b-一键导出本文所有代码">附录 B 一键导出本文所有代码</h2>
     <p>本文所有带「文件:」标记的代码块都可以自动导出成独立文件。保存下面的脚本，然后：</p>
     <pre><code class="language-bash">./extract-examples.sh verilog-tutorial.md verilog-examples
@@ -2864,7 +2847,6 @@ echo "文件列表:" &gt;&amp;2
 ls -1 "$out" &gt;&amp;2
 </code></pre>
     <p>脚本原理：扫描 md 里的 <code>```</code> 代码块，在块内<strong>前三行</strong>里找形如 <code>// 文件: xxx.v</code> 或 <code># 文件: Makefile</code> 的标记，把它当作输出文件名。（前三行是留给 shebang 之类的。）没有标记的代码块（命令示例、波形示意等）会被跳过。</p>
-    <hr>
     <h2 id="附录-c-makefile">附录 C Makefile</h2>
     <p>把导出的文件放在同一个目录里，下面的 Makefile 可以一条命令编译并跑完所有 tb：</p>
     <pre><code class="language-makefile"># 文件: Makefile
@@ -2912,7 +2894,6 @@ make clean
       <li><code>VFLAGS ?= -Wall -g2012</code>，可以用 <code>make VFLAGS="-Wall"</code> 覆盖。</li>
       <li><code>EXTRA</code> 用来传 <code>-DSTRICT</code> 之类：<code>make EXTRA=-DSTRICT</code>。</li>
     </ul>
-    <hr>
     <h2 id="附录-d-练习题">附录 D 练习题</h2>
     <p>按顺序做，前 5 题基本覆盖了本文核心。参考答案要点在每题后面。</p>
     <ol>
@@ -2975,7 +2956,6 @@ make clean
     > 要点：状态用"已投币金额"编码（0/0.5/1.0/1.5/2.0 元）；找零用一个计数器在 <code>dispense</code> 后逐拍输出 5 角脉冲。这是把 FSM 和数据通路的经典结合。</p>
       </li>
     </ol>
-    <hr>
     <h2 id="附录-e-继续学习">附录 E 继续学习</h2>
     <p><strong>要补的进阶话题（按重要性排序）</strong></p>
     <ol>
