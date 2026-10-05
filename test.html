@@ -38,7 +38,7 @@
        section > p，直接写在 article 下不会被约束。
        ─────────────────────────────────────────────── -->
   <section>
-    <h2>Katex演示</h2>
+    <h2><b>Katex演示</b></h2>
     <p>行内公式：$e^{i\pi}+1=0$</p>
     <p>行间公式：$$\int_{-\infty}^{\infty} e^{-x^2}\,\mathrm{d}x=\sqrt{\pi}$$</p>
     <p>$$E = mc^2$$</p>
@@ -47,7 +47,7 @@
          中文没有小型大写，newthought 对汉字无视觉效果的，
          所以中文站点用 <h2> 更合适。此处两行演示 newthought 仅供拉丁文。 -->
     <p><span class="newthought">Tufte 风格</span>的核心不是装饰，
-    而是把「与正文相关但非必需」的信息——引注、旁白、小图——放到页边，
+    而是把“与正文相关但非必需”的信息——引注、旁白、小图——放到页边，
     让读者的视线不必跳到底部。</p>
 
     <p>这一行演示行内引用样式<label for="sn-demo" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-demo" class="margin-toggle"><span class="sidenote">这是一条投注（sidenote）。它带自动编号，编号由 CSS counter 生成，没有 JavaScript。</span>，
@@ -112,10 +112,15 @@
 
     <div class="epigraph">
       <blockquote>
-        <p>上述引文说明，量化的证据若无恰当的呈现，便失去其说服力。</p>
+        <p>abcdefg上述引文说明，量化的证据若无恰当的呈现，便失去其说服力。</p>
         <footer>Edward Tufte, <cite>The Visual Display of Quantitative Information</cite></footer>
       </blockquote>
     </div>
+
+    <blockquote>
+      <p>abcdefg上述引文说明，量化的证据若无恰当的呈现，便失去其说服力。</p>
+      <footer>Edward Tufte, <cite>The Visual Display of Quantitative Information</cite></footer>
+    </blockquote>
 
     <p>题词用 <code>div.epigraph</code> 包裹一组 <code>blockquote</code>，
     可以叠放多条；出处写进 <code>blockquote</code> 内的 <code>footer</code>。</p>
