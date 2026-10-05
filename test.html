@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>katex 测试页 - HuJi Notes</title>
+  <title>测试页 - HuJi Notes</title>
   <link rel="stylesheet" href="./assets/tufte/tufte.css">
   <link rel="stylesheet" href="./assets/tufte/local.css">
 
@@ -112,15 +112,10 @@
 
     <div class="epigraph">
       <blockquote>
-        <p>abcdefg上述引文说明，量化的证据若无恰当的呈现，便失去其说服力。</p>
+        <p>上述引文说明，量化的证据若无恰当的呈现，便失去其说服力。</p>
         <footer>Edward Tufte, <cite>The Visual Display of Quantitative Information</cite></footer>
       </blockquote>
     </div>
-
-    <blockquote>
-      <p>abcdefg上述引文说明，量化的证据若无恰当的呈现，便失去其说服力。</p>
-      <footer>Edward Tufte, <cite>The Visual Display of Quantitative Information</cite></footer>
-    </blockquote>
 
     <p>题词用 <code>div.epigraph</code> 包裹一组 <code>blockquote</code>，
     可以叠放多条；出处写进 <code>blockquote</code> 内的 <code>footer</code>。</p>
@@ -132,9 +127,9 @@
   <section>
     <h2>表格</h2>
 
-    <p>宽表必须包一层 <code>div.table-wrapper</code>，否则窄屏会撑破版心。
-    注意：tufte.css 1.9.0 完全没写表格的边框样式，零边框是它的原生状态，
-    横线样式由 <code>assets/tufte/local.css</code> 里的第 4 节补上。</p>
+    <p>
+      宽表必须包一层 <code>div.table-wrapper</code>，外层 div.table-wrapper 负责窄屏横向滚动，否则窄屏会撑破版心。包了用的是无衬线字体。注意：tufte.css 1.9.0 完全没写表格的边框样式，零边框是它的原生状态，横线样式由 <code>assets/tufte/local.css</code> 里的第 4 节补上。
+    </p>
 
     <div class="table-wrapper">
       <table>
@@ -149,6 +144,20 @@
         </tbody>
       </table>
     </div>
+
+    <p>下面这种是不包 table-wrapper 的，用的是衬线体。</p>
+    <table>
+      <caption>三种边注对照</caption>
+      <thead>
+        <tr><th>元素</th><th>类名</th><th>编号</th><th>窄屏表现</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>投注</td><td><code>sidenote</code></td><td>自动</td><td>折叠为可点编号</td></tr>
+        <tr><td>边注</td><td><code>marginnote</code></td><td>无</td><td>折叠为 ⊕ 开关</td></tr>
+        <tr><td>页边图</td><td><code>marginnote</code> + <code>img</code></td><td>无</td><td>同上</td></tr>
+      </tbody>
+    </table>
+
   </section>
 
   <!-- ───────────────────────────────────────────────
@@ -160,8 +169,7 @@
     <p>行内代码用 <code>&lt;code&gt;</code>。整段代码放 <code>pre &gt; code</code>，
     它会自动限宽并横向滚动：</p>
 
-    <pre><code>
-# 本地预览本模板
+    <pre><code># 本地预览本模板
 cd /home/wuji/Projects/html
 python3 -m http.server 8000
 # 然后打开 http://localhost:8000/tufte.html
@@ -193,14 +201,15 @@ python3 -m http.server 8000
   </section>
 
   <section>
-      <div class="epigraph">
-        <blockquote>
-          <p>生活，就是面对现实微笑，就是越过障碍注视未来；生活，就是用心灵之剪，在人生之路上裁出叶绿的枝头；生活，就是面对困惑或黑暗时，灵魂深处燃起豆大却明亮且微笑的灯展。</p>
-          <footer>鲁迅，<b>朝花夕拾</b></footer>
-        </blockquote>
-      </div>
+    <div class="epigraph">
+      <blockquote>
+        <p>生活，就是面对现实微笑，就是越过障碍注视未来；生活，就是用心灵之剪，在人生之路上裁出叶绿的枝头；生活，就是面对困惑或黑暗时，灵魂深处燃起豆大却明亮且微笑的灯展。</p>
+        <footer>鲁迅，《朝花夕拾》</footer>
+      </blockquote>
+    </div>
   </section>
 
+  <section>
     <pre><code>#include &lt;stdio.h&gt;
 int main(void) 
 {

@@ -11,8 +11,9 @@ body {
        这里合并两个计数器并加 !important，与 <link> 顺序无关。 */
     counter-reset: sidenote-counter katexEqnNo mmlEqnNo !important;
     font-family:
-        et-book,
-        "Noto Serif CJK SC",        /* 本机已装的宋体，中文首选 */
+        "cjk-serif",                /* 中文专用族：统一正体 + 缩到 88%，见文末 */
+        et-book,                    /* 拉丁：官方自带真斜体、真粗体 */
+        "Noto Serif CJK SC",        /* 中文兜底：cjk-serif 面加载失败时才用 */
         "Source Han Serif SC",      /* 思源宋体：macOS / Windows 上装了则命中 */
         "Songti SC",                /* macOS 宋体 */
         "SimSun", "STSong",         /* Windows 宋体 */
@@ -64,3 +65,58 @@ td:last-child {
     padding-right: 0;       /* 让表格右边缘和正文栏右边缘对齐 */
 }
 
+/* 3) 中文专用族 cjk-serif：只覆盖中文码位，做两件事
+   (a) 字号缩到 88%。同一个 21px 下中西文并不等大：实测 et-book 小写 x 高
+       0.420em（8.8px）、大写 0.656em（13.8px），而 Noto Serif CJK 的汉字字面
+       约 0.91em（19.1px），中文大一号半。加 size-adjust: 88% 后中文 18.5px、
+       字面 16.8px（≈1.22 倍拉丁大写高），落在中文排版的平衡带里。该描述符只
+       作用于这一面：拉丁、等宽、公式全不受影响；旧浏览器忽略它，退回 100%，
+       也就是原来的表现，不会出错。
+   (b) 斜体请求保持正体。tufte.css 给 h2/h3、em/i/cite、p.subtitle、题词都设了
+       font-style: italic。字体匹配是"先定族、再在族内挑面"：族里没有斜体面时，
+       样式匹配会退到本族的常规面（CSS Fonts 4 的顺序 italic → oblique → normal），
+       而 body 上的 font-synthesis: none 禁止合成倾斜，所以汉字在这里必然是正体。
+       也就是说，不必再声明一个"斜体面"——斜体照样拿到 88% 和正体字形。
+   只声明 400 与 700 两个面。缺的面不会被跳过到字体栈里的下一个族：权重和样式
+   都会在本族内就近匹配，所以 700 必须显式声明，否则中文加粗会退化成常规字重
+   （合成已被全站禁止，这正是上一版"中文加粗消失"的原因）。
+   h2/h3 无需另写 font-family：字体栈继承自 body。 */
+@font-face {
+    font-family: "cjk-serif";
+    src:
+        local("Noto Serif CJK SC"),
+        local("Source Han Serif SC"),
+        local("Songti SC"),
+        local("SimSun"),
+        local("STSong");
+    font-style: normal;
+    font-weight: 400;
+    size-adjust: 88%;
+    unicode-range:
+        U+2E80-2EFF, U+3000-303F, U+31C0-31EF, U+3200-33FF,
+        U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE30-FE4F,
+        U+FF00-FFEF;
+}
+
+@font-face {
+    /* 700：中文没有斜体，宋体传统上也没有粗体，所以把各平台的"真粗体"全名逐一
+       列出（local() 认全名与 PostScript 名）。末端兜一层常规族名：某平台若真的
+       没有粗体面，宁可显示常规字重（不假粗），但尺寸仍是 88%，不会忽大忽小。
+       Windows 没有宋体粗体时会命中 SimHei，即中文排版里"宋体正文用黑体表强调"
+       的老做法。斜体无需另立一面：见上面 (b)。 */
+    font-family: "cjk-serif";
+    src:
+        local("Noto Serif CJK SC Bold"), local("NotoSerifCJKsc-Bold"),
+        local("Source Han Serif SC Bold"), local("SourceHanSerifSC-Bold"),
+        local("Songti SC Bold"), local("SongtiSC-Bold"),
+        local("SimHei"), local("Heiti SC"),
+        local("Noto Serif CJK SC"), local("Source Han Serif SC"),
+        local("Songti SC"), local("SimSun");
+    font-style: normal;
+    font-weight: 700;
+    size-adjust: 88%;
+    unicode-range:
+        U+2E80-2EFF, U+3000-303F, U+31C0-31EF, U+3200-33FF,
+        U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE30-FE4F,
+        U+FF00-FFEF;
+}
