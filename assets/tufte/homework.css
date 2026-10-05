@@ -54,8 +54,3 @@ code, kbd, pre, samp, pre > code,
     "JetBrains Maple Mono",
     monospace;
 }
-/* 可选：正文段落首行缩进 2 字符。按学校模板决定是否启用 */
-p {
-  margin: 0 0 0.5em;
-  text-indent: 2em;
-}

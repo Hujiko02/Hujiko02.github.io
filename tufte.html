@@ -46,7 +46,7 @@
         <p>文档用 <code>body</code> 内的 <code>article</code> 组织；每组逻辑相关的文字与标题用 <code>section</code> 包住。</p>
         <p>Tufte CSS 用 <code>h1</code> 表示文档标题，带 <code>subtitle</code> 类的 <code>p</code> 表示副标题，<code>h2</code> 表示章节标题，<code>h3</code> 表示低层标题，不支持更细的层级。若忍不住想用 4 级或更深的标题，不妨重新设计文档：</p>
         <blockquote cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000hB">
-          <p>值得一提的是，Feynman 讲义（3 卷）用 1800 页讲遍全部物理学，却只用了 2 级层级标题：章节，以及正文中的 A 级标题。它采用的也是<i>句子</i>的方法——<i>句子</i>依次累积成<i>段落</i>，而不是项目符号式的断句。加州理工的本科物理内容极为复杂，却并不需要一套繁复的层级来组织。</p>
+          <p>值得一提的是，Feynman 讲义（3 卷）用 1800 页讲遍全部物理学，却只用了 2 级层级标题：章节，以及正文中的 A 级标题。它采用的也是<b>句子</b>的方法，<b>句子</b>依次累积成<b>段落</b>，而不是项目符号式的断句。加州理工的本科物理内容极为复杂，却并不需要一套繁复的层级来组织。</p>
           <footer><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000hB">Edward Tufte, forum post, ‘Book design: advice and examples’ thread</a></footer>
         </blockquote>
         <p>这段摘录也顺便演示了引用块：在 Tufte CSS 中，引用块只是用 <code>blockquote</code> 和 <code>footer</code> 写成的语义正确、样式轻量的 HTML。印刷版例子见 <a href="https://www.edwardtufte.com/tufte/books_vdqi">The Visual Display of Quantitative Information</a> 第 20 页。</p>
@@ -118,7 +118,7 @@
           <img src="assets/images/tufte-css/exports-imports.png" alt="1700 至 1780 年间丹麦与挪威的进出口" />
         </figure>
 
-        <p><label for="mn-figure-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-figure-1" class="margin-toggle"/><span class="marginnote"><img src="assets/images/tufte-css/rhino.png" alt="犀牛图"/>F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zooological Literature,” <em>Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice</em> (London, 1953), ed. E. Ashworth Underwood, 337-356. 摘自 Edward Tufte 的 <em>Visual Explanations</em> 第 71 页。</span> 即使图形只是正文的附属，图文紧密结合仍是 Tufte 工作的核心；这时页边小图往往最合适。把插图放到页边，只需在 <code>p</code> 中用页边注包住图片，如本段右侧所示。</p>
+        <p><label for="mn-figure-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-figure-1" class="margin-toggle"/><span class="marginnote"><img src="assets/images/tufte-css/rhino.png" alt="犀牛图"/>F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zooological Literature,” <em>Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice</em> (London, 1953), ed. E. Ashworth Underwood, 337-356. From page 71 of Edward Tufte’s <em>Visual Explanations</em>.</span> 即使图形只是正文的附属，图文紧密结合仍是 Tufte 工作的核心；这时页边小图往往最合适。把插图放到页边，只需在 <code>p</code> 中用页边注包住图片，如本段右侧所示。</p>
         <p>需要满宽插图就加 <code>fullwidth</code> 类，并确保它在 <code>article</code> 内，即可占据屏幕（几乎）整个宽度。下面用 Edward Tufte 对拿破仑东征数据可视化的英译版演示。摘自 <em>Beautiful Evidence</em> 第 122-124 页。</p>
         <figure class="fullwidth">
           <img src="assets/images/tufte-css/napoleons-march.png" alt="1812-1813 年俄国战役中法军兵力逐次损失的形象化地图" />

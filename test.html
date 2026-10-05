@@ -21,9 +21,9 @@
 <header>
   <p>
     ₍^. .^₎⟆
-    <a href="../index.html">首页</a>
-    <a href="../diary/index.html">日记</a>
-    <a href="../about/index.html">关于</a>
+    <a href="./index.html">首页</a>
+    <a href="./diary/index.html">日记</a>
+    <a href="./about/index.html">关于</a>
   </p>
 </header>
 
@@ -38,7 +38,7 @@
        section > p，直接写在 article 下不会被约束。
        ─────────────────────────────────────────────── -->
   <section>
-    <h2><b>Katex演示</b></h2>
+    <h2>Katex演示</h2>
     <p>行内公式：$e^{i\pi}+1=0$</p>
     <p>行间公式：$$\int_{-\infty}^{\infty} e^{-x^2}\,\mathrm{d}x=\sqrt{\pi}$$</p>
     <p>$$E = mc^2$$</p>
@@ -90,14 +90,14 @@
     <p>正文栏内的图默认限制在 55% 宽：</p>
 
     <figure>
-      <img src="./assets/images/1.jpg" alt="示例图，来自 images/1.jpg"><label for="mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="mn-1" class="margin-toggle"><span class="marginnote">半宽图的注释要写在边注上。</span>
+      <img src="./assets/images/1.jpg" alt="示例图，来自 images/1.jpg"><label for="mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="mn-1" class="margin-toggle"><span class="marginnote">半宽图的注释要写在 <code>marginnote</code> 上。</span>
     </figure>
 
     <p>满宽图加 <code>fullwidth</code> 类，必须仍在 <code>article</code> 内才会撑开：</p>
 
     <figure class="fullwidth">
       <img src="./assets/images/1.jpg" alt="满宽示例图">
-      <figcaption>满宽图。用于时间线、地图、数据可视化这类拒绝缩水的图。满宽图注释放 figcaption 里面</figcaption>
+      <figcaption>满宽图注释放 figcaption 里面</figcaption>
     </figure>
 
     <p>页边小图：把 <code>&lt;img&gt;</code> 直接放进 margin note 里，无需 figure 包裹<label for="mn-inline-img" class="margin-toggle">⊕</label><input type="checkbox" id="mn-inline-img" class="margin-toggle"><span class="marginnote"><img src="./assets/images/1.jpg" alt="页边小图">页边图与它注释的那句话相邻，读者不用来回翻。</span>，这样图和它的引用就贴在一起。</p>
