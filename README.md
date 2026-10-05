@@ -1,5 +1,5 @@
 # HuJi Notes
 
-纯手写 HTML + [tufte-css](https://edwardtufte.github.io/tufte-css/)，**没有构建步骤**，改完推送即上线。
+本站由 HTML 和 [Tufte CSS](https://edwardtufte.github.io/tufte-css/)制作
 
 线上地址：<https://hujiko02.github.io>

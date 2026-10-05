@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tufte CSS</title>
+  <link rel="stylesheet" href="./assets/tufte/tufte.css">
+  <link rel="stylesheet" href="./assets/tufte/local.css">
+
+  <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml">
+</head>
+
+  <body>
+    <header>
+      <p>
+        ₍^. .^₎⟆
+        <a href="./index.html">首页</a>
+        <a href="./diary/index.html">日记</a>
+        <a href="./about/index.html">关于</a>
+      </p>
+    </header>
+    
+    <article>
+      <h1 id="tufte-css">Tufte CSS</h1>
+      <p class="subtitle">Dave Liepmann</p>
+      <section>
+        <p>Tufte CSS 用 Edward Tufte 在著作与讲义中的理念来排版网页文章。其风格以简洁、多用边注、图文紧密、字体讲究而著称。</p>
+        <p>Tufte CSS 由 <a href="http://www.daveliepmann.com">Dave Liepmann</a> 创建，现为 Edward Tufte 的项目，构想借鉴自 <a href="https://tufte-latex.github.io/tufte-latex/">Tufte-LaTeX</a> 与 <a href="http://rmarkdown.rstudio.com/tufte_handout_format.html">R Markdown’s Tufte Handout format</a>。感谢这两个项目的所有贡献者。</p>
+        <p>若发现可改进之处，欢迎到 GitHub 项目 <a href="https://github.com/edwardtufte/tufte-css">tufte-css</a> 提 issue 或 pull request。请先阅读<a href="https://github.com/edwardtufte/tufte-css#contributing">贡献指南</a>。</p>
+        <p>最后重申目标：网页不是印刷品，网页也不是书。所以 Tufte CSS 不是要主张“网站都该长成这副对 Tufte 著作的诠释模样”，而是想展示“Tufte 在印刷中发展出的一些技巧，我们发现有用；也许你也能让它们在网页上发挥作用”。它只是实现这组理念的一幅草图，是起点而非设计目标——任何项目都该按自身情况来呈现信息。</p>
+      </section>
+
+      <section>
+        <h2 id="getting-started">开始使用</h2>
+        <p>使用 Tufte CSS：把 <code>tufte.css</code> 和字体目录 <code>et-book</code> 复制到项目目录，再在文档的 <code>head</code> 中加入：</p>
+
+        <pre><code>&lt;link rel="stylesheet" href="tufte.css"/&gt;</code></pre>
+
+        <p>然后使用提供的 CSS 规则和本文档描述的约定即可。想要最佳效果，请常看源代码（View Source）和检查元素（Inspect Element）。</p>
+      </section>
+
+      <section>
+        <h2 id="fundamentals">基础</h2>
+        <h3 id="fundamentals--sections-and-headers">区块与标题</h3>
+        <p>文档用 <code>body</code> 内的 <code>article</code> 组织；每组逻辑相关的文字与标题用 <code>section</code> 包住。</p>
+        <p>Tufte CSS 用 <code>h1</code> 表示文档标题，带 <code>subtitle</code> 类的 <code>p</code> 表示副标题，<code>h2</code> 表示章节标题，<code>h3</code> 表示低层标题，不支持更细的层级。若忍不住想用 4 级或更深的标题，不妨重新设计文档：</p>
+        <blockquote cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000hB">
+          <p>值得一提的是，Feynman 讲义（3 卷）用 1800 页讲遍全部物理学，却只用了 2 级层级标题：章节，以及正文中的 A 级标题。它采用的也是<i>句子</i>的方法——<i>句子</i>依次累积成<i>段落</i>，而不是项目符号式的断句。加州理工的本科物理内容极为复杂，却并不需要一套繁复的层级来组织。</p>
+          <footer><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000hB">Edward Tufte, forum post, ‘Book design: advice and examples’ thread</a></footer>
+        </blockquote>
+        <p>这段摘录也顺便演示了引用块：在 Tufte CSS 中，引用块只是用 <code>blockquote</code> 和 <code>footer</code> 写成的语义正确、样式轻量的 HTML。印刷版例子见 <a href="https://www.edwardtufte.com/tufte/books_vdqi">The Visual Display of Quantitative Information</a> 第 20 页。</p>
+        <p><span class="newthought">在<label for="sn-in-his-later-books" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="sn-in-his-later-books" class="margin-toggle"/><span class="sidenote"><a href="https://www.edwardtufte.com/book/beautiful-evidence/"><em>Beautiful Evidence</em></a></span>中，Tufte 每节开头都会留一点垂直空白、用不缩进的段落，并把句首几个词排成小型大写。我们用带 <code>newthought</code> 类的 span 实现，如本段开头所示；垂直间距则由 <code>&lt;section&gt;</code> 标签单独完成。要保持一致：本段只是演示，别交替使用标题元素和 <code>newthought</code> 手法，选定一种并坚持到底。</p>
+
+        <h3 id="fundamentals--text">文字</h3>
+        <p>纸面讲义是纯白背景，网页则更适合略带灰调的白与黑。Tufte CSS 用 <code>#fffff8</code> 和 <code>#111111</code>：它们与“纯”色几乎无法分辨，却能降低刺眼的对比度。正文只用灰阶，颜色留给插图和图像中的谨慎使用。</p>
+        <p>印刷中 Tufte 用的是专有字体 Monotype Bembo<label for="sn-proprietary-monotype-bembo" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-proprietary-monotype-bembo" class="margin-toggle"/><span class="sidenote">参见 Tufte 在 <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000Vt">Tufte book fonts</a> 主题中的评论。</span>；数字格式里用现已开源的 <a href="https://github.com/edwardtufte/et-book">ETBook</a> 可达到相近效果，Tufte CSS 通过 <code>@font-face</code> 引用一个 .ttf 文件提供它。若 ETBook 失效，会优雅退回 Palatino、Georgia 等衬线字体。</p>
+        <p>另外，Tufte CSS 为粗体（strong）和斜体（emphasis）各配独立字体文件，而非让浏览器机械变换字形——这是字体排印的最佳实践。</p>
+        <p class="sans">偏好无衬线字体可用 <code>sans</code> 类，它依赖 Tufte 首选的无衬线字体 Gill Sans。</p>
+        <p>Tufte CSS 的链接与正文同色，悬停或点击都不变色。这里有一个不跳转的<a href="#">示例链接</a>。链接带下划线，因为这是最广泛认可的可点击标志。 <label for="mn-blue-links" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-blue-links" class="margin-toggle"/><span class="marginnote">蓝色文字虽也可点击，却粗俗且分散注意力；有了下划线，它也就没必要了。</span></p>
+        <p>这些设计只是 Tufte CSS 的一种默认方案，其他方案也行。目标是：读句子时不受链接干扰，同时让人一眼认出链接。</p>
+      </section>
+
+      <section>
+        <h2 id="epigraphs">题词</h2>
+        <div class="epigraph">
+          <blockquote>
+            <p>英语……之所以变得丑陋而不精确，是因为我们的思想愚蠢；但我们语言的邋遢，又使我们更容易产生愚蠢的思想。</p>
+            <footer>George Orwell, “Politics and the English Language”</footer>
+          </blockquote>
+          <blockquote>
+            <p>对于一项成功的技术，现实必须优先于公共关系，因为大自然不会被欺骗。</p>
+            <footer>Richard P. Feynman, <cite>“What Do You Care What Other People Think?”</cite></footer>
+          </blockquote>
+          <blockquote>
+            我不画事物，我只画事物之间的差异。
+            <footer>Henri Matisse, <cite>Henri Matisse Dessins: thèmes et variations</cite> (Paris, 1943), 37</footer>
+          </blockquote>
+        </div>
+        <p>想用几句引言开启页面或某一节时，就用题词。它模仿 Tufte 著作（尤其 <em>Beautiful Evidence</em>）中的章首题词，是加了少量专门样式的 <code>blockquote</code>。引文为斜体，出处放在 <code>blockquote</code> 内的 <code>footer</code> 中。本节题词给了三个例子，演示长短引文、带与不带 <code>p</code> 标签，以及如何用包裹类把多条引文组合在一起。</p>
+      </section>
+
+      <section>
+        <h2 id="sidenotes">边注：脚注与页边注</h2>
+        <p>边注是 Tufte 风格最鲜明的特点之一。<label for="sn-extensive-use-of-sidenotes" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-extensive-use-of-sidenotes" class="margin-toggle"/><span class="sidenote">这是一条边注。</span> 它类似脚注，但不逼读者把视线跳到页脚，而是显示在侧边页边。也许你早已注意到本文档中的边注——眼力真好。</p>
+        <p>边注正是网页不同于印刷的好例子：视口够大时，Tufte CSS 把页边用来放边注、页边注和小图；视口较小时，这些元素先隐藏，由用户切换显示。目标是让旁白、引用等次要信息<i>尽可能贴近</i>所引正文，又不挡视线、不打断正文思路。</p>
+        <p>边注由两部分组成：正文中的上标引用编号，以及边注内容。前者只需在引用处放入一个 label 和占位 checkbox，如下：</p>
+        <pre><code>&lt;label for="sn-demo"
+       class="margin-toggle sidenote-number"&gt;
+&lt;/label&gt;
+&lt;input type="checkbox"
+       id="sn-demo"
+       class="margin-toggle"/&gt;</code></pre>
+        <p>每条边注或页边注都要手动指定引用 <code>id</code>：把 <code>for</code> 和 <code>id</code> 中的“sn-demo”换成合适的描述符。用 <code>sn-</code> 前缀表示边注、<code>mn-</code> 表示页边注会很有帮助。</p>
+        <p>紧挨引用处放入边注内容，即带 <code>sidenote</code> 类的 <code>span</code>。它同样插在正文中间，但默认被推到页边或隐藏。请让 <code>sidenote-number</code> 的 label 贴近边注，以保证定位正确。</p>
+        <p>为获得最佳可读性，请把正文包在 <code>section</code> 中。</p>
+        <p>想要不带编号的边注，那就是页边注。
+          <label for="mn-demo" class="margin-toggle">&#8853;</label>
+          <input type="checkbox" id="mn-demo" class="margin-toggle"/>
+          <span class="marginnote">
+            这是一条页边注，注意它前面没有编号。
+          </span> 宽屏上，页边注就是省略了引用编号的边注：少了打断正文的干扰，却多了“对号入座”的认知负担。窄屏上它与边注类似，只是显隐开关是符号而非编号。本文档用 &#8853;（<code>&amp;#8853;</code>），用哪个由你决定。</p>
+        <p>页边注的创建与边注相同，只是内容用 <code>marginnote</code> 类，label 和占位 checkbox 用 <code>margin-toggle</code> 类。上一段页边注的代码如下：</p>
+        <pre><code>&lt;label for="mn-demo" class="margin-toggle"&gt;&amp;#8853;&lt;/label&gt;
+&lt;input type="checkbox" id="mn-demo" class="margin-toggle"/&gt;
+&lt;span class="marginnote"&gt;
+  This is a margin note. Notice there isn’t a number preceding the note.
+&lt;/span&gt;</code></pre>
+        <p>页边小图也用页边注的方式创建，下一节演示。</p>
+      </section>
+
+      <section>
+        <h2 id="figures">插图</h2>
+        <p>Tufte 强调图文紧密：数据、图表、插图都要与讨论它们的文字放在一起。印刷中这意味着不把它们甩到单独一页；网页上则意味着无须点击、切换标签或滚动就能读懂图形和配文。</p>
+        <p>插图尽量用 <code>figure</code> 元素，它默认限制在正文栏内。不要把 <code>figure</code> 包进 <code>p</code>。标注或页边注放进 <code>figure</code> 内的普通页边注里。多数情况下直接把插图引入讨论主线，像这样：</p>
+        <figure>
+          <label for="mn-exports-imports" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-exports-imports" class="margin-toggle"/><span class="marginnote">摘自 Edward Tufte, <em>Visual Display of Quantitative Information</em>，第 92 页。</span>
+          <img src="assets/images/tufte-css/exports-imports.png" alt="1700 至 1780 年间丹麦与挪威的进出口" />
+        </figure>
+
+        <p><label for="mn-figure-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-figure-1" class="margin-toggle"/><span class="marginnote"><img src="assets/images/tufte-css/rhino.png" alt="犀牛图"/>F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zooological Literature,” <em>Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice</em> (London, 1953), ed. E. Ashworth Underwood, 337-356. 摘自 Edward Tufte 的 <em>Visual Explanations</em> 第 71 页。</span> 即使图形只是正文的附属，图文紧密结合仍是 Tufte 工作的核心；这时页边小图往往最合适。把插图放到页边，只需在 <code>p</code> 中用页边注包住图片，如本段右侧所示。</p>
+        <p>需要满宽插图就加 <code>fullwidth</code> 类，并确保它在 <code>article</code> 内，即可占据屏幕（几乎）整个宽度。下面用 Edward Tufte 对拿破仑东征数据可视化的英译版演示。摘自 <em>Beautiful Evidence</em> 第 122-124 页。</p>
+        <figure class="fullwidth">
+          <img src="assets/images/tufte-css/napoleons-march.png" alt="1812-1813 年俄国战役中法军兵力逐次损失的形象化地图" />
+        </figure>
+      </section>
+
+      <section>
+        <h2 id="code">代码</h2>
+        <p>技术术语、编程词汇和代码示例都用 <code>code</code> 类表示（本文档即用它标注 HTML）。代码需用等宽字体以便排版和分析，同时要保持可读。为此 Tufte CSS 沿用 GitHub 的字体选择：从优雅但少见的 Consolas 一路平滑到可靠的老牌 Courier。</p>
+        <p>较长的代码示例放在 <code>pre</code> 内的 <code>code</code> 元素中，可更好地控制缩进与溢出：</p>
+        <pre><code>;; Some code examples in Clojure. This is a comment.
+
+;; applying a function to every item in the collection
+(map tufte-css blog-posts)
+;;;; if unfamiliar, see http://www.lispcast.com/annotated-map
+
+;; side-effecty loop (unformatted, causing text overflow) - from https://clojuredocs.org/clojure.core/doseq
+(doseq [[[a b] [c d]] (map list (sorted-map :1 1 :2 2) (sorted-map :3 3 :4 4))] (prn (* b d)))
+
+;; that same side-effecty loop, formatted
+(doseq [[[a b] [c d]] (map list
+                           (sorted-map :1 1 :2 2)
+                           (sorted-map :3 3 :4 4))]
+  (prn (* b d)))
+
+;; If this proselytizing has worked, check out:
+;; http://howistart.org/posts/clojure/1</code></pre>
+      </section>
+
+      <section>
+        <h2 id="imagequilts">ImageQuilts</h2>
+        <p>Tufte CSS 支持 Edward Tufte 与 Adam Schwartz 的 <a href="http://imagequilts.com/">ImageQuilts</a>。更多见 <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003wk">ET forum announcement thread</a>。有些 quilt 边缘参差，有些平直。像普通 <code>figure</code> 一样引入即可。</p>
+        <p>下面这幅 ImageQuilt 纵览中国书法，因幅面宽大而放在满宽图中：</p>
+        <figure class="fullwidth"><img src="assets/images/tufte-css/imagequilt-chinese-calligraphy.png" alt="中国书法图"/></figure>
+        <p>这幅 ImageQuilt 把 47 种动物叫声反复拼排，放在正文栏内。quilt 边缘参差，但图片本身仍是矩形。</p>
+        <figure><img src="assets/images/tufte-css/imagequilt-animal-sounds.png" alt="动物叫声图"/></figure>
+      </section>
+
+      <section>
+        <h2 id="epilogue">结语</h2>
+        <p>感谢 Edward Tufte 以其工作为我们开路；正是他友善而细致的编辑，才有这个项目的今天。实现中的一切错误当然都归我。</p>
+      </section>
+    </article>
+  </body>
+</html>

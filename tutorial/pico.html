@@ -35,6 +35,9 @@
 <strong>版权</strong>：© 2022-2026 Raspberry Pi Ltd，本文档采用 <a href="https://creativecommons.org/licenses/by-nd/4.0/">Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND)</a> 许可发布。</p>
       <p><strong>关于本译文</strong>：本文是上述官方文档的中文翻译。根据需求，已省略 Windows/macOS 相关的安装与操作步骤，以及原文档附录 D（其他集成开发环境，如 CLion）和附录 E（文档修订历史）。原文档开头的法律免责声明属固定样板文本，此处从略。代码、命令及程序输出保持原文，不作翻译。</p>
     </blockquote>
+  </section>
+
+  <section>
     <h2 id="目录">目录</h2>
     <ol>
       <li><a href="#1-简介">简介</a></li>
@@ -67,6 +70,9 @@
       <li><a href="#附录-b-picotool">附录 B. Picotool</a></li>
       <li><a href="#附录-c-命令行工具链配置">附录 C. 命令行工具链配置</a></li>
     </ol>
+  </section>
+
+  <section>
     <h2 id="1-简介">1. 简介</h2>
     <p>要跟着本指南操作，你需要准备以下物品：</p>
     <ul>
@@ -85,13 +91,19 @@
       <li>Raspberry Pi Press 出版的图书 <em>Get Started with MicroPython on Raspberry Pi Pico - 2nd Edition</em>（<a href="https://magazine.raspberrypi.com/books/get-started-micropython-pico-2ed">https://magazine.raspberrypi.com/books/get-started-micropython-pico-2ed</a>）</li>
     </ul>
     <p>关于 C/C++ SDK 的更多信息，请参阅 Raspberry Pi Pico 系列 C/C++ SDK 的文档（<a href="https://pip.raspberrypi.com/documents/RP-009085-KB">https://pip.raspberrypi.com/documents/RP-009085-KB</a>）。</p>
+  </section>
+
+  <section>
     <h2 id="2-安装-visual-studio-code">2. 安装 Visual Studio Code</h2>
     <p>Visual Studio Code（VS Code）是由 Microsoft 开发的一款流行的开源编辑器。Raspberry Pi Pico VS Code 扩展让安装依赖和为 Pico 系列设备构建软件变得非常简单。<label for="sn-pico-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-2" class="margin-toggle"><span class="sidenote">不想用 VS Code 的话，可以改用 <a href="https://vscodium.com/">VSCodium</a>（社区驱动的自由开源替代品），或者手动配置环境。</span></p>
     <p>在 Raspberry Pi OS 或 Linux 上安装 Visual Studio Code（VS Code），请运行以下命令：</p>
-    <pre><code class="language-sh">$ sudo apt update
+    <pre class="fullwidth"><code class="language-sh">$ sudo apt update
 $ sudo apt install code
 </code></pre>
     <p>你也可以从 <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a> 下载安装包进行安装。</p>
+  </section>
+
+  <section>
     <h2 id="3-安装-raspberry-pi-pico-vs-code-扩展">3. 安装 Raspberry Pi Pico VS Code 扩展</h2>
     <p>Raspberry Pi Pico VS Code 扩展帮助你在 Visual Studio Code 中创建、开发、运行和调试项目。它内置了项目生成器（支持多种模板选项）、工具链自动管理、一键编译项目，以及 Pico SDK 的离线文档。</p>
     <p>该 VS Code 扩展支持所有 Raspberry Pi Pico 系列设备。</p>
@@ -110,7 +122,7 @@ $ sudo apt install code
       <li>在 Ubuntu 22.04 上，需要安装 <code>libftdi1-2</code> 和 <code>libhidapi-hidraw0</code> 软件包才能使用 OpenOCD</li>
     </ul>
     <p>你可以用以下命令安装这些依赖：<label for="mn-pico-2" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-2" class="margin-toggle"><span class="marginnote">原文中 macOS 小节（3.1.3）已按要求省略。</span></p>
-    <pre><code class="language-sh">$ sudo apt install python3 git tar
+    <pre class="fullwidth"><code class="language-sh">$ sudo apt install python3 git tar
 </code></pre>
     <h3 id="32-安装扩展">3.2 安装扩展</h3>
     <p>你可以在 VS Code 扩展市场中找到该扩展。搜索 <strong>Raspberry Pi Pico</strong> 扩展（发布者为 Raspberry Pi），然后点击 <strong>Install</strong> 按钮将其添加到 VS Code。</p>
@@ -121,6 +133,9 @@ $ sudo apt install code
     <p>商店页面：<a href="https://marketplace.visualstudio.com/items?itemName=raspberry-pi.raspberry-pi-pico">https://marketplace.visualstudio.com/items?itemName=raspberry-pi.raspberry-pi-pico</a></p>
     <p>扩展的源代码和发行版下载地址：<a href="https://github.com/raspberrypi/pico-vscode">https://github.com/raspberrypi/pico-vscode</a></p>
     <p>安装完成后，查看活动侧边栏（默认位于 VS Code 左侧）。如果安装成功，会出现一个新的侧边栏区域，带有一个 Raspberry Pi Pico 图标，标签为 "Raspberry Pi Pico Project"。</p>
+  </section>
+
+  <section>
     <h2 id="4-加载并调试项目">4. 加载并调试项目</h2>
     <p>VS Code 扩展可以基于 <a href="https://github.com/raspberrypi/pico-examples">https://github.com/raspberrypi/pico-examples</a> 提供的示例来创建项目。下面以创建一个让 Pico 系列设备上的 LED 闪烁的项目为例，带你走一遍整个流程：</p>
     <ol>
@@ -153,19 +168,19 @@ $ sudo apt install code
       <li>按下状态栏中的 <strong>Run</strong> 按钮，或侧边栏中的 <strong>Run project</strong> 按钮。</li>
     </ol>
     <p>你应该会看到窗口底部的终端标签页打开，显示代码上传的相关信息。代码上传完成后，设备会重启，你应该会看到以下输出：</p>
-    <pre><code class="language-text">The device was rebooted to start the application.
+    <pre class="fullwidth"><code class="language-text">The device was rebooted to start the application.
 </code></pre>
     <p>你的 blink 代码现在开始运行了。观察设备，LED 应该每秒闪烁两次。</p>
     <h3 id="42-修改代码并重新运行">4.2 修改代码并重新运行</h3>
     <p>为了确认一切工作正常，在 VS Code 中点击 <code>blink.c</code> 文件。找到代码顶部 <code>LED_DELAY_MS</code> 的定义处：</p>
-    <pre><code class="language-c">#ifndef LED_DELAY_MS
+    <pre class="fullwidth"><code class="language-c">#ifndef LED_DELAY_MS
 #define LED_DELAY_MS 250
 #endif LED_DELAY_MS
 </code></pre>
     <ol>
       <li>把 250ms（四分之一秒）改为 100（十分之一秒）：</li>
     </ol>
-    <pre><code class="language-c">#ifndef LED_DELAY_MS
+    <pre class="fullwidth"><code class="language-c">#ifndef LED_DELAY_MS
 #define LED_DELAY_MS 100
 #endif LED_DELAY_MS
 </code></pre>
@@ -174,7 +189,7 @@ $ sudo apt install code
       <li>按下状态栏中的 <strong>Run</strong> 按钮，或侧边栏中的 <strong>Run project</strong> 按钮。</li>
     </ol>
     <p>你应该会看到窗口底部的终端标签页打开，显示代码上传的相关信息。代码上传完成后，设备会重启，你应该会看到以下输出：</p>
-    <pre><code class="language-text">The device was rebooted to start the application.
+    <pre class="fullwidth"><code class="language-text">The device was rebooted to start the application.
 </code></pre>
     <p>你的 blink 代码现在开始运行了。观察设备，LED 应该闪得更快，每秒闪烁五次。</p>
     <h3 id="43-调试">4.3 调试</h3>
@@ -208,6 +223,9 @@ $ sudo apt install code
     </figure>
     <p>点击红点即可添加或移除断点。</p>
     <p>按 <strong>Continue</strong>（<code>F5</code>），执行应该会停在断点处。接着按 <strong>Step-over</strong>（<code>F10</code>），你应该会看到 LED 亮起。</p>
+  </section>
+
+  <section>
     <h2 id="5-用-c-语言说-hello-world">5. 用 C 语言说 "Hello World"</h2>
     <p>在让 LED 点亮和熄灭之后，大多数开发者接下来想做的事就是创建并使用串口，然后说一句 "Hello World"。</p>
     <h3 id="51-pico-系列设备上的串口输入输出">5.1 Pico 系列设备上的串口输入输出</h3>
@@ -233,7 +251,7 @@ $ sudo apt install code
       <li>按下状态栏中的 <strong>Run</strong> 按钮，或侧边栏中的 <strong>Run project</strong> 按钮。</li>
     </ol>
     <p>你应该会看到窗口底部的终端标签页打开，显示代码上传的相关信息。代码上传完成后，设备会重启，你应该会看到以下输出：</p>
-    <pre><code class="language-text">The device was rebooted to start the application.
+    <pre class="fullwidth"><code class="language-text">The device was rebooted to start the application.
 </code></pre>
     <p>你的 "Hello world" 代码现在开始运行了。</p>
     <p>不过，虽然 "Hello World" 示例已经在运行，我们暂时还看不到输出的文本。</p>
@@ -244,6 +262,9 @@ $ sudo apt install code
       <img src="images/pico/figure-06.png" alt="VS Code 中的 Serial Monitor 面板。">
       <figcaption>图 6. VS Code 串口监视器。</figcaption>
     </figure>
+  </section>
+
+  <section>
     <h2 id="附录-a-debugprobe调试探针">附录 A. Debugprobe（调试探针）</h2>
     <p>Raspberry Pi 提供两种调试 Pico 系列设备的方式：</p>
     <ul>
@@ -288,7 +309,7 @@ $ sudo apt install code
       <label for="mn-pico-7" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-7" class="margin-toggle"><span class="marginnote">图 10. Pico A（左）与 Pico B（右）之间的接线，把 Pico A 配置为调试器。</span>
     </figure>
     <p>两块 Pico 开发板之间的线束连接如图 10 所示。</p>
-    <pre><code class="language-text">Pico A GND -&gt; Pico B GND
+    <pre class="fullwidth"><code class="language-text">Pico A GND -&gt; Pico B GND
 Pico A GP2 -&gt; Pico B SWCLK
 Pico A GP3 -&gt; Pico B SWDIO
 Pico A GP4/UART1 TX -&gt; Pico B GP1/UART0 RX
@@ -309,7 +330,7 @@ Pico A GP5/UART1 RX -&gt; Pico B GP0/UART0 TX
     <h3 id="a5-使用-uart">A.5 使用 UART</h3>
     <h4 id="a51-linux">A.5.1 Linux</h4>
     <p>在 Linux 上使用 UART 连接，请运行以下命令：<label for="mn-pico-3" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-3" class="margin-toggle"><span class="marginnote">原文中 A.5.2（Windows）与 A.5.3（macOS）小节已按要求省略。</span></p>
-    <pre><code class="language-sh">$ sudo minicom -D /dev/ttyACM0 -b 115200
+    <pre class="fullwidth"><code class="language-sh">$ sudo minicom -D /dev/ttyACM0 -b 115200
 </code></pre>
     <h3 id="a6-使用-openocd-调试">A.6 使用 OpenOCD 调试</h3>
     <h4 id="a61-获取-openocd">A.6.1 获取 OpenOCD</h4>
@@ -331,7 +352,7 @@ $ sudo make install
     <h4 id="a62-使用-swd-调试">A.6.2 使用 SWD 调试</h4>
     <p>你也可以让 OpenOCD 运行在服务器模式下，并连接一个能够提供断点等功能的调试器。</p>
     <p>为了让调试更容易，可以用 <code>CMAKE_BUILD_TYPE</code> 选项以 Debug 构建类型来构建二进制文件：</p>
-    <pre><code class="language-sh">$ cd ~/pico/pico-examples/
+    <pre class="fullwidth"><code class="language-sh">$ cd ~/pico/pico-examples/
 $ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DPICO_BOARD=pico
 $ cmake --build build
 </code></pre>
@@ -341,7 +362,7 @@ $ cmake --build build
 </code></pre>
     <p>对于基于 RP2350 的设备，请改用 <code>-f target/rp2350.cfg</code>。</p>
     <p>然后打开第二个终端窗口，启动调试器并把你的二进制文件作为参数传入：</p>
-    <pre><code class="language-sh">$ gdb blink.elf
+    <pre class="fullwidth"><code class="language-sh">$ gdb blink.elf
 &gt; target remote localhost:3333
 &gt; monitor reset init
 &gt; load
@@ -361,7 +382,7 @@ $ cmake --build build
       <li><code>rp2350-rescue.cfg</code></li>
     </ul>
     <p>使用与你目标设备相对应的配置文件启动 OpenOCD。</p>
-    <pre><code class="language-sh">$ openocd -f interface/cmsis-dap.cfg -f target/rp2040-rescue.cfg
+    <pre class="fullwidth"><code class="language-sh">$ openocd -f interface/cmsis-dap.cfg -f target/rp2040-rescue.cfg
 ...
 Warn : gdb services need one or more targets defined
 Now attach a debugger to your RP2040 and load some code
@@ -370,8 +391,11 @@ Info : Listening on port 4444 for telnet connections
 </code></pre>
     <p>按 <code>Ctrl + C</code> 停止。</p>
     <p>现在用普通配置启动 OpenOCD。<label for="sn-pico-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-9" class="margin-toggle"><span class="sidenote">在 RP2350 上，<code>CRIT1.DEBUG_DISABLE</code> 和 <code>CRIT1.SECURE_DEBUG_DISABLE</code> 这两个 OTP 标志（或设置了调试密钥索引）带来的效果，无法通过救援 DP 复位解除。</span></p>
-    <pre><code class="language-sh">$ openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg
+    <pre class="fullwidth"><code class="language-sh">$ openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg
 </code></pre>
+  </section>
+
+  <section>
     <h2 id="附录-b-picotool">附录 B. Picotool</h2>
     <p>你可以把信息嵌入到 Pico 系列的二进制文件中，这些信息可以通过一个名为 <code>picotool</code> 的命令行工具读取出来。</p>
     <h3 id="b1-获取-picotool">B.1 获取 picotool</h3>
@@ -503,13 +527,13 @@ TARGET SELECTION:
             Specify file type (uf2 | elf | bin) explicitly, ignoring file extension
 </code></pre>
     <p>例如，先按住 BOOTSEL 按钮再插入 USB，把你的 Pico 系列设备以大容量存储模式连接到计算机。然后打开终端窗口，输入：</p>
-    <pre><code class="language-text">$ sudo picotool info
+    <pre class="fullwidth"><code class="language-text">$ sudo picotool info
 Program Information
  name:          hello_world
  features:      stdout to UART
 </code></pre>
     <p>或者：</p>
-    <pre><code class="language-text">$ sudo picotool info -a
+    <pre class="fullwidth"><code class="language-text">$ sudo picotool info -a
 Program Information
  name:                hello_world
  features:            stdout to UART
@@ -532,7 +556,7 @@ Device Information
  ROM version:         2
 </code></pre>
     <p>想了解更多信息，或者你也可以只查看所用引脚的信息：</p>
-    <pre><code class="language-text">$ sudo picotool info -bp
+    <pre class="fullwidth"><code class="language-text">$ sudo picotool info -bp
 Program Information
  name:           hello_world
  features:       stdout to UART
@@ -654,7 +678,7 @@ web site:     https://github.com/raspberrypi/pico-examples/tree/HEAD/i2c/lcd_160
     <h4 id="b25-引脚">B.2.5 引脚</h4>
     <p>当你手头有个可执行文件 <code>hello_serial.elf</code>，却忘了它是为哪块基于 Raspberry Pi 微控制器的开发板构建的时候，这个功能就非常方便了——因为不同的开发板引出的引脚可能不同。</p>
     <p>静态（固定）引脚分配可以以非常紧凑的形式记录在二进制文件中：</p>
-    <pre><code class="language-text">$ picotool info --pins sprite_demo.elf
+    <pre class="fullwidth"><code class="language-text">$ picotool info --pins sprite_demo.elf
 File sprite_demo.elf:
 
 
@@ -696,6 +720,9 @@ Build Information
  build date:               Aug    1 2024
  build attributes:         Debug
 </code></pre>
+  </section>
+
+  <section>
     <h2 id="附录-c-命令行工具链配置">附录 C. 命令行工具链配置</h2>
     <h3 id="c1-通过脚本配置环境">C.1 通过脚本配置环境</h3>
     <p>如果你在运行 Raspberry Pi OS 的 Raspberry Pi 上为 Pico 系列设备开发，那么可以使用 <code>pico_setup.sh</code> 脚本来搭建命令行环境。</p>
@@ -713,36 +740,36 @@ Build Information
     </ul>
     <p><code>pico_setup.sh</code> 的 <a href="https://github.com/raspberrypi/pico-setup/blob/master/README.md">README.md</a> 中还包含如何在命令行下为 Pico 系列设备构建、加载和调试程序的说明。<label for="sn-pico-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-11" class="margin-toggle"><span class="sidenote">该脚本需要约 4 GB 的 SD 卡空间，运行前请用 <code>df -h</code> 确认剩余空间。</span></p>
     <p>首先运行以下命令安装 <code>wget</code>：</p>
-    <pre><code class="language-sh">$ sudo apt install wget
+    <pre class="fullwidth"><code class="language-sh">$ sudo apt install wget
 </code></pre>
     <pre class="fullwidth"><code class="language-sh">$ wget https://raw.githubusercontent.com/raspberrypi/pico-setup/master/pico_setup.sh
 </code></pre>
     <p>然后用 <code>chmod</code> 把脚本标记为可执行：</p>
-    <pre><code class="language-sh">$ chmod +x pico_setup.sh
+    <pre class="fullwidth"><code class="language-sh">$ chmod +x pico_setup.sh
 </code></pre>
     <p>用以下命令运行该脚本：</p>
-    <pre><code class="language-sh">$ ./pico_setup.sh
+    <pre class="fullwidth"><code class="language-sh">$ ./pico_setup.sh
 </code></pre>
     <p>最后，重启你的 Raspberry Pi 以加载 UART 配置的改动：</p>
-    <pre><code class="language-sh">$ sudo reboot
+    <pre class="fullwidth"><code class="language-sh">$ sudo reboot
 </code></pre>
     <h4 id="c11-手动配置环境">C.1.1 手动配置环境</h4>
     <p>关于手动配置环境的详细信息，请参阅 <code>pico_setup.sh</code> 的 README.md。</p>
     <h4 id="c12-更新-pico-sdk">C.1.2 更新 Pico SDK</h4>
     <p>当新版本的 Pico SDK 发布后，你必须更新本地的 SDK 副本，并且建议删除所有本地构建目录。更新时，进入 <code>pico-sdk</code> 目录并运行以下命令（对于 <code>pico-examples</code> 也应做同样的操作）：</p>
-    <pre><code class="language-sh">$ cd pico-sdk
+    <pre class="fullwidth"><code class="language-sh">$ cd pico-sdk
 $ git pull
 $ git submodule update
 </code></pre>
     <p>你还需要更新本地的 picotool 副本，并重新构建和安装它——进入 <code>picotool</code> 目录并运行以下命令：<label for="sn-pico-12" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-12" class="margin-toggle"><span class="sidenote">想及时获知新版本，可以在 <a href="https://github.com/raspberrypi/pico-sdk">pico-sdk 仓库</a>上设置自定义关注（watch）。</span></p>
-    <pre><code class="language-sh">$ cd picotool
+    <pre class="fullwidth"><code class="language-sh">$ cd picotool
 $ git pull
 $ cmake --build build
 $ sudo cmake --install build
 </code></pre>
     <h3 id="c2-手动创建你自己的项目">C.2 手动创建你自己的项目</h3>
     <p>先创建一个目录来存放你的测试项目，让它与 <code>pico-sdk</code> 目录并列：</p>
-    <pre><code class="language-sh">$ cd ~/pico
+    <pre class="fullwidth"><code class="language-sh">$ cd ~/pico
 $ ls -la
 total 16
 drwxr-xr-x       7 aa   staff   224   6 Apr 10:41 ./
@@ -753,7 +780,7 @@ $ mkdir test
 $ cd test
 </code></pre>
     <p>然后在该目录中创建一个 <code>test.c</code> 文件：</p>
-    <pre><code class="language-c">#include &lt;stdio.h&gt;
+    <pre class="fullwidth"><code class="language-c">#include &lt;stdio.h&gt;
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "pico/binary_info.h"
@@ -785,7 +812,7 @@ int main() {
 </code></pre>
     <p>在 Pico 和 Pico 2 上，板载 LED 连接到 <code>GP25</code>；如果你是为 Pico W 构建，LED 连接到 <code>CYW43_WL_GPIO_LED_PIN</code>。更多信息请参阅 pico-examples GitHub 仓库中的 Pico W blink 示例。上面 <code>&lt;1&gt;</code>、<code>&lt;2&gt;</code> 标记的这些行会往二进制文件中添加字符串，可用 picotool 查看，参见<a href="#附录-b-picotool">附录 B. Picotool</a>。</p>
     <p>再创建一个 <code>CMakeLists.txt</code> 文件：</p>
-    <pre><code class="language-cmake">cmake_minimum_required(VERSION 3.13)
+    <pre class="fullwidth"><code class="language-cmake">cmake_minimum_required(VERSION 3.13)
 
 
 include(pico_sdk_import.cmake)
@@ -816,7 +843,7 @@ pico_add_extra_outputs(test)
       <li><code>&lt;2&gt;</code> 启用通过 UART 的串口输出。这会添加对开发板上默认 UART 引脚（Pico 系列设备为 GPIO 0 和 1）进行 stdin/stdout 通信的支持。</li>
     </ul>
     <p>然后把你 pico-sdk 安装目录中 <code>external</code> 文件夹下的 <code>pico_sdk_import.cmake</code> 文件复制到你的测试项目文件夹中：</p>
-    <pre><code class="language-sh">$ cp ../pico-sdk/external/pico_sdk_import.cmake .
+    <pre class="fullwidth"><code class="language-sh">$ cp ../pico-sdk/external/pico_sdk_import.cmake .
 </code></pre>
     <p>现在你的目录看起来应该像这样：</p>
     <pre class="fullwidth"><code class="language-sh">$ ls -la
@@ -828,11 +855,12 @@ drwxr-xr-x      7 aa   staff    224    6 Apr 10:41 ../
 -rw-r--r--      1 aa   staff    383    6 Apr 10:37 test.c
 </code></pre>
     <p>然后就可以像构建 <code>pico-examples</code> 一样构建它了：<label for="sn-pico-13" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-13" class="margin-toggle"><span class="sidenote">SDK 默认面向 Raspberry Pi Pico。其他开发板用 <code>-DPICO_BOARD=&lt;board&gt;</code> 指定：Pico 2 用 <code>-DPICO_BOARD=pico2</code>，Pico W 用 <code>-DPICO_BOARD=pico_w</code>。Pico W 的 Wi-Fi 网络与密码用 <code>-DWIFI_SSID="..." -DWIFI_PASSWORD="..."</code> 传入。</span></p>
-    <pre><code class="language-sh">$ cmake -S . -B build
+    <pre class="fullwidth"><code class="language-sh">$ cmake -S . -B build
 $ cmake --build build
 </code></pre>
     <p>构建过程会生成多种不同的文件，其中比较重要的文件如下表所示。<label for="sn-pico-14" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-pico-14" class="margin-toggle"><span class="sidenote">UF2（USB Flashing Format）是 Microsoft 制定的一种格式，用于通过 USB 给 Raspberry Pi 微控制器烧录固件，详见 <a href="https://github.com/Microsoft/uf2">Microsoft UF2 规范仓库</a>。</span></p>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th>文件扩展名</th><th>说明</th></tr>
       </thead>
@@ -845,6 +873,7 @@ $ cmake --build build
         <tr><td><code>.map</code></td><td>与 <code>.elf</code> 文件配套的映射（map）文件，描述链接器如何把各个段安排在内存中</td></tr>
       </tbody>
     </table>
+    </div>
     <p>要让二进制文件在 SRAM 而非 Flash 中运行，可以在 cmake 构建时设置 <code>-DPICO_NO_FLASH=1</code>，或在 <code>CMakeLists.txt</code> 中为每个目标单独添加 <code>pico_set_binary_type(TARGET_NAME no_flash)</code>。UF2 只指定了数据要去的地址，因此也能把 RAM 二进制文件下载到设备上——例如开发板上没有 flash 芯片时。注意只能选择 RAM 或 Flash 之一，不能同时下载到两者。</p>
     <h4 id="c21-调试你的项目">C.2.1 调试你的项目</h4>
     <p>在命令行下调试你自己的项目，流程与<a href="#a62-使用-swd-调试">附录 A.6.2 使用 SWD 调试</a>相同。<label for="mn-pico-5" class="margin-toggle">⊕</label><input type="checkbox" id="mn-pico-5" class="margin-toggle"><span class="marginnote">这些“咒语”为何必要，Raspberry Pi Pico 系列 C/C++ SDK 一书有完整解释：它讲清了项目如何构建，以及本文 <code>CMakeLists.txt</code> 每一行与 SDK 结构的关系。</span></p>

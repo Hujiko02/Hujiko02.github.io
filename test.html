@@ -90,14 +90,14 @@
     <p>正文栏内的图默认限制在 55% 宽：</p>
 
     <figure>
-      <img src="./assets/images/1.jpg" alt="示例图，来自 images/1.jpg"><label for="mn-oplus" class="margin-toggle">⊕</label><input type="checkbox" id="mn-oplus" class="margin-toggle"><span class="marginnote">半宽图的注释要写在边注上。</span>
+      <img src="./assets/images/1.jpg" alt="示例图，来自 images/1.jpg"><label for="mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="mn-1" class="margin-toggle"><span class="marginnote">半宽图的注释要写在边注上。</span>
     </figure>
 
     <p>满宽图加 <code>fullwidth</code> 类，必须仍在 <code>article</code> 内才会撑开：</p>
 
     <figure class="fullwidth">
       <img src="./assets/images/1.jpg" alt="满宽示例图">
-      <figcaption>满宽图。用于时间线、地图、数据可视化这类拒绝缩水的图。</figcaption>
+      <figcaption>满宽图。用于时间线、地图、数据可视化这类拒绝缩水的图。满宽图注释放 figcaption 里面</figcaption>
     </figure>
 
     <p>页边小图：把 <code>&lt;img&gt;</code> 直接放进 margin note 里，无需 figure 包裹<label for="mn-inline-img" class="margin-toggle">⊕</label><input type="checkbox" id="mn-inline-img" class="margin-toggle"><span class="marginnote"><img src="./assets/images/1.jpg" alt="页边小图">页边图与它注释的那句话相邻，读者不用来回翻。</span>，这样图和它的引用就贴在一起。</p>
@@ -186,13 +186,17 @@ python3 -m http.server 8000
     <p>要换内容时，保留 <code>&lt;article&gt;</code> 和 <code>&lt;section&gt;</code> 骨架、
     保留边注那三件套（label + input + span）的相邻写法，其余随便改。</p>
   </section>
+
   <section>
-    <div class="epigraph">
-      <blockquote>
-        <p>生活，就是面对现实微笑，就是越过障碍注视未来；生活，就是用心灵之剪，在人生之路上裁出叶绿的枝头；生活，就是面对困惑或黑暗时，灵魂深处燃起豆大<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">形容像豆子一般大小。用在不同场合，有不同的效果。如「豆大的灯火」，乃形容其小；而「豆大的汗水」，则又形容其大。</span>却明亮且微笑的灯展。</p>
-        <footer>鲁迅，<cite>朝花夕拾</cite></footer>
-      </blockquote>
-    </div>
+    <p>
+      <div class="epigraph">
+        <blockquote>
+          <p>生活，就是面对现实微笑，就是越过障碍注视未来；生活，就是用心灵之剪，在人生之路上裁出叶绿的枝头；生活，就是面对困惑或黑暗时，灵魂深处燃起豆大却明亮且微笑的灯展。</p>
+          <footer>鲁迅，<cite>朝花夕拾</cite></footer>
+        </blockquote>
+      </div>
+    </p>
+  </section>
 
     <pre><code>
 #include &lt;stdio.h&gt;
@@ -208,6 +212,14 @@ int main(void)
 }
     </code></pre>
   </section>
+
+  <section>
+    <p>
+      生活，就是面对现实微笑，就是越过障碍注视未来；生活，就是用心灵之剪，在人生之路上裁出叶绿的枝头；生活，就是面对困惑或黑暗时，灵魂深处燃起豆大 <label for="mn-demo" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-demo" class="margin-toggle"/><span class="marginnote">边注内容</span> 却明亮且微笑的灯展。
+    </p>
+  </section>
+
+  
 </article>
 
 <footer>

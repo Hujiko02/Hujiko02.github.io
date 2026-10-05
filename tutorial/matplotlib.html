@@ -34,6 +34,9 @@ Matplotlib 是 Python 里最常用的<strong>绘图库</strong>，只需几行�
 折线图、散点图、柱状图、直方图等，还能把图保存成 PNG、PDF、SVG 等格式。
 本教程所有插图均用真实代码生成，跟着做就能得到一模一样的结果。</p>
     </blockquote>
+  </section>
+
+  <section>
     <h2 id="目录">目录</h2>
     <ol>
       <li><a href="#1-matplotlib-是什么">Matplotlib 是什么</a></li>
@@ -49,6 +52,9 @@ Matplotlib 是 Python 里最常用的<strong>绘图库</strong>，只需几行�
       <li><a href="#11-常见问题与技巧">常见问题与技巧</a></li>
       <li><a href="#12-下一步学习">下一步学习</a></li>
     </ol>
+  </section>
+
+  <section>
     <h2 id="1-matplotlib-是什么">1. Matplotlib 是什么</h2>
     <p><strong>Matplotlib</strong> 是 Python 生态中最经典、最通用的<strong>二维绘图库</strong>，由 John D. Hunter 于 2003 年创建：</p>
     <ul>
@@ -71,9 +77,12 @@ Matplotlib 是 Python 里最常用的<strong>绘图库</strong>，只需几行�
     <blockquote>
       <p>一句话总结：<strong>Matplotlib 让你用 Python 把数据变成图片。</strong></p>
     </blockquote>
+  </section>
+
+  <section>
     <h2 id="2-安装与环境">2. 安装与环境</h2>
     <h3 id="21-安装">2.1 安装</h3>
-    <pre><code class="language-bash"># 只装 matplotlib
+    <pre class="fullwidth"><code class="language-bash"># 只装 matplotlib
 pip install matplotlib
 
 # 推荐：连同 numpy 一起装（数据处理常用）
@@ -83,12 +92,15 @@ pip install matplotlib numpy
 pip install matplotlib -i https://pypi.tuna.tsinghua.edu.cn/simple
 </code></pre>
     <h3 id="22-验证安装">2.2 验证安装</h3>
-    <pre><code class="language-python">import matplotlib
+    <pre class="fullwidth"><code class="language-python">import matplotlib
 print(matplotlib.__version__)
 </code></pre>
+  </section>
+
+  <section>
     <h2 id="3-快速开始你的第一张图">3. 快速开始：你的第一张图</h2>
     <p>下面这段代码画出了正弦 <code>sin(x)</code> 和余弦 <code>cos(x)</code> 两条曲线：</p>
-    <pre><code class="language-python">import numpy as np
+    <pre class="fullwidth"><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
 # 1. 生成数据：0 到 2π 之间的 100 个点
@@ -119,8 +131,12 @@ plt.show()
       <figcaption>折线图示例</figcaption>
     </figure>
     <p><strong>最小可运行结构</strong>就是四步：<strong>造数据 → 创建 <code>fig, ax</code> → 用 <code>ax</code> 画图/修饰 → 显示</strong>。其余都是「锦上添花」。</p>
+  </section>
+
+  <section>
     <h2 id="4-核心概念figure-与-axes">4. 核心概念：Figure 与 Axes</h2>
     <p>这是 Matplotlib 最重要、也最让新手困惑的一组概念。</p>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>概念</th><th>英文</th><th>比喻</th><th>说明</th></tr>
@@ -131,12 +147,13 @@ plt.show()
         <tr><td><strong>轴（线）</strong></td><td><code>Axis</code></td><td>画区的 x / y 边界线</td><td>一条坐标轴，包含刻度、刻度标签、轴名</td></tr>
       </tbody>
     </table>
+    </div>
     <ul>
       <li><code>plt.plot()</code> 这种「快速写法」由 pyplot 自动帮你建一个 <code>Figure</code> 和一个 <code>Axes</code>；</li>
       <li>本教程主要使用<strong>面向对象写法</strong>：先创建 <code>fig, ax = plt.subplots()</code>，再用 <code>ax</code> 的方法画图和修饰。</li>
     </ul>
     <p><strong>两种写法对比：</strong><label for="sn-mpl-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-mpl-1" class="margin-toggle"><span class="sidenote"><strong>建议</strong>：主要使用面向对象写法。先创建 <code>fig, ax</code>，再用 <code>ax</code> 调用画图和修饰方法； 只有 <code>plt.subplots()</code>、<code>plt.show()</code>、<code>plt.style.use()</code>、<code>plt.rcParams</code> 等少数步骤还需要通过 <code>pyplot</code> 完成。</span></p>
-    <pre><code class="language-python"># 写法一：pyplot 快速写法（了解即可，适合临时单图）
+    <pre class="fullwidth"><code class="language-python"># 写法一：pyplot 快速写法（了解即可，适合临时单图）
 plt.plot([1, 2, 3], [2, 4, 3])
 plt.show()
 
@@ -146,10 +163,13 @@ ax.plot([1, 2, 3], [2, 4, 3])
 ax.set_title("my plot")
 fig.savefig("out.png")
 </code></pre>
+  </section>
+
+  <section>
     <h2 id="5-常用图表类型">5. 常用图表类型</h2>
     <h3 id="51-折线图">5.1 折线图</h3>
     <p>用于看数据<strong>随某个变量（通常是 x）的变化趋势</strong>。</p>
-    <pre><code class="language-python">import numpy as np
+    <pre class="fullwidth"><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
 x = np.linspace(0, 10, 100)
@@ -163,7 +183,8 @@ ax.legend()
 plt.show()
 </code></pre>
     <p>常用参数（<code>ax.plot</code>）：</p>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th>参数</th><th>作用</th><th>例子</th></tr>
       </thead>
@@ -175,9 +196,10 @@ plt.show()
         <tr><td><code>label</code></td><td>图例名称</td><td><code>label="sin(x)"</code></td></tr>
       </tbody>
     </table>
+    </div>
     <h3 id="52-散点图">5.2 散点图</h3>
     <p>用于看<strong>两个变量之间的关系、聚类、分布</strong>，常配合颜色和大小表示额外信息。</p>
-    <pre><code class="language-python">import numpy as np
+    <pre class="fullwidth"><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
 rng = np.random.default_rng(1)
@@ -198,7 +220,7 @@ plt.show()
     </figure>
     <h3 id="53-柱状图">5.3 柱状图</h3>
     <p>用于<strong>对比不同类别的数值大小</strong>。<code>ax.bar</code> 画竖直柱，<code>ax.barh</code> 画水平柱。</p>
-    <pre><code class="language-python">import matplotlib.pyplot as plt
+    <pre class="fullwidth"><code class="language-python">import matplotlib.pyplot as plt
 
 names = ["A", "B", "C", "D", "E"]
 values = [12, 19, 7, 15, 24]
@@ -229,7 +251,7 @@ plt.show()
     </table>
     <h3 id="54-直方图">5.4 直方图</h3>
     <p>用于看<strong>数据的分布形状</strong>（是否正态、有没有偏斜、有无离群值）。</p>
-    <pre><code class="language-python">import numpy as np
+    <pre class="fullwidth"><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
 data = np.random.default_rng(1).normal(loc=0, scale=1, size=1000)
@@ -248,7 +270,7 @@ plt.show()
     <p>关键参数：<code>bins</code> 决定柱子的数量/边界，<code>density=True</code> 可把纵轴改为概率密度。</p>
     <h3 id="55-饼图">5.5 饼图</h3>
     <p>用于展示<strong>各部分占整体的比例</strong>。</p>
-    <pre><code class="language-python">labels = ["A", "B", "C", "D"]
+    <pre class="fullwidth"><code class="language-python">labels = ["A", "B", "C", "D"]
 sizes = [30, 20, 25, 25]
 
 fig, ax = plt.subplots(figsize=(5, 5))
@@ -269,6 +291,7 @@ ax.boxplot(data, labels=["a", "b", "c"])
 plt.show()
 </code></pre>
     <h3 id="57-其他常用图">5.7 其他常用图</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>图表</th><th>函数（<code>ax</code> 方法）</th><th>用途</th></tr>
@@ -281,18 +304,22 @@ plt.show()
         <tr><td>极坐标</td><td><code>plt.subplots(subplot_kw={"projection": "polar"})</code> 后 <code>ax.plot</code></td><td>角度数据</td></tr>
       </tbody>
     </table>
+    </div>
+  </section>
+
+  <section>
     <h2 id="6-美化你的图">6. 美化你的图</h2>
     <p>好的图清楚、美观。这里列出最常用的美化手段。</p>
     <h3 id="61-标题与坐标轴标签">6.1 标题与坐标轴标签</h3>
-    <pre><code class="language-python">ax.set_title("标题", fontsize=16)
+    <pre class="fullwidth"><code class="language-python">ax.set_title("标题", fontsize=16)
 ax.set_xlabel("x", fontsize=12)
 ax.set_ylabel("y", fontsize=12)
 </code></pre>
     <p>也可以把多个设置合并成一行：</p>
-    <pre><code class="language-python">ax.set(title="标题", xlabel="x", ylabel="y")
+    <pre class="fullwidth"><code class="language-python">ax.set(title="标题", xlabel="x", ylabel="y")
 </code></pre>
     <h3 id="62-图例">6.2 图例</h3>
-    <pre><code class="language-python">ax.plot(x, y1, label="线1")
+    <pre class="fullwidth"><code class="language-python">ax.plot(x, y1, label="线1")
 ax.plot(x, y2, label="线2")
 ax.legend()                         # 自动放在合适位置
 ax.legend(loc="upper right")        # 指定位置
@@ -300,14 +327,14 @@ ax.legend(fontsize=10, framealpha=0.5)
 </code></pre>
     <p><code>loc</code> 常用值：<code>best</code>、<code>upper right</code>、<code>lower left</code>、<code>center</code> 等。</p>
     <h3 id="63-坐标范围与刻度">6.3 坐标范围与刻度</h3>
-    <pre><code class="language-python">ax.set_xlim(0, 10)       # x 轴范围
+    <pre class="fullwidth"><code class="language-python">ax.set_xlim(0, 10)       # x 轴范围
 ax.set_ylim(-1, 1)       # y 轴范围
 ax.set_xticks([0, 5, 10])         # 手动指定刻度位置
 ax.tick_params(axis="x", rotation=45)   # 旋转刻度标签（防重叠）
 ax.set_yscale("log")              # y 轴用对数刻度
 </code></pre>
     <h3 id="64-颜色线型与标记">6.4 颜色、线型与标记</h3>
-    <pre><code class="language-python">ax.plot(x, y, color="tab:blue", linewidth=2.5,
+    <pre class="fullwidth"><code class="language-python">ax.plot(x, y, color="tab:blue", linewidth=2.5,
         linestyle="--", marker="o", markersize=4,
         label="data")
 </code></pre>
@@ -315,12 +342,15 @@ ax.set_yscale("log")              # y 轴用对数刻度
 以及 matplotlib 自带的 <code>"tab:10"</code> 配色（<code>tab:blue</code>、<code>tab:orange</code>…）。
 也可以用十六进制如 <code>"#1f77b4"</code>。</p>
     <h3 id="65-网格与边框">6.5 网格与边框</h3>
-    <pre><code class="language-python">ax.grid(True)                       # 开网格
+    <pre class="fullwidth"><code class="language-python">ax.grid(True)                       # 开网格
 ax.grid(True, linestyle="--", alpha=0.5)   # 虚线、半透明
 ax.spines["top"].set_visible(False)  # 隐藏上边框
 ax.spines["right"].set_visible(False) # 隐藏右边框
 </code></pre>
     <p><label for="mn-mpl-1" class="margin-toggle">⊕</label><input type="checkbox" id="mn-mpl-1" class="margin-toggle"><span class="marginnote"><code>fig.tight_layout()</code> 能自动调整子图间距，避免标签被切掉，强烈建议每次都加。</span></p>
+  </section>
+
+  <section>
     <h2 id="7-子图subplots">7. 子图：subplots</h2>
     <p>一图放多个小图，适合<strong>对比展示多组数据</strong>。最常用的是 <code>plt.subplots(m, n)</code>，它返回一个 <code>Figure</code> 和一个 <code>Axes</code> 组成的二维数组。</p>
     <pre class="fullwidth"><code class="language-python">import numpy as np
@@ -348,7 +378,8 @@ plt.show()
       <figcaption>子图示例</figcaption>
     </figure>
     <p><strong>进阶技巧：</strong></p>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th>需求</th><th>做法</th></tr>
       </thead>
@@ -359,9 +390,13 @@ plt.show()
         <tr><td>双子坐标轴</td><td>用 <code>ax.twinx()</code> 在右侧再加一个 y 轴</td></tr>
       </tbody>
     </table>
+    </div>
+  </section>
+
+  <section>
     <h2 id="8-保存图片">8. 保存图片</h2>
     <p>保存图用 <code>fig.savefig()</code>，支持非常丰富的格式。<strong>一定要放在 <code>plt.show()</code> 之前调用</strong>，否则保存的是空图（有些环境 <code>show</code> 会清空画布）。</p>
-    <pre><code class="language-python">fig.savefig("plot.png")                    # PNG，默认 dpi=100
+    <pre class="fullwidth"><code class="language-python">fig.savefig("plot.png")                    # PNG，默认 dpi=100
 fig.savefig("plot.png", dpi=300)           # 高清，适合打印/论文
 fig.savefig("plot.pdf")                    # 矢量图，放大不失真
 fig.savefig("plot.svg")                    # SVG，适合网页
@@ -373,10 +408,13 @@ fig.savefig("plot.jpg", bbox_inches="tight")  # 自动裁剪空白
       <li>论文投稿通常用 <strong>PDF / EPS / 300dpi 的 PNG</strong>；</li>
       <li>想保存多张图，每画完一张就 <code>fig.savefig(...)</code> 再 <code>plt.close(fig)</code> 释放内存。</li>
     </ul>
+  </section>
+
+  <section>
     <h2 id="9-文本注释与数学公式">9. 文本注释与数学公式</h2>
     <h3 id="91-添加文字">9.1 添加文字</h3>
     <p><code>ax.text(x, y, "文字")</code> 在指定坐标写文字，<code>ax.annotate()</code> 可加箭头。</p>
-    <pre><code class="language-python">ax.text(2, 0.5, "注释文字", fontsize=12, color="red")
+    <pre class="fullwidth"><code class="language-python">ax.text(2, 0.5, "注释文字", fontsize=12, color="red")
 ax.annotate("峰值", xy=(np.pi / 2, 1), xytext=(2.5, 1.2),
             arrowprops=dict(arrowstyle="-&gt;"))
 </code></pre>
@@ -410,10 +448,13 @@ ax.legend()
         <tr><td>函数名</td><td><code>\sin</code>、<code>\cos</code>、<code>\log</code></td></tr>
       </tbody>
     </table>
+  </section>
+
+  <section>
     <h2 id="10-全局样式与风格">10. 全局样式与风格</h2>
     <h3 id="101-主题风格">10.1 主题风格</h3>
     <p>Matplotlib 内置多种<strong>整体风格</strong>，一条命令切换：<label for="sn-mpl-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-mpl-3" class="margin-toggle"><span class="sidenote">风格是<strong>全局设置</strong>，所以仍然通过 <code>plt.style.use()</code> 调用；设置完后， 面向对象写法里的 <code>ax</code> 会自动使用该风格。</span></p>
-    <pre><code class="language-python">import matplotlib.pyplot as plt
+    <pre class="fullwidth"><code class="language-python">import matplotlib.pyplot as plt
 
 plt.style.use("seaborn-v0_8")      # 更现代、更柔和
 plt.style.use("ggplot")            # 类似 R 的 ggplot 风格
@@ -423,7 +464,7 @@ plt.style.use("bmh")               # 蓝色主题
     <p>查看所有风格：<code>print(plt.style.available)</code>。</p>
     <h3 id="102-rcparams-全局配置">10.2 rcParams 全局配置</h3>
     <p><code>plt.rcParams</code> 可以设置全局默认，省去每个图都重写一遍（全局配置同样在 <code>pyplot</code> 层完成）。<label for="sn-mpl-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-mpl-4" class="margin-toggle"><span class="sidenote"><strong>关于中文</strong>：Matplotlib 默认字体不含中文，直接画中文会显示成方框。 解决办法是设置一个中文字体（如 <code>SimHei</code>、<code>Noto Sans CJK SC</code>）。 若你的系统没有中文字体，最简单是先用英文标签。</span></p>
-    <pre><code class="language-python">plt.rcParams["figure.figsize"] = (8, 5)
+    <pre class="fullwidth"><code class="language-python">plt.rcParams["figure.figsize"] = (8, 5)
 plt.rcParams["font.family"] = "sans-serif"
 plt.rcParams["font.sans-serif"] = ["SimHei", "DejaVu Sans"]  # 中文字体
 plt.rcParams["axes.unicode_minus"] = False   # 正常显示负号
@@ -432,6 +473,9 @@ plt.rcParams["lines.linewidth"] = 2
     <h3 id="103-默认配色tab10">10.3 默认配色（tab10）</h3>
     <p>新版 matplotlib 默认用一套对色盲友好、同一色系不同深浅的 <code>tab</code> 配色，
 一组曲线时自动轮换，不用手动指定，效果也足够好。</p>
+  </section>
+
+  <section>
     <h2 id="11-常见问题与技巧">11. 常见问题与技巧</h2>
     <h3 id="111-图没显示一下闪过">11.1 图没显示/一下闪过</h3>
     <ul>
@@ -445,24 +489,25 @@ plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei", "Noto Sans CJK S
 plt.rcParams["axes.unicode_minus"] = False
 </code></pre>
     <h3 id="113-画布太挤标签重叠">11.3 画布太挤、标签重叠</h3>
-    <pre><code class="language-python">fig.tight_layout()
+    <pre class="fullwidth"><code class="language-python">fig.tight_layout()
 # 或
 fig.subplots_adjust(top=0.9, right=0.95, hspace=0.3)
 </code></pre>
     <h3 id="114-让某条线更突出">11.4 让某条线更突出</h3>
     <p>调整 <code>zorder</code>（图层顺序）或直接在后面重新画一次。</p>
-    <pre><code class="language-python">ax.plot(x, y, "b--", zorder=1)
+    <pre class="fullwidth"><code class="language-python">ax.plot(x, y, "b--", zorder=1)
 ax.plot(x[::5], y[::5], "ro", zorder=2)   # 点画在线上层
 </code></pre>
     <h3 id="115-用-pandas-一键出图">11.5 用 Pandas 一键出图</h3>
     <p>如果数据是 DataFrame，可以直接：</p>
-    <pre><code class="language-python">df.plot(kind="line")      # 折线
+    <pre class="fullwidth"><code class="language-python">df.plot(kind="line")      # 折线
 df.plot(kind="bar")       # 柱状
 df.plot(kind="scatter", x="a", y="b")
 df["col"].hist()          # 某列的直方图
 </code></pre>
     <h3 id="116-常用快捷键面向对象写法速查">11.6 常用快捷键（面向对象写法速查）</h3>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th>想做的事</th><th>写法</th></tr>
       </thead>
@@ -474,6 +519,10 @@ df["col"].hist()          # 某列的直方图
         <tr><td>保存</td><td><code>fig.savefig(...)</code></td></tr>
       </tbody>
     </table>
+    </div>
+  </section>
+
+  <section>
     <h2 id="12-下一步学习">12. 下一步学习</h2>
     <h3 id="121-练习建议">12.1 练习建议</h3>
     <ol>
@@ -484,7 +533,8 @@ df["col"].hist()          # 某列的直方图
       <li>试着用 <code>fig.savefig</code> 导出一张 300dpi 的图，并加 <code>bbox_inches="tight"</code>。</li>
     </ol>
     <h3 id="122-进阶方向">12.2 进阶方向</h3>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th>方向</th><th>说明</th><th>库</th></tr>
       </thead>
@@ -496,12 +546,16 @@ df["col"].hist()          # 某列的直方图
         <tr><td>地理数据</td><td>地图可视化</td><td><strong>GeoPandas / Cartopy</strong></td></tr>
       </tbody>
     </table>
+    </div>
     <h3 id="123-官方资源">12.3 官方资源</h3>
     <ul>
       <li>官方文档：<a href="https://matplotlib.org/stable/">https://matplotlib.org/stable/</a></li>
       <li>官方教程：<a href="https://matplotlib.org/stable/tutorials/index.html">https://matplotlib.org/stable/tutorials/index.html</a></li>
       <li>画廊（大量示例，直接复制改）：<a href="https://matplotlib.org/stable/gallery/">https://matplotlib.org/stable/gallery/</a></li>
     </ul>
+  </section>
+
+  <section>
     <h2 id="附录一张图从-0-到-1-的标准模板">附录：一张图从 0 到 1 的标准模板</h2>
     <p>把下面代码保存为 <code>demo.py</code>，替换数据即可直接用：</p>
     <pre class="fullwidth"><code class="language-python">import numpy as np
@@ -526,7 +580,7 @@ fig.savefig("demo.png", dpi=300, bbox_inches="tight")
 plt.show()
 </code></pre>
     <h3 id="快速记忆卡">快速记忆卡</h3>
-    <pre><code>造数据     : numpy 的 linspace / random
+    <pre class="fullwidth"><code>造数据     : numpy 的 linspace / random
 创建画布   : fig, ax = plt.subplots(figsize=...)
 画折线     : ax.plot(x, y, label=...)
 画散点     : ax.scatter(x, y, c=..., s=...)

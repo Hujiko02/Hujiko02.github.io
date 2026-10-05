@@ -4,6 +4,12 @@
    ============================================================ */
 
 body {
+    /* katex.min.css 末尾有 body{counter-reset:katexEqnNo mmlEqnNo}，
+       与本文件同特异性且后加载，会把 tufte.css 的
+       body{counter-reset:sidenote-counter} 整条覆盖掉，
+       导致边注编号计数器不重置、每条都显示 1。
+       这里合并两个计数器并加 !important，与 <link> 顺序无关。 */
+    counter-reset: sidenote-counter katexEqnNo mmlEqnNo !important;
     font-family:
         et-book,
         "Noto Serif CJK SC",        /* 本机已装的宋体，中文首选 */

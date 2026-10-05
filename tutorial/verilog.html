@@ -35,6 +35,9 @@
 <strong>语言</strong>：中文正文，关键术语保留英文，方便你以后查资料。
 <strong>代码文件编号</strong>：按文中出现顺序编号（<code>ex01</code>…<code>ex21</code>），同名加 <code>tb_</code> 前缀的是它的测试平台（<code>tb_ex01_and_gate.v</code> 等）。附录 B 可以一键把它们全部导出成文件。</p>
     </blockquote>
+  </section>
+
+  <section>
     <h2 id="目录">目录</h2>
     <ul>
       <li><a href="#第-0-章-先把工具链跑通">第 0 章 先把工具链跑通</a></li>
@@ -53,7 +56,11 @@
       <li><a href="#附录-d-练习题">附录 D 练习题</a></li>
       <li><a href="#附录-e-继续学习">附录 E 继续学习</a></li>
     </ul>
+  </section>
+
+  <section>
     <h2 id="第-0-章-先把工具链跑通">第 0 章 先把工具链跑通</h2>
+    <p><label for="mn-vlog-2" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-2" class="margin-toggle"><span class="marginnote">入门阶段一条命令就够：<code>iverilog -Wall -g2012 -o sim.vvp *.v &amp;&amp; vvp sim.vvp</code>。养成看警告的习惯，很多 bug iverilog 已经替你标出来了。</span></p>
     <h3 id="01-三个工具的分工">0.1 三个工具的分工</h3>
     <p>初学者最容易糊涂的就是这三个命令谁管谁。一句话记住：</p>
     <pre class="fullwidth"><code class="language-text">  你的源码                编译                      仿真执行                波形
@@ -67,7 +74,7 @@
     </ul>
     <p>所以：<strong>编译错误找 iverilog，运行时报错找 vvp，波形看不懂找 gtkwave。</strong></p>
     <h3 id="02-安装与确认版本">0.2 安装与确认版本</h3>
-    <pre><code class="language-bash">sudo apt update
+    <pre class="fullwidth"><code class="language-bash">sudo apt update
 sudo apt install -y iverilog gtkwave
 iverilog -V | head -3
 vvp -V | head -2
@@ -76,7 +83,7 @@ gtkwave --version | head -2
     <p>本文验证过的版本：<code>Icarus Verilog version 13.0 (stable)</code>。</p>
     <h3 id="03-第一个例子与门">0.3 第一个例子：与门</h3>
     <p>数字电路的起点永远是门电路。下面两段代码：第一段是<strong>设计</strong>（DUT, Design Under Test），第二段是<strong>测试平台</strong>（testbench）。</p>
-    <pre><code class="language-verilog">// 文件: ex01_and_gate.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex01_and_gate.v
 `timescale 1ns/1ps
 module and_gate (
     input  wire a,
@@ -86,7 +93,7 @@ module and_gate (
     assign y = a &amp; b;
 endmodule
 </code></pre>
-    <pre><code class="language-verilog">// 文件: tb_ex01_and_gate.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: tb_ex01_and_gate.v
 `timescale 1ns/1ps
 module tb_ex01_and_gate;
     reg  a, b;
@@ -109,7 +116,7 @@ module tb_ex01_and_gate;
 endmodule
 </code></pre>
     <p>三板斧命令：</p>
-    <pre><code class="language-bash"># 1. 编译：把 testbench 和设计一起编译成一个仿真可执行文件
+    <pre class="fullwidth"><code class="language-bash"># 1. 编译：把 testbench 和设计一起编译成一个仿真可执行文件
 iverilog -Wall -o sim.vvp tb_ex01_and_gate.v ex01_and_gate.v
 
 # 2. 仿真：跑起来，看打印
@@ -119,7 +126,7 @@ vvp sim.vvp
 gtkwave tb_ex01_and_gate.vcd &amp;
 </code></pre>
     <p>vvp 的真实输出：</p>
-    <pre><code class="language-text">VCD info: dumpfile tb_ex01_and_gate.vcd opened for output.
+    <pre class="fullwidth"><code class="language-text">VCD info: dumpfile tb_ex01_and_gate.vcd opened for output.
 time  a b | y
    0  0 0 | 0
 10000  0 1 | 0
@@ -129,6 +136,7 @@ time  a b | y
 tb_ex01_and_gate.v:19: $finish called at 40000 (1ps)
 </code></pre>
     <p><strong>逐行讲解（这些是 Verilog 仿真的核心机制）</strong></p>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>代码</th><th>作用</th></tr>
@@ -147,8 +155,10 @@ tb_ex01_and_gate.v:19: $finish called at 40000 (1ps)
         <tr><td><code>$finish</code></td><td>结束仿真。<strong>忘记写它，仿真可能永远挂着</strong></td></tr>
       </tbody>
     </table>
+    </div>
     <p>注意模拟输出的时间：<code>0, 10000, 20000, 30000</code>。<code>timescale</code> 是 1ns，但打印显示的是 <strong>1ps 为单位的整数</strong>（10000 ps = 10ns）。这是因为 <code>$monitor</code> 默认按仿真精度（1ps）打印时间。想让时间好看点，在 tb 里加一句 <code>$timeformat(-9, 0, " ns", 8);</code>（第 7 章讲）。</p>
     <h3 id="04-iverilog-常用选项">0.4 iverilog 常用选项</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>选项</th><th>含义</th></tr>
@@ -167,23 +177,28 @@ tb_ex01_and_gate.v:19: $finish called at 40000 (1ps)
         <tr><td><code>-M depfile</code></td><td>生成依赖文件，可配合 Makefile</td></tr>
       </tbody>
     </table>
+    </div>
     <h3 id="05-三个一开始就会踩的坑">0.5 三个一开始就会踩的坑</h3>
     <ol>
       <li><strong>多个文件都要写 <code>`timescale</code>。</strong> 它按文件生效，不写就沿用默认（1s/1s），一混用时间就全乱。</li>
       <li><strong>编译顺序无所谓，但文件名要写全。</strong> iverilog 会把所有文件合成一个设计，模块名重复会报 <code>already been declared</code>。</li>
       <li><strong><code>$finish</code> 不要漏。</strong> 另外 <code>$stop</code> 是暂停（交互式调试用），<code>$finish</code> 才是结束。</li>
     </ol>
+  </section>
+
+  <section>
     <h2 id="第-1-章-verilog-是什么用文字画电路">第 1 章 Verilog 是什么：用文字画电路</h2>
+    <p><label for="mn-vlog-3" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-3" class="margin-toggle"><span class="marginnote">软件思维里「循环执行一百次」，在 Verilog 里是「复制一百份电路」。可综合的 <code>for</code> 边界必须是常量，就是因为它要展开成硬件。</span></p>
     <h3 id="11-你写的是电路不是程序">1.1 你写的是电路，不是程序</h3>
     <p>这是从软件转过来最难接受的一点：<strong>Verilog 里的所有 <code>always</code> 块和 <code>assign</code> 是同时存在的电路，不是按行执行的代码。</strong></p>
-    <pre><code class="language-text">  你写的：                              实际合成的：
+    <pre class="fullwidth"><code class="language-text">  你写的：                              实际合成的：
   assign y1 = a &amp; b;      ────┐
   assign y2 = c | d;      ────┤   两块电路并联，谁先谁后没有意义
   assign y3 = y1 ^ y2;    ────┘
 </code></pre>
     <p>只有在<strong>同一个 <code>always</code> 块内部</strong>，语句才有先后顺序（而且这个顺序还会被"阻塞/非阻塞赋值"影响，第 4 章专门讲）。</p>
     <h3 id="12-一个模块的骨架">1.2 一个模块的骨架</h3>
-    <pre><code class="language-verilog">// 这是骨架示意，不用抄
+    <pre class="fullwidth"><code class="language-verilog">// 这是骨架示意，不用抄
 `timescale 1ns/1ps              // 时间单位/精度
 
 module 模块名 #(                 // #(...) 是参数表，可选
@@ -217,7 +232,7 @@ endmodule
       <li><code>input</code> 永远是 <code>wire</code> 那种"导线"性质，不能声明成 <code>reg</code>。</li>
     </ul>
     <h3 id="13-例化的两种写法">1.3 例化的两种写法</h3>
-    <pre><code class="language-verilog">// 方式一：位置连接（顺序必须和模块定义一致，容易错，不推荐）
+    <pre class="fullwidth"><code class="language-verilog">// 方式一：位置连接（顺序必须和模块定义一致，容易错，不推荐）
   counter #(4) u1 (clk, rst_n, en, cnt, tick);
 
 // 方式二：命名连接（推荐，端口顺序随便，漏接会警告）
@@ -232,7 +247,7 @@ endmodule
     </ul>
     <h3 id="14-层次化引用跨层看信号">1.4 层次化引用：跨层看信号</h3>
     <p>tb 里可以用<strong>点号</strong>访问 DUT 内部信号：</p>
-    <pre><code class="language-verilog">$display("DUT 内部状态 = %b", tb_ex09_fsm.u_bin.state);
+    <pre class="fullwidth"><code class="language-verilog">$display("DUT 内部状态 = %b", tb_ex09_fsm.u_bin.state);
 $dumpvars(1, tb_ex09_fsm.u_bin);     // 只 dump 这一个子模块
 </code></pre>
     <p>调试时非常有用（波形里也直接出现 <code>u_bin.state</code> 这样的层级名）。但注意：<strong>综合出来的芯片里这些名字可能被改掉</strong>，别在真设计的逻辑里依赖层次名。</p>
@@ -249,8 +264,13 @@ $dumpvars(1, tb_ex09_fsm.u_bin);     // 只 dump 这一个子模块
         <tr><td>电路板上的多块芯片互联</td><td>顶层模块里例化多个子模块</td></tr>
       </tbody>
     </table>
+  </section>
+
+  <section>
     <h2 id="第-2-章-数据类型位宽与赋值">第 2 章 数据类型、位宽与赋值</h2>
+    <p><label for="mn-vlog-4" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-4" class="margin-toggle"><span class="marginnote"><code>x</code>（未知）和 <code>z</code>（高阻）只存在于仿真。真实硅片上只有 0 和 1，综合工具会把它们当 don't-care 处理。</span></p>
     <h3 id="21-四种值01xz">2.1 四种值：0、1、x、z</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>值</th><th>含义</th><th>出现场景</th></tr>
@@ -261,9 +281,11 @@ $dumpvars(1, tb_ex09_fsm.u_bin);     // 只 dump 这一个子模块
         <tr><td><code>z</code></td><td>高阻（high-impedance）</td><td>三态门没使能（第 6 章）</td></tr>
       </tbody>
     </table>
+    </div>
     <p>仿真里 <code>x</code> 会传染：<code>x &amp; 1 = x</code>、<code>x + 1 = x</code>。所以<strong>看到波形里一片红（gtkwave 里 x 是红色）</strong>，第一反应应该是"这个信号没人驱动/没复位"。注意 <code>~x</code> 也是 <code>x</code>，但 <code>x !== x</code> 是"真"（这是 <code>!==</code> 和 <code>!=</code> 的区别，tb 里校验要用 <code>!==</code>）。</p>
     <h3 id="22-wire-和-reg一条最容易记错的规则">2.2 wire 和 reg：一条最容易记错的规则</h3>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th></th><th><code>wire</code></th><th><code>reg</code></th></tr>
       </thead>
@@ -274,8 +296,9 @@ $dumpvars(1, tb_ex09_fsm.u_bin);     // 只 dump 这一个子模块
         <tr><td>综合出来一定是触发器吗</td><td>不是</td><td><strong>不是！</strong></td></tr>
       </tbody>
     </table>
+    </div>
     <p><strong>关键认知：<code>reg</code> 不等于寄存器。</strong> 它只表示"这个信号是在 <code>always</code>/<code>initial</code> 里被赋值的变量"。看下面两种 <code>reg</code>：</p>
-    <pre><code class="language-verilog">reg y_comb;                        // 组合逻辑
+    <pre class="fullwidth"><code class="language-verilog">reg y_comb;                        // 组合逻辑
 always @* y_comb = a &amp; b;          // 综合出来是一个与门，没有触发器
 
 reg q_seq;                         // 时序逻辑
@@ -283,7 +306,7 @@ always @(posedge clk) q_seq &lt;= d;  // 综合出来才是 D 触发器
 </code></pre>
     <p>决定电路形态的是 <strong><code>always</code> 的敏感列表和赋值方式</strong>，不是 <code>reg</code>/<code>wire</code> 关键字。<label for="sn-vlog-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-vlog-1" class="margin-toggle"><span class="sidenote">补充：SystemVerilog 用 <code>logic</code> 统一了两者（<code>-g2012</code> 可用）。为了兼容性和理解清晰，本文全程用经典写法。</span></p>
     <h3 id="23-向量位选部分选择拼接">2.3 向量、位选、部分选择、拼接</h3>
-    <pre><code class="language-verilog">wire [7:0] a;            // 8 位，a[7] 是最高位 MSB，a[0] 是最低位 LSB
+    <pre class="fullwidth"><code class="language-verilog">wire [7:0] a;            // 8 位，a[7] 是最高位 MSB，a[0] 是最低位 LSB
 wire [7:0] b = a[3:0];   // 部分选择：取低 4 位（高位补 0）
 wire [7:0] c = {a, b};   // 拼接：a 在高位，b 在低位（结果 16 位）
 wire [7:0] d = {4{2'b10}};   // 重复拼接 → 2'b10 复制 4 次 = 10101010
@@ -298,6 +321,7 @@ wire [7:0] g = {2'b11, a[5:0]};  // 拼接总位宽 = 2+6 = 8，正好
       <li>重复拼接 <code>{N{...}}</code> 里 N 必须是常量。</li>
     </ul>
     <h3 id="24-常量基数有符号">2.4 常量、基数、有符号</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>写法</th><th>含义</th></tr>
@@ -311,8 +335,9 @@ wire [7:0] g = {2'b11, a[5:0]};  // 拼接总位宽 = 2+6 = 8，正好
         <tr><td><code>4'b1_010</code></td><td>下划线可读性分隔符，等同于 <code>4'b1010</code></td></tr>
       </tbody>
     </table>
+    </div>
     <p><strong>默认是无符号的。</strong> 这是 Verilog 最大的坑来源之一：<code>reg [3:0] a = 4'b1111;</code> 里的 <code>a</code> 是 <strong>15</strong>，不是 -1。要做有符号运算，必须显式声明或转换：</p>
-    <pre><code class="language-verilog">wire signed [3:0] s = a;      // 声明成 signed，位模式按补码解释
+    <pre class="fullwidth"><code class="language-verilog">wire signed [3:0] s = a;      // 声明成 signed，位模式按补码解释
 $signed(a)                    // 或者用系统函数临时转换
 $unsigned(x)                  // 反向
 </code></pre>
@@ -322,7 +347,7 @@ $unsigned(x)                  // 反向
       <li>有符号和无符号混在一个表达式里时，<strong>整个表达式会按无符号算</strong>。所以 <code>if ($signed(a) &lt; $signed(b))</code> 这种地方一定要两边都写全。</li>
     </ul>
     <h3 id="25-parameter-与-localparam">2.5 parameter 与 localparam</h3>
-    <pre><code class="language-verilog">module counter #(
+    <pre class="fullwidth"><code class="language-verilog">module counter #(
     parameter WIDTH = 4              // 可以被例化时覆盖
 ) (
     ...
@@ -335,17 +360,18 @@ $unsigned(x)                  // 反向
       <li>覆盖参数的第二种写法是 <code>defparam</code>，<strong>不建议用</strong>（层次化覆盖，难维护）。</li>
     </ul>
     <p>位宽算式里尽量用 <code>localparam</code> 推导，而不是硬编码数字：</p>
-    <pre><code class="language-verilog">localparam CNT_W = $clog2(DEPTH);   // SystemVerilog 函数，需 -g2012
+    <pre class="fullwidth"><code class="language-verilog">localparam CNT_W = $clog2(DEPTH);   // SystemVerilog 函数，需 -g2012
 </code></pre>
     <h3 id="26-位宽陷阱本节是本教程最该记住的一节">2.6 位宽陷阱：本节是本教程最该记住的一节</h3>
+    <p><label for="mn-vlog-5" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-5" class="margin-toggle"><span class="marginnote">位宽不匹配是新手第一大 bug 来源。<code>iverilog -Wall</code> 会报 <em>width mismatch</em>，别把警告当噪音——本节讲的坑，一半靠看警告就能躲掉。</span></p>
     <p>Verilog 的表达式的位宽是<strong>静态推导</strong>出来的，跟你想的"先算再截"不一样：</p>
-    <pre><code class="language-text">  a + b        结果位宽 = max(width(a), width(b))     ← 4 位 + 4 位 = 4 位！
+    <pre class="fullwidth"><code class="language-text">  a + b        结果位宽 = max(width(a), width(b))     ← 4 位 + 4 位 = 4 位！
   a * b        结果位宽 = width(a) + width(b)         ← 乘法会自动变宽
   {a, b}       结果位宽 = width(a) + width(b)         ← 拼接总是变宽
   a &gt;&gt; 1       结果位宽 = width(a)
 </code></pre>
     <p>所以 <strong>两个 4 位数相加，即使赋给 8 位变量，进位也已经丢了</strong>。下面这个例子同时演示了位宽陷阱、符号问题、移位：</p>
-    <pre><code class="language-verilog">// 文件: ex02_ports_types.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex02_ports_types.v
 `timescale 1ns/1ps
 module ports_types #(
     parameter WIDTH = 4
@@ -442,7 +468,7 @@ module tb_ex02_ports_types;
 endmodule
 </code></pre>
     <p>真实输出（节选）：</p>
-    <pre><code class="language-text">== 位宽陷阱 ==
+    <pre class="fullwidth"><code class="language-text">== 位宽陷阱 ==
 15 + 1（4 位）    = 0000  = 0   &lt;- 进位没了
 15 + 1（扩到 8 位）= 00010000 = 16   &lt;- 正确
 
@@ -458,17 +484,17 @@ a = 1111。当成有符号是 -1:  a &gt;&gt;&gt; 1 = 1111 (-1)
       <li>编译永远带 <code>-Wall</code>，iverilog 会警告可疑的位宽截断。</li>
     </ol>
     <h3 id="27-声明中的初值只对仿真有效">2.7 声明中的初值：只对仿真有效</h3>
-    <pre><code class="language-verilog">reg clk = 1'b0;                 // 仿真有初值
+    <pre class="fullwidth"><code class="language-verilog">reg clk = 1'b0;                 // 仿真有初值
 reg [7:0] mem [0:15];           // 未初始化 → 读出来是 x
 initial clk = 1'b0;             // 等价写法
 </code></pre>
     <p><strong><code>reg x = 1;</code> 这种声明时赋值的写法，综合工具会忽略（FPGA 上的寄存器初值要靠复位或厂商专用属性）</strong>。别把它当成"硬件上电就是 1"。</p>
     <p>还有一个更隐蔽的坑：<strong>声明时赋初值发生在时刻 0，<code>assign</code> 也在时刻 0 求值，谁先谁后是不确定的（仿真竞态）</strong>。所以下面这种写法会偶发地打印出 <code>x</code>/<code>z</code>：</p>
-    <pre><code class="language-verilog">reg  [7:0] a = 8'hA5;
+    <pre class="fullwidth"><code class="language-verilog">reg  [7:0] a = 8'hA5;
 wire [7:0] g = {2'b11, a[5:0]};   // 时刻 0 求值时 a 可能还是 x
 </code></pre>
     <p>要保证顺序就用 <code>initial</code> 赋值，并且先等一拍：</p>
-    <pre><code class="language-verilog">reg  [7:0] a;
+    <pre class="fullwidth"><code class="language-verilog">reg  [7:0] a;
 wire [7:0] g = {2'b11, a[5:0]};
 initial begin
     a = 8'hA5;
@@ -477,9 +503,13 @@ initial begin
 end
 </code></pre>
     <p>（这个"为什么波形开头有一段 x"的问题，答案通常就在这里。）</p>
+  </section>
+
+  <section>
     <h2 id="第-3-章-组合逻辑">第 3 章 组合逻辑</h2>
+    <p><label for="mn-vlog-7" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-7" class="margin-toggle"><span class="marginnote">组合逻辑没有记忆：输入一变，输出立即跟着变。想让信号「记住」上一次的值，唯一办法是让它经过一个时钟边沿触发的寄存器（第 4 章）。</span></p>
     <p>组合逻辑 = 输出只跟当前输入有关，没有记忆。两种写法：</p>
-    <pre><code class="language-verilog">assign y = a &amp; b;               // 写法一：连续赋值（concurrent assignment）
+    <pre class="fullwidth"><code class="language-verilog">assign y = a &amp; b;               // 写法一：连续赋值（concurrent assignment）
 
 always @* begin                 // 写法二：过程块，@* 表示"任何被读的信号变化都触发"
     y = a &amp; b;
@@ -502,6 +532,7 @@ end
 </code></pre>
     <p>Verilog 里不用你手工化简，但也别指望工具帮你把 100 行 if-else 优化成一行：<strong>你写出来的结构就是电路结构</strong>（见 3.7）。</p>
     <p>常用运算符一览：</p>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>类别</th><th>运算符</th><th>说明</th></tr>
@@ -517,9 +548,10 @@ end
         <tr><td>拼接复制</td><td><code>{} {{}}</code></td><td>纯接线，不产生逻辑</td></tr>
       </tbody>
     </table>
+    </div>
     <h3 id="33-例4-选-1-数据选择器mux">3.3 例：4 选 1 数据选择器（MUX）</h3>
     <p><strong>数电</strong>：MUX 就是"用选择信号从多路输入里挑一路"。2 选 1 MUX 的电路是 <code>y = sel ? d1 : d0</code>，4 选 1 就是两棵 2 选 1 MUX 树。</p>
-    <pre><code class="language-verilog">// 文件: ex03_mux4.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex03_mux4.v
 `timescale 1ns/1ps
 module mux4_assign (
     input  wire [3:0] d,
@@ -584,6 +616,7 @@ module tb_ex03_mux4;
 endmodule
 </code></pre>
     <p>三种写法的关系（都验证过输出完全一致）：</p>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>写法</th><th>特点</th><th>综合结果</th></tr>
@@ -594,10 +627,11 @@ endmodule
         <tr><td><code>always @* case</code></td><td>最啰嗦，但最好扩展/最好读</td><td>一棵并行的 4 选 1 MUX</td></tr>
       </tbody>
     </table>
+    </div>
     <p>新手建议：<strong>多路选择用 <code>case</code>，简单的按位逻辑用 <code>assign</code>。</strong></p>
     <h3 id="34-例3-8-译码器与-8-3-优先编码器">3.4 例：3-8 译码器与 8-3 优先编码器</h3>
     <p><strong>数电</strong>：译码器是"最小项发生器"，输入一个二进制码，只有对应的一条输出线有效；优先编码器是反向操作，输入里最高优先级的那个 1 被编成二进制码。</p>
-    <pre><code class="language-verilog">// 文件: ex04_decoder38.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex04_decoder38.v
 `timescale 1ns/1ps
 module decoder38 (
     input  wire [2:0] a,
@@ -668,7 +702,7 @@ module tb_ex04_decoder38;
 endmodule
 </code></pre>
     <p>真实输出（节选）：</p>
-    <pre><code class="language-text">== 3-8 译码器（en=1）==
+    <pre class="fullwidth"><code class="language-text">== 3-8 译码器（en=1）==
 a=000 → y=00000001
 a=010 → y=00000100
 a=111 → y=10000000
@@ -687,7 +721,7 @@ in=10100100 → code=7 valid=1（bit7 最高）
     <h3 id="35-例加法器与-alu">3.5 例：加法器与 ALU</h3>
     <p><strong>数电</strong>：全加器 <code>sum = a ^ b ^ cin; cout = (a&amp;b) | (cin&amp;(a^b))</code>，n 位加法器由 n 个全加器串起来（行波进位）。Verilog 里直接写 <code>+</code> 就行，剩下的交给综合工具。</p>
     <p>补码减法的原理：<code>a - b = a + (~b) + 1</code>。所以减法和加法可以共用一套电路，这也是 ALU 的由来。</p>
-    <pre><code class="language-verilog">// 文件: ex05_adder_alu.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex05_adder_alu.v
 `timescale 1ns/1ps
 module rca4 (
     input  wire [3:0] a,
@@ -765,7 +799,7 @@ module tb_ex05_adder_alu;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">RCA: 9 + 5 = {cout,s} = {0,1110} = 14
+    <pre class="fullwidth"><code class="language-text">RCA: 9 + 5 = {cout,s} = {0,1110} = 14
 RCA: 15 + 15 = {1,1110}，4 位装不下，cout=1 就是溢出
 RCA: 15 + 1 + 1 = 17，多出来的进位被丢弃
 ALU ADD: 14, carry=0
@@ -786,8 +820,9 @@ ALU SUB: 0, zero=1 (零标志)
       <li><strong><code>zero = (y == 4'd0);</code></strong> 放在 <code>case</code> 外面，是因为它依赖最终的 <code>y</code>。注意组合块里语句顺序<strong>是</strong>有意义的（这里用阻塞赋值 <code>=</code>）。</li>
     </ul>
     <h3 id="36-反例漏写分支-综合出锁存器latch">3.6 反例：漏写分支 → 综合出锁存器（latch）</h3>
+    <p><label for="mn-vlog-6" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-6" class="margin-toggle"><span class="marginnote">综合工具遇到 latch 会报 <em>inferred latch</em> 警告。看到它基本就是 <code>if/case</code> 漏了分支或漏了 default，回去把每个组合块的所有路径补齐。</span></p>
     <p>这是新手最容易"仿真看起来正常、上板子就诡异"的坑。</p>
-    <pre><code class="language-verilog">// 文件: ex20_latch_trap.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex20_latch_trap.v
 `timescale 1ns/1ps
 // 反例：分支没写全，组合逻辑里长出锁存器
 module mux_latch_bad (
@@ -849,7 +884,7 @@ module tb_ex20_latch;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">   d   sel | y_bad(漏写分支) y_good(有 default)
+    <pre class="fullwidth"><code class="language-text">   d   sel | y_bad(漏写分支) y_good(有 default)
 0100  00  |      0            0
 0100  10  |      1            1
 0100  11  |      1            0  &lt;- y_bad 锁住了上一次的 1
@@ -863,12 +898,13 @@ endmodule
       <li>在仿真里一般表现为"值卡住不变"，很难发现。</li>
     </ul>
     <p><strong>规则：<code>always @*</code> 里每个被赋值的信号，<code>if</code> 必须有 <code>else</code>，<code>case</code> 必须有 <code>default</code>；或者养成习惯——在块开头先给所有输出一个默认值。</strong> 推荐后者，最保险：</p>
-    <pre><code class="language-verilog">always @* begin
+    <pre class="fullwidth"><code class="language-verilog">always @* begin
     y = 1'b0;              // 先给默认值，后面覆盖，永不漏分支
     if (...) y = ...;
 end
 </code></pre>
     <h3 id="37-你写的结构-综合出的电路结构">3.7 你写的结构 = 综合出的电路结构</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>你写</th><th>综合出来</th><th>延迟</th></tr>
@@ -882,6 +918,7 @@ end
         <tr><td><code>for</code> 有依赖链（<code>acc = acc + x[i]</code>）</td><td>8 级串行加法</td><td>延迟随 N 增长，可能是时序瓶颈</td></tr>
       </tbody>
     </table>
+    </div>
     <p>推论：<strong>优先编码器就应该用 <code>if-else</code> 写（要优先级），选通逻辑就该用 <code>case</code> 写（不要优先级）。</strong> 用错了会白白增加延迟和面积。</p>
     <h3 id="38-组合逻辑检查清单">3.8 组合逻辑检查清单</h3>
     <ul>
@@ -893,9 +930,14 @@ end
       <li><input disabled="" type="checkbox"/> 没有在组合块里用非阻塞赋值</li>
       <li><input disabled="" type="checkbox"/> <code>-Wall</code> 编译后没有 warning</li>
     </ul>
+  </section>
+
+  <section>
     <h2 id="第-4-章-时序逻辑">第 4 章 时序逻辑</h2>
+    <p><label for="mn-vlog-8" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-8" class="margin-toggle"><span class="marginnote">同步设计的黄金法则：尽量让整个设计只用一个时钟的所有上升沿。多时钟域是后面的进阶话题，初学阶段别碰。</span></p>
     <h3 id="41-数电回顾锁存器与触发器">4.1 数电回顾：锁存器与触发器</h3>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th></th><th>锁存器（latch）</th><th>触发器（flip-flop）</th></tr>
       </thead>
@@ -905,9 +947,10 @@ end
         <tr><td>用在哪</td><td>一般避免</td><td>同步设计的主力</td></tr>
       </tbody>
     </table>
+    </div>
     <p>为什么必须用边沿触发：如果所有寄存器都是"电平透明"的，时钟高电平期间信号会一级一级穿透过去，数据在同一个时钟周期内跑好几级，无法确定稳定值。边沿触发保证<strong>每个时钟周期数据只前进一级</strong>。</p>
     <p>几个必须建立的概念（决定你的电路能跑多快）：</p>
-    <pre><code class="language-text">        ┌──── 一个时钟周期 T ────┐
+    <pre class="fullwidth"><code class="language-text">        ┌──── 一个时钟周期 T ────┐
   clk ──┘                        └──
         ↑                        ↑
    前一级 FF               后一级 FF 采样
@@ -921,7 +964,7 @@ end
       <li><strong>最高频率</strong>：<code>T &gt; Tcq + T_组合逻辑_max + Tsu</code>。所以"关键路径"就是组合逻辑最长的那条路。</li>
     </ul>
     <h3 id="42-d-触发器的三种写法">4.2 D 触发器的三种写法</h3>
-    <pre><code class="language-verilog">// 文件: ex06_dff.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex06_dff.v
 `timescale 1ns/1ps
 module dff_async_rst (
     input  wire clk,
@@ -1027,7 +1070,7 @@ module tb_ex06_dff;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">== 1. D 触发器基本功能：上升沿把 d 搬进 q ==
+    <pre class="fullwidth"><code class="language-text">== 1. D 触发器基本功能：上升沿把 d 搬进 q ==
 t=21000 d=1 但还没到时钟沿: q_async=0 q_sync=0
 t=26000 时钟沿之后:        q_async=1 q_sync=1
 == 2. 异步复位 vs 同步复位 ==
@@ -1041,7 +1084,7 @@ t=126000 第 1 个沿: q1=1 q2=0
 t=136000 第 2 个沿: q1=1 q2=1
 </code></pre>
     <p>三段代码对应三种基本触发器：</p>
-    <pre><code class="language-verilog">// 1) 异步复位：敏感列表里有 negedge rst_n
+    <pre class="fullwidth"><code class="language-verilog">// 1) 异步复位：敏感列表里有 negedge rst_n
 always @(posedge clk or negedge rst_n)
     if (!rst_n) q &lt;= 1'b0; else q &lt;= d;
 
@@ -1053,7 +1096,8 @@ always @(posedge clk)
 always @(posedge clk)
     if (en) q &lt;= d;
 </code></pre>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th></th><th>异步复位</th><th>同步复位</th></tr>
       </thead>
@@ -1065,9 +1109,12 @@ always @(posedge clk)
         <tr><td>常见做法</td><td><strong>异步复位、同步释放</strong>（见下）</td><td>高速设计中常用</td></tr>
       </tbody>
     </table>
+    </div>
     <p>工程上最常见的折中是"异步复位、同步释放"：复位信号先经过两级触发器再送出去（叫 reset synchronizer）。本文不展开，记住这个名字，以后一定会用到。</p>
     <p><strong>另一个真实问题</strong>：波形里同步复位版在第一次时钟到来前是 <code>x</code>。如果不用复位，仿真开始时所有寄存器都是 <code>x</code>，<code>x</code> 会一路传播。所以 <strong>testbench 一定要先复位再测</strong>，这也是 tb 里第一件事就拉低 <code>rst_n</code> 的原因。</p>
     <h3 id="43-阻塞赋值-vs-非阻塞赋值本教程最重要的一节">4.3 阻塞赋值 vs 非阻塞赋值（本教程最重要的一节）</h3>
+    <p><label for="mn-vlog-9" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-9" class="margin-toggle"><span class="marginnote">一句口诀：<strong>时序块一律 <code>&lt;=</code>，组合块（<code>@*</code>）一律 <code>=</code></strong>。混用是「仿真通过、综合不一致」的头号原因。</span></p>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th></th><th>阻塞 <code>=</code></th><th>非阻塞 <code>&lt;=</code></th></tr>
@@ -1078,7 +1125,8 @@ always @(posedge clk)
         <tr><td>综合出来</td><td>组合逻辑</td><td>寄存器</td></tr>
       </tbody>
     </table>
-    <pre><code class="language-verilog">// 文件: ex21_blocking_nba.v
+    </div>
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex21_blocking_nba.v
 `timescale 1ns/1ps
 // 阻塞赋值（=）和非阻塞赋值（&lt;=）的区别
 module nba_demo (
@@ -1138,7 +1186,7 @@ module tb_ex21_blocking_nba;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">时间  d   | &lt;=: q1 q2 | =: q1 q2
+    <pre class="fullwidth"><code class="language-text">时间  d   | &lt;=: q1 q2 | =: q1 q2
           | (打两拍)  | (一拍就到)
 31000  a1 |   a0 00 |   a0 a0
 41000  a2 |   a1 a0 |   a1 a1
@@ -1154,7 +1202,7 @@ endmodule
     <p>为什么非阻塞能避免竞态：因为时序逻辑里所有赋值都是"同一时刻并行发生"的，物理上多个触发器同时打拍就是同时更新。用 <code>=</code> 却要求编译器给它们排一个顺序，而这个顺序不同工具可能不一样，就产生了"仿真通过、综合后行为不同"的经典事故。</p>
     <h3 id="44-计数器与分频">4.4 计数器与分频</h3>
     <p><strong>数电</strong>：计数器就是"加法器 + 寄存器"并联，输出接回输入端，进位信号作为溢出标志。异步（行波）计数器把前一级输出当作后一级时钟（快但毛刺多），同步计数器共用一个时钟（主流）。</p>
-    <pre><code class="language-verilog">// 文件: ex07_counter.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex07_counter.v
 `timescale 1ns/1ps
 module counter #(
     parameter WIDTH = 4
@@ -1262,7 +1310,7 @@ module tb_ex07_counter;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">计数到 3（en=1）
+    <pre class="fullwidth"><code class="language-text">计数到 3（en=1）
 en=0 时保持 3
 tick 出现在 cnt=15（回绕前一个周期）t=176000 ns
 clk 周期 = 10 ns, clk_out 周期 = 100 ns → 分频比 = 10
@@ -1275,7 +1323,7 @@ clk 周期 = 10 ns, clk_out 周期 = 100 ns → 分频比 = 10
       <li><strong><code>{WIDTH{1'b1}}</code></strong>：重复拼接，位宽参数化时的标准写法，别写死 <code>4'hF</code>。</li>
     </ul>
     <p><strong>重要工程建议</strong>：不要用分频出来的时钟去驱动其他寄存器，那样会制造多个时钟域（多时钟域要做 CDC 处理，很麻烦）。更好的做法是 <strong>用使能脉冲代替分频时钟</strong>：</p>
-    <pre><code class="language-verilog">// clk_div：产生"慢时钟"（电路里有多个时钟域，慎用）
+    <pre class="fullwidth"><code class="language-verilog">// clk_div：产生"慢时钟"（电路里有多个时钟域，慎用）
 // clk_en_pulse：每 DIV 个时钟产生一个 1 拍宽的使能脉冲（推荐）
 always @(posedge clk)
     if (cnt == DIV-1) begin cnt &lt;= 0; en_pulse &lt;= 1'b1; end
@@ -1284,7 +1332,7 @@ always @(posedge clk)
     <p>然后让所有逻辑共用同一个 <code>clk</code>，用 <code>if (en_pulse)</code> 控制节奏。这样整个设计只有一个时钟域，时序分析简单得多。<code>ex07_counter.v</code> 里两个模块都给了，对比看。</p>
     <h3 id="45-移位寄存器与-lfsr">4.5 移位寄存器与 LFSR</h3>
     <p><strong>数电</strong>：移位寄存器是串并转换的核心（UART、SPI 的基础）。LFSR（线性反馈移位寄存器）则是"移位寄存器 + 异或反馈"，能产生最长 <code>2^n - 1</code> 个非零状态的伪随机序列（m 序列），用于加扰、CRC、测试图案生成。</p>
-    <pre><code class="language-verilog">// 文件: ex08_shiftreg.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex08_shiftreg.v
 `timescale 1ns/1ps
 module shiftreg #(
     parameter WIDTH = 8
@@ -1379,7 +1427,7 @@ module tb_ex08_shiftreg;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">并行载入 q = 10100101
+    <pre class="fullwidth"><code class="language-text">并行载入 q = 10100101
 串行移入 1 → q = 01001011, sout = 0
 再移入 4 个 0 → q = 10110000
 从 sout 串出的序列: 1 0 1 1 0 0 1 1 
@@ -1393,10 +1441,14 @@ LFSR 回到初值 00000001 用了 255 次移位（理论 2^8-1 = 255）
       <li><strong>LFSR 的抽头（taps）不能乱选</strong>。<code>q[7]^q[5]^q[4]^q[3]</code>（对应多项式 x⁸+x⁶+x⁵+x⁴+1）是 8 位的一个本原多项式，所以能跑满 255 个非零状态。抽头选错，周期会变得很短。要换位数时去查"本原多项式表"。</li>
       <li><strong>LFSR 的种子不能是 0</strong>：全 0 是吸收态，异或永远是 0，会卡死。</li>
     </ul>
+  </section>
+
+  <section>
     <h2 id="第-5-章-状态机fsm">第 5 章 状态机（FSM）</h2>
+    <p><label for="mn-vlog-10" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-10" class="margin-toggle"><span class="marginnote">三段式 = ①状态寄存器（时序、<code>&lt;=</code>）②次态组合逻辑（<code>@*</code>、<code>=</code>）③输出逻辑。照这个骨架写，FSM 很难出错。</span></p>
     <h3 id="51-数电从状态图到电路">5.1 数电：从状态图到电路</h3>
     <p>状态机的三段式推导过程（你的数电课应该见过）：</p>
-    <pre><code class="language-text">  ①状态图          ②状态表                ③编码 + 次态逻辑
+    <pre class="fullwidth"><code class="language-text">  ①状态图          ②状态表                ③编码 + 次态逻辑
   ┌────┐ 1   ┌────┐        现态 输入 | 次态 输出
   │ S0 │────&gt;│ S1 │        S0   0   |  S0   0
   └────┘     └────┘        S0   1   |  S1   0
@@ -1405,7 +1457,8 @@ LFSR 回到初值 00000001 用了 255 次移位（理论 2^8-1 = 255）
                            ...
 </code></pre>
     <p>Verilog 里对应的就是<strong>三段式写法</strong>：</p>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th>段</th><th>写什么</th><th>电路</th></tr>
       </thead>
@@ -1415,8 +1468,10 @@ LFSR 回到初值 00000001 用了 255 次移位（理论 2^8-1 = 255）
         <tr><td>第三段</td><td>输出逻辑</td><td>Moore：只看状态；Mealy：看状态+输入</td></tr>
       </tbody>
     </table>
+    </div>
     <p>这样写的好处：状态触发器、次态逻辑、输出逻辑泾渭分明，综合出来的电路和教科书上的框图一一对应，调试时看一眼波形就知道到了哪个状态。</p>
     <h3 id="52-moore-与-mealy">5.2 Moore 与 Mealy</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th></th><th>Moore</th><th>Mealy</th></tr>
@@ -1429,8 +1484,9 @@ LFSR 回到初值 00000001 用了 255 次移位（理论 2^8-1 = 255）
         <tr><td>常用场景</td><td>控制信号、状态指示</td><td>快速响应的协议/检测</td></tr>
       </tbody>
     </table>
+    </div>
     <p>时间轴对比（输入 <code>1 1</code>，检测"连续两个 1"）：</p>
-    <pre><code class="language-text">           T1    T2    T3
+    <pre class="fullwidth"><code class="language-text">           T1    T2    T3
   clk    ─┘ └───┘ └───┘ └─
   din      0     1     1
   Moore          0     1     ← 进入 S11 状态后才输出
@@ -1439,7 +1495,7 @@ LFSR 回到初值 00000001 用了 255 次移位（理论 2^8-1 = 255）
 </code></pre>
     <h3 id="53-例moore-型状态机两种状态编码">5.3 例：Moore 型状态机（两种状态编码）</h3>
     <p><strong>数电</strong>：同一个状态图可以用不同的编码实现——二进制编码（状态少、触发器少）或 one-hot 编码（每位一个状态、触发器多、译码逻辑少、速度快，FPGA 上很常用，因为 FPGA 的触发器多得是）。</p>
-    <pre><code class="language-verilog">// 文件: ex09_fsm_moore.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex09_fsm_moore.v
 `timescale 1ns/1ps
 // Moore 型状态机：检测输入序列里出现连续两个 1（"11"）就给 y=1
 module fsm_moore_bin (
@@ -1502,7 +1558,7 @@ module fsm_moore_onehot (
     assign y = state[2];
 endmodule
 </code></pre>
-    <pre><code class="language-verilog">// 文件: ex10_fsm_mealy.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex10_fsm_mealy.v
 `timescale 1ns/1ps
 // Mealy 型状态机：同样检测 "11"，但输出和 din 同周期产生
 module fsm_mealy (
@@ -1580,7 +1636,7 @@ module tb_ex09_fsm;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">-- 输入序列 0 1 1 0 1 1 1 --
+    <pre class="fullwidth"><code class="language-text">-- 输入序列 0 1 1 0 1 1 1 --
 t=36000 din=1 | Moore(bin)=0 Moore(onehot)=0 Mealy=1
 t=46000 din=1 | Moore(bin)=1 Moore(onehot)=1 Mealy=1
 t=66000 din=1 | Moore(bin)=0 Moore(onehot)=0 Mealy=1
@@ -1704,7 +1760,7 @@ module tb_ex11_seq_detector;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text"> 时间   din | Moore Mealy
+    <pre class="fullwidth"><code class="language-text"> 时间   din | Moore Mealy
  51000    1  |   0     1
  61000    0  |   1     0
  81000    1  |   0     1
@@ -1720,12 +1776,13 @@ Moore 的输出要等一拍（状态先变化），Mealy 与最后一位同拍
       <li><strong>Mealy 在最后一位输入的同一拍就输出</strong>（先出现的那一列），Moore 在下一拍（状态已经变成 <code>S1011</code>）。</li>
       <li><strong>重叠检测</strong>：序列 <code>1011_0110...</code> 里第 1~4、4~7、9~12 位都能匹配。重叠检测的关键在 <code>S1011</code> 的次态处理：<code>next_state = din ? S1 : S10;</code>——匹配完之后不能傻乎乎地回 <code>S0</code>，要把"末尾的 1 或 10"当作新匹配的开头。</li>
     </ul>
-    <pre><code class="language-text">  重叠检测的状态迁移（S1011 状态的两个出边）：
+    <pre class="fullwidth"><code class="language-text">  重叠检测的状态迁移（S1011 状态的两个出边）：
      S1011 --din=1--&gt; S1    （末尾 1 当作新一轮的开头："1011|1"）
      S1011 --din=0--&gt; S10   （末尾 "10" 当作新一轮的开头："1011|0" → "10"）
 </code></pre>
     <p>设计 FSM 时把这两条出边想清楚，就能避免"漏检重叠序列"这个经典 bug。</p>
     <h3 id="55-状态编码怎么选">5.5 状态编码怎么选</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>编码</th><th>触发器数</th><th>组合逻辑</th><th>适用</th></tr>
@@ -1736,8 +1793,10 @@ Moore 的输出要等一拍（状态先变化），Mealy 与最后一位同拍
         <tr><td>gray</td><td>⌈log₂N⌉</td><td>中</td><td>跨时钟域传递状态（相邻状态只变一位，减小亚稳态风险）</td></tr>
       </tbody>
     </table>
+    </div>
     <p><strong>别自己手算编码，用 <code>localparam</code> 起名字就行。</strong> 综合工具也常可以自动重编码（<code>(* fsm_encoding = "one-hot" *)</code> 这类属性，各家语法不同）。</p>
     <h3 id="56-fsm-常见坑">5.6 FSM 常见坑</h3>
+    <p><label for="mn-vlog-11" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-11" class="margin-toggle"><span class="marginnote">最隐蔽的一个：复位时忘了给 <code>state</code> 赋初值，仿真里是 <code>x</code>，一旦进了这个状态，<code>case</code> 全不匹配，整机就此卡死。</span></p>
     <ul>
       <li>状态不是互斥的：<code>case</code> 分支重叠（用 <code>unique case</code> 或在 <code>default</code> 里断言）。</li>
       <li>忘了 <code>default</code>：综合出锁存器，或状态跑飞后无法恢复。<strong>每个 FSM 都要有 <code>default: next_state = S0;</code>。</strong></li>
@@ -1746,11 +1805,15 @@ Moore 的输出要等一拍（状态先变化），Mealy 与最后一位同拍
       <li>状态数变了但忘记改 <code>reg [2:0] state</code> 的位宽。</li>
       <li><strong>时序逻辑里用了阻塞赋值</strong>，导致次态和现态短路。</li>
     </ul>
+  </section>
+
+  <section>
     <h2 id="第-6-章-存储器与总线">第 6 章 存储器与总线</h2>
+    <p><label for="mn-vlog-12" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-12" class="margin-toggle"><span class="marginnote">记住「同步读、1 拍延迟」：地址在本拍时钟沿打入，数据要到下一拍才有效。算流水线级数时这条最容易漏。</span></p>
     <h3 id="61-同步-ram">6.1 同步 RAM</h3>
     <p><strong>数电</strong>：存储阵列就是"地址译码 + 存储单元"，写操作需要写使能，读操作是地址经过译码后选出某一行输出。同步 RAM 的地址、数据、控制都在时钟沿采样。</p>
     <p><strong>读延迟</strong>：因为读写都在 <code>always @(posedge clk)</code> 里，读出的数据在<strong>下一个时钟沿</strong>才出现在 <code>rdata</code> 上，即所谓"同步读、1 拍延迟"。这个延迟是所有存储器的通用特性，用的时候必须记账。</p>
-    <pre><code class="language-verilog">// 文件: ex12_ram.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex12_ram.v
 `timescale 1ns/1ps
 // 同步单口 RAM：读写都要时钟，读延迟 1 拍
 module ram_sync #(
@@ -1860,7 +1923,7 @@ module tb_ex12_ram;
 endmodule
 </code></pre>
     <p>真实输出（节选）：</p>
-    <pre><code class="language-text">地址 0 读回 a5  OK
+    <pre class="fullwidth"><code class="language-text">地址 0 读回 a5  OK
 ...
 错误数 = 0
 == 读旧值：同一拍写和读同一个地址 ==
@@ -1877,7 +1940,7 @@ endmodule
     </ul>
     <h3 id="62-rom">6.2 ROM</h3>
     <p>ROM 的本质就是"一个初始化好、只读的存储阵列"。综合工具大多支持 <code>initial</code> 初始化。</p>
-    <pre><code class="language-verilog">// 文件: ex13_rom.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex13_rom.v
 `timescale 1ns/1ps
 // 同步 ROM：地址打一拍后出数据
 module rom_sync #(
@@ -1938,7 +2001,7 @@ module tb_ex13_rom;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">地址 → 数据（mem[i] = i*7+1）
+    <pre class="fullwidth"><code class="language-text">地址 → 数据（mem[i] = i*7+1）
   0  → 1 (mem[0] 应为 1)
   3  → 22 (mem[3] 应为 22)
   7  → 50 (mem[7] 应为 50)
@@ -1951,7 +2014,7 @@ endmodule
     </ul>
     <h3 id="63-同步-fifo">6.3 同步 FIFO</h3>
     <p><strong>数电</strong>：FIFO 是"环形缓冲区"——一个存储阵列 + 读指针 + 写指针。写指针追上读指针是满，读指针追上写指针是空。用计数器 <code>count</code> 表示当前数据个数，满/空判断最直观。FIFO 用于跨时钟域（异步 FIFO）和速率匹配（同步 FIFO）。</p>
-    <pre><code class="language-verilog">// 文件: ex14_fifo.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex14_fifo.v
 `timescale 1ns/1ps
 // 同步 FIFO：先入先出，深度 2^ADDR_W
 module fifo_sync #(
@@ -2099,7 +2162,7 @@ module tb_ex14_fifo;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">== 1. 连写 5 个数据，观察 count 和 empty/full ==
+    <pre class="fullwidth"><code class="language-text">== 1. 连写 5 个数据，观察 count 和 empty/full ==
 count=5 empty=0 full=0
 == 2. 继续写到满，第 9 个数据应被丢弃 ==
   写 23 时已满，请求被忽略
@@ -2119,7 +2182,7 @@ count=8 full=1
     </ul>
     <h3 id="64-三态总线与-inout">6.4 三态总线与 inout</h3>
     <p><strong>数电</strong>：三态门（tri-state buffer）输出有 0/1/<strong>高阻 z</strong> 三种状态。高阻就是"我这根线不驱动"，于是别的器件可以驱动它。多个器件共用一根线就是总线（bus）。<strong>同一时刻只能有一个驱动源</strong>，否则就是总线争用（bus contention），在真实电路上会烧管子。</p>
-    <pre><code class="language-verilog">// 文件: ex15_inout_bus.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex15_inout_bus.v
 `timescale 1ns/1ps
 // 三态总线：多个驱动源共用一根线，同一时刻只能有一个驱动
 module bus_driver #(
@@ -2187,7 +2250,7 @@ module tb_ex15_inout_bus;
 endmodule
 </code></pre>
     <p>真实输出：</p>
-    <pre><code class="language-text">两个都不驱动: bus = 11111111  (z 被上拉电阻拉到 1，显示为 1)
+    <pre class="fullwidth"><code class="language-text">两个都不驱动: bus = 11111111  (z 被上拉电阻拉到 1，显示为 1)
 A 驱动 a5 : bus = 10100101
 B 驱动 5a : bus = 01011010
 两个同时驱动: bus = xxxxxxxx  &lt;-- 冲突，出现 x（真实电路会过热）
@@ -2201,10 +2264,14 @@ B 驱动 5a : bus = 01011010
       <li><strong><code>inout</code> 端口</strong> 写法：<code>inout wire [7:0] d;</code>，模块内部用 <code>assign</code> 驱动（配三态），同时可以直接读它。一般只出现在<strong>顶层 IO</strong>，芯片内部很少用三态总线（内部用 MUX 更安全，也更好做时序分析）。</li>
       <li>综合工具通常报 <code>inout</code> 的 warning，这是正常的；关键是你在协议层保证任何时候只有一个 <code>oe</code> 有效。</li>
     </ul>
+  </section>
+
+  <section>
     <h2 id="第-7-章-测试平台testbench">第 7 章 测试平台（Testbench）</h2>
+    <p><label for="mn-vlog-13" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-13" class="margin-toggle"><span class="marginnote">tb 不需要综合，所以 <code>#10</code>、<code>$display</code>、<code>fork/join</code>、<code>initial</code> 随便用——这些恰恰是设计代码里不能出现的东西。</span></p>
     <p>tb 的作用：给 DUT 喂激励、观察输出、自动判断对错。好的 tb 比设计本身更值钱。</p>
     <h3 id="71-tb-的标准骨架">7.1 tb 的标准骨架</h3>
-    <pre><code class="language-verilog">`timescale 1ns/1ps
+    <pre class="fullwidth"><code class="language-verilog">`timescale 1ns/1ps
 module tb_xxx;
     localparam T = 10;                 // 时钟周期
     reg  clk = 1'b0;
@@ -2250,13 +2317,14 @@ endmodule
       </tbody>
     </table>
     <p><strong>给 DUT 喂数据的黄金时机</strong>：在<strong>时钟下降沿</strong>（或时钟沿之后 1ns）改变输入。原因是：</p>
-    <pre><code class="language-text">  clk    ──┐        ┌────────
+    <pre class="fullwidth"><code class="language-text">  clk    ──┐        ┌────────
            └────────┘
   posedge ↑                    ← 触发器在这里采样
   危险：          |    |       ← 在时钟沿附近改输入会产生竞争
   安全：  ^                    ← 沿之前就稳定好（negedge 改，posedge 采）
 </code></pre>
     <h3 id="73-task-与-function">7.3 task 与 function</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th></th><th><code>task</code></th><th><code>function</code></th></tr>
@@ -2268,6 +2336,7 @@ endmodule
         <tr><td>常见用途</td><td>发送一个字节、复位、打印</td><td>计算、转换、校验</td></tr>
       </tbody>
     </table>
+    </div>
     <pre class="fullwidth"><code class="language-verilog">task send_byte(input [7:0] b);
     begin
         @(negedge clk);
@@ -2286,7 +2355,8 @@ endfunction
 </code></pre>
     <p>注意最后那个坑：<strong>Verilog-2001 的 <code>function</code> 必须至少有一个输入端口</strong>，所以"无输入的 function"（比如从参考模型里 <code>pop</code> 一个值）要用 <code>task</code> + 变量实现（第 6 章 FIFO 的 tb 里就是这么做的）。</p>
     <h3 id="74-打印display-家族">7.4 打印：<code>$display</code> 家族</h3>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th>系统函数</th><th>用法</th></tr>
       </thead>
@@ -2300,10 +2370,11 @@ endfunction
         <tr><td><code>$fopen</code>/<code>$fdisplay</code>/<code>$fclose</code></td><td>把结果写到文件</td></tr>
       </tbody>
     </table>
+    </div>
     <p>格式符：<code>%b</code> 二进制、<code>%h</code>/<code>%x</code> 十六进制、<code>%d</code> 十进制、<code>%o</code> 八进制、<code>%c</code> 字符、<code>%s</code> 字符串、<code>%t</code> 时间（用 <code>$timeformat</code> 的格式）、<code>%m</code> 当前层次名。宽度用 <code>%4t</code>、<code>%08h</code> 这种写法。</p>
     <p><strong><code>$display</code> 里加 <code>%0d</code></strong>：<code>%0d</code> 表示"不补空格"，比 <code>%d</code> 更好看。</p>
     <h3 id="75-vcd-波形怎么-dump怎么变小">7.5 VCD 波形：怎么 dump、怎么变小</h3>
-    <pre><code class="language-verilog">initial begin
+    <pre class="fullwidth"><code class="language-verilog">initial begin
     $dumpfile("dump.vcd");        // 建议每层测试一个独立文件名，别互相覆盖
     $dumpvars;                    // 不写参数 = 当前层次所有信号
     $dumpvars(0, tb);             // 递归所有层级（0 = 无限深度）
@@ -2318,6 +2389,7 @@ end
       <li>存储器的全部内容默认不 dump（太大）。想 dump 内存：<code>$dumpvars(1, tb.u_ram.mem)</code>，但通常没必要。</li>
     </ul>
     <h3 id="76-自检让-tb-自己告诉你对错而不是靠肉眼">7.6 自检：让 tb 自己告诉你对错，而不是靠肉眼</h3>
+    <p><label for="mn-vlog-14" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-14" class="margin-toggle"><span class="marginnote">靠肉眼看波形判断对错，只适合三五个信号的玩具例子。真正的 tb 必须自己打 <code>$error</code> 并给出最终 PASS/FAIL，否则回归测试无从谈起。</span></p>
     <p>三个层次的自检手段：</p>
     <pre class="fullwidth"><code class="language-verilog">// 1) 错误计数，最后汇总
 integer errors = 0;
@@ -2338,7 +2410,7 @@ end
     <p><code>$fatal</code> 的退出码行为让 tb 能直接用在 Makefile / CI 里：<code>make run</code> 失败会中断。</p>
     <p><strong>校验一定要用 <code>!==</code> 而不是 <code>!=</code></strong>，因为 <code>!==</code> 能发现 <code>x</code> 和 <code>z</code>（<code>x != 4'd0</code> 结果是 <code>x</code>，在 <code>if</code> 里算假，bug 会被吞掉）。</p>
     <h3 id="77-随机激励种子命令行参数编译开关">7.7 随机激励、种子、命令行参数、编译开关</h3>
-    <pre><code class="language-verilog">integer seed = 12345;
+    <pre class="fullwidth"><code class="language-verilog">integer seed = 12345;
 a = $random(seed) % 256;        // $random(seed) 每次调用都会推进种子
                                 // 传同一个 seed 值可以让随机序列可复现
 b = $random(seed) % 256;
@@ -2349,24 +2421,24 @@ cin = $random(seed) % 2;        // 注意：这三次调用会连续推进同一
       <li><strong>随机测试必须可复现</strong>：把种子打印出来，失败时用同一个种子重跑。这是随机测试的基本纪律。</li>
       <li><strong>命令行传参 + <code>$value$plusargs</code></strong>：</li>
     </ul>
-    <pre><code class="language-bash">vvp sim.vvp +N=1000 +SEED=7        # vvp 后面的 +xxx 参数会传给 $value$plusargs
+    <pre class="fullwidth"><code class="language-bash">vvp sim.vvp +N=1000 +SEED=7        # vvp 后面的 +xxx 参数会传给 $value$plusargs
 </code></pre>
-    <pre><code class="language-verilog">integer ntests = 10;
+    <pre class="fullwidth"><code class="language-verilog">integer ntests = 10;
 if (!$value$plusargs("N=%d", ntests)) $display("用默认值 %0d", ntests);
 </code></pre>
     <ul>
       <li><strong>编译期开关</strong>（<code>-D</code> + <code>`ifdef</code>），用于加速/降级测试：</li>
     </ul>
-    <pre><code class="language-bash">iverilog -DSTRICT -DINJECT -o sim.vvp tb.v dut.v
+    <pre class="fullwidth"><code class="language-bash">iverilog -DSTRICT -DINJECT -o sim.vvp tb.v dut.v
 </code></pre>
-    <pre><code class="language-verilog">`ifdef STRICT
+    <pre class="fullwidth"><code class="language-verilog">`ifdef STRICT
     $fatal(1, "有错误，终止");
 `else
     $display("有错误，但继续跑");
 `endif
 </code></pre>
     <h3 id="78-完整范例一个像样的-tb">7.8 完整范例：一个"像样"的 tb</h3>
-    <pre><code class="language-verilog">// 文件: ex16_adder8.v
+    <pre class="fullwidth"><code class="language-verilog">// 文件: ex16_adder8.v
 `timescale 1ns/1ps
 module rca8 (
     input  wire [7:0] a,
@@ -2479,7 +2551,7 @@ iverilog -Wall -g2012 -DSTRICT -DINJECT -o sim_s.vvp tb_ex16_techniques.v ex16_a
 vvp sim_s.vvp +N=1; echo "退出码 = $?"
 </code></pre>
     <p>真实输出（<code>-DINJECT -DSTRICT</code>）：</p>
-    <pre><code class="language-text">== 边界用例 ==
+    <pre class="fullwidth"><code class="language-text">== 边界用例 ==
   [ OK ] 0 + 0 + 0 = 0
   [ OK ] 255 + 255 + 0 = 510
   [ OK ] 255 + 0 + 1 = 256
@@ -2501,9 +2573,13 @@ FATAL: tb_ex16_techniques.v:72: 共 1 个错误，直接终止仿真
       <li><strong>忘记 <code>$finish</code></strong> → 仿真跑到天荒地老。</li>
       <li><strong>一个 tb 测太多东西</strong>：tb 太大后一个失败要看半天。按场景拆成多个小 tb，用 Makefile 串起来跑。</li>
     </ol>
+  </section>
+
+  <section>
     <h2 id="第-8-章-gtkwave-实战">第 8 章 GTKWave 实战</h2>
+    <p><label for="mn-vlog-15" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-15" class="margin-toggle"><span class="marginnote">排好信号布局后一定 <code>File → Write Save File</code> 存成 <code>.gtkw</code>，下次 <code>gtkwave -a xxx.gtkw</code> 一键复原，省掉每次重新拖一遍。</span></p>
     <h3 id="81-启动">8.1 启动</h3>
-    <pre><code class="language-bash">gtkwave tb_ex01_and_gate.vcd &amp;                    # 最简单：直接给 VCD
+    <pre class="fullwidth"><code class="language-bash">gtkwave tb_ex01_and_gate.vcd &amp;                    # 最简单：直接给 VCD
 gtkwave -f tb_ex01_and_gate.vcd -a my.gtkw &amp;      # 指定波形 + 指定 savefile
 gtkwave --dark tb_ex01_and_gate.vcd &amp;              # 暗色主题（夜里友好）
 </code></pre>
@@ -2525,7 +2601,7 @@ gtkwave --dark tb_ex01_and_gate.vcd &amp;              # 暗色主题（夜里�
       </tbody>
     </table>
     <h3 id="82-界面三大块">8.2 界面三大块</h3>
-    <pre><code class="language-text">┌──────────────────────┬─────────────────────────────────────────────┐
+    <pre class="fullwidth"><code class="language-text">┌──────────────────────┬─────────────────────────────────────────────┐
 │  SST                 │                                             │
 │  (Signal Search Tree)│            波形区（Waveform）               │
 │  树形浏览 DUT 层次    │   点击波形设定光标，光标所在时刻的数值会显示  │
@@ -2544,7 +2620,8 @@ gtkwave --dark tb_ex01_and_gate.vcd &amp;              # 暗色主题（夜里�
       <li><strong>看某个时刻的值</strong>：点波形任意位置，左侧 <code>value</code> 列立刻显示所有信号在该时刻的值。这是最常用的操作——<strong>比盯着一堆打印快多了</strong>。</li>
     </ul>
     <h3 id="83-缩放和移动">8.3 缩放和移动</h3>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th>操作</th><th>方式</th></tr>
       </thead>
@@ -2556,6 +2633,7 @@ gtkwave --dark tb_ex01_and_gate.vcd &amp;              # 暗色主题（夜里�
         <tr><td>跳到开头/结尾</td><td>菜单 <code>Time → Goto Start / Goto End</code></td></tr>
       </tbody>
     </table>
+    </div>
     <p><label for="mn-vlog-1" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-1" class="margin-toggle"><span class="marginnote">菜单项的措辞在不同版本略有差异（GTKWave 是活跃维护的老牌工具），找不到就用 <code>Time</code> 菜单挨个看一遍，或者直接拖框——<strong>拖框是最高效的，先学会它就够用了</strong>。</span></p>
     <h3 id="84-数据格式右键信号">8.4 数据格式（右键信号）</h3>
     <p>在信号列表里<strong>右键信号名 → Data Format</strong>，可以切换：</p>
@@ -2579,21 +2657,21 @@ gtkwave --dark tb_ex01_and_gate.vcd &amp;              # 暗色主题（夜里�
     </ul>
     <h3 id="85-分组与并排比较">8.5 分组与并排比较</h3>
     <p>调一块逻辑出问题时，最有效的手段是<strong>把"期望值"和"实际值"上下并排放</strong>：</p>
-    <pre><code class="language-text">  tb.u_dut.count          ← 我是这么想的
+    <pre class="fullwidth"><code class="language-text">  tb.u_dut.count          ← 我是这么想的
   tb.model.count          ← 参考模型
   tb.compare_fail         ← 一有差异就拉高的标志
 </code></pre>
     <p>做法：在信号列表里把相关信号拖到一起，用 <code>Edit</code> 菜单里的分组/插入分隔线（有的版本是右键 → Group）隔开。把 <code>fail</code> 放在最上面，出问题时一眼定位时间点。</p>
     <h3 id="86-savefilegtkw一次排好反复使用">8.6 savefile（.gtkw）：一次排好，反复使用</h3>
     <p><code>.gtkw</code> 是<strong>纯文本</strong>文件，记录了：加载哪个波形、显示了哪些信号、顺序、数据格式、缩放位置、分组。价值巨大——它可以把"看波形"从十分钟的手工操作变成一条命令。</p>
-    <pre><code class="language-bash"># 排好信号后：菜单 File → Write Save File 存成 tb_fifo.gtkw
+    <pre class="fullwidth"><code class="language-bash"># 排好信号后：菜单 File → Write Save File 存成 tb_fifo.gtkw
 # 下次直接一条命令回到同样的界面
 gtkwave -a tb_fifo.gtkw dump.vcd &amp;
 </code></pre>
     <p><code>.gtkw</code> 可以（也应该）<strong>跟代码一起提交到 git</strong>：审查者拿到波形文件就能直接看到你想让他看的信号。这在团队协作里非常加分。</p>
     <h3 id="87-大文件换成-fst-格式">8.7 大文件：换成 FST 格式</h3>
     <p>VCD 是文本格式，体积大、加载慢。GTKWave 自带的 <code>vcd2fst</code> 可以压成二进制 FST（体积常常小 10 倍以上，加载快得多）：</p>
-    <pre><code class="language-bash">vcd2fst tb_ex14_fifo.vcd tb_ex14_fifo.fst     # 转换
+    <pre class="fullwidth"><code class="language-bash">vcd2fst tb_ex14_fifo.vcd tb_ex14_fifo.fst     # 转换
 gtkwave tb_ex14_fifo.fst &amp;                     # 用 FST 打开，功能完全一样
 fst2vcd tb_ex14_fifo.fst &gt; back.vcd            # 需要时也能转回 VCD
 </code></pre>
@@ -2615,8 +2693,13 @@ fst2vcd tb_ex14_fifo.fst &gt; back.vcd            # 需要时也能转回 VCD
       <li>Tcl 脚本：<code>gtkwave -S script.tcl dump.vcd</code>，可以自动加载信号、自动导出图片，适合做回归测试报告。</li>
       <li>把 VCD 换 FST 再用命令行工具 <code>fst2vcd</code> 处理，可以写进 CI 脚本里做波形比对。</li>
     </ul>
+  </section>
+
+  <section>
     <h2 id="第-9-章-可综合风格与工程约定">第 9 章 可综合风格与工程约定</h2>
+    <p><label for="mn-vlog-16" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-16" class="margin-toggle"><span class="marginnote">工程习惯三步走：<strong>先 lint，再仿真，最后才上板</strong>。<code>verilator --lint-only *.v</code> 一句话就能拦掉大量低级错误。</span></p>
     <h3 id="91-哪些能综合哪些只能仿真">9.1 哪些能综合，哪些只能仿真</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>构造</th><th>能综合？</th><th>说明</th></tr>
@@ -2634,10 +2717,11 @@ fst2vcd tb_ex14_fifo.fst &gt; back.vcd            # 需要时也能转回 VCD
         <tr><td>事件控制 <code>@(posedge x)</code> 但 x 不是时钟</td><td>⚠️</td><td>会综合出不期望的触发器，慎用</td></tr>
       </tbody>
     </table>
+    </div>
     <p><strong>实践原则：把一个 <code>.v</code> 文件里的"设计"和"tb"彻底分开</strong>（<code>tb_*.v</code> 只参与仿真），这样综合脚本只要把 <code>tb_*</code> 排除掉就行（见附录 C 的 Makefile）。</p>
     <h3 id="92-参数化与-generate">9.2 参数化与 generate</h3>
     <p><strong>参数化</strong>是 Verilog 最重要的工程能力：写一次，实例化时给不同位宽。</p>
-    <pre><code class="language-verilog">module fifo_sync #(parameter DATA_W = 8, parameter ADDR_W = 3) (...);
+    <pre class="fullwidth"><code class="language-verilog">module fifo_sync #(parameter DATA_W = 8, parameter ADDR_W = 3) (...);
     localparam DEPTH = 1 &lt;&lt; ADDR_W;              // 由参数推导出来的常量
     reg [DATA_W-1:0] mem [0:DEPTH-1];
 </code></pre>
@@ -2648,7 +2732,7 @@ fst2vcd tb_ex14_fifo.fst &gt; back.vcd            # 需要时也能转回 VCD
       <li><code>$clog2</code>（需要 <code>-g2012</code>）能自动算"最少需要多少位"，用于地址宽度推导。</li>
     </ul>
     <p><strong>generate</strong> 用于"按参数复制电路"：</p>
-    <pre><code class="language-verilog">genvar i;                                   // genvar 只能在 generate 里用
+    <pre class="fullwidth"><code class="language-verilog">genvar i;                                   // genvar 只能在 generate 里用
 generate
     for (i = 0; i &lt; WIDTH; i = i + 1) begin : gen_bit
         assign y[i] = a[i] ^ b[i];          // 会被展开成 WIDTH 份并行电路
@@ -2656,7 +2740,7 @@ generate
 endgenerate
 </code></pre>
     <p>关于 <code>if generate</code>（按参数选择实现）：</p>
-    <pre><code class="language-verilog">generate
+    <pre class="fullwidth"><code class="language-verilog">generate
     if (STYLE == "ripple") begin : g_rca
         // 行波进位实现
     end else begin : g_cla
@@ -2671,7 +2755,7 @@ endgenerate
     </ul>
     <h3 id="93-目录命名分层约定">9.3 目录、命名、分层约定</h3>
     <p>一个能长期维护的工程习惯（不用一次做完，但方向要对）：</p>
-    <pre><code class="language-text">  rtl/          # 可综合的设计（每个模块一个文件，文件名=模块名）
+    <pre class="fullwidth"><code class="language-text">  rtl/          # 可综合的设计（每个模块一个文件，文件名=模块名）
     fifo_sync.v
     uart_tx.v
   tb/           # 测试平台（tb_ 前缀，或 _tb 后缀）
@@ -2680,7 +2764,8 @@ endgenerate
   Makefile
 </code></pre>
     <p>命名约定（团队统一即可，但下面这套很常见）：</p>
-    <table>
+    <div class="table-wrapper">
+    <table class="fullwidth">
       <thead>
         <tr><th>类别</th><th>命名</th><th>例子</th></tr>
       </thead>
@@ -2694,6 +2779,7 @@ endgenerate
         <tr><td>状态</td><td><code>S_</code> 前缀</td><td><code>S_IDLE</code>, <code>S_SEND</code></td></tr>
       </tbody>
     </table>
+    </div>
     <p><strong>分层原则</strong>：一个模块只做一件事。把一个 500 行的模块拆成 3 个 150 行的模块，调试时间至少少一半。</p>
     <h3 id="94-综合工具是怎么读你的代码的">9.4 综合工具是怎么"读"你的代码的</h3>
     <p>这部分理解了，写代码就有数了：</p>
@@ -2721,7 +2807,7 @@ endgenerate
       <li>想不通就去看综合报告的<strong>关键路径</strong>，再回头看代码。</li>
     </ol>
     <h3 id="95-lint把-bug-拦在仿真之前">9.5 Lint：把 bug 拦在仿真之前</h3>
-    <pre><code class="language-bash"># 1) iverilog 自带警告（最省事，永远开着）
+    <pre class="fullwidth"><code class="language-bash"># 1) iverilog 自带警告（最省事，永远开着）
 iverilog -Wall -g2012 -o sim.vvp tb.v dut.v
 
 # 2) Verilator 只做 lint（非常强，能报位宽截断、多驱动、latch 等）
@@ -2734,6 +2820,7 @@ yosys -p "read_verilog dut.v; hierarchy -top dut; proc; opt; stat"
 </code></pre>
     <p><code>verilator --lint-only</code> 是投入产出比最高的工具：它不跑仿真，只静态分析，但能抓出一大堆"仿真碰巧过得去、上板就挂"的问题。装一个，写代码前先 lint 一遍。</p>
     <h3 id="96-常见坑总表贴在显示器旁边">9.6 常见坑总表（贴在显示器旁边）</h3>
+    <div class="table-wrapper">
     <table class="fullwidth">
       <thead>
         <tr><th>#</th><th>坑</th><th>后果</th><th>正确做法</th></tr>
@@ -2761,7 +2848,12 @@ yosys -p "read_verilog dut.v; hierarchy -top dut; proc; opt; stat"
         <tr><td>20</td><td>只靠肉眼验波形</td><td>漏错、浪费生命</td><td>自检（参考模型 + 错误计数 + <code>$fatal</code>）</td></tr>
       </tbody>
     </table>
+    </div>
+  </section>
+
+  <section>
     <h2 id="附录-a-命令行速查">附录 A 命令行速查</h2>
+    <p><label for="mn-vlog-17" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-17" class="margin-toggle"><span class="marginnote">把这里最常用的几条塞进 Makefile 或 shell alias，比每次手敲强。附录 C 有现成的 Makefile 模板。</span></p>
     <pre class="fullwidth"><code class="language-bash"># ---------- 编译与仿真 ----------
 iverilog -Wall -g2012 -o sim.vvp tb_top.v dut.v      # 编译（-Wall 必加）
 iverilog -Wall -DDEBUG -I include -o sim.vvp *.v     # 定义宏 + 头文件目录
@@ -2799,9 +2891,13 @@ yosys -p "read_verilog dut.v; hierarchy -top dut; proc; opt; stat"
         <tr><td><code>-p</code></td><td>传参数给各种子系统，如 <code>-pfileline=1</code></td></tr>
       </tbody>
     </table>
+  </section>
+
+  <section>
     <h2 id="附录-b-一键导出本文所有代码">附录 B 一键导出本文所有代码</h2>
+    <p><label for="mn-vlog-18" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-18" class="margin-toggle"><span class="marginnote">脚本靠代码块里的「文件:」注释认文件名，改动代码块时别把那一行删掉，否则导出会漏文件。</span></p>
     <p>本文所有带「文件:」标记的代码块都可以自动导出成独立文件。保存下面的脚本，然后：</p>
-    <pre><code class="language-bash">./extract-examples.sh verilog-tutorial.md verilog-examples
+    <pre class="fullwidth"><code class="language-bash">./extract-examples.sh verilog-tutorial.md verilog-examples
 cd verilog-examples &amp;&amp; make all &amp;&amp; make run     # 全部编译并跑一遍
 
 # 提取出来的脚本需要加执行权限（代码块里保存的文件默认没有 +x）
@@ -2847,9 +2943,13 @@ echo "文件列表:" &gt;&amp;2
 ls -1 "$out" &gt;&amp;2
 </code></pre>
     <p>脚本原理：扫描 md 里的 <code>```</code> 代码块，在块内<strong>前三行</strong>里找形如 <code>// 文件: xxx.v</code> 或 <code># 文件: Makefile</code> 的标记，把它当作输出文件名。（前三行是留给 shebang 之类的。）没有标记的代码块（命令示例、波形示意等）会被跳过。</p>
+  </section>
+
+  <section>
     <h2 id="附录-c-makefile">附录 C Makefile</h2>
+    <p><label for="mn-vlog-19" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-19" class="margin-toggle"><span class="marginnote">Makefile 靠 <code>tb_</code> 前缀区分测试平台和设计文件，所以命名规范不是洁癖，直接决定这套流程能不能自动跑起来。</span></p>
     <p>把导出的文件放在同一个目录里，下面的 Makefile 可以一条命令编译并跑完所有 tb：</p>
-    <pre><code class="language-makefile"># 文件: Makefile
+    <pre class="fullwidth"><code class="language-makefile"># 文件: Makefile
 IVERILOG ?= iverilog
 VVP      ?= vvp
 GTKWAVE  ?= gtkwave
@@ -2882,7 +2982,7 @@ clean:
 .PHONY: all run wave clean
 </code></pre>
     <p>常用命令：</p>
-    <pre><code class="language-bash">make -j4 all                 # 编译全部 tb
+    <pre class="fullwidth"><code class="language-bash">make -j4 all                 # 编译全部 tb
 make run                     # 跑全部 tb（失败会中断，适合放 CI）
 make wave                    # 跑 tb_ex11_seq_detector 并打开波形
 make wave WAVE=tb_ex14_fifo  # 换一个 tb 看波形
@@ -2894,7 +2994,11 @@ make clean
       <li><code>VFLAGS ?= -Wall -g2012</code>，可以用 <code>make VFLAGS="-Wall"</code> 覆盖。</li>
       <li><code>EXTRA</code> 用来传 <code>-DSTRICT</code> 之类：<code>make EXTRA=-DSTRICT</code>。</li>
     </ul>
+  </section>
+
+  <section>
     <h2 id="附录-d-练习题">附录 D 练习题</h2>
+    <p><label for="mn-vlog-20" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-20" class="margin-toggle"><span class="marginnote">做题时强迫自己写自检 tb：期望值现算、不等就 <code>$error</code>。这比做对答案本身更重要。</span></p>
     <p>按顺序做，前 5 题基本覆盖了本文核心。参考答案要点在每题后面。</p>
     <ol>
       <li>
@@ -2956,7 +3060,11 @@ make clean
     > 要点：状态用"已投币金额"编码（0/0.5/1.0/1.5/2.0 元）；找零用一个计数器在 <code>dispense</code> 后逐拍输出 5 角脉冲。这是把 FSM 和数据通路的经典结合。</p>
       </li>
     </ol>
+  </section>
+
+  <section>
     <h2 id="附录-e-继续学习">附录 E 继续学习</h2>
+    <p><label for="mn-vlog-21" class="margin-toggle">⊕</label><input type="checkbox" id="mn-vlog-21" class="margin-toggle"><span class="marginnote">这份清单按优先级排了序。前两项（STA、CDC）是从「仿真能过」到「上板能跑」的分水岭。</span></p>
     <p><strong>要补的进阶话题（按重要性排序）</strong></p>
     <ol>
       <li><strong>时序约束与静态时序分析（STA）</strong>：建立/保持时间、时钟偏斜、关键路径报告。不管学 FPGA 还是 ASIC 都绕不过去。</li>
