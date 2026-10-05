@@ -82,7 +82,7 @@
 
       <section>
         <h2 id="sidenotes">边注：脚注与页边注</h2>
-        <p>边注是 Tufte 风格最鲜明的特点之一。<label for="sn-extensive-use-of-sidenotes" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-extensive-use-of-sidenotes" class="margin-toggle"/><span class="sidenote">这是一条边注。</span> 它类似脚注，但不逼读者把视线跳到页脚，而是显示在侧边页边。也许你早已注意到本文档中的边注——眼力真好。</p>
+        <p>边注是 Tufte 风格最鲜明的特点之一。<label for="sn-extensive-use-of-sidenotes" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-extensive-use-of-sidenotes" class="margin-toggle"/><span class="sidenote">这是一条边注。</span> 它类似脚注，但不逼读者把视线跳到页脚，而是显示在侧边页边。也许你早已注意到本文档中的边注，眼力真好。</p>
         <p>边注正是网页不同于印刷的好例子：视口够大时，Tufte CSS 把页边用来放边注、页边注和小图；视口较小时，这些元素先隐藏，由用户切换显示。目标是让旁白、引用等次要信息<i>尽可能贴近</i>所引正文，又不挡视线、不打断正文思路。</p>
         <p>边注由两部分组成：正文中的上标引用编号，以及边注内容。前者只需在引用处放入一个 label 和占位 checkbox，如下：</p>
         <pre><code>&lt;label for="sn-demo"
@@ -114,7 +114,7 @@
         <p>Tufte 强调图文紧密：数据、图表、插图都要与讨论它们的文字放在一起。印刷中这意味着不把它们甩到单独一页；网页上则意味着无须点击、切换标签或滚动就能读懂图形和配文。</p>
         <p>插图尽量用 <code>figure</code> 元素，它默认限制在正文栏内。不要把 <code>figure</code> 包进 <code>p</code>。标注或页边注放进 <code>figure</code> 内的普通页边注里。多数情况下直接把插图引入讨论主线，像这样：</p>
         <figure>
-          <label for="mn-exports-imports" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-exports-imports" class="margin-toggle"/><span class="marginnote">摘自 Edward Tufte, <em>Visual Display of Quantitative Information</em>，第 92 页。</span>
+          <label for="mn-exports-imports" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-exports-imports" class="margin-toggle"/><span class="marginnote">From Edward Tufte, <em>Visual Display of Quantitative Information</em>,page 92.</span>
           <img src="assets/images/tufte-css/exports-imports.png" alt="1700 至 1780 年间丹麦与挪威的进出口" />
         </figure>
 
