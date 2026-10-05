@@ -17,6 +17,9 @@ body {
         "Songti SC",                /* macOS 宋体 */
         "SimSun", "STSong",         /* Windows 宋体 */
         Palatino, "Palatino Linotype", Georgia, serif;
+
+    /* 全站禁止浏览器合成字体（font-synthesis 是继承属性，写这里即全站生效）。*/
+    font-synthesis: none;
 }
 
 /* 中文的无衬线回退：表格、.sans 用 */
@@ -41,16 +44,7 @@ code, kbd, pre, samp, pre > code,
         monospace;
 }
 
-/* 2) 表格：booktabs 三线表
-   tufte.css（连上游）里一条 th/td 规则都没有，所以表格既没有线也没内边距，
-   浏览器又把 th 默认居中、td 默认居左，表头和内容对不齐。
-   按 tufte 自己的书（tufte-latex 的 booktabs）补三条线，表头改左对齐。
-   border-collapse 必须写：默认是 separate + border-spacing: 2px，
-   表头那条下线会被切成一段一段的。
-   颜色用 currentColor：tufte.css 第 60 行有深色模式（body 背景 #151515、文字 #ddd），
-   写死 #111 会在深色下把黑线画在近黑背景上，写死 #ccc 又在浅色的纸白 #fffff8 上发灰。
-   currentColor 自动取正文色（浅色 #111 / 深色 #ddd），两个主题都清晰，
-   也更接近 Tufte 书里那种实黑规矩线。 */
+/* 2) 表格：booktabs 三线表*/
 table {
     border-collapse: collapse;
     border-top: 2px solid currentColor;
@@ -69,6 +63,4 @@ th:last-child,
 td:last-child {
     padding-right: 0;       /* 让表格右边缘和正文栏右边缘对齐 */
 }
-
-  
 
