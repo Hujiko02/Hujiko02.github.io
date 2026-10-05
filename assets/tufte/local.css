@@ -70,37 +70,5 @@ td:last-child {
     padding-right: 0;       /* 让表格右边缘和正文栏右边缘对齐 */
 }
 
-/* 3) h4–h6
-   tufte.css 只定义到 h3（斜体、常规字重，字号 3.2/2.2/1.7rem），
-   h4 及以下回落成浏览器默认的加粗小字，和上面断档。
-   这里按同一套比例把层级接下去。
-   中文没有真正的斜体，浏览器会合成倾斜；若觉得字形发虚，
-   把下面几条的 font-style 改成 normal 即可，其余不用动。 */
-h4 {
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.4rem;
-    margin-top: 1.8rem;
-    margin-bottom: 1.2rem;
-    line-height: 1;
-}
-h5 {
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.25rem;
-    margin-top: 1.6rem;
-    margin-bottom: 1rem;
-    line-height: 1.1;
-}
-h6 {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.15rem;
-    margin-top: 1.4rem;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.03em;
-    line-height: 1.1;
-}
-      
   
 
