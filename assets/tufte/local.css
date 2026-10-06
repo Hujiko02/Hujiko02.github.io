@@ -4,12 +4,6 @@
    ============================================================ */
 
 body {
-    /* katex.min.css 末尾有 body{counter-reset:katexEqnNo mmlEqnNo}，
-       与本文件同特异性且后加载，会把 tufte.css 的
-       body{counter-reset:sidenote-counter} 整条覆盖掉，
-       导致边注编号计数器不重置、每条都显示 1。
-       这里合并两个计数器并加 !important，与 <link> 顺序无关。 */
-    counter-reset: sidenote-counter katexEqnNo mmlEqnNo !important;
     font-family:
         "cjk-serif",                /* 中文专用族：统一正体 + 缩到 88%，见文末 */
         et-book,                    /* 拉丁：官方自带真斜体、真粗体 */
@@ -102,14 +96,15 @@ td:last-child {
     /* 700：中文没有斜体，宋体传统上也没有粗体，所以把各平台的"真粗体"全名逐一
        列出（local() 认全名与 PostScript 名）。末端兜一层常规族名：某平台若真的
        没有粗体面，宁可显示常规字重（不假粗），但尺寸仍是 88%，不会忽大忽小。
-       Windows 没有宋体粗体时会命中 SimHei，即中文排版里"宋体正文用黑体表强调"
-       的老做法。斜体无需另立一面：见上面 (b)。 */
+       Windows 默认没有宋体粗体，于是命中 local("SimSun") → 显示宋体常规字重，
+       不中途换字体（换成 SimHei 会让正文里的强调突然变无衬线字）。若用户装了
+       思源宋体，则前面几行就已命中真粗体，轮不到 SimSun。
+       斜体无需另立一面：见上面 (b)。 */
     font-family: "cjk-serif";
     src:
         local("Noto Serif CJK SC Bold"), local("NotoSerifCJKsc-Bold"),
         local("Source Han Serif SC Bold"), local("SourceHanSerifSC-Bold"),
         local("Songti SC Bold"), local("SongtiSC-Bold"),
-        local("SimHei"), local("Heiti SC"),
         local("Noto Serif CJK SC"), local("Source Han Serif SC"),
         local("Songti SC"), local("SimSun");
     font-style: normal;
