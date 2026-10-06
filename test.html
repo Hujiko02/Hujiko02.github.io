@@ -127,7 +127,7 @@
     <h2>表格</h2>
 
     <p>
-      宽表必须包一层 <code>div.table-wrapper</code>，外层 div.table-wrapper 负责窄屏横向滚动，否则窄屏会撑破版心。包了用的是无衬线字体。注意：tufte.css 1.9.0 完全没写表格的边框样式，零边框是它的原生状态，横线样式由 <code>assets/tufte/local.css</code> 里的第 4 节补上。
+      宽表必须包一层 <code>div.table-wrapper</code>，它负责窄屏横向滚动，否则窄屏会撑破版心。<strong>包不包不影响字体</strong>：tufte.css 原本给这个 div 设的是 Trebuchet MS / Gill Sans 无衬线体，<code>local.css</code> 用一条 <code>div.table-wrapper { font-family: inherit; }</code> 把它改回了跟正文一样的衬线（中文宋体 + 拉丁 et-book）。注意：tufte.css 1.9.0 完全没写表格的边框样式，零边框是它的原生状态，横线样式由 <code>assets/tufte/local.css</code> 的表格小节补上。
     </p>
 
     <div class="table-wrapper">
@@ -144,7 +144,7 @@
       </table>
     </div>
 
-    <p>下面这种是不包 table-wrapper 的，用的是衬线体。</p>
+    <p>下面这种是不包 table-wrapper 的，字体一样是衬线体，区别只在窄屏不能横向滚动。</p>
     <table>
       <caption>三种边注对照</caption>
       <thead>

@@ -17,8 +17,7 @@ body {
     font-synthesis: none;
 }
 
-/* 中文的无衬线回退：表格、.sans 用 */
-div.table-wrapper,
+/* 中文的无衬线回退：.sans 用 */
 .sans {
     font-family:
         "Gill Sans", "Gill Sans MT", Calibri,   /* 官方原本的拉丁无衬线 */
@@ -37,6 +36,16 @@ code, kbd, pre, samp, pre > code,
         "SF Mono", Menlo, Consolas, "Liberation Mono", Courier,
         "PingFang SC", "Microsoft YaHei",
         monospace;
+}
+
+/* 1) 表格字体：回到衬线，与正文一致。
+   tufte.css 给 div.table-wrapper 设了 Trebuchet MS / Gill Sans（无衬线），
+   光把上面 .sans 那条规则里的 div.table-wrapper 删掉没用——tufte.css 的规则还在。
+   这里显式覆写。inherit 取父级（body）的字体栈，所以表格里中文是宋体、拉丁是
+   et-book，跟正文一模一样；以后改 body 也只改一处。
+   表格里的 <code> / <pre> 仍走等宽：它们自己的规则比这条更具体。 */
+div.table-wrapper {
+    font-family: inherit;
 }
 
 /* 2) 表格：booktabs 三线表*/
