@@ -5,9 +5,9 @@
 
 body {
     font-family:
-        "cjk-serif",                /* 中文专用族：自托管宋体子集 + 缩到 88%，见下方 §3 */
+        "cjk-serif",                /* 中文专用族：统一正体 + 缩到 88%，见文末 */
         et-book,                    /* 拉丁：官方自带真斜体、真粗体 */
-        "Noto Serif CJK SC",        /* 中文兜底：webfont 下不到、或该字不在子集里时用 */
+        "Noto Serif CJK SC",        /* 中文兜底：cjk-serif 面加载失败时才用 */
         "Source Han Serif SC",      /* 思源宋体：macOS / Windows 上装了则命中 */
         "Songti SC",                /* macOS 宋体 */
         "SimSun", "STSong",         /* Windows 宋体 */
@@ -31,33 +31,12 @@ div.table-wrapper,
 code, kbd, pre, samp, pre > code,
 .mono {
     font-family:
-        "JetBrains Maple Mono",     /* 自托管子集：只含拉丁与符号，见下方 §1 */
-        "Noto Sans Mono CJK SC",    /* 中文等宽：代码块里的中文靠系统字体兜底 */
+        "JetBrains Maple Mono",     /* 本机已装的拉丁等宽 */
+        "Noto Sans Mono CJK SC",    /* 本机已装的中文等宽，紧跟其后 */
         "Sarasa Mono SC",           /* 别的平台装了才命中；排 Noto 之后，否则会被 fontconfig 顶替劫持 */
         "SF Mono", Menlo, Consolas, "Liberation Mono", Courier,
         "PingFang SC", "Microsoft YaHei",
         monospace;
-}
-
-/* 1) 等宽族 JetBrains Maple Mono：自托管子集，只切拉丁与符号，37 KB。
-*/
-@font-face {
-    font-family: "JetBrains Maple Mono";
-    src:
-        url("../fonts/jetbrains-maple-mono-400.woff2") format("woff2"),
-        local("JetBrains Maple Mono");
-    font-style: normal;
-    font-weight: normal;
-    font-display: swap;
-    unicode-range:
-        U+0020-007E,        /* ASCII */
-        U+00A0-00FF,        /* Latin-1 */
-        U+2000-206F,        /* 通用标点：连字符、省略号、引号 */
-        U+2190-21AF,        /* 箭头 */
-        U+2500-25FF,        /* 框线、块元素、几何图形 */
-        U+2600-27BF,        /* 杂项符号、装饰符号 */
-        U+2800-28FF,        /* 盲文点阵 */
-        U+E0A0-E0D4;        /* Nerd Font 私有区 */
 }
 
 /* 2) 表格：booktabs 三线表*/
@@ -92,16 +71,6 @@ td:last-child {
        样式匹配会退到本族的常规面（CSS Fonts 4 的顺序 italic → oblique → normal），
        而 body 上的 font-synthesis: none 禁止合成倾斜，所以汉字在这里必然是正体。
        也就是说，不必再声明一个"斜体面"——斜体照样拿到 88% 和正体字形。
-   (c) 字形来自自托管子集 assets/fonts/noto-serif-sc-{400,700}.woff2，生成脚本是
-       tools/build-fonts.py。url() 刻意写在 local() 前面：访客系统里可能是另一个
-       版本的思源宋体，甚至只有 Windows 的 SimSun，字面比例与本地的 Noto 不同，
-       88% 的校准就会失准；url 优先 → 所有人拿到同一份字形。local() 留在后面，
-       只在文件下载失败时兜底。
-   子集覆盖：GB2312 一级汉字 3755 字 + 本站 HTML 里实际用到的二级字（脚本自动扫描，
-   目前 13 个）+ 中文与全角标点，两个权重合计约 1.5 MB。拉丁字母不进这一面
-   （unicode-range 也不含拉丁区），拉丁照旧走 et-book。子集里没有的汉字不会变豆腐：
-   浏览器会按字体栈逐字回退到 "Noto Serif CJK SC" / SimSun 等，只是那几个字字形
-   不一致。正文用到了新的二级字后，重跑 `python3 tools/build-fonts.py` 再 push 即可。
    只声明 400 与 700 两个面。缺的面不会被跳过到字体栈里的下一个族：权重和样式
    都会在本族内就近匹配，所以 700 必须显式声明，否则中文加粗会退化成常规字重
    （合成已被全站禁止，这正是上一版"中文加粗消失"的原因）。
@@ -109,7 +78,6 @@ td:last-child {
 @font-face {
     font-family: "cjk-serif";
     src:
-        url("../fonts/noto-serif-sc-400.woff2") format("woff2"),
         local("Noto Serif CJK SC"),
         local("Source Han Serif SC"),
         local("Songti SC"),
@@ -117,27 +85,23 @@ td:last-child {
         local("STSong");
     font-style: normal;
     font-weight: 400;
-    /* swap 而不是 block：约 750 KB 可能要好几秒，block 会让正文空白等它。
-       代价是慢网下先看系统宋体再换过来。 */
-    font-display: swap;
     size-adjust: 88%;
-    /* 只声明子集里真的有的码位：范围外的字直接走字体栈下一个族，不用白下这份文件 */
     unicode-range:
-        U+3000-303F,        /* 中文标点 */
-        U+4E00-9FFF,        /* 汉字（子集里只有一级汉字 + 上面那 13 个） */
-        U+FF01-FF5E,        /* 全角 ASCII 标点 */
-        U+FFE0-FFE6;        /* 全角货币等 */
+        U+2E80-2EFF, U+3000-303F, U+31C0-31EF, U+3200-33FF,
+        U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE30-FE4F,
+        U+FF00-FFEF;
 }
 
 @font-face {
-    /* 700：自托管子集里带一份真正的粗体字形（约 780 KB），
-       所以中文加粗在任何平台都一样，不再看访客装没装思源宋体。
-       local() 链退居兜底（文件下载失败时用），末端保留常规族名：
-       宁可显示常规字重，也不假粗（font-synthesis: none 已禁合成）。
+    /* 700：中文没有斜体，宋体传统上也没有粗体，所以把各平台的"真粗体"全名逐一
+       列出（local() 认全名与 PostScript 名）。末端兜一层常规族名：某平台若真的
+       没有粗体面，宁可显示常规字重（不假粗），但尺寸仍是 88%，不会忽大忽小。
+       Windows 默认没有宋体粗体，于是命中 local("SimSun") → 显示宋体常规字重，
+       不中途换字体（换成 SimHei 会让正文里的强调突然变无衬线字）。若用户装了
+       思源宋体，则前面几行就已命中真粗体，轮不到 SimSun。
        斜体无需另立一面：见上面 (b)。 */
     font-family: "cjk-serif";
     src:
-        url("../fonts/noto-serif-sc-700.woff2") format("woff2"),
         local("Noto Serif CJK SC Bold"), local("NotoSerifCJKsc-Bold"),
         local("Source Han Serif SC Bold"), local("SourceHanSerifSC-Bold"),
         local("Songti SC Bold"), local("SongtiSC-Bold"),
@@ -145,11 +109,9 @@ td:last-child {
         local("Songti SC"), local("SimSun");
     font-style: normal;
     font-weight: 700;
-    font-display: swap;
     size-adjust: 88%;
     unicode-range:
-        U+3000-303F,
-        U+4E00-9FFF,
-        U+FF01-FF5E,
-        U+FFE0-FFE6;
+        U+2E80-2EFF, U+3000-303F, U+31C0-31EF, U+3200-33FF,
+        U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE30-FE4F,
+        U+FF00-FFEF;
 }
